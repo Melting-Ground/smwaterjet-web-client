@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "./_styles/main.scss";
+import styles from "./layout.module.scss";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const pretendard = localFont({
+  src: "./_fonts/Pretendard.woff",
+  variable: "--font-pretendard",
+  weight: "normal",
+  style: "normal",
 });
 
 export const metadata: Metadata = {
@@ -24,9 +21,37 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+    <html lang="ko">
+      <body className={`${pretendard.variable}`}>
+        <header className={styles.header}>
+          <div className={styles["header-inner"]}>
+            <h1>smwaterjet</h1>
+            <nav className={styles.nav}>
+              <h2>메뉴</h2>
+              <ul className={styles["nav-list"]}>
+                <li>
+                  <a href="/company/greeting">회사소개</a>
+                </li>
+                <li>
+                  <a href="/business">사업영역</a>
+                </li>
+                <li>
+                  <a href="/equipment">주요설비</a>
+                </li>
+                <li>
+                  <a href="/performance/overview">사업실적</a>
+                </li>
+                <li>
+                  <a href="/support/notice">고객지원</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </header>
+        <main className={styles.main}>
+          <div className={styles["main-inner"]}>{children}</div>
+        </main>
+        <footer className={styles.footer}></footer>
       </body>
     </html>
   );
