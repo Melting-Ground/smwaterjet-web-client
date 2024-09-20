@@ -7,9 +7,11 @@ import { Route, RouteCategory } from "../../_types/route";
 export default function NavSubList({
   isOpen,
   onOpen,
+  onNavItemHover,
 }: {
   isOpen: boolean;
   onOpen: (isOpen: boolean) => void;
+  onNavItemHover: (currentItem: string) => void;
 }) {
   return (
     <div
@@ -29,7 +31,15 @@ export default function NavSubList({
               <ul>
                 {category.routes.map((route: Route) => (
                   <li key={route.path}>
-                    <Link href={route.path}>{route.label}</Link>
+                    <Link
+                      onMouseEnter={() => {
+                        onNavItemHover(category.title);
+                      }}
+                      onMouseLeave={() => onNavItemHover("")}
+                      href={route.path}
+                    >
+                      {route.label}
+                    </Link>
                   </li>
                 ))}
               </ul>

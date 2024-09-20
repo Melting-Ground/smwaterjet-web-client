@@ -3,11 +3,19 @@
 
 .sub-nav-container {
   display: flex;
+  opacity: 1;
+  visibility: visible;
+
   flex-direction: row;
   justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 
   &.hidden {
-    display: none;
+    // display: none;
+    opacity: 0;
+    visibility: hidden;
+
+    transition: display 0.3s ease;
   }
 
   .sub-nav-list-container {

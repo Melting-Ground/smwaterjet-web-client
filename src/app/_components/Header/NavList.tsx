@@ -2,15 +2,17 @@
 import React from "react";
 import styles from "./NavList.module.scss";
 import Link from "next/link";
-import { useNav } from "../../_hooks/useNav";
 import { routeCategories } from "../../_config/routes";
 
 export default function NavList({
   onOpen,
+  onNavItemHover,
+  currentItem,
 }: {
   onOpen: (isOpen: boolean) => void;
+  onNavItemHover: (currentItem: string) => void;
+  currentItem: string;
 }) {
-  const { currentItem, onNavItemHover } = useNav();
   return (
     <nav
       className={styles.nav}
@@ -23,8 +25,12 @@ export default function NavList({
           <li key={category.title}>
             <h3>{category.title}</h3>
             <Link
+              className={`${styles["nav-item"]} ${
+                category.title === currentItem ? styles["nav-item--active"] : ""
+              }`}
               href={category.routes[0].path}
-              onMouseEnter={() => onNavItemHover("greeting")}
+              onMouseEnter={() => onNavItemHover(category.title)}
+              onMouseLeave={() => onNavItemHover("")}
             >
               {category.title}
             </Link>
