@@ -10,13 +10,9 @@
   }
 
   &-inner {
-    max-width: 1224px;
-    height: 100%;
-    padding: 0 24px;
-    display: flex;
+    @include inner-container;
     justify-content: space-between;
     align-items: center;
-    margin: 0 auto;
 
     h2 {
       @include sr-only;

@@ -8,3 +8,11 @@
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+@mixin inner-container {
+  max-width: 1224px;
+  height: 100%;
+  padding: 0 24px;
+  display: flex;
+  margin: 0 auto;
+}

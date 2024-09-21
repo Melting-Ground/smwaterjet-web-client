@@ -4,6 +4,7 @@ import NavSubList from "./NavSubList";
 import NavList from "./NavList";
 import styles from "./Header.module.scss";
 import { useNav } from "../../_hooks/useNav";
+import Link from "next/link";
 
 export default function Header() {
   const { isOpen, onOpen, currentItem, onNavItemHover } = useNav();
@@ -19,7 +20,9 @@ export default function Header() {
         onMouseLeave={() => onOpen(false)}
       >
         <div className={styles["header-inner"]}>
-          <h1>smwaterjet</h1>
+          <Link href="/">
+            <h1>smwaterjet</h1>
+          </Link>
           <NavList
             onOpen={onOpen}
             onNavItemHover={onNavItemHover}

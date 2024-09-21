@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./_styles/main.scss";
 import styles from "./layout.module.scss";
-import { useState } from "react";
 import Header from "./_components/Header/Header";
+import Footer from "./_components/Footer/Footer";
 // import localFont from 'next/font/local';
 
 const pretendard = localFont({
-  src: "./fonts/Pretendard.woff",
+  src: "./fonts/PretendardVariable.woff2",
   display: "swap",
-  weight: "normal",
+  // weight: ["100", "900"], // 폰트 가중치 범위 설정
   variable: "--font-pretendard",
 });
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ export default function RootLayout({
         <main className={styles.main}>
           <div className={styles["main-inner"]}>{children}</div>
         </main>
-        <footer className={styles.footer}></footer>
+        <Footer />
       </body>
     </html>
   );
