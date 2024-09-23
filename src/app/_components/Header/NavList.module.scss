@@ -9,9 +9,9 @@
     width: 680px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    h3 {
-      @include sr-only;
-    }
+    // h3 {
+    //   @include sr-only;
+    // }
     li {
       width: 100%;
       height: 100%;

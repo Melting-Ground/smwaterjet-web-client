@@ -2,9 +2,13 @@
 @import "./_styles/mixins";
 
 .body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: var(--font-pretendard);
 }
 .main {
+  flex: 1;
   &-inner {
     @include inner-container;
   }

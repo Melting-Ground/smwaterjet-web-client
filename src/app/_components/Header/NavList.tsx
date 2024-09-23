@@ -19,11 +19,11 @@ export default function NavList({
       onMouseEnter={() => onOpen(true)}
       onMouseLeave={() => onOpen(false)}
     >
-      <h2>메뉴</h2>
+      {/* <h2>메뉴</h2> */}
       <ul className={styles["nav-list"]}>
         {routeCategories.map((category) => (
           <li key={category.title}>
-            <h3>{category.title}</h3>
+            {/* <h3>{category.title}</h3> */}
             <Link
               className={`${styles["nav-item"]} ${
                 category.title === currentItem ? styles["nav-item--active"] : ""
