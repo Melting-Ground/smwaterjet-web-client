@@ -23,23 +23,68 @@ export default function Login() {
   const onSubmit = async () => {
     console.log(value);
     try {
-      const response = await axios.get("/company/certificates");
-      console.log(response);
+      console.log("submit");
+      const { data } = await axios.post(
+        "http://ec2-52-78-107-218.ap-northeast-2.compute.amazonaws.com:3000/admins/login",
+        {
+          phoneNumber: value.id,
+          password: value.password,
+        }
+      );
+      localStorage.setItem("token", data);
+      console.log("응답:", data);
     } catch (e) {
-      console.error(e);
+      console.error("에러:", e);
+    }
+  };
+
+  const postRequest = async () => {
+    try {
+      // console.log("submit", localStorage.getItem("token"));
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        "http://ec2-52-78-107-218.ap-northeast-2.compute.amazonaws.com:3000/company/certificates",
+        {
+          path: "1234",
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // localStorage.setItem("token", data);
+      console.log("응답:", response);
+    } catch (e) {
+      console.error("에러:", e);
+    }
+  };
+
+  const getRequest = async () => {
+    try {
+      // console.log("submit", localStorage.getItem("token"));
+      // const token = localStorage.getItem("token");
+      const response = await axios.get(
+        "http://ec2-52-78-107-218.ap-northeast-2.compute.amazonaws.com:3000/company/certificates"
+      );
+      // localStorage.setItem("token", data);
+      console.log("응답:", response);
+    } catch (e) {
+      console.error("에러:", e);
     }
   };
 
   return (
-    <div className={styles.login}>
+    <div className={styles.container}>
       <label htmlFor="id">
-        아이디 <input id="id" className={styles.id} onChange={onChange} />
+        아이디
+        <input id="id" className={styles.id} onChange={onChange} />
       </label>
       <label htmlFor="password">
-        비밀번호{" "}
+        비밀번호
         <input id="password" className={styles.password} onChange={onChange} />
       </label>
       <button onClick={onSubmit}>로그인</button>
+      <button onClick={postRequest}>post요청</button>
+      <button onClick={getRequest}>get요청</button>
     </div>
   );
 }

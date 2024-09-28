@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import NavSubList from "./NavSubList";
 import NavList from "./NavList";
 import styles from "./Header.module.scss";
