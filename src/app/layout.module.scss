@@ -6,6 +6,10 @@
   display: flex;
   flex-direction: column;
   font-family: var(--font-pretendard);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .main {
   flex: 1;

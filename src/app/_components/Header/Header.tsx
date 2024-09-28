@@ -9,16 +9,9 @@ import Link from "next/link";
 export default function Header() {
   const { isOpen, onOpen, currentItem, onNavItemHover } = useNav();
 
-  useEffect(() => {
-    console.log(currentItem);
-  }, [currentItem]);
   return (
     <>
-      <header
-        className={styles.header}
-        onMouseEnter={() => onOpen(true)}
-        onMouseLeave={() => onOpen(false)}
-      >
+      <header className={styles.header}>
         <div className={styles["header-inner"]}>
           <Link href="/">
             <h1>smwaterjet</h1>
