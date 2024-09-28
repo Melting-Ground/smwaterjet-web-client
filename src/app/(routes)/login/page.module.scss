@@ -1,0 +1,12 @@
+@import "../../_styles/mixins";
+@import "../../_styles/variables";
+
+.login {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  label {
+    // margin-right: 10px;
+  }
+}

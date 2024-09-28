@@ -42,6 +42,7 @@ export default function Footer() {
           <p>FAX: 033-261-4173</p>
         </address>
         <small>© 성문워터젯, All right reserved.</small>
+        <Link href={"/login"}>로그인</Link>
       </div>
     </footer>
   );
