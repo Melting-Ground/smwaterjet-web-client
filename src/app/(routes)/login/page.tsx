@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./page.module.scss";
-import axios from "axios";
+import axiosInstance from "../../_config/axiosInstance";
 
 export default function Login() {
   const [value, setValue] = useState<{ id: string; password: string }>({
@@ -24,13 +24,10 @@ export default function Login() {
     console.log(value);
     try {
       console.log("submit");
-      const { data } = await axios.post(
-        "http://ec2-52-78-107-218.ap-northeast-2.compute.amazonaws.com:3000/admins/login",
-        {
-          phoneNumber: value.id,
-          password: value.password,
-        }
-      );
+      const { data } = await axiosInstance.post("/admins/login", {
+        phoneNumber: value.id,
+        password: value.password,
+      });
       localStorage.setItem("token", data);
       console.log("응답:", data);
     } catch (e) {
@@ -42,15 +39,12 @@ export default function Login() {
     try {
       // console.log("submit", localStorage.getItem("token"));
       const token = localStorage.getItem("token");
-      const response = await axios.post(
-        "http://ec2-52-78-107-218.ap-northeast-2.compute.amazonaws.com:3000/company/certificates",
-        {
-          path: "1234",
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axiosInstance.post("/company/certificates", {
+        path: "1234",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
       // localStorage.setItem("token", data);
       console.log("응답:", response);
     } catch (e) {
@@ -62,9 +56,7 @@ export default function Login() {
     try {
       // console.log("submit", localStorage.getItem("token"));
       // const token = localStorage.getItem("token");
-      const response = await axios.get(
-        "http://ec2-52-78-107-218.ap-northeast-2.compute.amazonaws.com:3000/company/certificates"
-      );
+      const response = await axiosInstance.get("/company/certificates");
       // localStorage.setItem("token", data);
       console.log("응답:", response);
     } catch (e) {
