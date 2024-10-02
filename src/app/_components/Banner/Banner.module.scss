@@ -1,8 +1,13 @@
+@import "../../_styles/variables";
+@import "../../_styles/mixins";
+
+.business {
+  background-image: url(#{$businessBanner});
+}
+
 .banner {
   .background {
-    background-image: url("../../_images/background-image.jpg");
     height: 380px;
-    // width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -17,10 +22,12 @@
 
     h2 {
       position: relative;
-      font-size: 60px;
+      font-size: 3rem;
       z-index: 100;
       font-weight: bold;
       letter-spacing: 2.5px;
+      border-bottom: 1px solid white;
+      padding: 10px;
     }
 
     &::before {

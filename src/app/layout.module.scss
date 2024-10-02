@@ -16,4 +16,7 @@
   &-inner {
     @include inner-container;
   }
+  background-color: $white;
+
+  padding: 100px 0;
 }

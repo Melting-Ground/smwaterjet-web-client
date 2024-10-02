@@ -1,0 +1,111 @@
+@import "../../../_styles/mixins";
+@import "../../../_styles/variables";
+
+.container {
+  width: 100%;
+
+  h3 {
+    font-size: 36px;
+    margin-bottom: 42px;
+    color: $primary;
+    text-align: center;
+    font-weight: 700;
+  }
+  .description {
+    // font-weight: /00;
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.7;
+  }
+
+  .definition {
+    width: 100%;
+    margin: 0 auto;
+    font-size: 17px;
+    color: $black;
+    line-height: 1.5;
+
+    .image-desc-container {
+      @include row-container;
+
+      margin-top: 100px;
+
+      .image {
+        width: 45%;
+        height: fit-content;
+      }
+      p {
+        margin-bottom: 24px;
+      }
+      // background-color: yellow;
+      // width: 100vw; // 패딩을 더해줌
+      // margin-left: -124px; // 부모 padding-left 만큼 왼쪽으로 이동
+      // margin-right: -124px; // 부모 padding-right 만큼 오른쪽으로 이동
+    }
+
+    p {
+      strong {
+        font-weight: bold;
+      }
+    }
+  }
+  .feature {
+    margin-top: 150px;
+    line-height: 1.5;
+
+    h3 {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    .description {
+      font-size: 17px;
+      color: $gray;
+      text-align: left;
+    }
+
+    ol {
+      font-size: 17px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 70px;
+
+      li {
+        height: 100px;
+        border-radius: 20px;
+        padding: 10px;
+        display: flex;
+        gap: 5px;
+        justify-content: start;
+
+        .number {
+          color: white;
+          margin-right: 24px;
+          font-size: 32px;
+          font-weight: 200;
+          line-height: 1;
+          z-index: 1;
+          position: relative;
+          font-weight: 400;
+
+          &::before {
+            margin-left: 12px;
+            margin-top: 8px;
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            content: "";
+            background-color: $primary;
+            opacity: 10%;
+            border-radius: 50%;
+            z-index: -1;
+          }
+
+          em {
+            color: $primary;
+          }
+        }
+      }
+    }
+  }
+}

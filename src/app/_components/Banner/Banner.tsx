@@ -18,10 +18,11 @@ export const findLabelByPathname = (pathname: string): string | null => {
 export default function Banner() {
   const pathname = usePathname();
   const label = findLabelByPathname(pathname);
+  const segment = pathname.split("/")[1]; // path 대분류
 
   return (
     <div key={pathname} className={styles.banner}>
-      <div className={styles.background}>
+      <div className={`${styles.background} ${styles[segment]}`}>
         <h2>{label}</h2>
       </div>
     </div>

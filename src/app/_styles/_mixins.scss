@@ -9,10 +9,20 @@
   border: 0;
 }
 
+.sr-only {
+  @include sr-only;
+}
+
 @mixin inner-container {
   max-width: 1224px;
   height: 100%;
   padding: 0 24px;
   display: flex;
   margin: 0 auto;
+}
+
+@mixin row-container {
+  display: flex;
+  gap: 50px;
+  width: 100%;
 }
