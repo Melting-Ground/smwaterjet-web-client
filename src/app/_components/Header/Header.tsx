@@ -5,6 +5,8 @@ import NavList from "./NavList";
 import styles from "./Header.module.scss";
 import { useNav } from "../../_hooks/useNav";
 import Link from "next/link";
+import logo from "../../_images/logo-rm.png";
+import Image from "next/image";
 
 export default function Header() {
   const { isOpen, onOpen, currentItem, onNavItemHover } = useNav();
@@ -14,7 +16,9 @@ export default function Header() {
       <header className={styles.header}>
         <div className={styles["header-inner"]}>
           <Link href="/">
-            <h1>smwaterjet</h1>
+            <h1>
+              <Image width={150} src={logo} alt="성문워터젯" />
+            </h1>
           </Link>
           <NavList
             onOpen={onOpen}
