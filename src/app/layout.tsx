@@ -4,6 +4,7 @@ import "./_styles/main.scss";
 import styles from "./layout.module.scss";
 import Header from "./_components/Header/Header";
 import Footer from "./_components/Footer/Footer";
+import Banner from "./_components/Banner/Banner";
 // import localFont from 'next/font/local';
 
 const pretendard = localFont({
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${styles.body} ${pretendard.variable}`}>
         <Header />
+        <Banner />
         <main className={styles.main}>
           <div className={styles["main-inner"]}>{children}</div>
         </main>
