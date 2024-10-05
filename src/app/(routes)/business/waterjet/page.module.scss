@@ -3,13 +3,16 @@
 // TODO: 코드 정리하기
 .container {
   width: 100%;
+  word-break: keep-all;
+  white-space: normal;
+
   p {
     strong {
       font-weight: bold;
     }
   }
   h3 {
-    font-size: 36px;
+    font-size: 40px;
     // margin-top: 100px;
     margin-bottom: 42px;
     text-align: center;
@@ -17,7 +20,7 @@
   }
   .description {
     text-align: center;
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1.7;
   }
 
@@ -27,7 +30,7 @@
 
     color: $white;
     padding: 70px 0;
-    font-weight: 300;
+    font-weight: 400;
     em {
       font-weight: 700;
     }
@@ -36,18 +39,25 @@
   .definition {
     width: 100%;
     margin: 0 auto;
-    font-size: 17px;
+    font-size: 18px;
     color: $black;
 
     line-height: 1.5;
+
+    h3 {
+      text-align: center;
+      margin-top: 150px;
+      font-size: 32px;
+      font-weight: 700;
+      color: $primary-lighter;
+    }
 
     .inner-container {
       @include inner-container;
     }
     .image-desc-container {
       @include row-container;
-
-      margin-top: 100px;
+      margin-top: 50px;
 
       .image {
         width: 45%;
@@ -60,7 +70,7 @@
     }
   }
   .feature {
-    margin-top: 130px;
+    margin-top: 200px;
     line-height: 1.5;
 
     h3 {
@@ -70,7 +80,7 @@
       color: $primary-lighter;
     }
     .description {
-      font-size: 17px;
+      font-size: 18px;
       color: $gray;
       text-align: left;
       @include inner-container;
@@ -96,7 +106,7 @@
         position: absolute;
         margin-top: -100px;
         color: $white;
-        font-size: 17px;
+        font-size: 18px;
         display: grid;
         grid-template-columns: repeat(3, minmax(260px, 1fr));
         gap: 50px;
@@ -107,8 +117,7 @@
           padding-bottom: 25px;
           display: flex;
           flex-direction: column;
-          word-break: keep-all;
-          white-space: normal;
+
           // align-items: center;
 
           .number {
