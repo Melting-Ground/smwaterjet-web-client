@@ -8,10 +8,10 @@ import Banner from "./_components/Banner/Banner";
 // import localFont from 'next/font/local';
 
 const pretendard = localFont({
-  src: "./fonts/PretendardVariable.woff2",
+  src: "./fonts/SpoqaHanSansNeo-Medium.otf",
   display: "swap",
   // weight: ["100", "900"], // 폰트 가중치 범위 설정
-  variable: "--font-pretendard",
+  // variable: "--font-pretendard",
 });
 export const metadata: Metadata = {
   title: "Create Next App",
