@@ -6,7 +6,7 @@
   opacity: 1;
   visibility: visible;
   position: absolute;
-  margin-top: 105px;
+  // margin-top: 105px;
   width: 100%;
   padding-bottom: 40px;
   flex-direction: row;
@@ -32,7 +32,7 @@
   .sub-nav-list {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    width: 680px;
+    width: 650px;
 
     h4 {
       @include sr-only;

@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${styles.body} ${pretendard.variable}`}>
+      <body className={`${styles.body} ${pretendard}`}>
         <Header />
         <Banner />
         <main className={styles.main}>

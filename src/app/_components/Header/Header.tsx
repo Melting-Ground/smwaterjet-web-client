@@ -12,7 +12,7 @@ export default function Header() {
   const { isOpen, onOpen, currentItem, onNavItemHover } = useNav();
 
   return (
-    <>
+    <article className={styles["header-container"]}>
       <header className={styles.header}>
         <div className={styles["header-inner"]}>
           <Link href="/">
@@ -33,6 +33,6 @@ export default function Header() {
         onOpen={onOpen}
         onNavItemHover={onNavItemHover}
       />
-    </>
+    </article>
   );
 }
