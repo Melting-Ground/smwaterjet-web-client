@@ -7,7 +7,8 @@
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  padding: 100px 0;
+  padding: 150px 0 300px 0;
+  background-color: $primary;
 
   .history {
     width: 50%;
@@ -17,58 +18,60 @@
     &-line {
       width: 2px;
       height: 80%;
-      // background-color: rgba(
-      //   red($black),
-      //   green($black),
-      //   blue($black),
-      //   0.5
-      // ); // 50% 투명도
-      background-color: $black;
+      background-color: #ff9945;
       border-radius: 100px;
       position: absolute;
-      left: -0px;
     }
 
     li {
       border-left: 2px solid $white;
-      padding: 30px;
+      padding: 40px 30px;
       padding-left: 100px;
       display: flex;
       flex-direction: column;
+      cursor: pointer;
 
-      // &:nth-child(1) {
-      //   border-image: linear-gradient(transparent, $black) 1 100%;
-      // }
-      // &:last-child {
-      //   border-image: linear-gradient($black, transparent) 1 100%;
-      // }
+      @include label;
+      color: $black;
+      // color: $black;
+
+      .period {
+        @include content;
+        font-weight: 700;
+        color: #ff9945;
+      }
+
+      div:nth-child(2) {
+        margin-top: 12px;
+      }
 
       &::after {
+        @include label;
+        font-size: 32px;
+        color: $white;
+        // color: $black;
+        font-weight: 600;
         position: absolute;
-        margin-left: -250px;
-        font-size: 20px;
-        font-weight: 700;
+        margin-left: -260px;
         content: attr(data-year);
       }
 
       &::before {
-        margin-left: -107px;
+        margin-left: -111px;
         position: absolute;
-        margin-top: 5px;
+        margin-top: 15px;
         width: 12px;
         height: 12px;
         content: "";
-        background-color: $black;
+        background-color: $white;
         border-radius: 50%;
+        cursor: pointer;
+        border: 4px solid #ffb87e;
+        border-color: var(--border, #ffb87e);
       }
+    }
+    .selected-year {
+      font-weight: 600;
     }
   }
 }
-
-// .back-pannel {
-//   background-color: blueviolet;
-//   width: 100%;
-//   height: 500px;
-//   z-index: -999;
-//   position: fixed;
-// }

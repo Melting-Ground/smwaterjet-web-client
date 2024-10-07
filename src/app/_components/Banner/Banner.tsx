@@ -21,7 +21,7 @@ export default function Banner() {
   const segment = pathname.split("/")[1]; // path 대분류
 
   return (
-    <div key={pathname} className={styles.banner}>
+    <div key={pathname} className={styles.banner} id="banner">
       <div className={`${styles.background} ${styles[segment]}`}>
         <h2>{label}</h2>
       </div>

@@ -19,9 +19,9 @@ export default function Waterjet() {
           </p>
         </div>
         <h3 className={styles["sub-title"]}>
-          &quot; <em>철근 손상 없이</em> 취약부 제거,
+          <em>철근 손상 없이</em> 취약부 제거,
           <br />
-          <em>환경과 품질을 동시에</em> 잡는 <em>워터젯 공법</em> &quot;
+          <em>환경과 품질을 동시에</em> 잡는 <em>워터젯 공법</em>
         </h3>
         <div className={styles["inner-container"]}>
           <div className={styles["image-content-container"]}>
