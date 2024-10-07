@@ -7,10 +7,10 @@ import image from "../../../_images/background-image.jpg";
 export default function Waterjet() {
   return (
     <div className={styles.container}>
-      <section id="definition" className={styles.definition}>
-        <div className={styles["dark-background"]}>
+      <section id="definition">
+        <div className={styles["dark-section"]}>
           <h3 className={styles["sr-only"]}>워터젯(WaterJet) 공법</h3>
-          <p className={styles.description}>
+          <p className={styles.label}>
             <em>워터젯(WaterJet) 공법</em>이란 물을 초고압, 초고속 상태의
             제트루로 만들어
             <br /> 이를 해체 대상 구조물에 분사시킴으로써 콘크리트의 세골작용을
@@ -18,14 +18,14 @@ export default function Waterjet() {
             <br /> 콘크리트만을 선택적으로 파괴시킬 수 있는 획기적인 공법입니다.
           </p>
         </div>
-        <h3>
-          &quot; 철근 손상 없이 취약부 제거,
+        <h3 className={styles["sub-title"]}>
+          &quot; <em>철근 손상 없이</em> 취약부 제거,
           <br />
-          환경과 품질을 동시에 잡는 워터젯 공법 &quot;
+          <em>환경과 품질을 동시에</em> 잡는 <em>워터젯 공법</em> &quot;
         </h3>
         <div className={styles["inner-container"]}>
-          <div className={styles["image-desc-container"]}>
-            <div>
+          <div className={styles["image-content-container"]}>
+            <div className={styles.content}>
               <p>
                 이 공법은 철근을 전혀 손상시키지 않고 해체하므로,
                 <br />
@@ -67,8 +67,8 @@ export default function Waterjet() {
         </div>
       </section>
       <section className={styles.feature} id="feature">
-        <h3>워터젯 공법의 특징</h3>
-        <p className={styles.description}>
+        <h3 className={styles["sub-title"]}>워터젯 공법의 특징</h3>
+        <p className={styles.content}>
           일정한 압력의 물을 각도있게 분사하여 재료의 공극을 파고들어 취약부를
           제거하며
           <br />

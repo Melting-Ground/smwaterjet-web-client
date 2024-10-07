@@ -21,8 +21,49 @@
   margin: 0 auto;
 }
 
+// 사진, 설명 wrapper
 @mixin row-container {
   display: flex;
   gap: 40px;
   width: 100%;
+}
+
+@mixin text-no-break {
+  word-break: keep-all;
+  white-space: normal;
+}
+
+@mixin box-shadow {
+  box-shadow: $black 0px 20px 30px -10px;
+}
+
+// 폰트
+
+@mixin title {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+@mixin sub-title {
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 1.4;
+
+  em {
+    font-weight: 700;
+  }
+}
+
+@mixin label {
+  font-size: 22px;
+  line-height: 1.8;
+  font-weight: 400;
+  em {
+    font-weight: 700;
+  }
+}
+
+@mixin content {
+  font-size: 18px;
+  line-height: 1.6;
 }

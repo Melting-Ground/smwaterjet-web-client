@@ -1,89 +1,59 @@
 @import "../../../_styles/mixins";
 @import "../../../_styles/variables";
-// TODO: 코드 정리하기
+
 .container {
   width: 100%;
-  word-break: keep-all;
-  white-space: normal;
+  @include text-no-break;
 
-  p {
-    strong {
-      font-weight: bold;
-    }
-  }
-  h3 {
-    font-size: 40px;
-    // margin-top: 100px;
-    margin-bottom: 42px;
-    text-align: center;
-    font-weight: 700;
-  }
-  .description {
-    text-align: center;
-    font-size: 22px;
-    line-height: 1.7;
+  .inner-container {
+    @include inner-container;
   }
 
-  .dark-background {
+  .dark-section {
     background-color: $primary;
-    // background-image: linear-gradient(to bottom, #3a2d1e, $primary);
+    padding: 65px 0;
+  }
 
+  .sub-title {
+    @include sub-title;
+    text-align: center;
+    color: $primary-lighter;
+    margin-top: 150px;
+    margin-bottom: 50px;
+  }
+
+  .label {
+    @include label;
+    text-align: center;
     color: $white;
-    padding: 70px 0;
-    font-weight: 400;
-    em {
-      font-weight: 700;
+  }
+
+  .image-content-container {
+    @include row-container;
+    margin-top: 50px;
+
+    .image {
+      @include box-shadow;
+      width: 45%;
+      height: fit-content;
     }
   }
 
-  .definition {
-    width: 100%;
-    margin: 0 auto;
-    font-size: 18px;
+  .content {
+    @include content;
     color: $black;
-
-    line-height: 1.5;
-
-    h3 {
-      text-align: center;
-      margin-top: 150px;
-      font-size: 32px;
-      font-weight: 700;
-      color: $primary-lighter;
-    }
-
-    .inner-container {
-      @include inner-container;
-    }
-    .image-desc-container {
-      @include row-container;
-      margin-top: 50px;
-
-      .image {
-        width: 45%;
-        height: fit-content;
-        box-shadow: $black 0px 20px 30px -10px;
-      }
-      p {
-        margin-bottom: 24px;
-      }
+    p {
+      margin-bottom: 24px;
     }
   }
-  .feature {
-    margin-top: 200px;
-    line-height: 1.5;
 
-    h3 {
-      @include inner-container;
+  .feature {
+    @include inner-container;
+    flex-direction: column;
+
+    .sub-title {
       text-align: left;
-      margin-bottom: 20px;
-      color: $primary-lighter;
-    }
-    .description {
-      font-size: 18px;
-      color: $gray;
-      text-align: left;
-      @include inner-container;
+      font-weight: 700;
     }
 
     .card-background {
@@ -97,20 +67,19 @@
       position: relative;
 
       ol {
-        @include inner-container;
+        @include content;
+        @include box-shadow;
+        color: $white;
         height: auto;
         max-width: 1180px;
-
         background-color: $primary;
-        box-shadow: $black 0px 20px 30px -10px;
         position: absolute;
         margin-top: -100px;
-        color: $white;
-        font-size: 18px;
         display: grid;
         grid-template-columns: repeat(3, minmax(260px, 1fr));
         gap: 50px;
         padding: 50px;
+
         li {
           border: 3px solid $primary-lighter;
           padding: 24px;
@@ -118,18 +87,14 @@
           display: flex;
           flex-direction: column;
 
-          // align-items: center;
-
           .number {
             background-color: $primary;
             width: 70px;
-
             display: flex;
             justify-content: center;
             color: white;
             margin-top: -40px;
             margin-bottom: 20px;
-
             font-size: 32px;
             font-weight: 200;
             line-height: 1;
@@ -137,6 +102,7 @@
             position: relative;
             font-weight: 400;
 
+            // 원
             // &::before {
             //   margin-left: 12px;
             //   position: absolute;
@@ -150,7 +116,6 @@
             // }
 
             em {
-              // color: $primary;
               font-weight: 700;
             }
           }
