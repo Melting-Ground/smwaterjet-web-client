@@ -1,0 +1,28 @@
+@import "../../../_styles/mixins";
+@import "../../../_styles/variables";
+
+.container {
+  margin: 150px 0;
+  .inner-container {
+    @include inner-container;
+    flex-direction: column;
+  }
+  .title {
+    @include title;
+    font-weight: 500;
+    color: $primary-lighter;
+    margin-bottom: 50px;
+  }
+  .label {
+    @include label;
+    color: $primary-lighter;
+    font-weight: 600;
+  }
+  .content {
+    @include content;
+
+    p {
+      margin-bottom: 32px;
+    }
+  }
+}
