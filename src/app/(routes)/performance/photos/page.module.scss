@@ -1,0 +1,20 @@
+@import "../../../_styles/variables";
+@import "../../../_styles/mixins";
+
+.container {
+  @include inner-container;
+
+  .image-container {
+    margin: 150px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    row-gap: 16px;
+    width: 100%;
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+  }
+}
