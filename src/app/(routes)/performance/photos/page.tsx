@@ -7,11 +7,11 @@ export default function Photos() {
   return (
     <div className={styles.container}>
       <div className={styles["image-container"]}>
-        <Image src={src} alt="alt" width={300} className={styles.image} />
-        <Image src={src} alt="alt" width={300} className={styles.image} />
-        <Image src={src} alt="alt" width={300} className={styles.image} />
-        <Image src={src} alt="alt" width={300} className={styles.image} />
-        <Image src={src} alt="alt" width={300} className={styles.image} />
+        <Image src={src} alt="alt" width={400} className={styles.image} />
+        <Image src={src} alt="alt" width={400} className={styles.image} />
+        <Image src={src} alt="alt" width={400} className={styles.image} />
+        <Image src={src} alt="alt" width={400} className={styles.image} />
+        <Image src={src} alt="alt" width={400} className={styles.image} />
       </div>
     </div>
   );
