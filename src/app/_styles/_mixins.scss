@@ -14,7 +14,7 @@
 }
 
 @mixin inner-container {
-  max-width: 1224px;
+  max-width: $inner-max-width;
   height: 100%;
   padding: 0 24px;
   display: flex;
