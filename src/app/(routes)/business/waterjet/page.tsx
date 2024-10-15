@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./page.module.scss";
 import Image from "next/image";
-import image from "../../../_images/background-image.jpg";
+import backgroundImage from "../../../../../public/images/background-image.jpg";
 
 export default function Waterjet() {
   return (
@@ -62,7 +62,11 @@ export default function Waterjet() {
                 여러 시험을 통해 입증되었기 때문입니다.
               </p>
             </div>
-            <Image className={styles.image} src={image} alt="waterjet" />
+            <Image
+              className={styles.image}
+              src={backgroundImage}
+              alt="waterjet"
+            />
           </div>
         </div>
       </section>
