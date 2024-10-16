@@ -40,7 +40,7 @@
 // 폰트
 
 @mixin title {
-  font-size: 48px;
+  font-size: 46px;
   font-weight: 700;
   line-height: 1.4;
 
@@ -50,7 +50,7 @@
 }
 
 @mixin sub-title {
-  font-size: 42px;
+  font-size: 40px;
   font-weight: 500;
   line-height: 1.4;
 
@@ -60,7 +60,7 @@
 }
 
 @mixin label {
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.8;
   font-weight: 400;
   em {
