@@ -71,14 +71,16 @@ export default function Waterjet() {
         </div>
       </section>
       <section className={styles.feature} id="feature">
-        <h3 className={styles["sub-title"]}>워터젯 공법의 특징</h3>
-        <p className={styles.content}>
-          일정한 압력의 물을 각도있게 분사하여 재료의 공극을 파고들어 취약부를
-          제거하며
-          <br />
-          작업이 완료 후에 잔존하는 구조물은 일정한 강도 이상을 반드시 지니게
-          됩니다.
-        </p>
+        <div className={styles["feature-title-container"]}>
+          <h3 className={styles["sub-title"]}>워터젯 공법의 특징</h3>
+          <p className={styles.content}>
+            일정한 압력의 물을 각도있게 분사하여 재료의 공극을 파고들어 취약부를
+            제거하며
+            <br />
+            작업이 완료 후에 잔존하는 구조물은 일정한 강도 이상을 반드시 지니게
+            됩니다.
+          </p>
+        </div>
         <div className={styles["card-background"]}>
           <ol>
             <li>

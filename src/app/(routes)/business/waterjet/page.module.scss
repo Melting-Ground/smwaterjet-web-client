@@ -48,8 +48,12 @@
   }
 
   .feature {
-    @include inner-container;
     flex-direction: column;
+
+    .feature-title-container {
+      @include inner-container;
+      flex-direction: column;
+    }
 
     .sub-title {
       text-align: left;
