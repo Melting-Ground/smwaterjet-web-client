@@ -6,21 +6,50 @@
 
   .gallery {
     margin: 150px 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    row-gap: 16px;
-    width: 100%;
+    gap: 16px;
+    display: flex;
+    flex-wrap: wrap;
 
     .img-container {
+      position: relative;
       width: 400px;
+      height: 260px;
       overflow: hidden;
       cursor: pointer;
-    }
-  }
 
-  .image {
-    width: 100%;
-    height: auto;
-    max-width: 400px;
+      .hover-effect {
+        position: relative;
+
+        &:hover .overlay {
+          opacity: 1;
+        }
+
+        .image {
+          width: fit-content;
+          height: fit-content;
+          transition: transform 0.3s ease;
+        }
+
+        .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.7);
+          opacity: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: opacity 0.3s ease;
+
+          .description {
+            color: $black;
+            font-size: 15px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
   }
 }

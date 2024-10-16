@@ -49,9 +49,12 @@ export default function Photos() {
     <div className={styles.container}>
       <div className={styles.gallery}>
         {imageList.map((image) => (
-          // link 등
+          // link 태그 등
           <div key={image.id} className={styles["img-container"]}>
-            <motion.div whileHover={{ scale: 1.08 }}>
+            <motion.div
+              whileHover={{ scale: 1.08 }}
+              className={styles["hover-effect"]}
+            >
               <Image
                 src={image.src}
                 alt={image.alt || ""}
@@ -59,6 +62,9 @@ export default function Photos() {
                 height={300}
                 className={styles.image}
               />
+              <div className={styles.overlay}>
+                <span className={styles.description}>{image.description}</span>
+              </div>
             </motion.div>
           </div>
         ))}
