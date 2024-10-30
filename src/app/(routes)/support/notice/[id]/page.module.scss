@@ -1,0 +1,7 @@
+@import "../../../../_styles/mixins";
+@import "../../../../_styles/variables";
+
+.container {
+  @include inner-container;
+  //   margin: 100px 0;
+}

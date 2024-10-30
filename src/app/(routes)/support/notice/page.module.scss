@@ -1,0 +1,42 @@
+@import "../../../_styles/mixins";
+@import "../../../_styles/variables";
+
+.container {
+  @include inner-container;
+  text-align: center;
+
+  .table {
+    margin: 0 auto;
+    margin: 100px 0;
+    width: 100%; // 테이블 너비를 100%로 설정
+
+    border-collapse: collapse; // 테두리 겹침 방지
+    // box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); // 테이블에 그림자 추가
+    border-radius: 8px; // 테이블 모서리 둥글게
+    span {
+      display: flex;
+      width: 100%;
+      background-color: yellow;
+    }
+    th,
+    td {
+      padding: 15px; // 셀 내부 여백
+      border: 1px solid #e1e1e1; // 테두리 색상 설정
+      text-align: left; // 텍스트 정렬
+    }
+
+    th {
+      background-color: #f4f4f4; // 헤더 배경색
+      font-weight: bold; // 헤더 텍스트 굵게
+      color: #333; // 헤더 텍스트 색상
+    }
+
+    .link:hover {
+      background-color: #f9f9f9; // 호버 시 배경색 변경
+    }
+
+    // tr:nth-child(even) {
+    //   background-color: #fafafa; // 짝수 행 배경색
+    // }
+  }
+}
