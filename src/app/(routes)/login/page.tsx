@@ -42,7 +42,7 @@ export default function Login() {
       const response = await axiosInstance.post("/company/certificates", {
         path: "1234",
         headers: {
-          authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       // localStorage.setItem("token", data);
