@@ -3,38 +3,16 @@ import React, { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 import Link from "next/link";
 import axiosInstance from "../../../_config/axiosInstance";
-import { useRouter } from "next/navigation";
+import { NoticeType } from "../../../_types/notice";
 
 export default function Notice() {
-  const router = useRouter();
-  const defaultData = [
-    {
-      id: 1,
-      title: "첫 번째 제목",
-      content: "slkfjalsdjfskjdlfs",
-      date: "2024-10-01",
-    },
-    {
-      id: 2,
-      title: "두 번째 제목",
-      content: "slkfjalsdjfskjdlfs",
-      date: "2024-10-02",
-    },
-    {
-      id: 3,
-      title: "세 번째 제목",
-      content: "slkfjalsdjfskjdlfs",
-      date: "2024-10-03",
-    },
-  ];
-
-  const [data, setData] = useState(defaultData);
+  const [noticeList, setNoticeList] = useState<NoticeType[]>([]);
 
   const fetchNoticeList = async () => {
     try {
       const response = await axiosInstance.get("/support/notices");
       console.log("notices", response.data);
-      setData(response.data);
+      setNoticeList(response.data);
     } catch (error) {
       console.error("에러", error);
     }
@@ -58,20 +36,25 @@ export default function Notice() {
           <tr>
             <th scope="col">No</th>
             <th scope="col">제목</th>
+            <th scope="col">첨부 파일</th>
             <th scope="col">등록일</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
-            <tr
-              key={item.id}
-              onClick={() => {
-                router.push(`/support/notice/${item.id}`);
-              }}
-            >
-              <td>{item.id}</td>
-              <td>{item.title}</td>
-              <td>{item.date}</td>
+          {noticeList.map((noticeItem) => (
+            <tr key={noticeItem.id}>
+              <td>{noticeItem.id}</td>
+              <td className={styles.title}>
+                <Link href={`/support/notice/${noticeItem.id}`}>
+                  {noticeItem.title}
+                </Link>
+              </td>
+              <td>{noticeItem.files.length}</td>
+              <td>
+                <time dateTime={noticeItem.created_at}>
+                  {noticeItem.created_at.substring(0, 10)}
+                </time>
+              </td>
             </tr>
           ))}
         </tbody>

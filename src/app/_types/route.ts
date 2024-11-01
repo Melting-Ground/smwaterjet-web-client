@@ -1,8 +1,8 @@
-export interface Route {
+export interface RouteType {
   path: string;
   label: string;
 }
-export type RouteCategory = {
-  title: string;
-  routes: Route[];
-};
+// export type RouteCategoryType = {
+//   title: string;
+//   routes: RouteType[];
+// };

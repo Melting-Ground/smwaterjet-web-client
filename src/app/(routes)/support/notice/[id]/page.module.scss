@@ -3,5 +3,46 @@
 
 .container {
   @include inner-container;
-  //   margin: 100px 0;
+
+  .notice-article {
+    margin: 100px 0;
+    @include table-content;
+    color: $black;
+
+    .head-title {
+      background-color: #f4f4f4;
+      padding: 22px 15px;
+      border-top: 1px solid $gray-border;
+      border-bottom: 1px solid $gray-border;
+      @include content;
+    }
+    .head-sub {
+      padding: 15px;
+      display: grid;
+      text-align: right;
+      grid-template-columns: 6fr 100px 150px;
+      border-bottom: 1px solid $gray-lighter;
+      font-size: 15px;
+
+      .title {
+        padding-right: 8px;
+      }
+      li:first-child {
+        text-align: left;
+        .title {
+          padding-right: 22px;
+        }
+      }
+
+      .info-item {
+        color: $gray;
+      }
+    }
+
+    .content {
+      padding: 50px 16px;
+      line-height: 1.3;
+      white-space: pre-line;
+    }
+  }
 }
