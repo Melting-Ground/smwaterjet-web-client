@@ -41,11 +41,9 @@ export default function Edit() {
     const token = localStorage.getItem("token");
 
     try {
-      // 올바른 데이터 형식으로 요청 전송
       const response = await axiosInstance.post("/support/notices", formData, {
         headers: {
           authorization: `Bearer ${token}`,
-          // "Content-Type"은 자동으로 설정됨
         },
       });
       console.log("response", response);
