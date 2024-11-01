@@ -3,24 +3,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 import Link from "next/link";
 import axiosInstance from "../../../_config/axiosInstance";
-import { NoticeType } from "../../../_types/notice";
+import { useNoticeContext } from "../../../_contexts/noticeContext";
+import useNotices from "../../../_hooks/useNotices";
 
 export default function Notice() {
-  const [noticeList, setNoticeList] = useState<NoticeType[]>([]);
-
-  const fetchNoticeList = async () => {
-    try {
-      const response = await axiosInstance.get("/support/notices");
-      console.log("notices", response.data);
-      setNoticeList(response.data);
-    } catch (error) {
-      console.error("에러", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchNoticeList();
-  }, []);
+  const { notices, setNotices } = useNotices();
 
   return (
     <div className={styles.container}>
@@ -41,7 +28,7 @@ export default function Notice() {
           </tr>
         </thead>
         <tbody>
-          {noticeList.map((noticeItem) => (
+          {notices.map((noticeItem) => (
             <tr key={noticeItem.id}>
               <td>{noticeItem.id}</td>
               <td className={styles.title}>
