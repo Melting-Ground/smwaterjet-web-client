@@ -1,18 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./page.module.scss";
 import Link from "next/link";
-import axiosInstance from "../../../_config/axiosInstance";
-import { useNoticeContext } from "../../../_contexts/noticeContext";
 import useNotices from "../../../_hooks/useNotices";
 import { formatDate } from "../../../_utils/formatDate";
 
 export default function Notice() {
-  const { notices, setNotices } = useNotices();
+  const { notices } = useNotices();
 
   return (
     <div className={styles.container}>
-      <Link href={"/support/notice/edit"}>글쓰기</Link>
+      {/* <Link href={"/support/notice/edit"}>글쓰기</Link> */}
       <table className={styles.table} width={920}>
         <colgroup>
           <col width={130} />
