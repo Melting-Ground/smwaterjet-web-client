@@ -7,6 +7,7 @@ import { NoticeType } from "../../../../_types/notice";
 import useNotices from "../../../../_hooks/useNotices";
 import { RiArrowUpSFill, RiArrowDownSFill } from "@remixicon/react";
 import Link from "next/link";
+import { formatDate } from "../../../../_utils/formatDate";
 export default function NoticeDetail() {
   const [noticeDetail, setNoticeDetail] = useState<NoticeType>();
   const { notices } = useNotices();
@@ -57,7 +58,7 @@ export default function NoticeDetail() {
               <span className={styles.title}>작성일</span>
               <span className={styles["info-item"]}>
                 <time dateTime={noticeDetail.created_at}>
-                  {noticeDetail.created_at.substring(0, 10)}
+                  {formatDate(noticeDetail.created_at)}
                 </time>
               </span>
             </li>
@@ -79,9 +80,13 @@ export default function NoticeDetail() {
                 )}
               </span>
               <span>
-                {previousIndex >= 0
-                  ? notices[previousIndex].created_at.substring(0, 10)
-                  : ""}
+                {previousIndex >= 0 ? (
+                  <time dateTime={notices[previousIndex].created_at}>
+                    {formatDate(notices[previousIndex].created_at)}
+                  </time>
+                ) : (
+                  ""
+                )}
               </span>
             </li>
             <li className={styles["notice-nav-item"]}>
@@ -99,9 +104,13 @@ export default function NoticeDetail() {
                 )}
               </span>
               <span>
-                {nextIndex < notices.length
-                  ? notices[nextIndex].created_at.substring(0, 10)
-                  : ""}
+                {nextIndex < notices.length ? (
+                  <time dateTime={notices[nextIndex].created_at}>
+                    {formatDate(notices[nextIndex].created_at)}
+                  </time>
+                ) : (
+                  ""
+                )}
               </span>
             </li>
           </ul>

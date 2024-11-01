@@ -5,6 +5,7 @@ import Link from "next/link";
 import axiosInstance from "../../../_config/axiosInstance";
 import { useNoticeContext } from "../../../_contexts/noticeContext";
 import useNotices from "../../../_hooks/useNotices";
+import { formatDate } from "../../../_utils/formatDate";
 
 export default function Notice() {
   const { notices, setNotices } = useNotices();
@@ -39,7 +40,7 @@ export default function Notice() {
               <td>{noticeItem.files.length}</td>
               <td>
                 <time dateTime={noticeItem.created_at}>
-                  {noticeItem.created_at.substring(0, 10)}
+                  {formatDate(noticeItem.created_at)}
                 </time>
               </td>
             </tr>
