@@ -2,7 +2,8 @@ import React from "react";
 import styles from "./NavSubList.module.scss";
 import { routeCategories } from "../../_config/routes";
 import Link from "next/link";
-import { Route, RouteCategory } from "../../_types/route";
+import { RouteType, RouteCategoryType } from "../../_types/route";
+
 
 export default function NavSubList({
   isOpen,
@@ -25,11 +26,11 @@ export default function NavSubList({
         <span />
 
         <ul className={styles["sub-nav-list"]}>
-          {routeCategories.map((category: RouteCategory) => (
+          {routeCategories.map((category: RouteCategoryType) => (
             <li key={category.title} className={styles["category-container"]}>
               <h4 className={styles.title}>{category.title}</h4>
               <ul>
-                {category.routes.map((route: Route) => (
+                {category.routes.map((route: RouteType) => (
                   <li key={route.path}>
                     <Link
                       onMouseEnter={() => {
