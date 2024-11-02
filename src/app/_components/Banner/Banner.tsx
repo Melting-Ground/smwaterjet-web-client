@@ -2,21 +2,7 @@
 import React from "react";
 import styles from "./Banner.module.scss";
 import { usePathname } from "next/navigation";
-import { routeCategories } from "../../_config/routes";
-
-export const findLabelByPathname = (pathname: string): string | null => {
-  // path의 마지막 부분(id 등) 제거
-  const basePathName = pathname.substring(0, pathname.lastIndexOf("/"));
-
-  for (const category of routeCategories) {
-    for (const route of category.routes) {
-      if (route.path === basePathName) {
-        return route.label;
-      }
-    }
-  }
-  return null;
-};
+import { findLabelByPathname } from "../../_utils/findLabelByPathname";
 
 export default function Banner() {
   const pathname = usePathname();
