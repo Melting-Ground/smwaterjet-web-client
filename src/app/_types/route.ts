@@ -2,7 +2,7 @@ export interface RouteType {
   path: string;
   label: string;
 }
-// export type RouteCategoryType = {
-//   title: string;
-//   routes: RouteType[];
-// };
+export type RouteCategoryType = {
+  title: string;
+  routes: RouteType[];
+};

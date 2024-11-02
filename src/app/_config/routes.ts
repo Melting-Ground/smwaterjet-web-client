@@ -1,6 +1,6 @@
-import { RouteCategory } from "../_types/route";
+import { RouteCategoryType } from "../_types/route";
 
-export const companyRoutes: RouteCategory = {
+export const companyRoutes: RouteCategoryType = {
   title: "회사소개",
   routes: [
     { path: "/company/greeting", label: "인사말" },
@@ -10,7 +10,7 @@ export const companyRoutes: RouteCategory = {
   ],
 };
 
-export const businessRoutes: RouteCategory = {
+export const businessRoutes: RouteCategoryType = {
   title: "사업영역",
   routes: [
     { path: "/business/waterjet", label: "워터젯이란?" },
@@ -19,12 +19,12 @@ export const businessRoutes: RouteCategory = {
   ],
 };
 
-export const equipmentRoutes: RouteCategory = {
+export const equipmentRoutes: RouteCategoryType = {
   title: "주요장비",
   routes: [{ path: "/equipment", label: "주요장비" }],
 };
 
-export const performanceRoutes: RouteCategory = {
+export const performanceRoutes: RouteCategoryType = {
   title: "사업실적",
   routes: [
     { path: "/performance/overview", label: "실적현황" },
@@ -32,7 +32,7 @@ export const performanceRoutes: RouteCategory = {
   ],
 };
 
-export const supportRoutes: RouteCategory = {
+export const supportRoutes: RouteCategoryType = {
   title: "고객지원",
   routes: [
     { path: "/support/notice", label: "공지사항" },
@@ -41,7 +41,7 @@ export const supportRoutes: RouteCategory = {
   ],
 };
 
-export const routeCategories: RouteCategory[] = [
+export const routeCategories: RouteCategoryType[] = [
   companyRoutes,
   businessRoutes,
   equipmentRoutes,
