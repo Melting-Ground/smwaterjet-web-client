@@ -1,10 +1,12 @@
-import useNotice from "./useNotice";
+import { APIConfig } from "../_config/apiConfig";
+import { useAPIData } from "./useAPIData";
 
-const useFormData = <T extends Record<string, any>>(
-  contents: T,
-  setContents: React.Dispatch<React.SetStateAction<T>>
+const useFormData = <T, P>(
+  apiConfig: APIConfig<T>,
+  contents: P,
+  setContents: React.Dispatch<React.SetStateAction<P>>
 ) => {
-  const { postNotice } = useNotice();
+  const { postData } = useAPIData<T>(apiConfig);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -29,25 +31,27 @@ const useFormData = <T extends Record<string, any>>(
   const createFormData = (): FormData => {
     const formData = new FormData();
 
-    Object.entries(contents).forEach(([key, value]) => {
-      if (value) {
-        if (value instanceof FileList) {
-          // 파일이 있을 경우
-          for (let i = 0; i < value.length; i++) {
-            formData.append(key, value[i]);
+    Object.entries(contents as Record<string, unknown>).forEach(
+      ([key, value]) => {
+        if (value) {
+          if (value instanceof FileList) {
+            // 파일이 있을 경우
+            for (let i = 0; i < value.length; i++) {
+              formData.append(key, value[i]);
+            }
+          } else if (typeof value === "string") {
+            formData.append(key, value);
           }
-        } else {
-          formData.append(key, value as string);
         }
       }
-    });
+    );
     return formData;
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = createFormData();
-    postNotice(formData);
+    postData(formData);
   };
   return { handleChange, handleSubmit };
 };

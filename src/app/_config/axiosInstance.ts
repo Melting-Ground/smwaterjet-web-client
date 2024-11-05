@@ -1,9 +1,9 @@
 import axios from "axios";
-import API_CONFIG from "./apiConfig";
+import { API_SETTINGS } from "./apiConfig";
 
 const axiosInstance = axios.create({
-  baseURL: API_CONFIG.baseURL,
-  timeout: API_CONFIG.timeout,
+  baseURL: API_SETTINGS.baseURL,
+  timeout: API_SETTINGS.timeout,
 });
 
 // // 요청 또는 응답 인터셉터 추가 가능

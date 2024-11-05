@@ -1,43 +1,34 @@
 "use client";
 import styles from "./page.module.scss";
 import { useParams } from "next/navigation"; // useParams를 import합니다.
-import React, { useEffect, useState } from "react";
-import axiosInstance from "../../../../_config/axiosInstance";
-import { NoticeType } from "../../../../_types/notice";
-import useNotice from "../../../../_hooks/useNotice";
+import React, { useEffect } from "react";
 import { RiArrowUpSFill, RiArrowDownSFill } from "@remixicon/react";
 import Link from "next/link";
 import { formatDate } from "../../../../_utils/formatDate";
+import { API_URLS } from "../../../../_config/apiConfig";
+import { useAPIData } from "../../../../_hooks/useAPIData";
+
 export default function NoticeDetail() {
-  const [noticeDetail, setNoticeDetail] = useState<NoticeType>();
-  const { notices } = useNotice();
-  console.log("notices", notices);
-  // 조회수
+  // TODO: 조회수 추가하기
+  const {
+    fetchData: fetchNoticeDetail,
+    dataList: noticeList,
+    dataDetail: noticeDetail,
+  } = useAPIData<typeof API_URLS.notices.method.get>(API_URLS.notices);
+
   const { id } = useParams();
-  // const previousId = notices[id]
+  useEffect(() => {
+    if (typeof id === "string") {
+      fetchNoticeDetail(id);
+    }
+  }, [id]);
 
   // 배열의 인덱스
-  const currentIndex = notices.findIndex((notice) => notice.id === Number(id));
+  const currentIndex = noticeList.findIndex(
+    (notice) => notice.id === Number(id)
+  );
   const previousIndex = currentIndex - 1;
   const nextIndex = currentIndex + 1;
-
-  console.log(notices[previousIndex]?.title);
-  console.log(notices[nextIndex]?.title);
-
-  // TODO: 훅으로 관리하기
-  const fetchNotice = async () => {
-    try {
-      const { data } = await axiosInstance.get(`/support/notices/${id}`);
-      console.log(data);
-      setNoticeDetail(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    fetchNotice();
-  }, []);
-  // console.log(noticeDetail.files[0]);
 
   return (
     <div className={styles.container}>
@@ -75,8 +66,10 @@ export default function NoticeDetail() {
               </span>
               <span>
                 {previousIndex >= 0 ? (
-                  <Link href={`/support/notice/${notices[previousIndex].id}`}>
-                    {notices[previousIndex].title}
+                  <Link
+                    href={`/support/notice/${noticeList[previousIndex].id}`}
+                  >
+                    {noticeList[previousIndex].title}
                   </Link>
                 ) : (
                   "이전 글이 없습니다."
@@ -84,8 +77,8 @@ export default function NoticeDetail() {
               </span>
               <span>
                 {previousIndex >= 0 ? (
-                  <time dateTime={notices[previousIndex].created_at}>
-                    {formatDate(notices[previousIndex].created_at)}
+                  <time dateTime={noticeList[previousIndex].created_at}>
+                    {formatDate(noticeList[previousIndex].created_at)}
                   </time>
                 ) : (
                   ""
@@ -98,18 +91,18 @@ export default function NoticeDetail() {
                 <RiArrowDownSFill size={18} />
               </span>
               <span>
-                {nextIndex < notices.length ? (
-                  <Link href={`/support/notice/${notices[nextIndex].id}`}>
-                    {notices[nextIndex].title}
+                {nextIndex < noticeList.length ? (
+                  <Link href={`/support/notice/${noticeList[nextIndex].id}`}>
+                    {noticeList[nextIndex].title}
                   </Link>
                 ) : (
                   "다음 글이 없습니다."
                 )}
               </span>
               <span>
-                {nextIndex < notices.length ? (
-                  <time dateTime={notices[nextIndex].created_at}>
-                    {formatDate(notices[nextIndex].created_at)}
+                {nextIndex < noticeList.length ? (
+                  <time dateTime={noticeList[nextIndex].created_at}>
+                    {formatDate(noticeList[nextIndex].created_at)}
                   </time>
                 ) : (
                   ""

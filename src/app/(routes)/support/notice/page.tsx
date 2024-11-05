@@ -2,11 +2,14 @@
 import React from "react";
 import styles from "./page.module.scss";
 import Link from "next/link";
-import useNotice from "../../../_hooks/useNotice";
 import { formatDate } from "../../../_utils/formatDate";
+import { useAPIData } from "../../../_hooks/useAPIData";
+import { API_URLS } from "../../../_config/apiConfig";
 
 export default function Notice() {
-  const { notices } = useNotice();
+  const { dataList: notices } = useAPIData<typeof API_URLS.notices.method.get>(
+    API_URLS.notices
+  );
 
   return (
     <div className={styles.container}>

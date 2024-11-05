@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "./page.module.scss";
 import useFormData from "../../../../_hooks/useFormData";
 import { NoticePostType } from "../../../../_types/notice";
+import { API_URLS } from "../../../../_config/apiConfig";
 
 export default function Edit() {
   const [noticeContents, setNoticeContents] = useState<NoticePostType>({
@@ -13,6 +14,7 @@ export default function Edit() {
   });
 
   const { handleChange, handleSubmit } = useFormData(
+    API_URLS.notices,
     noticeContents,
     setNoticeContents
   );
