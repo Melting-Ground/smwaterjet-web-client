@@ -37,6 +37,7 @@ export default function NoticeDetail() {
   useEffect(() => {
     fetchNotice();
   }, []);
+  // console.log(noticeDetail.files[0]);
 
   return (
     <div className={styles.container}>
@@ -47,7 +48,9 @@ export default function NoticeDetail() {
             <li>
               <span className={styles.title}>첨부파일</span>
               <span className={styles["info-item"]}>
-                {noticeDetail.files[0].file_path.split("/")[2]}
+                {noticeDetail.files.length > 0
+                  ? noticeDetail.files[0].file_path.split("/")[2]
+                  : null}
               </span>
             </li>
             <li>

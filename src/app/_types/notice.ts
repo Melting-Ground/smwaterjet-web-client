@@ -1,3 +1,9 @@
+export interface NoticePostType {
+  title: string;
+  content: string;
+  author: string;
+  files: FileList | null;
+}
 export interface NoticeType {
   content: string;
   created_at: string;

@@ -1,67 +1,21 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./page.module.scss";
-import axiosInstance from "../../../../_config/axiosInstance";
+import useFormData from "../../../../_hooks/useFormData";
+import { NoticePostType } from "../../../../_types/notice";
 
 export default function Edit() {
-  const [noticeContents, setNoticeContents] = useState<{
-    title: string;
-    content: string;
-    username: string;
-  }>({
+  const [noticeContents, setNoticeContents] = useState<NoticePostType>({
     title: "",
     content: "",
-    username: "test",
+    author: "admin",
+    files: null,
   });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData();
-
-    // 텍스트 데이터 추가
-    formData.append("title", noticeContents.title);
-    formData.append("content", noticeContents.content);
-    formData.append("username", noticeContents.username);
-
-    // 파일 추가
-    const element = document.getElementById("files") as HTMLInputElement;
-    if (element) {
-      const files = element.files;
-      if (files) {
-        for (let i = 0; i < files.length; i++) {
-          formData.append("files", files[i]);
-          console.log(`Added file: ${files[i].name}`); // 추가된 파일명 로그 출력
-        }
-      }
-    }
-    // FormData 내용 확인
-    formData.forEach((value, key) => {
-      console.log(key, value); // FormData의 내용을 확인
-    });
-    const token = localStorage.getItem("token");
-
-    try {
-      const response = await axiosInstance.post("/support/notices", formData, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      console.log("response", response);
-    } catch (error) {
-      console.error("에러", error);
-    }
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { value, id } = e.target as HTMLInputElement;
-
-    setNoticeContents((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
-  };
+  const { handleChange, handleSubmit } = useFormData(
+    noticeContents,
+    setNoticeContents
+  );
 
   return (
     <div className={styles.container}>
@@ -83,7 +37,13 @@ export default function Edit() {
         />
         <label>
           파일 선택
-          <input type="file" name="files" id="files" multiple />
+          <input
+            type="file"
+            name="files"
+            id="files"
+            multiple
+            onChange={handleChange}
+          />
         </label>
         <button type="submit">확인</button>
       </form>
