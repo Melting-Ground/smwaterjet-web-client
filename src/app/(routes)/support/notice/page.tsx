@@ -2,15 +2,15 @@
 import React from "react";
 import styles from "./page.module.scss";
 import Link from "next/link";
-import useNotices from "../../../_hooks/useNotices";
+import useNotice from "../../../_hooks/useNotice";
 import { formatDate } from "../../../_utils/formatDate";
 
 export default function Notice() {
-  const { notices } = useNotices();
+  const { notices } = useNotice();
 
   return (
     <div className={styles.container}>
-      {/* <Link href={"/support/notice/edit"}>글쓰기</Link> */}
+      <Link href={"/support/notice/edit"}>글쓰기</Link>
       <table className={styles.table} width={920}>
         <colgroup>
           <col width={130} />

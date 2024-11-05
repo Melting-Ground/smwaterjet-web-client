@@ -4,13 +4,13 @@ import { useParams } from "next/navigation"; // useParams를 import합니다.
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../../../_config/axiosInstance";
 import { NoticeType } from "../../../../_types/notice";
-import useNotices from "../../../../_hooks/useNotices";
+import useNotice from "../../../../_hooks/useNotice";
 import { RiArrowUpSFill, RiArrowDownSFill } from "@remixicon/react";
 import Link from "next/link";
 import { formatDate } from "../../../../_utils/formatDate";
 export default function NoticeDetail() {
   const [noticeDetail, setNoticeDetail] = useState<NoticeType>();
-  const { notices } = useNotices();
+  const { notices } = useNotice();
   console.log("notices", notices);
   // 조회수
   const { id } = useParams();
