@@ -5,10 +5,18 @@
   @include inner-container;
   .form {
     margin: 50px;
-
     width: 100%;
     display: grid;
     grid-template-columns: 100px 1fr;
     gap: 10px;
+
+    label {
+      padding: 8px;
+    }
+
+    .file-input {
+      background: none;
+      border: none;
+    }
   }
 }

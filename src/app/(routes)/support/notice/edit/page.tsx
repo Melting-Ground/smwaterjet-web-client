@@ -59,6 +59,7 @@ export default function Edit() {
           <React.Fragment key={num}>
             <label htmlFor={`file${num}`}>첨부 파일{num}</label>
             <Input
+              className={styles["file-input"]}
               type="file"
               name={`file${num}`}
               id={`file${num}`}
