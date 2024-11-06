@@ -5,6 +5,7 @@ import useFormData from "../../../../_hooks/useFormData";
 import { API_URLS } from "../../../../_config/apiConfig";
 import Input from "../../../../_components/Input/Input";
 import TextArea from "../../../../_components/TextArea/TextArea";
+import Button from "../../../../_components/Button/Button";
 
 export default function Edit() {
   const NOTICE_API = API_URLS.notices;
@@ -67,8 +68,14 @@ export default function Edit() {
             />
           </React.Fragment>
         ))}
-
-        <button type="submit">제출</button>
+        <div>
+          <Button type="submit" color="primary-border">
+            취소
+          </Button>
+          <Button type="submit" color="primary">
+            작성 완료
+          </Button>
+        </div>
       </form>
     </div>
   );
