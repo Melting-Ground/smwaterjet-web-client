@@ -1,12 +1,14 @@
 @import "../../../../_styles/mixins";
 @import "../../../../_styles/variables";
-
+// TODO: inner padding 더 넓게 잡기
 .container {
   @include inner-container;
-  form {
-    margin: 50px 0;
-    display: flex;
-    flex-direction: column;
+  .form {
+    margin: 50px;
+
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100px 1fr;
     gap: 10px;
   }
 }

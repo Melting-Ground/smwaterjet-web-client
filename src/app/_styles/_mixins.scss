@@ -9,8 +9,8 @@
   border: 0;
 }
 
-.sr-only {
-  @include sr-only;
+@mixin full-width {
+  width: 100%;
 }
 
 @mixin inner-container {

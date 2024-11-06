@@ -1,0 +1,44 @@
+@import "../../../_styles/mixins";
+@import "../../../_styles/variables";
+
+.container {
+  @include inner-container;
+  text-align: center;
+
+  .table {
+    margin: 0 auto;
+    margin: 100px 0;
+    width: 100%;
+    @include table-content;
+    color: $black;
+    border-top: 1px solid $gray-border;
+
+    border-collapse: collapse;
+    span {
+      display: flex;
+      width: 100%;
+    }
+    th,
+    td {
+      padding: 15px;
+      border-bottom: 1px solid $gray-lighter;
+      text-align: center;
+    }
+
+    th {
+      background-color: $gray-lightest;
+      font-weight: bold;
+    }
+
+    td {
+      a:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    .title {
+      text-align: left;
+    }
+  }
+}
