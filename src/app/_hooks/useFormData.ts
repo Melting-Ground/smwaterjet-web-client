@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { APIConfig } from "../_config/apiConfig";
 import { useAPIData } from "./useAPIData";
 
@@ -15,11 +16,18 @@ const useFormData = <T, P>(
 
     if (type === "file") {
       const { files } = e.target as HTMLInputElement;
+      const num = Number(id.at(-1));
+      const index = num - 1;
       if (files) {
-        setContents((prev) => ({
-          ...prev,
-          files: files,
-        }));
+        setContents((prev: P) => {
+          const fileList = prev.files;
+          fileList[index] = files[0];
+
+          return {
+            ...prev,
+            files: fileList,
+          };
+        });
       }
     } else {
       setContents((prev) => ({
@@ -28,16 +36,25 @@ const useFormData = <T, P>(
       }));
     }
   };
+  useEffect(() => {
+    console.log(contents);
+  }, [contents]);
+
   const createFormData = (): FormData => {
     const formData = new FormData();
 
     Object.entries(contents as Record<string, unknown>).forEach(
       ([key, value]) => {
         if (value) {
-          if (value instanceof FileList) {
+          if (
+            Array.isArray(value) &&
+            value.some((item) => item instanceof File)
+          ) {
             // 파일이 있을 경우
             for (let i = 0; i < value.length; i++) {
-              formData.append(key, value[i]);
+              if (value[i]) {
+                formData.append(key, value[i]);
+              }
             }
           } else if (typeof value === "string") {
             formData.append(key, value);
@@ -45,6 +62,7 @@ const useFormData = <T, P>(
         }
       }
     );
+
     return formData;
   };
 
@@ -52,6 +70,7 @@ const useFormData = <T, P>(
     e.preventDefault();
     const formData = createFormData();
     postData(formData);
+    formData.forEach((item) => console.log(item));
   };
   return { handleChange, handleSubmit };
 };

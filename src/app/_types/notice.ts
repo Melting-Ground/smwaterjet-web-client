@@ -2,7 +2,7 @@ export interface NoticePostType {
   title: string;
   content: string;
   author: string;
-  files: FileList | null;
+  files: File | null[];
 }
 export interface NoticeType {
   content: string;

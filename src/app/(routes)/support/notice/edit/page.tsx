@@ -15,14 +15,15 @@ export default function Edit() {
     title: "",
     content: "",
     author: "관리자",
-    files: null,
+    files: [null, null, null, null, null],
   });
 
-  const { handleChange, handleSubmit } = useFormData(
-    NOTICE_API,
-    noticeContents,
-    setNoticeContents
-  );
+  const { handleChange, handleSubmit } = useFormData<
+    typeof NOTICE_API.method.get,
+    typeof NOTICE_API.method.post
+  >(NOTICE_API, noticeContents, setNoticeContents);
+
+  const fileInputs = Array.from({ length: 5 }, (_, index) => index + 1);
 
   return (
     <div className={styles.container}>
@@ -53,15 +54,19 @@ export default function Edit() {
           value={noticeContents.content}
           onChange={handleChange}
         />
-        <label htmlFor="files">첨부 파일</label>
-        {/* 파일 선택 */}
-        <Input
-          type="file"
-          name="files"
-          id="files"
-          multiple
-          onChange={handleChange}
-        />
+        {/* 파일 선택 1~5개 */}
+        {fileInputs.map((num) => (
+          <React.Fragment key={num}>
+            <label htmlFor={`file${num}`}>첨부 파일{num}</label>
+            <Input
+              type="file"
+              name={`file${num}`}
+              id={`file${num}`}
+              onChange={handleChange}
+            />
+          </React.Fragment>
+        ))}
+
         <button type="submit">제출</button>
       </form>
     </div>
