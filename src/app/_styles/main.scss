@@ -1,8 +1,4 @@
 @import "_mixins";
 @import "_reset";
 @import "_variables";
-* {
-  font-family: var(--font-pretendard);
-  // background-color: #151c42;
-  // color: $black;
-}
+@import "_global";

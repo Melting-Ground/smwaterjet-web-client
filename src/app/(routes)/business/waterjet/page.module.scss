@@ -14,7 +14,8 @@
     padding: 65px 0;
   }
 
-  .sub-title {
+  .sub-title,
+  .sub-title > em {
     @include sub-title;
     text-align: center;
     color: $primary-lighter;
@@ -22,7 +23,8 @@
     margin-bottom: 50px;
   }
 
-  .label {
+  .label,
+  .label > em {
     @include label;
     text-align: center;
     color: $white;
@@ -73,7 +75,7 @@
       ol {
         @include content;
         @include box-shadow;
-        color: $white;
+
         height: auto;
         max-width: 1180px;
         background-color: $primary;
@@ -90,13 +92,16 @@
           padding-bottom: 25px;
           display: flex;
           flex-direction: column;
+          p {
+            color: $white;
+          }
 
           .number {
             background-color: $primary;
             width: 70px;
             display: flex;
             justify-content: center;
-            color: white;
+            color: $white;
             margin-top: -40px;
             margin-bottom: 20px;
             font-size: 32px;
@@ -121,10 +126,14 @@
 
             em {
               font-weight: 700;
+              color: $white;
             }
           }
         }
       }
     }
   }
+}
+.sr-only {
+  @include sr-only;
 }

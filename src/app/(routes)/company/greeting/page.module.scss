@@ -7,13 +7,15 @@
     @include inner-container;
     flex-direction: column;
   }
-  .title {
+  .title,
+  .title > em {
     @include title;
     font-weight: 500;
     color: $primary-lighter;
     margin-bottom: 50px;
   }
-  .label {
+  .label,
+  .label > em {
     @include label;
     color: $primary-lighter;
     font-weight: 600;
