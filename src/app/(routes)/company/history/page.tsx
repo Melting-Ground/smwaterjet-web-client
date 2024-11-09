@@ -102,14 +102,18 @@ export default function History() {
 
   useEffect(() => {
     Object.entries(yearRefs.current).forEach(([year, li]) => {
-      if (li) {
-        if (year === currentYear) {
-          li.style.setProperty("--border", "#e86a02");
-          li.style.color = "#f5f5f5";
-        } else {
-          li.style.setProperty("--border", "");
-          li.style.color = "#947C72";
-        }
+      const description = li?.querySelectorAll("p");
+      if (li && description) {
+        description.forEach((p) => {
+          const element = p as HTMLElement;
+          if (year === currentYear) {
+            li.style.setProperty("--border", "#e86a02");
+            element.style.color = "#f5f5f5";
+          } else {
+            li.style.setProperty("--border", "");
+            element.style.color = "#947C72";
+          }
+        });
       }
     });
   }, [currentYear]);
@@ -137,8 +141,10 @@ export default function History() {
           >
             {item.events.map((event, idx) => (
               <div key={idx}>
-                <p className={styles.period}>{event.period}</p>
-                <p>{event.description}</p>
+                <time dateTime={event.period} className={styles.period}>
+                  {event.period}
+                </time>
+                <p className={styles.description}>{event.description}</p>
               </div>
             ))}
           </li>
