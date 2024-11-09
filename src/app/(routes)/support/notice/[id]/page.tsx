@@ -46,7 +46,7 @@ export default function NoticeDetail() {
             </li>
             <li>
               <span className={styles.title}>조회수</span>
-              <span className={styles["info-item"]}>110</span>
+              <span className={styles["info-item"]}>{noticeDetail.count}</span>
             </li>
             <li>
               <span className={styles.title}>작성일</span>
