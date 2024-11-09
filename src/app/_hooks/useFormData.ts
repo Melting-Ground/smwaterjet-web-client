@@ -4,7 +4,7 @@ import { useAPIData } from "./useAPIData";
 
 const useFormData = <T, P>(
   apiConfig: APIConfig<T>,
-  contents: P,
+  contents: P, //post
   setContents: React.Dispatch<React.SetStateAction<P>>
 ) => {
   const { postData } = useAPIData<T>(apiConfig);

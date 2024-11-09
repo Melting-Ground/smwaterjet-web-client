@@ -26,6 +26,7 @@ export default function Edit() {
 
   const fileInputs = Array.from({ length: 5 }, (_, index) => index + 1);
 
+  // TODO: * 표시 하기 (필수항목)
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>

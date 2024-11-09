@@ -36,19 +36,19 @@ export default function Inquiry() {
           </tr>
         </thead>
         <tbody>
-          {inquiries.map((noticeItem) => (
-            <tr key={noticeItem.id}>
-              <td>{noticeItem.id}</td>
+          {inquiries.map((inquiryItem) => (
+            <tr key={inquiryItem.id}>
+              <td>{inquiryItem.id}</td>
               <td className={styles.title}>
-                <Link href={`/support/notice/${noticeItem.id}`}>
-                  {noticeItem.title}
+                <Link href={`/support/inquiry/${inquiryItem.id}/password`}>
+                  {inquiryItem.title}
                 </Link>
               </td>
-              <td>{noticeItem.files.length}</td>
+              {/* <td>{inquiryItem.files.length}</td> */}
               <td>이땡땡</td>
               <td>
-                <time dateTime={noticeItem.created_at}>
-                  {formatDate(noticeItem.created_at)}
+                <time dateTime={inquiryItem.created_at}>
+                  {formatDate(inquiryItem.created_at)}
                 </time>
               </td>
             </tr>
