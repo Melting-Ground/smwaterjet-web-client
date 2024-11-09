@@ -19,18 +19,17 @@ export default function Inquiry() {
       <Link href={"/support/inquiry/edit"}>글쓰기</Link>
       <table className={styles.table} width={920}>
         <colgroup>
+          {/* TODO: 수치 수정하기 */}
           <col width={130} />
           <col width={535} />
           <col width={115} />
           <col width={115} />
-          <col width={140} />
           {/* 1035 */}
         </colgroup>
         <thead>
           <tr>
             <th scope="col">No</th>
             <th scope="col">제목</th>
-            <th scope="col">첨부 파일</th>
             <th scope="col">글쓴이</th>
             <th scope="col">등록일</th>
           </tr>
@@ -45,7 +44,7 @@ export default function Inquiry() {
                 </Link>
               </td>
               {/* <td>{inquiryItem.files.length}</td> */}
-              <td>이땡땡</td>
+              <td>{inquiryItem.author}</td>
               <td>
                 <time dateTime={inquiryItem.created_at}>
                   {formatDate(inquiryItem.created_at)}

@@ -11,6 +11,7 @@ export interface NoticeType {
   id: number;
   title: string;
   username: string;
+  count: number;
 }
 
 export interface NoticeFileType {

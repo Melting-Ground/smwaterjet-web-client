@@ -26,8 +26,8 @@ export default function Notice() {
           <tr>
             <th scope="col">No</th>
             <th scope="col">제목</th>
-            <th scope="col">첨부 파일</th>
             <th scope="col">등록일</th>
+            <th scope="col">조회</th>
           </tr>
         </thead>
         <tbody>
@@ -39,12 +39,12 @@ export default function Notice() {
                   {noticeItem.title}
                 </Link>
               </td>
-              <td>{noticeItem.files.length}</td>
               <td>
                 <time dateTime={noticeItem.created_at}>
                   {formatDate(noticeItem.created_at)}
                 </time>
               </td>
+              <td>{noticeItem.count}</td>
             </tr>
           ))}
         </tbody>
