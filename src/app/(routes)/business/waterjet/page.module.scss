@@ -46,6 +46,10 @@
     color: $black;
     p {
       margin-bottom: 24px;
+      em {
+        color: $primary-lighter;
+        font-weight: 700;
+      }
     }
   }
 

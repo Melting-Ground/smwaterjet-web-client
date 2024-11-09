@@ -33,11 +33,9 @@ export default function Waterjet() {
                 증대시킬 수 있습니다.
               </p>
               <p>
-                따라서 도로 보수 공사나 교량의 상판 보수 공사 등에서 구조물을
-                해체하지 않고도
-                <br />
-                보강이 필요한 콘크리트 부분만을 제거하는 데 매우 유용한
-                공법입니다.
+                따라서 도로 보수 공사나 <em>교량의 상판 및 교량 하부</em> 보수
+                공사 등에서 구조물을 해체하지 않고도 보강이 필요한 열화된
+                콘크리트 부분만을 제거하는 데 매우 유용한 공법입니다.
               </p>
               <p>
                 7-80년대에 건설된 많은 콘크리트 구조물이 보수를 해야 할 시기에
@@ -70,6 +68,7 @@ export default function Waterjet() {
           </div>
         </div>
       </section>
+      {/* TODO: 반복문으로 변경 */}
       <section className={styles.feature} id="feature">
         <div className={styles["feature-title-container"]}>
           <h3 className={styles["sub-title"]}>워터젯 공법의 특징</h3>
