@@ -8,7 +8,8 @@ import { API_URLS } from "../../../_config/apiConfig";
 
 export default function Notice() {
   const { dataList: notices } = useAPIData<typeof API_URLS.notices.method.get>(
-    API_URLS.notices
+    API_URLS.notices,
+    1
   );
 
   return (

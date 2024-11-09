@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./page.module.scss";
 import Link from "next/link";
 import { formatDate } from "../../../_utils/formatDate";
@@ -9,8 +9,11 @@ import { API_URLS } from "../../../_config/apiConfig";
 export default function Inquiry() {
   const { dataList: inquiries } = useAPIData<
     typeof API_URLS.inquiries.method.get
-  >(API_URLS.inquiries);
+  >(API_URLS.inquiries, 1);
 
+  useEffect(() => {
+    console.log(inquiries);
+  }, [inquiries]);
   return (
     <div className={styles.container}>
       <Link href={"/support/inquiry/edit"}>글쓰기</Link>

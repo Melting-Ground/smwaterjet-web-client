@@ -1,15 +1,16 @@
 export interface InquiryPostType {
-  title: string;
-  content: string;
   author: string;
   phone_number: string;
+  email: string;
+  title: string;
+  content: string;
   password: string;
-  files: FileList | null;
+  files: File[] | null;
 }
 
 export interface InquiryType {
   id: number;
-  username: string;
+  author: string;
   phone_number: string;
   password: string;
   email: string;
@@ -21,7 +22,5 @@ export interface InquiryType {
 
 export interface InquiryFileType {
   id: number;
-  inquiry_id: number;
-  name: string;
   path: string;
 }
