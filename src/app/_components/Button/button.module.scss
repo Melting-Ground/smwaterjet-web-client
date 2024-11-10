@@ -2,6 +2,8 @@
 @import "../../_styles/variables";
 
 .button {
+  display: inline-flex;
+  gap: 8px;
 }
 .primary {
   background-color: $primary-lighter;
@@ -18,9 +20,7 @@
   color: $black;
   border: none;
 
-  &:hover {
-    text-decoration: underline;
-  }
+  text-decoration: underline;
 }
 .full-width {
   @include full-width;

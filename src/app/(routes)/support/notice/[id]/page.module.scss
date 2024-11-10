@@ -25,11 +25,26 @@
       border-bottom: 1px solid $gray-lighter;
       @include table-content-small;
 
+      .attachment-file {
+        display: inline-flex;
+        align-items: center;
+      }
+
       .title {
         padding-right: 8px;
       }
+
       .info-item {
         color: $gray;
+
+        .file-download {
+          display: flex;
+          align-items: center;
+
+          &-button {
+            font-size: 15px;
+          }
+        }
       }
     }
 
