@@ -22,5 +22,6 @@ export interface InquiryType {
 
 export interface InquiryFileType {
   id: number;
-  path: string;
+  file_path: string;
+  inquiry_id: string;
 }
