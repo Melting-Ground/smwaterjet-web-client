@@ -13,6 +13,15 @@
   background-color: $white;
   color: $black;
 }
+.transparent-link {
+  background-color: transparent;
+  color: $black;
+  border: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
 .full-width {
   @include full-width;
 }

@@ -6,7 +6,7 @@ interface ButtonProps {
   children: ReactNode;
   id?: string;
   type?: "button" | "submit" | "reset";
-  color?: "primary" | "primary-border";
+  color?: "primary" | "primary-border" | "transparent-link";
   // color?:
   //   | "primary"
   //   | "secondary"

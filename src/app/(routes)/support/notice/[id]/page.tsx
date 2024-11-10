@@ -8,6 +8,7 @@ import { formatDate } from "../../../../_utils/formatDate";
 import { API_URLS } from "../../../../_config/apiConfig";
 import { useAPIData } from "../../../../_hooks/useAPIData";
 import { downloadFile } from "../../../../_utils/downloadFile";
+import Button from "../../../../_components/Button/Button";
 
 export default function NoticeDetail() {
   // TODO: 조회수 추가하기
@@ -41,13 +42,14 @@ export default function NoticeDetail() {
               <span className={styles.title}>첨부파일</span>
               <span className={styles["info-item"]}>
                 {noticeDetail.files.length > 0 ? (
-                  <button
+                  <Button
+                    color="transparent-link"
                     onClick={() => {
                       downloadFile(noticeDetail.files[0]);
                     }}
                   >
-                    {noticeDetail.files[0].file_path}
-                  </button>
+                    {noticeDetail.files[0].file_path.split("/")[2]}
+                  </Button>
                 ) : null}
               </span>
             </li>
