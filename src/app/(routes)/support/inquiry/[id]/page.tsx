@@ -7,11 +7,11 @@ import Link from "next/link";
 import { formatDate } from "../../../../_utils/formatDate";
 import { API_URLS } from "../../../../_config/apiConfig";
 import { useAPIData } from "../../../../_hooks/useAPIData";
-import { userInquiryPasswordContext } from "../../../../_contexts/inquiryContext";
+import { UserInquiryPasswordContext } from "../../../../_contexts/inquiryContext";
+import { useRouter } from "next/navigation";
 // TODO: 파일 경로 @
 
 export default function InquiryDetail() {
-  // TODO: 조회수 추가하기
   const {
     fetchData: fetchInquiryDetail,
     dataList: inquiryList,
@@ -19,10 +19,20 @@ export default function InquiryDetail() {
   } = useAPIData<typeof API_URLS.inquiries.method.get>(API_URLS.inquiries);
 
   const { id } = useParams();
-  const { password } = userInquiryPasswordContext();
+  const { password } = UserInquiryPasswordContext();
+  const router = useRouter();
+
+  const getInquiryDetail = async (id: string) => {
+    const errorMessage = await fetchInquiryDetail(id, password);
+    if (errorMessage) {
+      alert(errorMessage);
+      router.push("/support/inquiry");
+    }
+  };
+
   useEffect(() => {
     if (typeof id === "string") {
-      fetchInquiryDetail(id, password);
+      getInquiryDetail(id);
     }
   }, [id]);
 
@@ -47,10 +57,7 @@ export default function InquiryDetail() {
                   : null} */}
               </span>
             </li>
-            <li>
-              <span className={styles.title}>조회수</span>
-              <span className={styles["info-item"]}>110</span>
-            </li>
+
             <li>
               <span className={styles.title}>작성일</span>
               <span className={styles["info-item"]}>

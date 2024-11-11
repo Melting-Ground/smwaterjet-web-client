@@ -1,15 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Input from "../../../../../_components/Input/Input";
 import Button from "../../../../../_components/Button/Button";
 import { usePathname, useRouter } from "next/navigation";
-import { userInquiryPasswordContext } from "../../../../../_contexts/inquiryContext";
+import { UserInquiryPasswordContext } from "../../../../../_contexts/inquiryContext";
 
 export default function Password() {
   const router = useRouter();
   const pathname = usePathname();
   const id = pathname?.split("/")[3];
-  const { password, setPassword } = userInquiryPasswordContext();
+  const { password, setPassword } = UserInquiryPasswordContext();
   console.log(id);
 
   const onPasswordSubmit = (e: React.FormEvent<HTMLFormElement>) => {

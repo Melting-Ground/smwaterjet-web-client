@@ -52,7 +52,7 @@ export default function NoticeDetail() {
                       }}
                     >
                       {/* TODO: 색상 넣기 */}
-                      <RiFile2Line size={16} />
+                      <RiFile2Line size={16} color="#75767f" />
                       {noticeDetail.files[0].file_path.split("/")[2]}
                     </Button>
                   </span>

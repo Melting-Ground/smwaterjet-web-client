@@ -27,7 +27,7 @@ export const InquiryPasswordProvider: React.FC<{
   );
 };
 
-export const userInquiryPasswordContext = () => {
+export const UserInquiryPasswordContext = () => {
   const context = useContext(InquiryPasswordContext);
 
   if (!context) {
