@@ -1,16 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./layout.module.scss";
-import useFormData from "../../../../_hooks/useFormData";
-import { API_URLS } from "../../../../_config/apiConfig";
 import Input from "../../../../_components/Input/Input";
 import TextArea from "../../../../_components/TextArea/TextArea";
 import Button from "../../../../_components/Button/Button";
 import { useRouter } from "next/navigation";
-import { NoticePostType, NoticeType } from "../../../../_types/notice";
-import { InquiryPostType, InquiryType } from "../../../../_types/inquiry";
+import { NoticePostType } from "../../../../_types/notice";
+import { InquiryPostType } from "../../../../_types/inquiry";
 
-interface DetailProps<T> {
+interface EditProps<T> {
   contents: T;
   type: "notice" | "inquiry";
   handleChange: (
@@ -21,7 +19,7 @@ interface DetailProps<T> {
 
 export default function BoardEditLayout<
   T extends NoticePostType | InquiryPostType
->({ contents, type, handleChange, handleSubmit }: DetailProps<T>) {
+>({ contents, type, handleChange, handleSubmit }: EditProps<T>) {
   const router = useRouter();
 
   const fileInputs = Array.from({ length: 5 }, (_, index) => index + 1);

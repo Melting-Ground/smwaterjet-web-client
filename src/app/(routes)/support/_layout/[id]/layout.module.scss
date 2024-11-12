@@ -27,7 +27,8 @@
 
       .attachment-file {
         display: inline-flex;
-        align-items: center;
+        align-items: start;
+        gap: 8px;
       }
 
       .title {
@@ -43,6 +44,8 @@
 
           &-button {
             font-size: 15px;
+            padding: 0px;
+            margin-bottom: 2px;
           }
         }
       }

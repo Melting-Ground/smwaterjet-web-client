@@ -37,26 +37,27 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
             <li className={styles["attachment-file"]}>
               <span className={styles.title}>첨부파일</span>
               <span className={styles["info-item"]}>
-                {dataDetail.files.length > 0 ? (
-                  <span className={styles["file-download"]}>
-                    <Button
-                      className={styles["file-download-button"]}
-                      color="transparent-link"
-                      onClick={() => {
-                        downloadFile(dataDetail.files[0]);
-                      }}
-                    >
-                      {/* TODO: 색상 넣기 */}
-                      <RiFile2Line size={16} color="#75767f" />
-                      {dataDetail.files[0].file_path.split("/")[2]}
-                    </Button>
-                  </span>
-                ) : null}
+                {dataDetail.files.length > 0
+                  ? dataDetail.files.map((file, index) => (
+                      <span key={index} className={styles["file-download"]}>
+                        <Button
+                          className={styles["file-download-button"]}
+                          color="transparent-link"
+                          onClick={() => {
+                            downloadFile(file); // 각 파일에 대한 다운로드 함수 호출
+                          }}
+                        >
+                          <RiFile2Line size={16} color="#75767f" />
+                          {file.file_path.split("/")[2]}{" "}
+                          {/* 파일 경로에서 파일명 추출 */}
+                        </Button>
+                      </span>
+                    ))
+                  : null}
               </span>
             </li>
             <li>
-              {/* 공지사항에만 있음 */}
-            {type === "notice" && "count" in dataDetail ? (
+              {type === "notice" && "count" in dataDetail ? (
                 <>
                   <span className={styles.title}>조회수</span>
                   <span className={styles["info-item"]}>
@@ -83,7 +84,9 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
               </span>
               <span>
                 {previousIndex >= 0 ? (
-                  <Link href={`/support/${type}/${dataList[previousIndex].id}`}>
+                  <Link
+                    href={`/support/${type}/${dataList[previousIndex].id}/password`}
+                  >
                     {dataList[previousIndex].title}
                   </Link>
                 ) : (
@@ -107,7 +110,9 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
               </span>
               <span>
                 {nextIndex < dataList.length ? (
-                  <Link href={`/support/${type}/${dataList[nextIndex].id}`}>
+                  <Link
+                    href={`/support/${type}/${dataList[nextIndex].id}/password`}
+                  >
                     {dataList[nextIndex].title}
                   </Link>
                 ) : (
