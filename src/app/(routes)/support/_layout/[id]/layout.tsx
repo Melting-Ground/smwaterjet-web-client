@@ -56,7 +56,7 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
             </li>
             <li>
               {/* 공지사항에만 있음 */}
-              {type === "notice" && "count" in dataDetail ? (
+            {type === "notice" && "count" in dataDetail ? (
                 <>
                   <span className={styles.title}>조회수</span>
                   <span className={styles["info-item"]}>

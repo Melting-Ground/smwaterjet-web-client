@@ -1,5 +1,6 @@
-@import "../../../../_styles/mixins";
+@import "../../../../_styles//mixins";
 @import "../../../../_styles/variables";
+
 // TODO: inner padding 더 넓게 잡기
 .container {
   @include inner-container;

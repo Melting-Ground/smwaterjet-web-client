@@ -5,7 +5,7 @@ export interface InquiryPostType {
   title: string;
   content: string;
   password: string;
-  files: File[] | null;
+  files: File[] | null[];
 }
 
 export interface InquiryType {

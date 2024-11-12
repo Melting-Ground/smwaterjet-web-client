@@ -8,9 +8,10 @@
     display: flex;
     background-color: $gray-lightest;
     border: 1px solid $gray-lighter;
-    padding: 5px 7px; // -1px(border)
+    padding: 7px 9px;
     outline: none;
-    @include table-content-small;
+    font-size: 16px;
+    border-radius: 2px;
   }
 }
 

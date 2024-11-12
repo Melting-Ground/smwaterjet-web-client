@@ -5,15 +5,27 @@
   @include inner-container;
   text-align: center;
 
+  .table-container {
+    margin: 100px 0;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+    .write-button {
+      margin-left: auto;
+      margin-bottom: 20px;
+    }
+  }
+
   .table {
     margin: 0 auto;
-    margin: 100px 0;
+    // margin: 100px 0;
     width: 100%;
     @include table-content;
     color: $black;
     border-top: 1px solid $gray-border;
-
     border-collapse: collapse;
+
     span {
       display: flex;
       width: 100%;
