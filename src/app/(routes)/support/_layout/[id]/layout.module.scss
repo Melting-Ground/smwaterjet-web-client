@@ -4,7 +4,7 @@
 .container {
   @include inner-container;
 
-  .notice-article {
+  .article {
     margin: 100px 0;
     width: 100%;
     @include table-content;
@@ -54,7 +54,7 @@
       white-space: pre-line;
     }
 
-    .notice-nav {
+    .nav {
       display: grid;
       padding: 15px;
       @include table-content-small;

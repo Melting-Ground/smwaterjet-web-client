@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "../../../../../_components/Input/Input";
 import Button from "../../../../../_components/Button/Button";
 import { usePathname, useRouter } from "next/navigation";
@@ -11,6 +11,10 @@ export default function Password() {
   const id = pathname?.split("/")[3];
   const { password, setPassword } = UserInquiryPasswordContext();
   console.log(id);
+
+  useEffect(() => {
+    setPassword("");
+  }, [id]);
 
   const onPasswordSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
