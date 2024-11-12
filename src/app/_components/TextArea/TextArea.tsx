@@ -35,10 +35,10 @@ TextAreaProps) {
     error ? styles.error : null
   } ${customClassName}`;
   return (
-    <div className={styles.textareaContainer}>
+    <div className={styles.container}>
       {/* 레이블을 prop으로 받는 경우 기본적으로 숨김처리, 숨김처리 하지 않을 경우 외부에서 선언하기 */}
       {label && <label className={styles["sr-only"]}>{label}</label>}
-      <div className={styles.textareaWrapper}>
+      <div className={styles["textarea-icon-container"]}>
         {icon && <span className={styles.icon}>{icon}</span>}
         {/* 아이콘 추가 */}
         <textarea

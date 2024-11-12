@@ -1,0 +1,71 @@
+@import "../../../../../_styles/mixins";
+@import "../../../../../_styles/variables";
+
+.container {
+  @include inner-container;
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    margin: 150px auto;
+    margin-bottom: 200px;
+  }
+
+  .form-title,
+  h3 {
+    @include sr-only;
+  }
+
+  .form {
+    @include table-content-small;
+    border: 1px solid $gray-border;
+    padding: 35px 40px;
+    padding-bottom: 0;
+    margin-bottom: 16px;
+
+    .fieldset-container {
+      background-color: $gray-lightest;
+      width: calc(100% + 80px);
+      margin-left: -40px;
+      margin-right: -40px;
+      padding: 0 40px;
+      padding-bottom: 10px;
+      margin-top: 20px;
+    }
+    .description {
+      color: $primary-lighter;
+      @include content;
+      font-weight: 600;
+
+      &-sub {
+        color: $policy-font;
+        @include table-content-small;
+        margin-top: 6px;
+      }
+    }
+
+    .input-container {
+      display: flex;
+      gap: 8px;
+      margin-top: 32px;
+      margin-bottom: 22px;
+      align-items: center;
+
+      label {
+        white-space: nowrap;
+      }
+
+      .input {
+        background-color: $white;
+      }
+    }
+
+    // .button-container {
+    //   display: flex;
+    //   gap: 8px;
+    //   .button {
+    //     margin-top: 8px;
+    //   }
+    // }
+  }
+}

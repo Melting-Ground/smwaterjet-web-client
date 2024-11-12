@@ -2,8 +2,11 @@
 @import "../../_styles/variables";
 
 .button {
-  display: inline-flex;
+  display: flex;
   gap: 8px;
+  justify-content: center;
+  padding: 6px 8px;
+  white-space: nowrap;
 }
 .primary {
   background-color: $primary-lighter;

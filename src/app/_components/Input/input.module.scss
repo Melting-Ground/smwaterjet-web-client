@@ -1,14 +1,19 @@
 @import "../../_styles/mixins";
 @import "../../_styles/variables";
 
-.input {
-  background-color: $gray-lightest;
-  border: 1px solid $gray-lighter;
-  padding: 6px 8px;
-  outline: none;
-  //   border-radius: 2px;
-  @include table-content-small;
+.container {
+  display: flex;
+
+  .input {
+    display: flex;
+    background-color: $gray-lightest;
+    border: 1px solid $gray-lighter;
+    padding: 5px 7px; // -1px(border)
+    outline: none;
+    @include table-content-small;
+  }
 }
+
 .full-width {
   @include full-width;
 }
