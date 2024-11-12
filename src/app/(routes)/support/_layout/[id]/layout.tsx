@@ -7,6 +7,8 @@ import { formatDate } from "../../../../_utils/formatDate";
 import { downloadFile } from "../../../../_utils/downloadFile";
 import Button from "../../../../_components/Button/Button";
 import { RiFile2Line } from "@remixicon/react";
+import { NoticeType } from "../../../../_types/notice";
+import { InquiryType } from "../../../../_types/inquiry";
 
 interface DetailProps<T> {
   dataDetail: T;
@@ -15,7 +17,7 @@ interface DetailProps<T> {
   type: "notice" | "inquiry";
 }
 
-export default function BoardDetailLayout<T>({
+export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
   dataDetail,
   dataList,
   currentId,
@@ -54,7 +56,7 @@ export default function BoardDetailLayout<T>({
             </li>
             <li>
               {/* 공지사항에만 있음 */}
-              {type === "notice" ? (
+              {type === "notice" && "count" in dataDetail ? (
                 <>
                   <span className={styles.title}>조회수</span>
                   <span className={styles["info-item"]}>
