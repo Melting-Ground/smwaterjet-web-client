@@ -81,3 +81,18 @@
   font-size: 15px;
   line-height: 1.2;
 }
+@mixin news-title {
+  font-size: 20px;
+  font-weight: 700;
+  max-height: 64px;
+}
+
+@mixin news-content {
+  @include table-content;
+  margin-bottom: 10px;
+}
+
+@mixin news-description {
+  font-size: 14px;
+  font-weight: 500;
+}

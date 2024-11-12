@@ -1,0 +1,48 @@
+@import "../../../_styles/mixins";
+@import "../../../_styles/variables";
+
+.container {
+  @include inner-container;
+
+  .news {
+    margin: 100px;
+    margin-bottom: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .article {
+    padding: 40px 30px;
+    border-bottom: 1px solid $gray-lighter;
+
+    &:hover {
+      background-color: $gray-lightest;
+    }
+
+    .title {
+      @include news-title;
+      color: $primary;
+      margin-bottom: 12px;
+    }
+    .content {
+      @include news-content;
+    }
+
+    .description {
+      display: flex;
+      gap: 10px;
+      .company,
+      .pub-date {
+        @include news-description;
+      }
+
+      .company {
+        color: $blue;
+      }
+
+      .pub-date {
+        color: $gray;
+      }
+    }
+  }
+}
