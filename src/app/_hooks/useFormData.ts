@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { APIConfig } from "../_config/apiConfig";
 import { useAPIData } from "./useAPIData";
 

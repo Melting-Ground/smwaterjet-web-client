@@ -1,0 +1,16 @@
+@import "../../../_styles/mixins";
+@import "../../../_styles/variables";
+
+.container {
+  @include inner-container;
+  .certificates {
+    margin: 100px 0;
+    gap: 16px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .image {
+      max-width: 100%;
+    }
+  }
+}

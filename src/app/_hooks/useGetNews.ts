@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NewsType } from "../_types/news";
 import axios from "axios";
 
+// TODO: 로딩 상태 추가하기
 export const useGetNews = (searchQuery: string) => {
   const [newsList, setNewsList] = useState<NewsType[] | NewsType | null>();
   const fetchNews = async (searchQuery: string) => {
