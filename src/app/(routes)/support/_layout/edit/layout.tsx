@@ -17,6 +17,7 @@ interface EditProps<T> {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
 }
 
+// TODO: 자동 등록 방지
 export default function BoardEditLayout<
   T extends NoticePostType | InquiryPostType
 >({ contents, type, handleChange, handleSubmit }: EditProps<T>) {

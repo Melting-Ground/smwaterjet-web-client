@@ -36,9 +36,6 @@ const useFormData = <T, P>(
       }));
     }
   };
-  useEffect(() => {
-    console.log(contents);
-  }, [contents]);
 
   const createFormData = (): FormData => {
     const formData = new FormData();
@@ -74,4 +71,5 @@ const useFormData = <T, P>(
   };
   return { handleChange, handleSubmit };
 };
+
 export default useFormData;

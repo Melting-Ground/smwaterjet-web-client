@@ -24,6 +24,7 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
     router.push(`/support/${type}/edit`);
   };
 
+  // TODO: 페이징 기능 추가하기
   return (
     <div className={styles.container}>
       <div className={styles["table-container"]}>
