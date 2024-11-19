@@ -60,7 +60,7 @@ export default function Password() {
           color="transparent-link"
           onClick={goBackToList}
           fullWidth
-          className={styles.button}
+          className={styles["go-back-button"]}
         >
           목록으로 돌아가기
         </Button>
