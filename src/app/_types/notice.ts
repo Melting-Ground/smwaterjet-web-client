@@ -10,7 +10,7 @@ export interface NoticeType {
   files: NoticeFileType[];
   id: number;
   title: string;
-  username: string;
+  author: string;
   count: number;
 }
 
