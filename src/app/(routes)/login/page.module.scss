@@ -3,10 +3,68 @@
 
 .container {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  @include inner-container;
+  margin: 150px auto 250px auto;
 
-  label {
-    // margin-right: 10px;
+  h3 {
+    @include sr-only;
+  }
+
+  form {
+    width: 300px;
+    margin: 0 auto;
+
+    .fieldset {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      .legend {
+        font-size: 24px;
+        font-weight: 600;
+        color: $primary-lighter;
+        margin-bottom: 24px;
+        text-align: center;
+      }
+
+      .id-label,
+      .password-label {
+        @include sr-only;
+      }
+
+      button.show-password {
+        background: none;
+        border: none;
+        padding: 0;
+      }
+      .remember-me-container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        padding: 4px;
+        margin-top: 4px;
+
+        .remember-me-label {
+          font-size: 14px;
+          cursor: inherit;
+          color: $policy-font;
+        }
+        input[type="checkbox"] {
+          vertical-align: middle;
+          top: 0.1em;
+          transform: translateY(-1px);
+          margin: 0px;
+          width: 14px;
+          height: 14px;
+          accent-color: $secondary;
+          cursor: pointer;
+        }
+      }
+
+      button.login {
+        margin-top: 14px;
+      }
+    }
   }
 }

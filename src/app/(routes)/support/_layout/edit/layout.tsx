@@ -68,7 +68,7 @@ export default function BoardEditLayout<
   // TODO: * 표시 하기 (필수항목)
   //   문의사항의 경우 더 항목이 많음
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor="title">
           {type === "inquiry" ? <>성함</> : <>작성자</>}
@@ -154,6 +154,6 @@ export default function BoardEditLayout<
           </Button>
         </div>
       </form>
-    </div>
+    </section>
   );
 }

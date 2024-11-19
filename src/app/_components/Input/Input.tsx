@@ -3,6 +3,7 @@ import styles from "./input.module.scss";
 
 interface InputProps {
   value?: string;
+  checked?: boolean;
   label?: string;
   error?: boolean;
   placeholder?: string;
@@ -15,12 +16,14 @@ interface InputProps {
   name?: string;
   message?: string;
   icon?: JSX.Element;
+  iconPosition?: "left" | "inner-right";
   fullWidth?: boolean;
   multiple?: boolean;
 }
 
 export default function Input({
   value,
+  checked,
   label,
   placeholder,
   id,
@@ -32,6 +35,7 @@ export default function Input({
   type = "text",
   name,
   icon,
+  iconPosition = "left",
   fullWidth = false,
   multiple = false,
 }: InputProps) {
@@ -45,12 +49,15 @@ export default function Input({
     >
       {/* 레이블을 prop으로 받는 경우 기본적으로 숨김처리, 숨김처리 하지 않을 경우 외부에서 선언하기 */}
       {label && <label className={styles["sr-only"]}>{label}</label>}
-      {icon && <span className={styles.icon}>{icon}</span>}
+      {icon && iconPosition === "left" && (
+        <span className={styles.icon}>{icon}</span>
+      )}
       {/* 아이콘 추가 */}
       <input
         type={type}
         name={name}
         value={value}
+        checked={checked}
         id={id}
         className={className}
         onChange={onChange}
@@ -58,6 +65,9 @@ export default function Input({
         placeholder={placeholder}
         multiple={multiple}
       />
+      {icon && iconPosition === "inner-right" && (
+        <span className={styles["inner-right-icon"]}>{icon}</span>
+      )}
       {error && message && <p className={styles.errorMessage}>{message}</p>}
       {/* 에러 메시지 처리 */}
     </div>

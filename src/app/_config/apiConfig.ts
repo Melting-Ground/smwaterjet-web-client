@@ -1,4 +1,5 @@
 import { InquiryPostType, InquiryType } from "../_types/inquiry";
+import { NewsPostType, NewsType } from "../_types/news";
 import { NoticePostType, NoticeType } from "../_types/notice";
 
 export interface APIConfig<T = unknown, P = unknown> {
@@ -24,6 +25,14 @@ const API_URLS = {
       post: {} as InquiryPostType,
     },
   },
+
+  // certificates: {
+  //   url: "/company/certificates",
+  //   method: {
+  //     get: {} as InquiryType,
+  //     post: {} as InquiryPostType,
+  //   },
+  // },
   // inquiries: {
   //   url: {
   //     list: "/support/inquiries",
