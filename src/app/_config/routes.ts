@@ -14,7 +14,7 @@ export const businessRoutes: RouteCategoryType = {
   title: "사업영역",
   routes: [
     { path: "/business/waterjet", label: "워터젯이란?" },
-    { path: "/business/cutting", label: "콘크리트 커팅" },
+    // { path: "/business/cutting", label: "콘크리트 커팅" },
     { path: "/business/chipping", label: "콘트리트 파쇄" },
   ],
 };

@@ -4,7 +4,8 @@ import "./_styles/main.scss";
 import styles from "./layout.module.scss";
 import Header from "./_components/Header/Header";
 import Footer from "./_components/Footer/Footer";
-import Banner from "./_components/Banner/Banner";import ClientWrapper from "./clientWrapper";
+import Banner from "./_components/Banner/Banner";
+import ClientWrapper from "./clientWrapper";
 // import localFont from 'next/font/local';
 
 const pretendard = localFont({
