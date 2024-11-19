@@ -1,5 +1,5 @@
 export const getAuthHeaders = () => {
-  const token = localStorage.getItem("token");
+  const token = getToken();
   if (!token) {
     throw new Error("사용자 토큰이 없습니다.");
   }
@@ -8,4 +8,8 @@ export const getAuthHeaders = () => {
       authorization: `Bearer ${token}`,
     },
   };
+};
+
+export const getToken = () => {
+  return localStorage.getItem("token") || sessionStorage.getItem("token");
 };

@@ -4,8 +4,7 @@ import "./_styles/main.scss";
 import styles from "./layout.module.scss";
 import Header from "./_components/Header/Header";
 import Footer from "./_components/Footer/Footer";
-import Banner from "./_components/Banner/Banner";
-import Script from "next/script";
+import Banner from "./_components/Banner/Banner";import ClientWrapper from "./clientWrapper";
 // import localFont from 'next/font/local';
 
 const pretendard = localFont({
@@ -24,17 +23,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&autoload=false`;
   return (
     <html lang="ko">
       <body className={`${styles.body} ${pretendard}`}>
-        <Header />
-        <Banner />
-        <main className={styles.main}>
-          <div className={styles["main-inner"]}>{children}</div>
-        </main>
-        <Footer />
-        <Script src={KAKAO_SDK_URL} strategy="beforeInteractive" />
+        <ClientWrapper>
+          <Header />
+          <Banner />
+          <main className={styles.main}>
+            <div className={styles["main-inner"]}>{children}</div>
+          </main>
+          <Footer />
+        </ClientWrapper>
       </body>
     </html>
   );

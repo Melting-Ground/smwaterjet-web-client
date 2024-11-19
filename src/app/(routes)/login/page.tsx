@@ -3,41 +3,16 @@ import React, { useState } from "react";
 import styles from "./page.module.scss";
 import Button from "../../_components/Button/Button";
 import Input from "../../_components/Input/Input";
-import { useLogin } from "../../_hooks/useLogin";
 import { RiEyeLine, RiEyeOffLine } from "@remixicon/react";
+import { useAuth } from "../../_hooks/useAuth";
 
 export default function Login() {
-  const { handleChange, handleSubmit, handleCheckboxChange, rememberMe } =
-    useLogin();
-
-  // const postRequest = async () => {
-  //   try {
-  //     // console.log("submit", localStorage.getItem("token"));
-  //     const token = localStorage.getItem("token");
-  //     const response = await axiosInstance.post("/company/certificates", {
-  //       path: "1234",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     // localStorage.setItem("token", data);
-  //     console.log("응답:", response);
-  //   } catch (e) {
-  //     console.error("에러:", e);
-  //   }
-  // };
-
-  // const getRequest = async () => {
-  //   try {
-  //     // console.log("submit", localStorage.getItem("token"));
-  //     // const token = localStorage.getItem("token");
-  //     const response = await axiosInstance.get("/company/certificates");
-  //     // localStorage.setItem("token", data);
-  //     console.log("응답:", response);
-  //   } catch (e) {
-  //     console.error("에러:", e);
-  //   }
-  // };
+  const {
+    handleLoginChange,
+    handleLoginSubmit,
+    handleLoginCheckboxChange,
+    rememberMe,
+  } = useAuth();
 
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
 
@@ -48,7 +23,7 @@ export default function Login() {
   return (
     <section className={styles.container}>
       <h3>로그인</h3>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLoginSubmit}>
         <fieldset className={styles.fieldset}>
           <legend className={styles.legend}>로그인</legend>
           <label htmlFor="id" className={styles["id-label"]}>
@@ -58,7 +33,7 @@ export default function Login() {
             placeholder="아이디"
             id="id"
             className={styles.id}
-            onChange={handleChange}
+            onChange={handleLoginChange}
             fullWidth
           />
           <label htmlFor="password" className={styles["password-label"]}>
@@ -68,7 +43,7 @@ export default function Login() {
             placeholder="비밀번호"
             id="password"
             className={styles.password}
-            onChange={handleChange}
+            onChange={handleLoginChange}
             fullWidth
             type={!isShowPassword ? "password" : "text"}
             icon={
@@ -90,7 +65,7 @@ export default function Login() {
               type="checkbox"
               id="remember-me"
               checked={rememberMe}
-              onChange={handleCheckboxChange}
+              onChange={handleLoginCheckboxChange}
             />
             <label
               htmlFor="remember-me"

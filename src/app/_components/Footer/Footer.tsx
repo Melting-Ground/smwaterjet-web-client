@@ -1,8 +1,14 @@
+"use client";
 import React from "react";
 import styles from "./Footer.module.scss";
 import Link from "next/link";
 import { RiArrowRightUpLine } from "@remixicon/react";
+import Button from "../Button/Button";
+import { useAuth } from "../../_hooks/useAuth";
+import { useAuthContext } from "../../_contexts/authContext";
 export default function Footer() {
+  const { handleLogoutClick, isLoggedIn } = useAuth();
+
   return (
     <footer className={styles.footer}>
       <div className={styles["footer-inner"]}>
@@ -42,7 +48,11 @@ export default function Footer() {
           <p>FAX: 033-261-4173</p>
         </address>
         <small>© 성문워터젯, All right reserved.</small>
-        <Link href={"/login"}>로그인</Link>
+        {!isLoggedIn ? (
+          <Link href={"/login"}>로그인</Link>
+        ) : (
+          <Button onClick={handleLogoutClick}>로그아웃</Button>
+        )}
       </div>
     </footer>
   );
