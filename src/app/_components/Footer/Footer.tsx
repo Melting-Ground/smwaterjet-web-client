@@ -5,34 +5,45 @@ import Link from "next/link";
 import { RiArrowRightUpLine } from "@remixicon/react";
 import Button from "../Button/Button";
 import { useAuth } from "../../_hooks/useAuth";
-import { useAuthContext } from "../../_contexts/authContext";
+
 export default function Footer() {
-  const { handleLogoutClick, isLoggedIn } = useAuth();
+  const { handleLogoutClick, handleLoginClick, isLoggedIn } = useAuth();
 
   return (
     <footer className={styles.footer}>
       <div className={styles["footer-inner"]}>
-        <ul className={styles["policy"]}>
-          <cite>성문워터젯</cite>
-          <li>
-            <Link href={"/policy/tos"}>
-              이용약관
-              <RiArrowRightUpLine size={18} />
-            </Link>
-          </li>
-          <li>
-            <Link href={"/policy/privacy"}>
-              개인정보처리방침
-              <RiArrowRightUpLine size={18} />
-            </Link>
-          </li>
-          <li>
-            <Link href={"/policy/email"}>
-              이메일무단수집거부
-              <RiArrowRightUpLine size={18} />
-            </Link>
-          </li>
-        </ul>
+        <div className={styles["policy-button-container"]}>
+          <ul className={styles["policy"]}>
+            <cite>성문워터젯</cite>
+            <li>
+              <Link href={"/policy/tos"}>
+                이용약관
+                <RiArrowRightUpLine size={18} />
+              </Link>
+            </li>
+            <li>
+              <Link href={"/policy/privacy"}>
+                개인정보처리방침
+                <RiArrowRightUpLine size={18} />
+              </Link>
+            </li>
+            <li>
+              <Link href={"/policy/email"}>
+                이메일무단수집거부
+                <RiArrowRightUpLine size={18} />
+              </Link>
+            </li>
+          </ul>
+          {!isLoggedIn ? (
+            <Button className={styles.login} onClick={handleLoginClick}>
+              로그인
+            </Button>
+          ) : (
+            <Button className={styles.logout} onClick={handleLogoutClick}>
+              로그아웃
+            </Button>
+          )}
+        </div>
         <address>
           <p>강원도 춘천시 동내면 신촌길 15</p>
           <p>
@@ -48,11 +59,6 @@ export default function Footer() {
           <p>FAX: 033-261-4173</p>
         </address>
         <small>© 성문워터젯, All right reserved.</small>
-        {!isLoggedIn ? (
-          <Link href={"/login"}>로그인</Link>
-        ) : (
-          <Button onClick={handleLogoutClick}>로그아웃</Button>
-        )}
       </div>
     </footer>
   );

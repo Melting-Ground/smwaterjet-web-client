@@ -7,10 +7,16 @@
   width: 100%;
   font-size: 15px;
   z-index: 10;
+
   &-inner {
     @include inner-container;
     display: flex;
     flex-direction: column;
+
+    .policy-button-container {
+      display: flex;
+      justify-content: space-between;
+    }
 
     .policy {
       display: flex;
@@ -46,5 +52,14 @@
     h2 {
       @include sr-only;
     }
+  }
+
+  button.login,
+  button.logout {
+    margin-right: auto;
+    background: none;
+    border: none;
+    font-size: 15px;
+    padding: 0;
   }
 }

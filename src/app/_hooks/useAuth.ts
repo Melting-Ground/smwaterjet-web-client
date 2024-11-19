@@ -59,12 +59,17 @@ export const useAuth = () => {
     router.push("/");
   };
 
+  const handleLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    router.push("/login");
+  };
+
   return {
     handleLoginChange,
     handleLoginSubmit,
     handleLoginCheckboxChange,
     rememberMe,
     handleLogoutClick,
+    handleLoginClick,
     isLoggedIn,
   };
 };
