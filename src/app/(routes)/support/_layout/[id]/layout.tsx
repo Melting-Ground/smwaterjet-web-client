@@ -85,7 +85,11 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
               <span>
                 {previousIndex >= 0 ? (
                   <Link
-                    href={`/support/${type}/${dataList[previousIndex].id}/password`}
+                    href={
+                      type === "inquiry"
+                        ? `/support/${type}/${dataList[previousIndex].id}/password`
+                        : `/support/${type}/${dataList[previousIndex].id}`
+                    }
                   >
                     {dataList[previousIndex].title}
                   </Link>
@@ -111,7 +115,11 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
               <span>
                 {nextIndex < dataList.length ? (
                   <Link
-                    href={`/support/${type}/${dataList[nextIndex].id}/password`}
+                    href={
+                      type === "inquiry"
+                        ? `/support/${type}/${dataList[nextIndex].id}/password`
+                        : `/support/${type}/${dataList[nextIndex].id}`
+                    }
                   >
                     {dataList[nextIndex].title}
                   </Link>
