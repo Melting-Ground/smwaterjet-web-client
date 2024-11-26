@@ -5,9 +5,25 @@
   background-image: url(#{$businessBanner});
 }
 
+.company {
+  background-image: url(#{$companyBanner});
+}
+
+.equipment {
+  background-image: url(#{$equipmentBanner});
+}
+
+.support {
+  background-image: url(#{$supportBanner});
+}
+
+.performance {
+  background-image: url(#{$performanceBanner});
+}
+
 .banner {
   .background {
-    height: 20rem;
+    height: 25rem;
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 100px;
