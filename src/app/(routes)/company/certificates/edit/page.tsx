@@ -2,13 +2,14 @@
 import React, { useState } from "react";
 import styles from "./page.module.scss";
 import axiosInstance from "../../../../_config/axiosInstance";
+import { getToken } from "../../../../_utils/getAuth";
 
 export default function Edit() {
   const [certificate, setCertificate] = useState<File | null>(null); // 초기값을 null로 설정
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
+    const token = getToken();
 
     if (!certificate) {
       console.error("파일을 선택하세요.");
@@ -22,6 +23,7 @@ export default function Edit() {
       const response = await axiosInstance.post(
         "/company/certificates",
         formData,
+        // TODO: 제목을 함께 넘겨줘야 함
         {
           headers: {
             authorization: `Bearer ${token}`,
