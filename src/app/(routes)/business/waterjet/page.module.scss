@@ -10,7 +10,7 @@
   }
 
   .dark-section {
-    background-color: $primary;
+    background-color: $primary-lighter;
     padding: 65px 0;
   }
 
@@ -20,7 +20,7 @@
     text-align: center;
     color: $primary-lighter;
     margin-top: 100px;
-    margin-bottom: 50px;
+    margin-bottom: 24px;
   }
 
   .label,
@@ -43,7 +43,8 @@
 
   .content {
     @include content;
-    color: $black;
+    // color: $black;
+    color: $policy-font;
     p {
       margin-bottom: 24px;
       em {
@@ -67,7 +68,8 @@
     }
 
     .card-background {
-      background-color: $gray-lighter;
+      background-color: $gray-lightest;
+
       width: 100%;
       display: flex;
       justify-content: center;
@@ -82,38 +84,47 @@
 
         height: auto;
         max-width: 1180px;
-        background-color: $primary;
+        background-color: $white;
         position: absolute;
         margin-top: -100px;
         display: grid;
-        grid-template-columns: repeat(3, minmax(260px, 1fr));
-        gap: 50px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
         padding: 50px;
 
         li {
-          border: 3px solid $primary-lighter;
+          background-color: $gray-lightest;
+          // border: 3px solid $policy-font;
+
           padding: 24px;
           padding-bottom: 25px;
           display: flex;
           flex-direction: column;
           p {
-            color: $white;
+            color: $policy-font;
+            // color: $white;
+            // margin-top: 10px;
           }
 
           .number {
-            background-color: $primary;
-            width: 70px;
+            margin-left: -40px;
+            background-color: $white;
+            width: 40px;
+            height: 40px;
             display: flex;
             justify-content: center;
-            color: $white;
+            align-items: center;
+            color: $blue;
             margin-top: -40px;
-            margin-bottom: 20px;
-            font-size: 32px;
+            // margin-bottom: 20px;
+            font-size: 22px;
             font-weight: 200;
             line-height: 1;
             z-index: 1;
+            border: 5px solid $blue;
+            border-radius: 50%;
             position: relative;
-            font-weight: 400;
+            font-weight: 700;
 
             // 원
             // &::before {
@@ -129,8 +140,8 @@
             // }
 
             em {
-              font-weight: 700;
-              color: $white;
+              font-weight: 800;
+              color: inherit;
             }
           }
         }
