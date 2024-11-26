@@ -50,13 +50,13 @@
 }
 
 @mixin sub-title {
-  font-size: 38px;
-  font-weight: 500;
+  font-size: 34px;
+  font-weight: 700;
   line-height: 1.4;
 
-  em {
-    font-weight: 700;
-  }
+  // em {
+  //   font-weight: 700;
+  // }
 }
 
 @mixin label {

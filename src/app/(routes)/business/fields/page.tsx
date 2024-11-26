@@ -166,8 +166,10 @@ export default function Fields() {
         >
           <h3 className={styles["list-title"]}>해결 방안</h3>
           <p className={styles["list-description"]}>
-            <em>워터젯 공법</em>을 통해 구조물의 열화된 부분만 정밀하게 제거하고
-            보강 작업을 지원하여 구조물의 안정성을 유지합니다.
+            <em>워터젯 공법</em>을 통해 구조물의{" "}
+            <strong>열화된 부분만 정밀하게 제거</strong>하고{" "}
+            <strong>보강 작업을 지원</strong>하여{" "}
+            <em>구조물의 안정성을 유지</em>합니다.
           </p>
 
           {/* <h3 id="advantages-heading">워터젯 공법의 차별화된 기술력</h3> */}

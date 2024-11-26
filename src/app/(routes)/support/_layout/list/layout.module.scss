@@ -22,8 +22,7 @@
     // margin: 100px 0;
     width: 100%;
     @include table-content;
-    color: $black;
-    border-top: 1px solid $gray-border;
+    border-top: 1.5px solid $gray-border;
     border-collapse: collapse;
 
     span {
@@ -32,14 +31,18 @@
     }
     th,
     td {
-      padding: 15px;
+      padding: 17px;
       border-bottom: 1px solid $gray-lighter;
       text-align: center;
     }
 
     th {
+      font-size: 17px;
+      padding: 14px;
+
       background-color: $gray-lightest;
-      font-weight: bold;
+      font-weight: 600;
+      color: $primary;
     }
 
     td {

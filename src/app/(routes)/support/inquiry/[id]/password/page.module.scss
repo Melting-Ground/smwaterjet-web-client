@@ -18,7 +18,7 @@
 
   .form {
     @include table-content-small;
-
+    border-radius: 8px;
     border: 1px solid $gray-border;
     padding: 35px 40px;
     padding-bottom: 0;
@@ -29,25 +29,27 @@
       width: calc(100% + 80px);
       margin-left: -40px;
       margin-right: -40px;
+      border-radius: 0 0 8px 8px;
+
       padding: 0 40px;
       padding-bottom: 10px;
       margin-top: 20px;
     }
     .description {
       color: $primary-lighter;
-      @include content;
+      font-size: 20px;
       font-weight: 600;
 
       &-sub {
         color: $policy-font;
         @include table-content-small;
-        margin-top: 6px;
+        margin-top: 10px;
       }
     }
 
     .input-container {
       display: flex;
-      gap: 8px;
+      gap: 12px;
       @include table-content;
       margin-top: 32px;
       margin-bottom: 22px;
@@ -55,6 +57,8 @@
 
       label {
         white-space: nowrap;
+        color: $primary;
+        font-weight: 500;
       }
 
       .input {

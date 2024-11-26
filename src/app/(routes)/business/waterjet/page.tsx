@@ -19,15 +19,16 @@ export default function Waterjet() {
             <br /> 콘크리트만을 선택적으로 파괴시킬 수 있는 획기적인 공법입니다.
           </p>
         </div>
-        <h3 className={styles["sub-title"]}>
-          <em>철근 손상 없이</em> 취약부 제거,
-          <br />
-          <em>환경과 품질을 동시에</em> 잡는 <em>워터젯 공법</em>
-        </h3>
         <div className={styles["inner-container"]}>
+          <h3 className={styles["sub-title"]}>
+            <em>철근 손상 없이</em> 취약부 제거,
+            <br />
+            <em>환경과 품질을 동시에</em> 잡는 <em>워터젯 공법</em>
+          </h3>
+
           <div className={styles["image-content-container"]}>
             <div className={styles.content}>
-              <p>
+              {/* <p>
                 이 공법은 철근을 전혀 손상시키지 않고 해체하므로,
                 <br />
                 표면 위에 보강 공사를 시행할 때 보강 콘크리트의 부착력을
@@ -37,12 +38,11 @@ export default function Waterjet() {
                 따라서 도로 보수 공사나 <em>교량의 상판 및 교량 하부</em> 보수
                 공사 등에서 구조물을 해체하지 않고도 보강이 필요한 열화된
                 콘크리트 부분만을 제거하는 데 매우 유용한 공법입니다.
-              </p>
+              </p> */}
               <p>
                 7-80년대에 건설된 많은 콘크리트 구조물이 보수를 해야 할 시기에
                 접어들었습니다.
-              </p>
-              <p>
+                <br />
                 보수 공법 중 재료에 대한 부분은 상당한 발전과 개발이
                 이루어졌지만,
                 <br />
@@ -50,6 +50,7 @@ export default function Waterjet() {
                 <br /> 기능공의 판단이나 능력에 의존하는 낙후된 방식만이
                 사용되고 있습니다.
               </p>
+              <br />
               <p>
                 현재 우리나라를 비롯한 선진국에서는 콘크리트 취약부를 제거하는
                 방법으로

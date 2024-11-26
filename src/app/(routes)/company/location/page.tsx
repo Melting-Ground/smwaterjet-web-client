@@ -5,6 +5,7 @@ import styles from "./page.module.scss";
 // import { useKakaoLoader } from "../../../_hooks/useKakaoLoader";
 
 export default function Location() {
+  // 카카오
   // const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&autoload=false`;
   // useKakaoLoader(KAKAO_SDK_URL);
   return (

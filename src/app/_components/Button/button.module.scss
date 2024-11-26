@@ -5,28 +5,29 @@
   display: flex;
   gap: 8px;
   justify-content: center;
-  padding: 7px 9px;
+  padding: 8px 15px;
   white-space: nowrap;
   width: fit-content;
   justify-content: center;
   align-self: center;
   font-size: 16px;
-  border-radius: 2px;
+  border-radius: 6px;
   line-height: 1;
+  font-weight: 500;
 }
 .primary {
   background-color: $primary-lighter;
   color: $white;
-  border: 1px solid $primary-lighter;
+  border: 1.5px solid $primary-lighter;
 }
 .primary-border {
-  border: 1px solid $primary-lighter;
+  border: 1.5px solid $primary-lighter;
   background-color: $white;
-  color: $black;
+  color: $primary;
 }
 .transparent-link {
   background-color: transparent;
-  color: $black;
+  color: $primary;
   border: none;
 
   text-decoration: underline;

@@ -16,7 +16,7 @@
     .header {
       text-align: center;
       &-title {
-        font-size: 36px;
+        font-size: 38px;
         font-weight: 700;
         color: $primary-lighter;
         line-height: 1.6;
@@ -59,17 +59,18 @@
     display: flex;
     justify-content: space-between;
     text-align: center;
-    max-width: 850px;
+    max-width: 900px;
 
     margin: 0 auto;
     margin-top: 50px;
     // border-radius: 20px;
     padding: 50px;
     background-color: $gray-lightest;
-    @include box-shadow;
+    border-radius: 10px;
+    // @include box-shadow;
 
     &-title {
-      font-size: 28px;
+      font-size: 30px;
       font-weight: 700;
       color: $primary;
     }
@@ -82,6 +83,10 @@
 
       em {
         color: $blue;
+        font-weight: 600;
+      }
+      strong {
+        color: $primary;
         font-weight: 600;
       }
     }
@@ -141,7 +146,7 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    margin-top: 50px;
+    margin-top: 100px;
     position: relative;
     gap: 80px;
     // margin: 50px 0;
