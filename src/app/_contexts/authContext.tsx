@@ -5,6 +5,7 @@ interface AuthContextType {
   isLoggedIn: boolean;
   login: (token: string, rememberMe: boolean) => void;
   logout: () => void;
+  isInitialized: boolean; // 초기화 상태
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -13,10 +14,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isInitialized, setIsInitialized] = useState<boolean>(false);
 
   useEffect(() => {
     const token = getToken();
+    console.log("token", token);
     setIsLoggedIn(!!token);
+    setIsInitialized(true);
   }, []);
 
   const login = (token: string, rememberMe: boolean) => {
@@ -33,9 +37,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     sessionStorage.removeItem("token");
     setIsLoggedIn(false);
   };
-
+  if (!isInitialized) {
+    return <div>로딩 중...</div>;
+  }
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, isInitialized }}>
       {children}
     </AuthContext.Provider>
   );
