@@ -6,6 +6,7 @@ import BoardListLayout from "../_layout/list/layout";
 
 export default function Notice() {
   // TODO: 페이징 기능 추가하기
+  // TODO: 폰트 키워도 될 것 같음
   const { dataList: notices } = useAPIData<typeof API_URLS.notices.method.get>(
     API_URLS.notices,
     1

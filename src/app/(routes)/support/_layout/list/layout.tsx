@@ -52,7 +52,9 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
           <thead>
             <tr>
               {tableHeadList.map((col) => (
-                <th scope="col">{col}</th>
+                <th scope="col" key={col}>
+                  {col}
+                </th>
               ))}
             </tr>
           </thead>
