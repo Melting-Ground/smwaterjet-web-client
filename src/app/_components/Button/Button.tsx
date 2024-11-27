@@ -6,7 +6,7 @@ interface ButtonProps {
   children: ReactNode;
   id?: string;
   type?: "button" | "submit" | "reset";
-  color?: "primary" | "primary-border" | "transparent-link";
+  color?: "primary" | "primary-border" | "transparent-link" | "blue";
   // color?:
   //   | "primary"
   //   | "secondary"
@@ -47,6 +47,7 @@ export default function Button({
       value={value}
     >
       {children}
+      {icon}
     </button>
   );
 }

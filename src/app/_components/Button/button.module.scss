@@ -8,6 +8,7 @@
   padding: 8px 15px;
   white-space: nowrap;
   width: fit-content;
+  align-items: center;
   justify-content: center;
   align-self: center;
   font-size: 16px;
@@ -24,6 +25,12 @@
   border: 1px solid $primary-lighter;
   background-color: $white;
   color: $primary;
+}
+
+.blue {
+  border: 1px solid $blue;
+  background-color: $blue;
+  color: $white;
 }
 .transparent-link {
   background-color: transparent;

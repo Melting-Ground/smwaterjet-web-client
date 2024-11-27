@@ -4,7 +4,6 @@ import { routeCategories } from "../../_config/routes";
 import Link from "next/link";
 import { RouteType, RouteCategoryType } from "../../_types/route";
 
-
 export default function NavSubList({
   isOpen,
   onOpen,
@@ -29,15 +28,16 @@ export default function NavSubList({
           {routeCategories.map((category: RouteCategoryType) => (
             <li key={category.title} className={styles["category-container"]}>
               <h4 className={styles.title}>{category.title}</h4>
-              <ul>
+              <ul className={styles["category-list"]}>
                 {category.routes.map((route: RouteType) => (
-                  <li key={route.path}>
+                  <li key={route.path} className={styles["category-item"]}>
                     <Link
                       onMouseEnter={() => {
                         onNavItemHover(category.title);
                       }}
                       onMouseLeave={() => onNavItemHover("")}
                       href={route.path}
+                      className={styles["category-item-link"]}
                     >
                       {route.label}
                     </Link>
