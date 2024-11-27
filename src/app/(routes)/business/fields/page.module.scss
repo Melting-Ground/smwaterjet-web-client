@@ -66,8 +66,8 @@
     // border-radius: 20px;
     padding: 50px;
     background-color: $gray-lightest;
-    border-radius: 10px;
-    // @include box-shadow;
+    // border-radius: 8px;
+    @include box-shadow;
 
     &-title {
       font-size: 30px;
