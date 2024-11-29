@@ -1,0 +1,66 @@
+@import "../../../_styles/mixins";
+@import "../../../_styles/variables";
+
+.container {
+  @include inner-container;
+  margin-top: 150px;
+  margin-bottom: 100px;
+  display: block;
+
+  .equipment-name {
+    font-size: 20px;
+    padding-left: 14px;
+    position: relative;
+    color: $primary;
+    font-weight: 500;
+
+    &::before {
+      content: "";
+      height: 20px;
+      width: 4px;
+      background-color: $blue;
+      position: absolute;
+      left: 0;
+    }
+  }
+
+  .item-container {
+    gap: 50px;
+    width: 100%;
+    margin-top: 30px;
+
+    display: flex;
+    .image-container {
+      width: 600px;
+      height: 400px;
+      position: relative;
+    }
+    // .item-info-button-container {
+    //   flex: 1;
+    // }
+    .item-info {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      border-top: 1px solid $gray-border;
+      height: fit-content;
+
+      font-size: 16px;
+      p {
+        border-bottom: 1px solid $gray-lighter;
+
+        padding: 16px 20px;
+      }
+      &-title {
+        letter-spacing: 0.08em;
+        color: $primary;
+        font-weight: 700;
+        background-color: $gray-lightest;
+      }
+    }
+  }
+  .go-list-button {
+    margin: 0 auto;
+    margin-top: 100px;
+  }
+}

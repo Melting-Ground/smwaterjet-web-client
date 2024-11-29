@@ -19,14 +19,6 @@ export const useGetNews = (searchQuery: string) => {
       );
       console.log(data);
       setNewsList(data.items);
-      // const xmlText = await response.text();
-      // console.log(xmlText);
-      // const parser = new xml2js.Parser({
-      //   explicitArray: false,
-      //   mergeAttrs: true,
-      // });
-      // const parsedJson = await parser.parseStringPromise(xmlText);
-      // setNewsList(parsedJson.rss.channel.item);
     } catch (error) {
       console.error("fetchNews 에러", error);
     }

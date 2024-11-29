@@ -3,16 +3,10 @@ import React from "react";
 import Image from "next/image";
 import styles from "./page.module.scss";
 import { motion } from "framer-motion";
-
-interface ImageItem {
-  id: number;
-  description?: string;
-  src: string;
-  alt?: string;
-}
+import { ImageItemType } from "../../../_types/image";
 
 export default function Photos() {
-  const imageList: ImageItem[] = [
+  const imageList: ImageItemType[] = [
     {
       src: "/images/waterjet.jpg",
       alt: "alt",
@@ -52,7 +46,7 @@ export default function Photos() {
           // link 태그 등
           <div key={image.id} className={styles["img-container"]}>
             <motion.div
-              whileHover={{ scale: 1.08 }}
+              whileHover={{ scale: 1.02 }}
               className={styles["hover-effect"]}
             >
               <Image

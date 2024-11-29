@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "NLB High-pressure Pump",
+    "standard": "600HP",
+    "price": 400,
+    "purchased_year": 2010,
+    "use": "고압수 생성",
+    "image": "/images/equipment/equipment1.jpg",
+    "own": "(주)삼형건설"
+  },
+  {
+    "id": 2,
+    "name": "NLB High-pressure Pump",
+    "standard": "600HP",
+    "price": 400,
+    "purchased_year": 2010,
+    "use": "고압수 생성",
+    "image": "/images/equipment/equipment2.jpg",
+    "own": "(주)삼형건설"
+  },
+  {
+    "id": 3,
+    "name": "NLB High-pressure Pump",
+    "standard": "600HP",
+    "price": 400,
+    "purchased_year": 2010,
+    "use": "고압수 생성",
+    "image": "/images/equipment/equipment3.jpg",
+    "own": "(주)삼형건설"
+  },
+  {
+    "id": 4,
+    "name": "NLB High-pressure Pump",
+    "standard": "600HP",
+    "price": 400,
+    "purchased_year": 2010,
+    "use": "고압수 생성",
+    "image": "/images/equipment/equipment4.jpg",
+    "own": "(주)삼형건설"
+  },
+  {
+    "id": 5,
+    "name": "NLB High-pressure Pump",
+    "standard": "600HP",
+    "price": 400,
+    "purchased_year": 2010,
+    "use": "고압수 생성",
+    "image": "/images/equipment/equipment5.jpg",
+    "own": "(주)삼형건설"
+  }
+]

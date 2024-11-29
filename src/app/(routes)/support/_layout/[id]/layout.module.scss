@@ -3,9 +3,14 @@
 
 .container {
   @include inner-container;
+  display: block;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  .to-list-button {
+    margin-top: 20px;
+  }
 
   .article {
-    margin: 100px 0;
     width: 100%;
     @include table-content;
 

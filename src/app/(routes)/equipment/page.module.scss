@@ -1,0 +1,57 @@
+@import "../../_styles/variables";
+@import "../../_styles/mixins";
+
+.container {
+  @include inner-container;
+
+  .gallery {
+    margin: 100px 0;
+    gap: 16px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .img-container {
+      position: relative;
+      width: 400px;
+      height: 260px;
+      overflow: hidden;
+      cursor: pointer;
+
+      &:hover .overlay {
+        background: rgba(0, 0, 0, 0.7);
+
+        .description {
+          color: $blue;
+        }
+      }
+
+      .image {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
+
+      .overlay {
+        transition: transform 0.5s ease;
+
+        position: absolute;
+        left: 0;
+        width: 100%;
+        bottom: 0;
+        height: 20%;
+        background: rgba(0, 0, 0, 0.3);
+        // opacity: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: opacity 0.3s ease;
+
+        .description {
+          color: $white;
+          font-size: 15px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

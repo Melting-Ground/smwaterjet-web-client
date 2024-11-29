@@ -9,6 +9,7 @@ import Button from "../../../../_components/Button/Button";
 import { RiFile2Line } from "@remixicon/react";
 import { NoticeType } from "../../../../_types/notice";
 import { InquiryType } from "../../../../_types/inquiry";
+import { useRouter } from "next/navigation";
 
 interface DetailProps<T> {
   dataDetail: T;
@@ -27,6 +28,11 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
   const currentIndex = dataList.findIndex((data) => data.id === currentId);
   const previousIndex = currentIndex - 1;
   const nextIndex = currentIndex + 1;
+  const router = useRouter();
+
+  const goToList = () => {
+    router.push(`/support/${type}`);
+  };
 
   return (
     <div className={styles.container}>
@@ -140,6 +146,13 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
           </ul>
         </article>
       )}
+      <Button
+        color="primary"
+        className={styles["to-list-button"]}
+        onClick={goToList}
+      >
+        목록으로
+      </Button>
     </div>
   );
 }
