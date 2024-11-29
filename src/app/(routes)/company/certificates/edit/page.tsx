@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import styles from "./page.module.scss";
 import axiosInstance from "../../../../_config/axiosInstance";
 import { getToken } from "../../../../_utils/getAuth";
+import Input from "../../../../_components/Input/Input";
+import Button from "../../../../_components/Button/Button";
 
 export default function Edit() {
   const [certificate, setCertificate] = useState<File | null>(null); // 초기값을 null로 설정
+  const [title, setTitle] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,7 +21,8 @@ export default function Edit() {
 
     try {
       const formData = new FormData();
-      formData.append("file", certificate); // 파일을 FormData에 추가합니다.
+      formData.append("file", certificate);
+      formData.append("title", title);
 
       const response = await axiosInstance.post(
         "/company/certificates",
@@ -37,21 +41,28 @@ export default function Edit() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]; // 파일 선택 시 첫 번째 파일을 가져옵니다.
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const file = e.target.files?.[0];
     if (file) {
-      setCertificate(file); // 선택한 파일을 상태에 저장합니다.
+      setCertificate(file);
     }
+  };
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
   };
 
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="file">
-          파일 선택
-          <input type="file" name="files" id="file" onChange={handleChange} />
-        </label>
-        <button type="submit">업로드</button>
+        <label htmlFor="file">파일 선택</label>
+        <input type="file" name="files" id="file" onChange={handleFileChange} />
+        <label htmlFor="file">제목</label>
+        <Input name="title" id="title" onChange={handleTitleChange} />
+        <Button type="submit" color="primary">
+          업로드
+        </Button>
       </form>
     </div>
   );

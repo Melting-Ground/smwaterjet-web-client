@@ -5,7 +5,7 @@ import NavList from "./NavList";
 import styles from "./Header.module.scss";
 import { useNav } from "../../_hooks/useNav";
 import Link from "next/link";
-import logo from "../../../../public/images/logo-rm.png";
+import logo from "../../../../public/images/logo/logo.png";
 import Image from "next/image";
 
 export default function Header() {

@@ -18,7 +18,6 @@
 
   .form {
     @include table-content-small;
-    border-radius: 8px;
     border: 1px solid $gray-border;
     padding: 35px 40px;
     padding-bottom: 0;
@@ -29,7 +28,6 @@
       width: calc(100% + 80px);
       margin-left: -40px;
       margin-right: -40px;
-      border-radius: 0 0 8px 8px;
 
       padding: 0 40px;
       padding-bottom: 10px;
