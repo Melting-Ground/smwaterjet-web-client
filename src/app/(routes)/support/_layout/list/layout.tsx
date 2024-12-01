@@ -7,25 +7,25 @@ import { formatDate } from "../../../../_utils/formatDate";
 import { NoticeType } from "../../../../_types/notice";
 import { InquiryType } from "../../../../_types/inquiry";
 import { useAuth } from "../../../../_hooks/useAuth";
-import { BoardType, categoryMap } from "../../../../_types/board";
-import { ReportType } from "../../../../_types/report";
 
 interface ListProps<T> {
   list: T[];
   colWidthList: number[];
-  type: BoardType;
+  type: "notice" | "inquiry";
   tableHeadList: string[];
 }
 
-export default function BoardListLayout<
-  T extends NoticeType | InquiryType | ReportType
->({ list, colWidthList, type, tableHeadList }: ListProps<T>) {
+export default function BoardListLayout<T extends NoticeType | InquiryType>({
+  list,
+  colWidthList,
+  type,
+  tableHeadList,
+}: ListProps<T>) {
   const router = useRouter();
-  const category = categoryMap[type];
 
   // TODO: type === "notice", "inquiry" 일 경우와 "performance" 일 경우 대분류가 다름
   const goToEditPage = () => {
-    router.push(`/${category}/${type}/edit`);
+    router.push(`/support/${type}/edit`);
   };
 
   const { isLoggedIn } = useAuth();
@@ -69,19 +69,15 @@ export default function BoardListLayout<
               <tr key={item.id}>
                 <td>{item.id}</td>
                 <td className={styles.title}>
-                  {category !== "performance" ? (
-                    <Link
-                      href={
-                        type === "inquiry"
-                          ? `/support/${type}/${item.id}/password`
-                          : `/support/${type}/${item.id}`
-                      }
-                    >
-                      {item.title}
-                    </Link>
-                  ) : (
-                    item.title
-                  )}
+                  <Link
+                    href={
+                      type === "inquiry"
+                        ? `/support/${type}/${item.id}/password`
+                        : `/support/${type}/${item.id}`
+                    }
+                  >
+                    {item.title}
+                  </Link>
                 </td>
                 <td>{item.author}</td>
                 <td>

@@ -7,12 +7,11 @@ import Button from "../../../../_components/Button/Button";
 import { useRouter } from "next/navigation";
 import { NoticePostType } from "../../../../_types/notice";
 import { InquiryPostType } from "../../../../_types/inquiry";
-import { BoardType } from "../../../../_types/board";
 
 // TODO: 레이아웃 상위 폴더로 옮기기
 interface EditProps<T> {
   contents: T;
-  type: Omit<BoardType, "reports">;
+  type: "notice" | "inquiry";
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -97,7 +96,6 @@ export default function BoardEditLayout<
 
         <label htmlFor="title">제목</label>
         <Input
-          // placeholder="공지사항의 제목을 입력해주세요."
           type="text"
           name="title"
           id="title"
