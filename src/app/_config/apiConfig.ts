@@ -25,6 +25,13 @@ const API_URLS = {
       post: {} as InquiryPostType,
     },
   },
+  overview: {
+    url: "/performance/overview", // 임시
+    method: {
+      get: {} as OverviewType,
+      post: {} as OverviewType,
+    },
+  },
 
   // certificates: {
   //   url: "/company/certificates",

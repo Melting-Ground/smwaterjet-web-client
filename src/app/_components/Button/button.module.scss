@@ -2,19 +2,7 @@
 @import "../../_styles/variables";
 
 .button {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  padding: 8px 15px;
-  white-space: nowrap;
-  width: fit-content;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
-  font-size: 16px;
-  border-radius: 4px;
-  line-height: 1;
-  font-weight: 500;
+  @include button-base;
 }
 .primary {
   background-color: $primary-lighter;

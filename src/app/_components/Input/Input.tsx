@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./input.module.scss";
+import styles from "./Input.module.scss";
 
 interface InputProps {
   value?: string;
@@ -19,6 +19,7 @@ interface InputProps {
   iconPosition?: "left" | "inner-right";
   fullWidth?: boolean;
   multiple?: boolean;
+  required: boolean;
 }
 
 export default function Input({
@@ -38,6 +39,7 @@ export default function Input({
   iconPosition = "left",
   fullWidth = false,
   multiple = false,
+  required = false,
 }: InputProps) {
   const className = `${styles.input} ${
     error ? styles.error : ""
@@ -64,6 +66,7 @@ export default function Input({
         disabled={disabled}
         placeholder={placeholder}
         multiple={multiple}
+        required={required}
       />
       {icon && iconPosition === "inner-right" && (
         <span className={styles["inner-right-icon"]}>{icon}</span>

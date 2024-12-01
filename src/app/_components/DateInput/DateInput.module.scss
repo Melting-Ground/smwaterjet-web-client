@@ -1,0 +1,8 @@
+@import "../../_styles/mixins";
+@import "../../_styles/variables";
+
+.container {
+  .input {
+    @include input-base;
+  }
+}

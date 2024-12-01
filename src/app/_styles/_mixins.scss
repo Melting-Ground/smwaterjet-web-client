@@ -13,6 +13,37 @@
   width: 100%;
 }
 
+@mixin input-base {
+  display: flex;
+  background-color: $gray-lightest;
+  border: 1px solid $gray-lighter;
+  padding: 8px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 4px;
+  line-height: 1;
+
+  &::placeholder {
+    color: $gray-border;
+  }
+}
+
+@mixin button-base {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 8px 15px;
+  white-space: nowrap;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  font-size: 16px;
+  border-radius: 4px;
+  line-height: 1;
+  font-weight: 500;
+}
+
 @mixin inner-container {
   max-width: $inner-max-width;
   height: 100%;
