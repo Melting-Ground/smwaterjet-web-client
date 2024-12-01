@@ -13,8 +13,8 @@ export default function Reports() {
   );
   const reportsTableHeadList = [
     "No",
-    "공사명",
     "공사년도",
+    "공사명",
     "시작일",
     "종료일",
     "비고",
@@ -23,7 +23,7 @@ export default function Reports() {
     <BoardListLayout
       tableHeadList={reportsTableHeadList}
       list={reports}
-      colWidthList={[80, 300, 90, 80, 80, 50]}
+      colWidthList={[50, 50, 350, 80, 80, 50]}
     />
   );
 }

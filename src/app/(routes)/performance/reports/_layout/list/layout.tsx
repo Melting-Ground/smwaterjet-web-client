@@ -52,12 +52,8 @@ export default function BoardListLayout({
             {list.map((item) => (
               <tr key={item.id}>
                 <td>{item.id}</td>
-                <td className={styles.title}>
-                  <Link href={`/performance/reports/${item.id}`}>
-                    {item.title}
-                  </Link>
-                </td>
                 <td>{item.year}</td>
+                <td>{item.title}</td>
                 <td>{formatDate(item.start_date)}</td>
                 <td>{formatDate(item.end_date)}</td>
                 <td>{item.note}</td>

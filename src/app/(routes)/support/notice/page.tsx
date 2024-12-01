@@ -17,7 +17,7 @@ export default function Notice() {
       type="notice"
       tableHeadList={noticeTableHeadList}
       list={notices}
-      colWidthList={[100, 500, 100, 100, 100]}
+      colWidthList={[100, 450, 100, 100, 100]}
     />
   );
 }
