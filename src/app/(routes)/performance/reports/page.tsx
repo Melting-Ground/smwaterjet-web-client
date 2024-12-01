@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import BoardListLayout from "../../support/_layout/list/layout";
 import { useAPIData } from "../../../_hooks/useAPIData";
 import { API_URLS } from "../../../_config/apiConfig";
+import BoardListLayout from "./_layout/list/layout";
 
 export default function Reports() {
   // 게시판
@@ -21,7 +21,6 @@ export default function Reports() {
   ];
   return (
     <BoardListLayout
-      type="reports"
       tableHeadList={reportsTableHeadList}
       list={reports}
       colWidthList={[80, 300, 90, 80, 80, 50]}

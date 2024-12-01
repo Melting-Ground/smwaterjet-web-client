@@ -1,0 +1,59 @@
+@import "../../../../../_styles/mixins";
+@import "../../../../../_styles/variables";
+
+.container {
+  @include inner-container;
+  text-align: center;
+
+  .table-container {
+    margin: 100px 50px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+    .write-button {
+      margin-left: auto;
+      margin-bottom: 20px;
+    }
+  }
+
+  .table {
+    margin: 0 auto;
+    // margin: 100px 0;
+    width: 100%;
+    @include table-content;
+    border-top: 1px solid $gray-border;
+    border-collapse: collapse;
+
+    span {
+      display: flex;
+      width: 100%;
+    }
+    th,
+    td {
+      padding: 17px;
+      border-bottom: 1px solid $gray-lighter;
+      text-align: center;
+    }
+
+    th {
+      font-size: 17px;
+      padding: 14px;
+
+      background-color: $gray-lightest;
+      font-weight: 600;
+      color: $primary;
+    }
+
+    td {
+      a:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    .title {
+      text-align: left;
+    }
+  }
+}
