@@ -6,13 +6,15 @@ import Input from "../../../../../_components/Input/Input";
 import Button from "../../../../../_components/Button/Button";
 import DateInput from "../../../../../_components/DateInput/DateInput";
 import Select from "../../../../../_components/Select/Select";
-import { ReportsPostType } from "../../../../../_types/report";
+import { ReportPostType } from "../../../../../_types/report";
 
 // TODO: 레이아웃 상위 폴더로 옮기기
-interface EditProps<ReportsPostType> {
-  contents?: ReportsPostType;
+interface EditProps<ReportPostType> {
+  contents?: ReportPostType;
   handleChange?: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => void;
   handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   //   isFormDirty?: boolean;
@@ -24,7 +26,7 @@ export default function BoardEditLayout({
   handleChange,
   handleSubmit,
 }: //   isFormDirty,
-EditProps<ReportsPostType>) {
+EditProps<ReportPostType>) {
   const router = useRouter();
 
   const currentYear = new Date().getFullYear();
@@ -34,11 +36,17 @@ EditProps<ReportsPostType>) {
   );
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
 
-  const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value } = e.target;
-    console.log(value);
-    setSelectedYear(Number(value));
-  };
+  // const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const { value } = e.target;
+  //   console.log(value);
+  //   setSelectedYear(Number(value));
+
+  //   if (handleChange) {
+  //     handleChange({
+  //       target: { value, id: "year", type: "select" },
+  //     } as React.ChangeEvent<HTMLInputElement>);
+  //   }
+  // };
 
   const goBackToList = () => {
     // if (isFormDirty) {
@@ -77,23 +85,23 @@ EditProps<ReportsPostType>) {
           selectList={yearList}
           initialValue={currentYear}
           placeholder="공사년도"
-          onChange={handleYearChange}
+          onChange={handleChange}
           value={contents?.year.toString()}
         />
 
         <label htmlFor="title">시작일</label>
         <DateInput
-          id="startDate"
+          id="start_date"
           year={selectedYear}
-          value={contents?.startDate.toString()}
+          value={contents?.start_date.toString()}
           onChange={handleChange}
         />
 
         <label htmlFor="title">종료일</label>
         <DateInput
-          id="endDate"
+          id="end_date"
           year={selectedYear}
-          value={contents?.endDate.toString()}
+          value={contents?.end_date.toString()}
           onChange={handleChange}
         />
 

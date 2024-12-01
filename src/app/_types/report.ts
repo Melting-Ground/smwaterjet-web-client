@@ -1,16 +1,16 @@
-export interface ReportsPostType {
+export interface ReportPostType {
   title: string;
-  startDate: string; // 0000-00-00
-  endDate: string;
-  year: number;
+  start_date: string; // 0000-00-00
+  end_date: string;
+  year: string;
   note?: string | null;
 }
 
-export interface ReportsType {
+export interface ReportType {
   id: number;
   title: string;
-  startDate: string; // 0000-00-00
-  endDate: string;
-  year: number;
+  start_date: string; // 0000-00-00
+  end_date: string;
+  year: string;
   note?: string | null;
 }

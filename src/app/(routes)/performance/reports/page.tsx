@@ -6,11 +6,12 @@ import { API_URLS } from "../../../_config/apiConfig";
 
 export default function Reports() {
   // 게시판
-  const { dataList: notices } = useAPIData<typeof API_URLS.notices.method.get>(
-    API_URLS.notices,
+  // TODO: 페이지네이션
+  const { dataList: reports } = useAPIData<typeof API_URLS.reports.method.get>(
+    API_URLS.reports,
     1
   );
-  const noticeTableHeadList = [
+  const reportsTableHeadList = [
     "No",
     "공사명",
     "공사년도",
@@ -21,8 +22,8 @@ export default function Reports() {
   return (
     <BoardListLayout
       type="reports"
-      tableHeadList={noticeTableHeadList}
-      list={notices}
+      tableHeadList={reportsTableHeadList}
+      list={reports}
       colWidthList={[80, 300, 90, 80, 80, 50]}
     />
   );

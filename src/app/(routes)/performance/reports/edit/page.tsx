@@ -11,9 +11,9 @@ export default function Edit() {
     typeof OVERVEIW_API.method.post
   >({
     title: "",
-    startDate: "",
-    endDate: "",
-    year: 2024,
+    start_date: "",
+    end_date: "",
+    year: "2024",
     note: null,
   });
 

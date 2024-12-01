@@ -8,6 +8,7 @@ import { NoticeType } from "../../../../_types/notice";
 import { InquiryType } from "../../../../_types/inquiry";
 import { useAuth } from "../../../../_hooks/useAuth";
 import { BoardType, categoryMap } from "../../../../_types/board";
+import { ReportType } from "../../../../_types/report";
 
 interface ListProps<T> {
   list: T[];
@@ -16,12 +17,9 @@ interface ListProps<T> {
   tableHeadList: string[];
 }
 
-export default function BoardListLayout<T extends NoticeType | InquiryType>({
-  list,
-  colWidthList,
-  type,
-  tableHeadList,
-}: ListProps<T>) {
+export default function BoardListLayout<
+  T extends NoticeType | InquiryType | ReportType
+>({ list, colWidthList, type, tableHeadList }: ListProps<T>) {
   const router = useRouter();
   const category = categoryMap[type];
 
