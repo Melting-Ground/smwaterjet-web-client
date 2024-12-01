@@ -16,6 +16,7 @@ export default function Inquiry() {
       tableHeadList={inquiryTableHeadList}
       list={inquiries}
       type="inquiry"
+      colWidthList={[80, 500, 100, 100]}
     />
   );
 }

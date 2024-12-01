@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { APIConfig } from "../_config/apiConfig";
 import { useAPIData } from "./useAPIData";
 
@@ -7,6 +8,42 @@ const useFormData = <T, P>(
   setContents: React.Dispatch<React.SetStateAction<P>>
 ) => {
   const { postData } = useAPIData<T>(apiConfig);
+  const [isFormDirty, setIsFormDirty] = useState<boolean>(false);
+
+  // useEffect(() => {
+  //   const trackFormChanges = () => {
+  //     setIsFormDirty(true);
+  //   };
+
+  //   // Add event listeners to all inputs and textareas
+  //   const inputs = document.querySelectorAll("input, textarea");
+  //   inputs.forEach((input) => {
+  //     input.addEventListener("change", trackFormChanges);
+  //   });
+
+  //   return () => {
+  //     inputs.forEach((input) => {
+  //       input.removeEventListener("change", trackFormChanges);
+  //     });
+  //   };
+  // }, []);
+
+  // // Prevent navigation when form is dirty
+  // useEffect(() => {
+  //   const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+  //     if (isFormDirty) {
+  //       e.preventDefault();
+  //       e.returnValue = "변경 사항이 저장되지 않을 수 있습니다.";
+  //       return "변경 사항이 저장되지 않을 수 있습니다.";
+  //     }
+  //   };
+
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [isFormDirty]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -67,8 +104,9 @@ const useFormData = <T, P>(
     const formData = createFormData();
     postData(formData);
     formData.forEach((item) => console.log(item));
+    setIsFormDirty(false);
   };
-  return { handleChange, handleSubmit };
+  return { handleChange, handleSubmit, isFormDirty };
 };
 
 export default useFormData;

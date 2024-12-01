@@ -7,30 +7,36 @@ import { formatDate } from "../../../../_utils/formatDate";
 import { NoticeType } from "../../../../_types/notice";
 import { InquiryType } from "../../../../_types/inquiry";
 import { useAuth } from "../../../../_hooks/useAuth";
+import { BoardType, categoryMap } from "../../../../_types/board";
 
 interface ListProps<T> {
   list: T[];
-  type: "notice" | "inquiry";
+  colWidthList: number[];
+  type: BoardType;
   tableHeadList: string[];
 }
 
 export default function BoardListLayout<T extends NoticeType | InquiryType>({
   list,
+  colWidthList,
   type,
   tableHeadList,
 }: ListProps<T>) {
   const router = useRouter();
+  const category = categoryMap[type];
 
+  // TODO: type === "notice", "inquiry" 일 경우와 "performance" 일 경우 대분류가 다름
   const goToEditPage = () => {
-    router.push(`/support/${type}/edit`);
+    router.push(`/${category}/${type}/edit`);
   };
+
   const { isLoggedIn } = useAuth();
 
   // TODO: 페이징 기능 추가하기
   return (
     <div className={styles.container}>
       <div className={styles["table-container"]}>
-        {type === "notice" && !isLoggedIn ? null : (
+        {type !== "inquiry" && !isLoggedIn ? null : (
           <Button
             onClick={goToEditPage}
             color="primary"
@@ -42,12 +48,14 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
         <table className={styles.table}>
           <colgroup>
             {/* TODO: 수치 수정하기 */}
-            <col width={100} />
+            {/* <col width={100} />
             <col />
             <col width={100} />
             <col width={150} />
-            {type === "notice" ? <col width={100} /> : null}
-            {/* 1035 */}
+            {type === "notice" ? <col width={100} /> : null} */}
+            {colWidthList.map((colWidth, index) => (
+              <col key={`${index}-${colWidth}`} width={colWidth} />
+            ))}
           </colgroup>
           <thead>
             <tr>
@@ -63,15 +71,19 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
               <tr key={item.id}>
                 <td>{item.id}</td>
                 <td className={styles.title}>
-                  <Link
-                    href={
-                      type === "inquiry"
-                        ? `/support/${type}/${item.id}/password`
-                        : `/support/${type}/${item.id}`
-                    }
-                  >
-                    {item.title}
-                  </Link>
+                  {category !== "performance" ? (
+                    <Link
+                      href={
+                        type === "inquiry"
+                          ? `/support/${type}/${item.id}/password`
+                          : `/support/${type}/${item.id}`
+                      }
+                    >
+                      {item.title}
+                    </Link>
+                  ) : (
+                    item.title
+                  )}
                 </td>
                 <td>{item.author}</td>
                 <td>

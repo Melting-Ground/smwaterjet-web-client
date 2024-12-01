@@ -7,62 +7,38 @@ import Button from "../../../../_components/Button/Button";
 import { useRouter } from "next/navigation";
 import { NoticePostType } from "../../../../_types/notice";
 import { InquiryPostType } from "../../../../_types/inquiry";
+import { BoardType } from "../../../../_types/board";
 
+// TODO: 레이아웃 상위 폴더로 옮기기
 interface EditProps<T> {
   contents: T;
-  type: "notice" | "inquiry";
+  type: Omit<BoardType, "overview">;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  isFormDirty: boolean;
 }
 
 // TODO: 자동 등록 방지
 export default function BoardEditLayout<
   T extends NoticePostType | InquiryPostType
->({ contents, type, handleChange, handleSubmit }: EditProps<T>) {
+>({ contents, type, handleChange, handleSubmit, isFormDirty }: EditProps<T>) {
   const router = useRouter();
 
   const fileInputs = Array.from({ length: 5 }, (_, index) => index + 1);
 
   const goBackToList = () => {
-    router.push(`/support/${type}`);
-  };
-
-  const InquiryInputs = () => {
-    return contents &&
-      "password" in contents &&
-      "phone_number" in contents &&
-      "email" in contents ? (
-      <>
-        <label htmlFor="password">비밀번호</label>
-        <Input
-          type="password"
-          name="password"
-          id="password"
-          value={contents.password}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="phone_number">연락처</label>
-        <Input
-          type="text"
-          name="phone_number"
-          id="phone_number"
-          value={contents.phone_number}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="email">이메일</label>
-        <Input
-          type="text"
-          name="email"
-          id="email"
-          value={contents.email}
-          onChange={handleChange}
-        />
-      </>
-    ) : null;
+    if (isFormDirty) {
+      const confirmation = window.confirm(
+        "변경 사항이 저장되지 않을 수 있습니다."
+      );
+      if (confirmation) {
+        router.push(`/support/${type}`);
+      }
+    } else {
+      router.push(`/support/${type}`);
+    }
   };
 
   // TODO: * 표시 하기 (필수항목)
