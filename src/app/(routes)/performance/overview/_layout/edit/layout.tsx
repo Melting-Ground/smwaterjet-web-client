@@ -6,24 +6,25 @@ import Input from "../../../../../_components/Input/Input";
 import Button from "../../../../../_components/Button/Button";
 import DateInput from "../../../../../_components/DateInput/DateInput";
 import Select from "../../../../../_components/Select/Select";
+import { OverviewPostType } from "../../../../../_types/overview";
 
 // TODO: 레이아웃 상위 폴더로 옮기기
-interface EditProps<T> {
-  contents?: T;
+interface EditProps<OverviewPostType> {
+  contents?: OverviewPostType;
   handleChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
-  isFormDirty?: boolean;
+  //   isFormDirty?: boolean;
 }
 
 // TODO: 자동 등록 방지
 export default function BoardEditLayout({
   contents,
   handleChange,
-  //   handleSubmit,
-  isFormDirty,
-}: EditProps<T>) {
+  handleSubmit,
+}: //   isFormDirty,
+EditProps<OverviewPostType>) {
   const router = useRouter();
 
   const currentYear = new Date().getFullYear();
@@ -33,10 +34,6 @@ export default function BoardEditLayout({
   );
   const [selectedYear, setSelectedYear] = useState<number>(currentYear);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
-
   const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
     console.log(value);
@@ -44,16 +41,18 @@ export default function BoardEditLayout({
   };
 
   const goBackToList = () => {
-    if (isFormDirty) {
-      const confirmation = window.confirm(
-        "변경 사항이 저장되지 않을 수 있습니다."
-      );
-      if (confirmation) {
-        router.push("/performance/overview");
-      }
-    } else {
-      router.push("/support/overview");
-    }
+    // if (isFormDirty) {
+    //   const confirmation = window.confirm(
+    //     "변경 사항이 저장되지 않을 수 있습니다."
+    //   );
+    //   if (confirmation) {
+    //     router.push("/performance/overview");
+    //   }
+    // }
+    // else {
+
+    router.push("/support/overview");
+    // }
   };
 
   // TODO: * 표시 하기 (필수항목)
@@ -64,37 +63,50 @@ export default function BoardEditLayout({
         <label htmlFor="title">공사명</label>
         <Input
           type="text"
-          name="name"
-          id="name"
+          name="title"
+          id="title"
           required
-          //   value={contents.author}
+          value={contents?.title}
           onChange={handleChange}
         />
 
         <label htmlFor="title">공사년도</label>
 
         <Select
+          id="year"
           selectList={yearList}
           initialValue={currentYear}
           placeholder="공사년도"
           onChange={handleYearChange}
+          value={contents?.year.toString()}
         />
 
         <label htmlFor="title">시작일</label>
-        <DateInput year={selectedYear} />
+        <DateInput
+          id="startDate"
+          year={selectedYear}
+          value={contents?.startDate.toString()}
+          onChange={handleChange}
+        />
 
         <label htmlFor="title">종료일</label>
-        <DateInput year={selectedYear} />
+        <DateInput
+          id="endDate"
+          year={selectedYear}
+          value={contents?.endDate.toString()}
+          onChange={handleChange}
+        />
 
         <label htmlFor="title">비고</label>
         <Input
           type="text"
-          name="remarks"
-          id="remarks"
+          name="note"
+          id="note"
           disabled
           onChange={handleChange}
           placeholder="-"
           required={false}
+          value={contents?.note ?? ""} // null
         />
 
         <div className={styles["button-container"]}>

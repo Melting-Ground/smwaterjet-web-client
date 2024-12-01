@@ -10,7 +10,11 @@ export default function Edit() {
   const [overviewContents, setOverviewContents] = useState<
     typeof OVERVEIW_API.method.post
   >({
-    // 공사명, 공사년도, 시작일, 종료일, 비고(Null)
+    title: "",
+    startDate: "",
+    endDate: "",
+    year: 2024,
+    note: null,
   });
 
   const { handleChange, handleSubmit, isFormDirty } = useFormData<
@@ -20,10 +24,10 @@ export default function Edit() {
 
   return (
     <BoardEditLayout
-    //   contents={overviewContents}
-    //   handleChange={handleChange}
-    //   handleSubmit={handleSubmit}
-    //   isFormDirty={isFormDirty}
+      contents={overviewContents}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      //   isFormDirty={isFormDirty}
     />
   );
 }

@@ -27,8 +27,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
   // TODO: 에러 메시지 따로 관리하기
   const fetchData = async (
     id: string,
-    password?: string,
-    
+    password?: string
   ): Promise<string | null> => {
     // password O: 문의사항
     // password X: 공지사항
@@ -60,6 +59,8 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
 
   const postData = async (formData: FormData) => {
     try {
+      formData.forEach((item) => console.log(item));
+
       const response = await axiosInstance.post(
         apiConfig.url,
         formData,

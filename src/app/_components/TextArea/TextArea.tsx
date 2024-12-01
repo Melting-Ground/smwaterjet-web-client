@@ -14,6 +14,7 @@ interface TextAreaProps {
   name?: string;
   message?: string;
   icon?: JSX.Element;
+  required?: boolean;
   // fullWidth?: boolean;
 }
 
@@ -29,6 +30,7 @@ export default function TextArea({
   onChange = () => {},
   name,
   icon,
+  required = false,
 }: // fullWidth = false,
 TextAreaProps) {
   const className = `${styles.textarea} ${
@@ -49,6 +51,7 @@ TextAreaProps) {
           onChange={onChange}
           disabled={disabled}
           placeholder={placeholder}
+          required
         />
       </div>
       {error && message && <p className={styles.errorMessage}>{message}</p>}{" "}

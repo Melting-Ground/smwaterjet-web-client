@@ -101,10 +101,11 @@ const useFormData = <T, P>(
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(" handle submit");
     const formData = createFormData();
     postData(formData);
-    formData.forEach((item) => console.log(item));
-    setIsFormDirty(false);
+    // formData.forEach((item) => console.log(item));
+    // setIsFormDirty(false);
   };
   return { handleChange, handleSubmit, isFormDirty };
 };

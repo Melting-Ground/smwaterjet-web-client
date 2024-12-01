@@ -34,11 +34,11 @@ export default function Select({
         id={id}
         onChange={onChange}
         className={className}
-        defaultValue={2024}
+        value={value ?? initialValue}
       >
-        <option value={value}>{placeholder}</option>
+        <option value="">{placeholder}</option>
         {selectList.map((year) => (
-          <option key={year} value={year} selected={year === initialValue}>
+          <option key={year} value={year}>
             {year}
           </option>
         ))}

@@ -1,6 +1,7 @@
 import { InquiryPostType, InquiryType } from "../_types/inquiry";
 import { NewsPostType, NewsType } from "../_types/news";
 import { NoticePostType, NoticeType } from "../_types/notice";
+import { OverviewPostType, OverviewType } from "../_types/overview";
 
 export interface APIConfig<T = unknown, P = unknown> {
   url: string;
@@ -29,7 +30,7 @@ const API_URLS = {
     url: "/performance/overview", // 임시
     method: {
       get: {} as OverviewType,
-      post: {} as OverviewType,
+      post: {} as OverviewPostType,
     },
   },
 

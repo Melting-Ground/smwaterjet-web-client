@@ -7,7 +7,7 @@ interface DateInputProps {
   id?: string;
   className?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  label?: string;
+  //   label?: string;
   fullWidth?: boolean;
 }
 
@@ -17,7 +17,7 @@ export default function DateInput({
   id,
   className: customClassName,
   onChange,
-  label,
+  //   label,
   fullWidth,
 }: DateInputProps) {
   const className = `${styles.input} ${customClassName} ${
@@ -27,7 +27,7 @@ export default function DateInput({
   return (
     <div className={styles.container}>
       {/* 레이블을 prop으로 받는 경우 기본적으로 숨김처리, 숨김처리 하지 않을 경우 외부에서 선언하기 */}
-      {label && <label className={styles["sr-only"]}>{label}</label>}
+      {/* {label && <label className={styles["sr-only"]}>{label}</label>} */}
       <input
         value={value}
         id={id}

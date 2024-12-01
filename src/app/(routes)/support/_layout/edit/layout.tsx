@@ -55,6 +55,7 @@ export default function BoardEditLayout<
           id="author"
           value={contents.author}
           onChange={handleChange}
+          required
         />
         {type === "inquiry" &&
         contents &&
@@ -69,6 +70,7 @@ export default function BoardEditLayout<
               id="password"
               value={contents.password}
               onChange={handleChange}
+              required
             />
 
             <label htmlFor="phone_number">연락처</label>
@@ -78,6 +80,7 @@ export default function BoardEditLayout<
               id="phone_number"
               value={contents.phone_number}
               onChange={handleChange}
+              required
             />
 
             <label htmlFor="email">이메일</label>
@@ -87,6 +90,7 @@ export default function BoardEditLayout<
               id="email"
               value={contents.email}
               onChange={handleChange}
+              required
             />
           </>
         ) : null}
@@ -99,6 +103,7 @@ export default function BoardEditLayout<
           id="title"
           value={contents.title}
           onChange={handleChange}
+          required
           fullWidth
         />
         <label htmlFor="content">내용</label>
@@ -118,6 +123,7 @@ export default function BoardEditLayout<
               name={`file${num}`}
               id={`file${num}`}
               onChange={handleChange}
+              required
             />
           </React.Fragment>
         ))}
