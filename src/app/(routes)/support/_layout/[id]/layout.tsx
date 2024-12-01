@@ -16,7 +16,7 @@ interface DetailProps<T> {
   dataDetail: T;
   dataList: T[];
   currentId: number;
-  type: Omit<BoardType, "overview">;
+  type: Omit<BoardType, "reports">;
 }
 
 export default function BoardDetailLayout<T extends NoticeType | InquiryType>({

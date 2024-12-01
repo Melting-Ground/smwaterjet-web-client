@@ -5,9 +5,9 @@ import { API_URLS } from "../../../../_config/apiConfig";
 import BoardEditLayout from "../_layout/edit/layout";
 
 export default function Edit() {
-  const OVERVEIW_API = API_URLS.overview;
+  const OVERVEIW_API = API_URLS.reports;
 
-  const [overviewContents, setOverviewContents] = useState<
+  const [reportsContents, setReportsContents] = useState<
     typeof OVERVEIW_API.method.post
   >({
     title: "",
@@ -20,11 +20,11 @@ export default function Edit() {
   const { handleChange, handleSubmit, isFormDirty } = useFormData<
     typeof OVERVEIW_API.method.get,
     typeof OVERVEIW_API.method.post
-  >(OVERVEIW_API, overviewContents, setOverviewContents);
+  >(OVERVEIW_API, reportsContents, setReportsContents);
 
   return (
     <BoardEditLayout
-      contents={overviewContents}
+      contents={reportsContents}
       handleChange={handleChange}
       handleSubmit={handleSubmit}
       //   isFormDirty={isFormDirty}

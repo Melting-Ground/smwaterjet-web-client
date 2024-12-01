@@ -1,4 +1,4 @@
-export interface OverviewPostType {
+export interface ReportsPostType {
   title: string;
   startDate: string; // 0000-00-00
   endDate: string;
@@ -6,7 +6,7 @@ export interface OverviewPostType {
   note?: string | null;
 }
 
-export interface OverviewType {
+export interface ReportsType {
   id: number;
   title: string;
   startDate: string; // 0000-00-00

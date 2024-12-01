@@ -6,11 +6,11 @@ import Input from "../../../../../_components/Input/Input";
 import Button from "../../../../../_components/Button/Button";
 import DateInput from "../../../../../_components/DateInput/DateInput";
 import Select from "../../../../../_components/Select/Select";
-import { OverviewPostType } from "../../../../../_types/overview";
+import { ReportsPostType } from "../../../../../_types/report";
 
 // TODO: 레이아웃 상위 폴더로 옮기기
-interface EditProps<OverviewPostType> {
-  contents?: OverviewPostType;
+interface EditProps<ReportsPostType> {
+  contents?: ReportsPostType;
   handleChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -24,7 +24,7 @@ export default function BoardEditLayout({
   handleChange,
   handleSubmit,
 }: //   isFormDirty,
-EditProps<OverviewPostType>) {
+EditProps<ReportsPostType>) {
   const router = useRouter();
 
   const currentYear = new Date().getFullYear();
@@ -46,12 +46,12 @@ EditProps<OverviewPostType>) {
     //     "변경 사항이 저장되지 않을 수 있습니다."
     //   );
     //   if (confirmation) {
-    //     router.push("/performance/overview");
+    //     router.push("/performance/reports");
     //   }
     // }
     // else {
 
-    router.push("/support/overview");
+    router.push("/support/reports");
     // }
   };
 

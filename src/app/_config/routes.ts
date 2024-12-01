@@ -26,7 +26,7 @@ export const equipmentRoutes: RouteCategoryType = {
 export const performanceRoutes: RouteCategoryType = {
   title: "사업실적",
   routes: [
-    { path: "/performance/overview", label: "실적현황" },
+    { path: "/performance/reports", label: "실적현황" },
     { path: "/performance/photos", label: "현장사진" },
   ],
 };

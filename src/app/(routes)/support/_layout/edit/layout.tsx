@@ -12,7 +12,7 @@ import { BoardType } from "../../../../_types/board";
 // TODO: 레이아웃 상위 폴더로 옮기기
 interface EditProps<T> {
   contents: T;
-  type: Omit<BoardType, "overview">;
+  type: Omit<BoardType, "reports">;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
