@@ -5,10 +5,10 @@ import { API_URLS } from "../../../../_config/apiConfig";
 import BoardEditLayout from "../_layout/edit/layout";
 
 export default function Edit() {
-  const OVERVEIW_API = API_URLS.reports;
+  const REPORTS_API = API_URLS.reports;
 
   const [reportsContents, setReportsContents] = useState<
-    typeof OVERVEIW_API.method.post
+    typeof REPORTS_API.method.post
   >({
     title: "",
     start_date: "",
@@ -17,16 +17,16 @@ export default function Edit() {
     note: null,
   });
 
-  const { handleChange, handleSubmit, isFormDirty } = useFormData<
-    typeof OVERVEIW_API.method.get,
-    typeof OVERVEIW_API.method.post
-  >(OVERVEIW_API, reportsContents, setReportsContents);
+  const { handleChange, handleUpload, isFormDirty } = useFormData<
+    typeof REPORTS_API.method.get,
+    typeof REPORTS_API.method.post
+  >(REPORTS_API, reportsContents, setReportsContents);
 
   return (
     <BoardEditLayout
       contents={reportsContents}
       handleChange={handleChange}
-      handleSubmit={handleSubmit}
+      handleSubmit={handleUpload}
       //   isFormDirty={isFormDirty}
     />
   );

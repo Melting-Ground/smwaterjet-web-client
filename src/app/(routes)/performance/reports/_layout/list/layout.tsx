@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../../../../_components/Button/Button";
 import styles from "./layout.module.scss";
 import { useRouter } from "next/navigation";
@@ -10,12 +10,14 @@ interface ListProps<T> {
   list: T[];
   colWidthList: number[];
   tableHeadList: string[];
+  handleDelete: (id: string) => void;
 }
 
 export default function BoardListLayout({
   list,
   colWidthList,
   tableHeadList,
+  handleDelete,
 }: ListProps<ReportType>) {
   const router = useRouter();
   const { isLoggedIn } = useAuth();
@@ -23,6 +25,7 @@ export default function BoardListLayout({
   const goToEditPage = () => {
     router.push("/performance/reports/edit");
   };
+
   return (
     <div className={styles.container}>
       <div className={styles["table-container"]}>
@@ -54,12 +57,36 @@ export default function BoardListLayout({
           <tbody>
             {list.map((item) => (
               <tr key={item.id}>
-                <td>{item.id}</td>
+                <td>
+                  {!isLoggedIn ? (
+                    item.id
+                  ) : (
+                    <Button
+                      color="red"
+                      className={styles["delete-button"]}
+                      onClick={() => handleDelete(item.id.toString())}
+                    >
+                      삭제
+                    </Button>
+                  )}
+                </td>
                 <td>{item.year}</td>
                 <td>{item.title}</td>
                 <td>{formatDate(item.start_date)}</td>
                 <td>{formatDate(item.end_date)}</td>
-                <td>{item.note ?? "-"}</td>
+                <td>
+                  {!isLoggedIn ? (
+                    item.note ?? "-"
+                  ) : (
+                    <Button
+                      color="primary-border"
+                      className={styles["edit-button"]}
+                      onClick={goToEditPage}
+                    >
+                      수정
+                    </Button>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
