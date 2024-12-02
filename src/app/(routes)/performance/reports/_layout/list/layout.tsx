@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ReportType } from "../../../../../_types/report";
 import { formatDate } from "../../../../../_utils/formatDate";
+import { useAuth } from "../../../../../_hooks/useAuth";
 
 interface ListProps<T> {
   list: T[];
@@ -18,6 +19,7 @@ export default function BoardListLayout({
   tableHeadList,
 }: ListProps<ReportType>) {
   const router = useRouter();
+  const { isLoggedIn } = useAuth();
 
   const goToEditPage = () => {
     router.push("/performance/reports/edit");
@@ -25,13 +27,15 @@ export default function BoardListLayout({
   return (
     <div className={styles.container}>
       <div className={styles["table-container"]}>
-        <Button
-          onClick={goToEditPage}
-          color="primary"
-          className={styles["write-button"]}
-        >
-          글쓰기
-        </Button>
+        {isLoggedIn ? (
+          <Button
+            onClick={goToEditPage}
+            color="primary"
+            className={styles["write-button"]}
+          >
+            글쓰기
+          </Button>
+        ) : null}
 
         <table className={styles.table}>
           <colgroup>
