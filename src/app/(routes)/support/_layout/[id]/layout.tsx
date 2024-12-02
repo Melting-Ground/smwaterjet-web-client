@@ -10,13 +10,12 @@ import { RiFile2Line } from "@remixicon/react";
 import { NoticeType } from "../../../../_types/notice";
 import { InquiryType } from "../../../../_types/inquiry";
 import { useRouter } from "next/navigation";
-import { BoardType } from "../../../../_types/board";
 
 interface DetailProps<T> {
   dataDetail: T;
   dataList: T[];
   currentId: number;
-  type: Omit<BoardType, "reports">;
+  type: "notice" | "inquiry";
 }
 
 export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
