@@ -21,7 +21,7 @@ export default function Edit() {
     files: [null, null, null, null, null],
   });
 
-  const { handleChange, handleSubmit, isFormDirty } = useFormData<
+  const { handleChange, handleUpload, isFormDirty } = useFormData<
     typeof INQUIRY_API.method.get,
     typeof INQUIRY_API.method.post
   >(INQUIRY_API, inquiryContents, setInquiryContents);
@@ -31,7 +31,7 @@ export default function Edit() {
       type="inquiry"
       contents={inquiryContents}
       handleChange={handleChange}
-      handleSubmit={handleSubmit}
+      handleSubmit={handleUpload}
       isFormDirty={isFormDirty}
     />
   );

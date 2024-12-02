@@ -13,11 +13,20 @@ export default function InquiryDetail() {
     fetchData: fetchInquiryDetail,
     dataList: inquiryList,
     dataDetail: inquiryDetail,
+    isLoading,
   } = useAPIData<typeof API_URLS.inquiries.method.get>(API_URLS.inquiries);
 
   const { id } = useParams();
   const { password } = UserInquiryPasswordContext();
   const router = useRouter();
+
+  let currentId;
+  if (typeof id === "string") {
+    currentId = id;
+  }
+  if (!currentId) {
+    return <div>존재하지 않는 게시물입니다.</div>;
+  }
 
   const getInquiryDetail = async (id: string) => {
     const errorMessage = await fetchInquiryDetail(id, password);
@@ -28,17 +37,19 @@ export default function InquiryDetail() {
   };
 
   useEffect(() => {
-    if (typeof id === "string") {
-      getInquiryDetail(id);
-    }
-  }, [id]);
+    getInquiryDetail(currentId);
+  }, [currentId]);
+  
+  const isNotLoaded = isLoading.detail || !inquiryDetail;
 
-  return (
+  return !isNotLoaded ? (
     <BoardDetailLayout
       dataList={inquiryList}
       dataDetail={inquiryDetail}
       type="inquiry"
-      currentId={Number(id)}
+      currentId={Number(currentId)}
     />
+  ) : (
+    <div>로딩중</div>
   );
 }
