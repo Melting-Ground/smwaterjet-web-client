@@ -3,12 +3,11 @@ import { InquiryPostType, InquiryType } from "../_types/inquiry";
 import { NoticePostType, NoticeType } from "../_types/notice";
 import { ReportPostType, ReportType } from "../_types/report";
 
+export type HttpMethodType = "get" | "post" | "put";
+
 export interface APIConfig<T = unknown, P = unknown> {
   url: string;
-  method: {
-    get?: T;
-    post?: P;
-  };
+  method: Record<HttpMethodType, T | P>;
 }
 
 const API_URLS = {
@@ -17,6 +16,7 @@ const API_URLS = {
     method: {
       get: {} as NoticeType,
       post: {} as NoticePostType,
+      put: {} as NoticePostType,
     },
   },
   inquiries: {
@@ -24,6 +24,7 @@ const API_URLS = {
     method: {
       get: {} as InquiryType,
       post: {} as InquiryPostType,
+      put: {} as InquiryPostType,
     },
   },
   reports: {
@@ -31,6 +32,7 @@ const API_URLS = {
     method: {
       get: {} as ReportType,
       post: {} as ReportPostType,
+      put: {} as InquiryPostType,
     },
   },
 

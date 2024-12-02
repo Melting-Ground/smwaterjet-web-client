@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { APIConfig } from "../_config/apiConfig";
+import { useState } from "react";
+import { APIConfig, HttpMethodType } from "../_config/apiConfig";
 import { useAPIData } from "./useAPIData";
 
 const useFormData = <T, P>(
   apiConfig: APIConfig<T>,
-  contents: P, //post
-  setContents: React.Dispatch<React.SetStateAction<P>>
+  contents?: P, //post, put
+  setContents?: React.Dispatch<React.SetStateAction<P>>
 ) => {
-  const { postData } = useAPIData<T>(apiConfig);
+  const { postData, putData, deleteData } = useAPIData<T>(apiConfig);
   const [isFormDirty, setIsFormDirty] = useState<boolean>(false);
 
   // useEffect(() => {
@@ -46,9 +46,12 @@ const useFormData = <T, P>(
   // }, [isFormDirty]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { value, id, type } = e.target as HTMLInputElement;
+    if (!setContents) return;
 
     if (type === "file") {
       const { files } = e.target as HTMLInputElement;
@@ -99,15 +102,57 @@ const useFormData = <T, P>(
     return formData;
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  // post or put
+  // TODO: alert 처리 하기, navigate 처리하기
+  const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(" handle submit");
     const formData = createFormData();
-    postData(formData);
-    // formData.forEach((item) => console.log(item));
-    // setIsFormDirty(false);
+    try {
+      await postData(formData);
+      alert("등록이 완료되었습니다.");
+    } catch (error) {
+      alert("등록 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+    }
+    setIsFormDirty(false);
   };
-  return { handleChange, handleSubmit, isFormDirty };
+
+  const handleUpdate = async (
+    e: React.FormEvent<HTMLFormElement>,
+    id: string
+  ) => {
+    e.preventDefault();
+    const formData = createFormData();
+    try {
+      await putData(formData, id);
+      alert("수정이 완료되었습니다.");
+    } catch (error) {
+      alert("수정 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+    }
+    setIsFormDirty(false);
+  };
+
+  const handleDelete = async (id: string): Promise<boolean> => {
+    if (!confirm("정말 삭제하시겠습니까?")) {
+      return false;
+    }
+
+    try {
+      await deleteData(id);
+      alert("삭제가 완료되었습니다.");
+      return true;
+    } catch (error) {
+      alert("삭제 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+      return false;
+    }
+  };
+
+  return {
+    handleChange,
+    handleUpload,
+    handleUpdate,
+    handleDelete,
+    isFormDirty,
+  };
 };
 
 export default useFormData;

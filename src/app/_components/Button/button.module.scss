@@ -20,6 +20,12 @@
   background-color: $blue;
   color: $white;
 }
+
+.red {
+  border: 1px solid $red;
+  background-color: $red;
+  color: $white;
+}
 .transparent-link {
   background-color: transparent;
   color: $primary;

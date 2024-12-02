@@ -10,6 +10,9 @@ import { RiFile2Line } from "@remixicon/react";
 import { NoticeType } from "../../../../_types/notice";
 import { InquiryType } from "../../../../_types/inquiry";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../../../../_hooks/useAuth";
+import { API_URLS } from "../../../../_config/apiConfig";
+import useFormData from "../../../../_hooks/useFormData";
 
 interface DetailProps<T> {
   dataDetail: T;
@@ -29,9 +32,24 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
   const previousIndex = currentIndex - 1;
   const nextIndex = currentIndex + 1;
   const router = useRouter();
+  const { isLoggedIn } = useAuth();
+
+  const apiConfig = type === "notice" ? API_URLS.notices : API_URLS.inquiries;
+  const { handleDelete } = useFormData(apiConfig);
 
   const goToList = () => {
     router.push(`/support/${type}`);
+  };
+
+  const goToEditPage = () => {
+    router.push(`/support/${type}/${currentId}/edit`);
+  };
+
+  const deleteItem = async (id: string) => {
+    const isDeleted = await handleDelete(id);
+    if (isDeleted) {
+      router.push(`/support/${type}`);
+    }
   };
 
   return (
@@ -146,13 +164,28 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
           </ul>
         </article>
       )}
-      <Button
-        color="primary"
-        className={styles["to-list-button"]}
-        onClick={goToList}
-      >
-        목록으로
-      </Button>
+      <span className={styles["button-container"]}>
+        <Button
+          color="primary"
+          className={styles["to-list-button"]}
+          onClick={goToList}
+        >
+          목록으로
+        </Button>
+        {isLoggedIn ? (
+          <span className={styles["edit-del-button-container"]}>
+            <Button color="primary-border" onClick={goToEditPage}>
+              수정
+            </Button>
+            <Button
+              color="red"
+              onClick={() => deleteItem(currentId.toString())}
+            >
+              삭제
+            </Button>
+          </span>
+        ) : null}
+      </span>
     </div>
   );
 }

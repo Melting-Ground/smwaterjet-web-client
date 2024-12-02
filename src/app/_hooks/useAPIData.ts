@@ -8,14 +8,26 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
   const [dataList, setDataList] = useState<T[]>([]);
   const [dataDetail, setDataDetail] = useState<T | undefined>(undefined);
 
+  const [isLoading, setIsLoading] = useState({
+    list: false,
+    detail: false,
+    post: false,
+    put: false,
+    delete: false,
+  });
+
   const fetchDataList = async (page: number) => {
-    console.log(apiConfig.url);
+    setIsLoading((prev) => ({ ...prev, list: true }));
+
     try {
       const response = await axiosInstance.get(`${apiConfig.url}?page=${page}`);
+      // console.log(response);
       setDataList(response.data);
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
-      console.error("fetchDataList 에러", error);
+      throw new Error(`fatchDataList 에러: ${error}`);
+    } finally {
+      setIsLoading((prev) => ({ ...prev, list: false }));
     }
   };
 
@@ -33,13 +45,16 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
     // password X: 공지사항
     // console.log(password);
     // const password = "1234";
+    setIsLoading((prev) => ({ ...prev, detail: true }));
+
     try {
       const response = await axiosInstance({
+        //  TODO: 로직 확인하기
         method: password ? "post" : "get",
         url: `${apiConfig.url}/${id}`,
         data: password ? { password } : undefined,
       });
-      console.log(response);
+      // console.log(response);
       setDataDetail(response.data);
       return null;
     } catch (error) {
@@ -54,12 +69,16 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
         console.error(`fetData 에러, ${error}`);
         return "알 수 없는 오류가 발생했습니다. 관리자에게 문의하세요.";
       }
+    } finally {
+      setIsLoading((prev) => ({ ...prev, detail: false }));
     }
   };
 
   const postData = async (formData: FormData) => {
+    setIsLoading((prev) => ({ ...prev, post: true }));
+
     try {
-      formData.forEach((item) => console.log(item));
+      formData.forEach((item) => console.log(item, typeof item));
 
       const response = await axiosInstance.post(
         apiConfig.url,
@@ -68,9 +87,54 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
       );
       console.log("response", response);
     } catch (error) {
-      console.error("postData 에러", error);
+      throw new Error(`postData 에러: ${error}`);
+    } finally {
+      setIsLoading((prev) => ({ ...prev, post: false }));
     }
   };
 
-  return { dataList, dataDetail, postData, fetchData };
+  const putData = async (formData: FormData, id: string) => {
+    setIsLoading((prev) => ({ ...prev, put: true }));
+
+    try {
+      formData.forEach((item) => console.log(item, typeof item));
+      console.log(`${apiConfig.url}/${id}`);
+      const response = await axiosInstance.put(
+        `${apiConfig.url}/${id}`,
+        formData,
+        getAuthHeaders()
+      );
+      console.log("put data", response);
+    } catch (error) {
+      throw new Error(`putData 에러: ${error}`);
+    } finally {
+      setIsLoading((prev) => ({ ...prev, put: false }));
+    }
+  };
+
+  const deleteData = async (id: string) => {
+    setIsLoading((prev) => ({ ...prev, delete: true }));
+
+    try {
+      const response = await axiosInstance.delete(
+        `${apiConfig.url}/${id}`,
+        getAuthHeaders()
+      );
+      console.log(response);
+    } catch (error) {
+      throw new Error(`deleteData 에러: ${error}`);
+    } finally {
+      setIsLoading((prev) => ({ ...prev, list: false }));
+    }
+  };
+
+  return {
+    dataList,
+    dataDetail,
+    postData,
+    putData,
+    deleteData,
+    fetchData,
+    isLoading,
+  };
 };

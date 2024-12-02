@@ -19,7 +19,7 @@ interface InputProps {
   iconPosition?: "left" | "inner-right";
   fullWidth?: boolean;
   multiple?: boolean;
-  required: boolean;
+  required?: boolean;
 }
 
 export default function Input({
