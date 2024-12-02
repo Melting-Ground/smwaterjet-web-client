@@ -2,7 +2,6 @@ import React from "react";
 import Button from "../../../../../_components/Button/Button";
 import styles from "./layout.module.scss";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { ReportType } from "../../../../../_types/report";
 import { formatDate } from "../../../../../_utils/formatDate";
 import { useAuth } from "../../../../../_hooks/useAuth";
@@ -60,7 +59,7 @@ export default function BoardListLayout({
                 <td>{item.title}</td>
                 <td>{formatDate(item.start_date)}</td>
                 <td>{formatDate(item.end_date)}</td>
-                <td>{item.note}</td>
+                <td>{item.note ?? "-"}</td>
               </tr>
             ))}
           </tbody>

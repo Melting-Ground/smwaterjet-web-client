@@ -23,7 +23,7 @@ export default function Reports() {
     <BoardListLayout
       tableHeadList={reportsTableHeadList}
       list={reports}
-      colWidthList={[50, 50, 350, 80, 80, 50]}
+      colWidthList={[50, 50, 250, 80, 80, 40]}
     />
   );
 }
