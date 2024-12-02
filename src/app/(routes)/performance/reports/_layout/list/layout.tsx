@@ -11,6 +11,7 @@ interface ListProps<T> {
   colWidthList: number[];
   tableHeadList: string[];
   handleDelete: (id: string) => void;
+  // handleUpdate: () => void;
 }
 
 export default function BoardListLayout({
@@ -18,12 +19,17 @@ export default function BoardListLayout({
   colWidthList,
   tableHeadList,
   handleDelete,
-}: ListProps<ReportType>) {
+}: // handleUpdate,
+ListProps<ReportType>) {
   const router = useRouter();
   const { isLoggedIn } = useAuth();
 
-  const goToEditPage = () => {
-    router.push("/performance/reports/edit");
+  const goToEditPage = (id?: string) => {
+    if (id) {
+      router.push(`/performance/reports/${id}/edit`);
+    } else {
+      router.push("/performance/reports/edit");
+    }
   };
 
   return (
@@ -31,7 +37,7 @@ export default function BoardListLayout({
       <div className={styles["table-container"]}>
         {isLoggedIn ? (
           <Button
-            onClick={goToEditPage}
+            onClick={() => goToEditPage()}
             color="primary"
             className={styles["write-button"]}
           >
@@ -81,7 +87,7 @@ export default function BoardListLayout({
                     <Button
                       color="primary-border"
                       className={styles["edit-button"]}
-                      onClick={goToEditPage}
+                      onClick={() => goToEditPage(item.id.toString())}
                     >
                       수정
                     </Button>

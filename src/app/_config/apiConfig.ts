@@ -32,7 +32,7 @@ const API_URLS = {
     method: {
       get: {} as ReportType,
       post: {} as ReportPostType,
-      put: {} as InquiryPostType,
+      put: {} as ReportPostType,
     },
   },
 
