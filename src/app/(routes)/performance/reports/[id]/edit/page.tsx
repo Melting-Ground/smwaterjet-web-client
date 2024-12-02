@@ -61,7 +61,7 @@ export default function Edit() {
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       await handleUpdate(e, currentId);
-      router.push(`/performance/reports/${currentId}`);
+      router.push("/performance/reports/");
     } catch (error) {
       alert(error);
     }
