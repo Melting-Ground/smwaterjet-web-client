@@ -70,10 +70,6 @@ export default function Edit() {
     typeof INQUIRY_API.method.put
   >(INQUIRY_API, inquiryContents, setInquiryContents);
 
-  if (isLoading.detail) {
-    return <div>상세 데이터 로딩중</div>;
-  }
-
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       await handleUpdate(e, currentId);
@@ -83,7 +79,9 @@ export default function Edit() {
     }
   };
 
-  return (
+  const isNotLoaded = isLoading.detail || !inquiryDetail;
+
+  return !isNotLoaded ? (
     <BoardEditLayout
       type="inquiry"
       method="update"
@@ -92,5 +90,7 @@ export default function Edit() {
       handleSubmit={handleFormSubmit}
       isFormDirty={isFormDirty}
     />
+  ) : (
+    <div>로딩중</div>
   );
 }

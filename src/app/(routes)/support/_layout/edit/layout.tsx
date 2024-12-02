@@ -12,6 +12,7 @@ import { InquiryPostType } from "../../../../_types/inquiry";
 interface EditProps<T> {
   contents: T;
   type: "notice" | "inquiry";
+  method: "update" | "upload";
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -22,7 +23,14 @@ interface EditProps<T> {
 // TODO: 자동 등록 방지
 export default function BoardEditLayout<
   T extends NoticePostType | InquiryPostType
->({ contents, type, handleChange, handleSubmit, isFormDirty }: EditProps<T>) {
+>({
+  contents,
+  type,
+  method,
+  handleChange,
+  handleSubmit,
+  isFormDirty,
+}: EditProps<T>) {
   const router = useRouter();
 
   const fileInputs = Array.from({ length: 5 }, (_, index) => index + 1);
@@ -55,6 +63,7 @@ export default function BoardEditLayout<
           value={contents.author}
           onChange={handleChange}
           required
+          disabled={method === "update" ? true : false}
         />
         {type === "inquiry" &&
         contents &&
@@ -70,6 +79,7 @@ export default function BoardEditLayout<
               value={contents.password}
               onChange={handleChange}
               required
+              disabled={method === "update" ? true : false}
             />
 
             <label htmlFor="phone_number">연락처</label>
@@ -80,6 +90,7 @@ export default function BoardEditLayout<
               value={contents.phone_number}
               onChange={handleChange}
               required
+              disabled={method === "update" ? true : false}
             />
 
             <label htmlFor="email">이메일</label>
@@ -90,6 +101,7 @@ export default function BoardEditLayout<
               value={contents.email}
               onChange={handleChange}
               required
+              disabled={method === "update" ? true : false}
             />
           </>
         ) : null}
@@ -103,6 +115,7 @@ export default function BoardEditLayout<
           onChange={handleChange}
           required
           fullWidth
+          disabled={method === "update" ? true : false}
         />
         <label htmlFor="content">내용</label>
         <TextArea
@@ -121,10 +134,10 @@ export default function BoardEditLayout<
               name={`file${num}`}
               id={`file${num}`}
               onChange={handleChange}
-              required
             />
           </React.Fragment>
         ))}
+        {/* 자동방지등록 */}
         <div className={styles["button-container"]}>
           <Button type="submit" color="primary-border" onClick={goBackToList}>
             취소

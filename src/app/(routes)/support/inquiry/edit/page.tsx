@@ -29,6 +29,7 @@ export default function Edit() {
   return (
     <BoardEditLayout
       type="inquiry"
+      method="upload"
       contents={inquiryContents}
       handleChange={handleChange}
       handleSubmit={handleUpload}

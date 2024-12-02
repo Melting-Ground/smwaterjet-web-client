@@ -60,10 +60,6 @@ export default function Edit() {
     typeof NOTICE_API.method.put
   >(NOTICE_API, noticeContents, setNoticeContents);
 
-  if (isLoading.detail) {
-    return <div>상세 데이터 로딩중</div>;
-  }
-
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       await handleUpdate(e, currentId);
@@ -73,13 +69,18 @@ export default function Edit() {
     }
   };
 
-  return (
+  const isNotLoaded = isLoading.detail || !noticeDetail;
+
+  return !isNotLoaded ? (
     <BoardEditLayout
       type="notice"
+      method="update"
       contents={noticeContents}
       handleChange={handleChange}
       handleSubmit={handleFormSubmit}
       isFormDirty={isFormDirty}
     />
+  ) : (
+    <div>로딩중</div>
   );
 }

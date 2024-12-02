@@ -25,6 +25,7 @@ export default function Edit() {
   return (
     <BoardEditLayout
       type="notice"
+      method="upload"
       contents={noticeContents}
       handleChange={handleChange}
       handleSubmit={handleUpload}

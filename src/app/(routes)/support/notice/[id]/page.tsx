@@ -11,21 +11,33 @@ export default function NoticeDetail() {
     fetchData: fetchNoticeDetail,
     dataList: noticeList,
     dataDetail: noticeDetail,
+    isLoading,
   } = useAPIData<typeof API_URLS.notices.method.get>(API_URLS.notices);
 
   const { id } = useParams();
-  useEffect(() => {
-    if (typeof id === "string") {
-      fetchNoticeDetail(id);
-    }
-  }, [id]);
 
-  return (
+  let currentId;
+  if (typeof id === "string") {
+    currentId = id;
+  }
+  if (!currentId) {
+    return <div>존재하지 않는 게시물입니다.</div>;
+  }
+
+  useEffect(() => {
+    fetchNoticeDetail(currentId);
+  }, [currentId]);
+
+  const isNotLoaded = isLoading.detail || !noticeDetail;
+
+  return !isNotLoaded ? (
     <BoardDetailLayout
       dataDetail={noticeDetail}
       dataList={noticeList}
-      currentId={Number(id)}
+      currentId={Number(currentId)}
       type="notice"
     />
+  ) : (
+    <div>로딩중</div>
   );
 }
