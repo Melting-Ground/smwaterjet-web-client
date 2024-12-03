@@ -14,12 +14,9 @@ export default function Edit() {
   const router = useRouter();
   const { id } = useParams();
 
-  let currentId;
+  let currentId: string = "";
   if (typeof id === "string") {
     currentId = id;
-  }
-  if (!currentId) {
-    return <div>존재하지 않는 게시물입니다.</div>;
   }
 
   const {
@@ -44,30 +41,41 @@ export default function Edit() {
 
   useEffect(() => {
     if (noticeDetail) {
-      console.log("noticeDetail", noticeDetail);
       setNoticeContents({
         title: noticeDetail?.title || "",
         content: noticeDetail?.content || "",
         author: noticeDetail?.author || "",
-        files: [],
-        // files: noticeDetail?.files || [],
+        files: noticeDetail?.files.map((file) => ({
+          id: file.id,
+          file_path: file.file_path,
+        })),
       });
     }
   }, [noticeDetail]);
 
-  const { handleChange, handleUpdate, isFormDirty } = useFormData<
-    typeof NOTICE_API.method.get,
-    typeof NOTICE_API.method.put
-  >(NOTICE_API, noticeContents, setNoticeContents);
+  const { handleChange, handleUpdate, handleFileDelete, isFormDirty } =
+    useFormData<typeof NOTICE_API.method.get, typeof NOTICE_API.method.put>(
+      NOTICE_API,
+      noticeContents,
+      setNoticeContents
+    );
 
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   TODO: 변수명 정리..
+  const handleFormSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+    deletedFileIdArray?: number[]
+  ) => {
     try {
-      await handleUpdate(e, currentId);
+      await handleUpdate(e, currentId, deletedFileIdArray);
       router.push(`/support/notice/${currentId}`);
     } catch (error) {
       alert(error);
     }
   };
+
+  // if (!currentId) {
+  //   return <div>존재하지 않는 게시물입니다.</div>;
+  // }
 
   const isNotLoaded = isLoading.detail || !noticeDetail;
 
@@ -78,6 +86,7 @@ export default function Edit() {
       contents={noticeContents}
       handleChange={handleChange}
       handleSubmit={handleFormSubmit}
+      handleDeleteFile={handleFileDelete}
       isFormDirty={isFormDirty}
     />
   ) : (

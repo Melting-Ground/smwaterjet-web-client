@@ -23,6 +23,12 @@
       border: none;
     }
 
+    .exist-file-container {
+      display: flex;
+      align-items: center;
+      padding-left: 8px;
+    }
+
     .button-container {
       display: flex;
       margin: 0 auto;

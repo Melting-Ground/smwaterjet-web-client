@@ -14,16 +14,16 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
     post: false,
     put: false,
     delete: false,
+    deleteFile: false,
   });
 
   const fetchDataList = async (page: number) => {
     setIsLoading((prev) => ({ ...prev, list: true }));
 
     try {
-      const response = await axiosInstance.get(`${apiConfig.url}?page=${page}`);
+      const { data } = await axiosInstance.get(`${apiConfig.url}?page=${page}`);
       // console.log(response);
-      setDataList(response.data);
-      // console.log(response.data);
+      setDataList(data.items);
     } catch (error) {
       throw new Error(`fatchDataList 에러: ${error}`);
     } finally {
@@ -48,14 +48,11 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
     setIsLoading((prev) => ({ ...prev, detail: true }));
 
     try {
-      const response = await axiosInstance({
-        //  TODO: 로직 확인하기
-        method: password ? "post" : "get",
-        url: `${apiConfig.url}/${id}`,
-        data: password ? { password } : undefined,
+      const { data } = await axiosInstance.get(`${apiConfig.url}/${id}`, {
+        ...getAuthHeaders(password ? password : null),
       });
-      // console.log(response);
-      setDataDetail(response.data);
+
+      setDataDetail(data);
       return null;
     } catch (error) {
       if (
@@ -124,7 +121,23 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
     } catch (error) {
       throw new Error(`deleteData 에러: ${error}`);
     } finally {
-      setIsLoading((prev) => ({ ...prev, list: false }));
+      setIsLoading((prev) => ({ ...prev, delete: false }));
+    }
+  };
+
+  const deleteFile = async (id: string) => {
+    setIsLoading((prev) => ({ ...prev, deleteFile: true }));
+
+    try {
+      const response = await axiosInstance.delete(
+        `${apiConfig.url}/file/${id}`,
+        getAuthHeaders()
+      );
+      console.log(response);
+    } catch (error) {
+      throw new Error(`deleteFile 에러: ${error}`);
+    } finally {
+      setIsLoading((prev) => ({ ...prev, deleteFile: false }));
     }
   };
 
@@ -134,6 +147,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
     postData,
     putData,
     deleteData,
+    deleteFile,
     fetchData,
     isLoading,
   };

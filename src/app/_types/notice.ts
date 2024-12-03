@@ -1,9 +1,12 @@
+import { FileWithIdType } from "./file";
+
 export interface NoticePostType {
   title: string;
   content: string;
   author: string;
-  files: File[] | null[];
+  files: File[] | FileWithIdType[]; // 새로 등록 | 이미 있는
 }
+
 export interface NoticeType {
   content: string;
   created_at: string;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { APIConfig, HttpMethodType } from "../_config/apiConfig";
+import { APIConfig } from "../_config/apiConfig";
 import { useAPIData } from "./useAPIData";
 
 const useFormData = <T, P>(
@@ -7,7 +7,8 @@ const useFormData = <T, P>(
   contents?: P, //post, put
   setContents?: React.Dispatch<React.SetStateAction<P>>
 ) => {
-  const { postData, putData, deleteData } = useAPIData<T>(apiConfig);
+  const { postData, putData, deleteData, deleteFile } =
+    useAPIData<T>(apiConfig);
   const [isFormDirty, setIsFormDirty] = useState<boolean>(false);
 
   // useEffect(() => {
@@ -48,7 +49,8 @@ const useFormData = <T, P>(
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
+    method: "update" | "upload" = "upload"
   ) => {
     const { value, id, type } = e.target as HTMLInputElement;
     if (!setContents) return;
@@ -58,13 +60,14 @@ const useFormData = <T, P>(
       const num = Number(id.at(-1));
       const index = num - 1;
       if (files) {
+        const fieldName = method === "update" ? "newFiles" : "files";
         setContents((prev: P) => {
           const fileList = prev.files;
           fileList[index] = files[0];
 
           return {
             ...prev,
-            files: fileList,
+            [fieldName]: fileList,
           };
         });
       }
@@ -118,10 +121,21 @@ const useFormData = <T, P>(
 
   const handleUpdate = async (
     e: React.FormEvent<HTMLFormElement>,
-    id: string
+    id: string,
+    deleteFileIdArray?: number[]
   ) => {
     e.preventDefault();
     const formData = createFormData();
+    formData.delete("files");
+
+    // delete file
+    if (deleteFileIdArray) {
+      await Promise.all(
+        deleteFileIdArray.map((id) => deleteFile(id.toString()))
+      );
+      console.log("파일 전부 삭제 완료");
+    }
+
     try {
       await putData(formData, id);
       alert("수정이 완료되었습니다.");
@@ -146,11 +160,29 @@ const useFormData = <T, P>(
     }
   };
 
+  // 파일 하나 지우기
+  const handleFileDelete = async (id: string) => {
+    if (!confirm("정말 삭제하시겠습니까?")) {
+      return false;
+    }
+
+    try {
+      await deleteFile(id);
+      alert("삭제가 완료되었습니다.");
+
+      return true;
+    } catch (error) {
+      alert("삭제 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+      return false;
+    }
+  };
+
   return {
     handleChange,
     handleUpload,
     handleUpdate,
     handleDelete,
+    handleFileDelete,
     isFormDirty,
   };
 };

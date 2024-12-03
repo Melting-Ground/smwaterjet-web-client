@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./layout.module.scss";
 import Input from "../../../../_components/Input/Input";
 import TextArea from "../../../../_components/TextArea/TextArea";
@@ -7,6 +7,8 @@ import Button from "../../../../_components/Button/Button";
 import { useRouter } from "next/navigation";
 import { NoticePostType } from "../../../../_types/notice";
 import { InquiryPostType } from "../../../../_types/inquiry";
+import { RiCloseCircleLine } from "@remixicon/react";
+import { FileWithIdType } from "../../../../_types/file";
 
 // TODO: 레이아웃 상위 폴더로 옮기기
 interface EditProps<T> {
@@ -14,9 +16,14 @@ interface EditProps<T> {
   type: "notice" | "inquiry";
   method: "update" | "upload";
   handleChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    method?: "update" | "upload"
   ) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  handleSubmit: (
+    e: React.FormEvent<HTMLFormElement>,
+    setDeletedFileIdArray?: number[]
+  ) => Promise<void>;
+  handleDeleteFile: (id: string) => void;
   isFormDirty: boolean;
 }
 
@@ -29,11 +36,42 @@ export default function BoardEditLayout<
   method,
   handleChange,
   handleSubmit,
+  handleDeleteFile,
   isFormDirty,
 }: EditProps<T>) {
   const router = useRouter();
 
-  const fileInputs = Array.from({ length: 5 }, (_, index) => index + 1);
+  console.log("contents", contents);
+
+  const [files, setFiles] = useState<(FileWithIdType | File | null)[]>([]);
+  const [deleteFileIdArray, setDeleteFileIdArray] = useState<number[]>([]);
+
+  useEffect(() => {
+    const updatedFiles: (FileWithIdType | File | null)[] = [];
+    contents.files.forEach((file) => {
+      if (!file || file instanceof File) {
+        return;
+      }
+      updatedFiles.push({ id: file.id, file_path: file.file_path });
+    });
+
+    for (let i = 0; i < 5 - contents.files.length; i++) {
+      updatedFiles.push(null);
+    }
+    setFiles(updatedFiles);
+  }, [contents.files]);
+
+  // contents.files.map((file) => {
+  //   if (!file || file instanceof File) {
+  //     return;
+  //   }
+  //   combinedFileArray[file.id - 1] = file.file_path;
+  // });
+
+  useEffect(() => {
+    console.log(files);
+    console.log(contents.files);
+  }, [files]);
 
   const goBackToList = () => {
     if (isFormDirty) {
@@ -47,12 +85,22 @@ export default function BoardEditLayout<
       router.push(`/support/${type}`);
     }
   };
+  const deleteFile = (id: string) => {
+    // handleDeleteFile(id); // 수정 완료했을때 지우기.
+    setFiles((prevFiles) =>
+      prevFiles.map((file) => (file?.id.toString() === id ? null : file))
+    );
+    setDeleteFileIdArray((prev) => [...prev, Number(id)]);
+  };
 
   // TODO: * 표시 하기 (필수항목)
   //   문의사항의 경우 더 항목이 많음
   return (
     <section className={styles.container}>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form
+        onSubmit={(e) => handleSubmit(e, deleteFileIdArray)}
+        className={styles.form}
+      >
         <label htmlFor="title">
           {type === "inquiry" ? <>성함</> : <>작성자</>}
         </label>
@@ -61,7 +109,7 @@ export default function BoardEditLayout<
           name="author"
           id="author"
           value={contents.author}
-          onChange={handleChange}
+          onChange={(e) => handleChange(e, method)}
           required
           disabled={method === "update" ? true : false}
         />
@@ -77,7 +125,7 @@ export default function BoardEditLayout<
               name="password"
               id="password"
               value={contents.password}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, method)}
               required
               disabled={method === "update" ? true : false}
             />
@@ -88,7 +136,7 @@ export default function BoardEditLayout<
               name="phone_number"
               id="phone_number"
               value={contents.phone_number}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, method)}
               required
               disabled={method === "update" ? true : false}
             />
@@ -99,7 +147,7 @@ export default function BoardEditLayout<
               name="email"
               id="email"
               value={contents.email}
-              onChange={handleChange}
+              onChange={(e) => handleChange(e, method)}
               required
               disabled={method === "update" ? true : false}
             />
@@ -112,7 +160,7 @@ export default function BoardEditLayout<
           name="title"
           id="title"
           value={contents.title}
-          onChange={handleChange}
+          onChange={(e) => handleChange(e, method)}
           required
           fullWidth
           disabled={method === "update" ? true : false}
@@ -122,19 +170,33 @@ export default function BoardEditLayout<
           id="content"
           name="content"
           value={contents.content}
-          onChange={handleChange}
+          onChange={(e) => handleChange(e, method)}
         />
         {/* 파일 선택 1~5개 */}
-        {fileInputs.map((num) => (
-          <React.Fragment key={num}>
-            <label htmlFor={`file${num}`}>첨부 파일{num}</label>
-            <Input
-              className={styles["file-input"]}
-              type="file"
-              name={`file${num}`}
-              id={`file${num}`}
-              onChange={handleChange}
-            />
+        {files.map((file, index) => (
+          <React.Fragment key={index}>
+            <label htmlFor={`file${index + 1}`}>첨부 파일{index + 1}</label>
+            {!(file instanceof File) && file !== null ? (
+              <div className={styles["exist-file-container"]}>
+                {file.file_path}
+                <Button
+                  onClick={() => {
+                    deleteFile(file.id.toString());
+                  }}
+                  color="icon"
+                  className={styles["file-delete-button"]}
+                  icon={<RiCloseCircleLine color={"#2f437a"} />}
+                />
+              </div>
+            ) : (
+              <Input
+                className={styles["file-input"]}
+                type="file"
+                name={`file${index + 1}`}
+                id={`file${index + 1}`}
+                onChange={(e) => handleChange(e, method)}
+              />
+            )}
           </React.Fragment>
         ))}
         {/* 자동방지등록 */}
