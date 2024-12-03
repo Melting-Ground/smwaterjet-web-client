@@ -61,40 +61,44 @@ ListProps<ReportType>) {
             </tr>
           </thead>
           <tbody>
-            {list.map((item) => (
-              <tr key={item.id}>
-                <td>
-                  {!isLoggedIn ? (
-                    item.id
-                  ) : (
-                    <Button
-                      color="red"
-                      className={styles["delete-button"]}
-                      onClick={() => handleDelete(item.id.toString())}
-                    >
-                      삭제
-                    </Button>
-                  )}
-                </td>
-                <td>{item.year}</td>
-                <td>{item.title}</td>
-                <td>{formatDate(item.start_date)}</td>
-                <td>{formatDate(item.end_date)}</td>
-                <td>
-                  {!isLoggedIn ? (
-                    item.note ?? "-"
-                  ) : (
-                    <Button
-                      color="primary-border"
-                      className={styles["edit-button"]}
-                      onClick={() => goToEditPage(item.id.toString())}
-                    >
-                      수정
-                    </Button>
-                  )}
-                </td>
-              </tr>
-            ))}
+            {list ? (
+              list.map((item) => (
+                <tr key={item.id}>
+                  <td>
+                    {!isLoggedIn ? (
+                      item.id
+                    ) : (
+                      <Button
+                        color="red"
+                        className={styles["delete-button"]}
+                        onClick={() => handleDelete(item.id.toString())}
+                      >
+                        삭제
+                      </Button>
+                    )}
+                  </td>
+                  <td>{item.year}</td>
+                  <td>{item.title}</td>
+                  <td>{formatDate(item.start_date)}</td>
+                  <td>{formatDate(item.end_date)}</td>
+                  <td>
+                    {!isLoggedIn ? (
+                      item.note ?? "-"
+                    ) : (
+                      <Button
+                        color="primary-border"
+                        className={styles["edit-button"]}
+                        onClick={() => goToEditPage(item.id.toString())}
+                      >
+                        수정
+                      </Button>
+                    )}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <>데이터가 존재하지 않습니다.</>
+            )}
           </tbody>
         </table>
       </div>

@@ -28,6 +28,7 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
     router.push(`/support/${type}/edit`);
   };
 
+
   const { isLoggedIn } = useAuth();
 
   // TODO: 페이징 기능 추가하기
@@ -65,29 +66,33 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
             </tr>
           </thead>
           <tbody>
-            {list.map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td className={styles.title}>
-                  <Link
-                    href={
-                      type === "inquiry"
-                        ? `/support/${type}/${item.id}/password`
-                        : `/support/${type}/${item.id}`
-                    }
-                  >
-                    {item.title}
-                  </Link>
-                </td>
-                <td>{item.author}</td>
-                <td>
-                  <time dateTime={item.created_at}>
-                    {formatDate(item.created_at)}
-                  </time>
-                </td>
-                {type === "notice" ? <td>{item.count}</td> : null}
-              </tr>
-            ))}
+            {list ? (
+              list.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td className={styles.title}>
+                    <Link
+                      href={
+                        type === "inquiry"
+                          ? `/support/${type}/${item.id}/password`
+                          : `/support/${type}/${item.id}`
+                      }
+                    >
+                      {item.title}
+                    </Link>
+                  </td>
+                  <td>{item.author}</td>
+                  <td>
+                    <time dateTime={item.created_at}>
+                      {formatDate(item.created_at)}
+                    </time>
+                  </td>
+                  {type === "notice" ? <td>{item.count}</td> : null}
+                </tr>
+              ))
+            ) : (
+              <>데이터가 존재하지 않습니다.</>
+            )}
           </tbody>
         </table>
       </div>
