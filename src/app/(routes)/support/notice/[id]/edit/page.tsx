@@ -53,12 +53,10 @@ export default function Edit() {
     }
   }, [noticeDetail]);
 
-  const { handleChange, handleUpdate, handleFileDelete, isFormDirty } =
-    useFormData<typeof NOTICE_API.method.get, typeof NOTICE_API.method.put>(
-      NOTICE_API,
-      noticeContents,
-      setNoticeContents
-    );
+  const { handleChange, handleUpdate, handleFileDelete } = useFormData<
+    typeof NOTICE_API.method.get,
+    typeof NOTICE_API.method.put
+  >(NOTICE_API, noticeContents, setNoticeContents);
 
   //   TODO: 변수명 정리..
   const handleFormSubmit = async (
@@ -87,7 +85,6 @@ export default function Edit() {
       handleChange={handleChange}
       handleSubmit={handleFormSubmit}
       handleDeleteFile={handleFileDelete}
-      isFormDirty={isFormDirty}
     />
   ) : (
     <div>로딩중</div>

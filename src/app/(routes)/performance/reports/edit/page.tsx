@@ -17,7 +17,7 @@ export default function Edit() {
     note: null,
   });
 
-  const { handleChange, handleUpload, isFormDirty } = useFormData<
+  const { handleChange, handleUpload } = useFormData<
     typeof REPORTS_API.method.get,
     typeof REPORTS_API.method.post
   >(REPORTS_API, reportsContents, setReportsContents);
@@ -27,7 +27,6 @@ export default function Edit() {
       contents={reportsContents}
       handleChange={handleChange}
       handleSubmit={handleUpload}
-      //   isFormDirty={isFormDirty}
     />
   );
 }

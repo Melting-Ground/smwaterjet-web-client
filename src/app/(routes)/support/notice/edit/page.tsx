@@ -16,7 +16,7 @@ export default function Edit() {
     files: [null, null, null, null, null],
   });
 
-  const { handleChange, handleUpload, isFormDirty } = useFormData<
+  const { handleChange, handleUpload } = useFormData<
     typeof NOTICE_API.method.get,
     typeof NOTICE_API.method.post
   >(NOTICE_API, noticeContents, setNoticeContents);
@@ -29,7 +29,6 @@ export default function Edit() {
       contents={noticeContents}
       handleChange={handleChange}
       handleSubmit={handleUpload}
-      isFormDirty={isFormDirty}
     />
   );
 }

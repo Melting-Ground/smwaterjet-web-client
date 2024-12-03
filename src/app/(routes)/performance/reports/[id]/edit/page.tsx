@@ -53,7 +53,7 @@ export default function Edit() {
     }
   }, [reportDetail]);
 
-  const { handleChange, handleUpdate, isFormDirty } = useFormData<
+  const { handleChange, handleUpdate } = useFormData<
     typeof REPORTS_API.method.get,
     typeof REPORTS_API.method.put
   >(REPORTS_API, reportContents, setReportContents);
@@ -79,7 +79,6 @@ export default function Edit() {
       handleChange={handleChange}
       handleSubmit={handleFormSubmit}
       handleUpdate={goToEditPage}
-      //   isFormDirty={isFormDirty}
     />
   ) : (
     <div>로딩중</div>

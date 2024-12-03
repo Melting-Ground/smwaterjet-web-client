@@ -19,7 +19,6 @@ interface EditProps<ReportPostType> {
   ) => void;
   handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   handleUpdate?: () => void;
-  //   isFormDirty?: boolean;
 }
 
 // TODO: 자동 등록 방지
@@ -28,8 +27,7 @@ export default function BoardEditLayout({
   handleChange,
   handleSubmit,
   handleUpdate,
-}: //   isFormDirty,
-EditProps<ReportPostType>) {
+}: EditProps<ReportPostType>) {
   const router = useRouter();
 
   const currentYear = new Date().getFullYear();
@@ -39,18 +37,7 @@ EditProps<ReportPostType>) {
   );
 
   const goBackToList = () => {
-    // if (isFormDirty) {
-    //   const confirmation = window.confirm(
-    //     "변경 사항이 저장되지 않을 수 있습니다."
-    //   );
-    //   if (confirmation) {
-    //     router.push("/performance/reports");
-    //   }
-    // }
-    // else {
-    // e.preventDefault();
     router.push("/performance/reports");
-    // }
   };
 
   // TODO: * 표시 하기 (필수항목)

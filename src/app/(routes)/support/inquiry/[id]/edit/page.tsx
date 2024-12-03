@@ -65,7 +65,7 @@ export default function Edit() {
     }
   }, [inquiryDetail]);
 
-  const { handleChange, handleUpdate, isFormDirty } = useFormData<
+  const { handleChange, handleUpdate } = useFormData<
     typeof INQUIRY_API.method.get,
     typeof INQUIRY_API.method.put
   >(INQUIRY_API, inquiryContents, setInquiryContents);
@@ -88,7 +88,6 @@ export default function Edit() {
       contents={inquiryContents}
       handleChange={handleChange}
       handleSubmit={handleFormSubmit}
-      isFormDirty={isFormDirty}
     />
   ) : (
     <div>로딩중</div>

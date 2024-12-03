@@ -24,20 +24,12 @@ interface EditProps<T> {
     e: React.FormEvent<HTMLFormElement>,
     setDeletedFileIdArray?: number[]
   ) => Promise<void>;
-  isFormDirty: boolean;
 }
 
 // TODO: 자동 등록 방지
 export default function BoardEditLayout<
   T extends NoticePostType | InquiryPostType
->({
-  contents,
-  type,
-  method,
-  handleChange,
-  handleSubmit,
-  isFormDirty,
-}: EditProps<T>) {
+>({ contents, type, method, handleChange, handleSubmit }: EditProps<T>) {
   const router = useRouter();
 
   console.log("contents", contents);
@@ -61,17 +53,9 @@ export default function BoardEditLayout<
   }, [contents.files]);
 
   const goBackToList = () => {
-    if (isFormDirty) {
-      const confirmation = window.confirm(
-        "변경 사항이 저장되지 않을 수 있습니다."
-      );
-      if (confirmation) {
-        router.push(`/support/${type}`);
-      }
-    } else {
-      router.push(`/support/${type}`);
-    }
+    router.push(`/support/${type}`);
   };
+
   const deleteFile = (id: string) => {
     setFiles((prevFiles) =>
       prevFiles.map((file) => (file?.id.toString() === id ? null : file))
