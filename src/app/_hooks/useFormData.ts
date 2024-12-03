@@ -1,5 +1,5 @@
-import { APIConfig } from "../_config/apiConfig";
-import { EditMethodType } from "../_types/board";
+import { APIConfig } from "@/_config/apiConfig";
+import { EditMethodType } from "@/_types/board";
 import { useAPIData } from "./useAPIData";
 
 const useFormData = <T, P>(

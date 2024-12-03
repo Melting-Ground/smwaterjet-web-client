@@ -2,7 +2,7 @@
 import React from "react";
 import { MapMarker, Map, CustomOverlayMap } from "react-kakao-maps-sdk";
 import styles from "./page.module.scss";
-// import { useKakaoLoader } from "../../../_hooks/useKakaoLoader";
+// import { useKakaoLoader } from "@/_hooks/useKakaoLoader";
 
 export default function Location() {
   // 카카오

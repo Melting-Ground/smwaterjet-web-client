@@ -1,6 +1,6 @@
 import axios from "axios";
-import { InquiryFileType } from "../_types/inquiry";
-import { NoticeFileType } from "../_types/notice";
+import { InquiryFileType } from "@/_types/inquiry";
+import { NoticeFileType } from "@/_types/notice";
 
 export const downloadFile = (file: NoticeFileType | InquiryFileType) => {
   const filePath = file.file_path;

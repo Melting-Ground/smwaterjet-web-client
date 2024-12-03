@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./NavList.module.scss";
 import Link from "next/link";
-import { routeCategories } from "../../_config/routes";
+import { routeCategories } from "@/_config/routes";
 
 export default function NavList({
   onOpen,

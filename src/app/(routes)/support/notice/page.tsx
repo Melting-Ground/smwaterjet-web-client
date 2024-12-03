@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { useAPIData } from "../../../_hooks/useAPIData";
-import { API_URLS } from "../../../_config/apiConfig";
-import BoardListLayout from "../../../_layout/support/list/layout";
+import { useAPIData } from "@/_hooks/useAPIData";
+import { API_URLS } from "@/_config/apiConfig";
+import BoardListLayout from "@/_layout/support/list/layout";
 
 export default function Notice() {
   // TODO: 페이징 기능 추가하기

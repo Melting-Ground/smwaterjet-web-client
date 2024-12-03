@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import styles from "./page.module.scss";
 import { motion } from "framer-motion";
-import { ImageItemType } from "../../../_types/image";
+import { ImageItemType } from "@/_types/image";
 
 export default function Photos() {
   const imageList: ImageItemType[] = [

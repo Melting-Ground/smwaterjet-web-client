@@ -1,13 +1,13 @@
 import React from "react";
-import Button from "../../../_components/Button/Button";
+import Button from "@/_components/Button/Button";
 import styles from "./layout.module.scss";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { formatDate } from "../../../_utils/formatDate";
-import { NoticeType } from "../../../_types/notice";
-import { InquiryType } from "../../../_types/inquiry";
-import { useAuth } from "../../../_hooks/useAuth";
-import { BoardType } from "../../../_types/board";
+import { formatDate } from "@/_utils/formatDate";
+import { NoticeType } from "@/_types/notice";
+import { InquiryType } from "@/_types/inquiry";
+import { useAuth } from "@/_hooks/useAuth";
+import { BoardType } from "@/_types/board";
 
 interface ListProps<T> {
   list: T[];

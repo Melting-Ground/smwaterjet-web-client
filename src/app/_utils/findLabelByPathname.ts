@@ -1,4 +1,4 @@
-import { routeCategories } from "../_config/routes";
+import { routeCategories } from "@/_config/routes";
 
 export const findLabelByPathname = (pathname: string): string | null => {
   const trimmedPath = pathname.replace(/^\/+|\/+$/g, "");

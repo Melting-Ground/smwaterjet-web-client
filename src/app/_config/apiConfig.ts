@@ -1,7 +1,7 @@
-import { InquiryPostType, InquiryType } from "../_types/inquiry";
+import { InquiryPostType, InquiryType } from "@/_types/inquiry";
 // import { NewsPostType, NewsType } from "../_types/news";
-import { NoticePostType, NoticeType } from "../_types/notice";
-import { ReportPostType, ReportType } from "../_types/report";
+import { NoticePostType, NoticeType } from "@/_types/notice";
+import { ReportPostType, ReportType } from "@/_types/report";
 
 export type HttpMethodType = "get" | "post" | "put";
 

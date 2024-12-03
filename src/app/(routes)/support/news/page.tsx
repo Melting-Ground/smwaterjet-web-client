@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
-import { useGetNews } from "../../../_hooks/useGetNews";
-import { removeHtmlTags } from "../../../_utils/removeHtmlTags";
+import { useGetNews } from "@/_hooks/useGetNews";
+import { removeHtmlTags } from "@/_utils/removeHtmlTags";
 import styles from "./page.module.scss";
-import { NewsType } from "../../../_types/news";
-import { newsFormatDate } from "../../../_utils/formatDate";
+import { NewsType } from "@/_types/news";
+import { newsFormatDate } from "@/_utils/formatDate";
 import Link from "next/link";
 
+// 뉴스가 들어있는 url_name
 const newspaperCompany = [{ name: "공학저널", url_name: "engjournal" }];
 
 export default function News() {

@@ -1,4 +1,4 @@
-import { RouteCategoryType } from "../_types/route";
+import { RouteCategoryType } from "@/_types/route";
 
 export const companyRoutes: RouteCategoryType = {
   title: "회사소개",

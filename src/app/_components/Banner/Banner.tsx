@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./Banner.module.scss";
 import { usePathname } from "next/navigation";
-import { findLabelByPathname } from "../../_utils/findLabelByPathname";
+import { findLabelByPathname } from "@/_utils/findLabelByPathname";
 // TODO:components 보다 상위 디렉토리 만들어서 옮기기
 export default function Banner() {
   const pathname = usePathname();

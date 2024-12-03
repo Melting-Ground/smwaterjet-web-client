@@ -1,20 +1,20 @@
 "use client";
 import React from "react";
 import styles from "./page.module.scss";
-import Vibration from "../../../_icons/Vibration";
-import Corrosive from "../../../_icons/Corrosive";
-import SunRays from "../../../_icons/SunRays";
-import Transport from "../../../_icons/Transport";
-import Wave from "../../../_icons/Wave";
-import Optimization from "../../../_icons/Optimization";
-import Target from "../../../_icons/Target";
-import Stability from "../../../_icons/Stability";
-import Eco from "../../../_icons/Eco";
-import Energy from "../../../_icons/Energy";
-import AcidRain from "../../../_icons/AcidRain";
-import Button from "../../../_components/Button/Button";
+import Vibration from "@/_icons/Vibration";
+import Corrosive from "@/_icons/Corrosive";
+import SunRays from "@/_icons/SunRays";
+import Transport from "@/_icons/Transport";
+import Wave from "@/_icons/Wave";
+import Optimization from "@/_icons/Optimization";
+import Target from "@/_icons/Target";
+import Stability from "@/_icons/Stability";
+import Eco from "@/_icons/Eco";
+import Energy from "@/_icons/Energy";
+import AcidRain from "@/_icons/AcidRain";
+import Button from "@/_components/Button/Button";
 import { useRouter } from "next/navigation";
-import { RiArrowRightBoxLine, RiArrowRightUpLine } from "@remixicon/react";
+import { RiArrowRightUpLine } from "@remixicon/react";
 
 export default function Fields() {
   const router = useRouter();

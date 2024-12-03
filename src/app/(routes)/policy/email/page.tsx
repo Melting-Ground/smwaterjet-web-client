@@ -3,7 +3,7 @@ import styles from "../policy.module.scss";
 export default function Email() {
   return (
     <section className={styles.email}>
-      <h2>이메일무단수집거부</h2>
+      <h2>이메일무단수집거부?</h2>
       <article>
         <p>
           본 사이트의 무차별적으로 보내지는 메일을 차단하기 위해 웹사이트에

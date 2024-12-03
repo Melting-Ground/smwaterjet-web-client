@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import axiosInstance from "../_config/axiosInstance";
+import axiosInstance from "@/_config/axiosInstance";
 import { useRouter } from "next/navigation";
-import { getToken } from "../_utils/getAuth";
-import { useAuthContext } from "../_contexts/authContext";
+import { getToken } from "@/_utils/getAuth";
+import { useAuthContext } from "@/_contexts/authContext";
 
 export const useAuth = () => {
   // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);

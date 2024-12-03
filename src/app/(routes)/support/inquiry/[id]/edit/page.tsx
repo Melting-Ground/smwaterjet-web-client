@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
-import BoardEditLayout from "../../../../../_layout/support/edit/layout";
-import { API_URLS } from "../../../../../_config/apiConfig";
+import BoardEditLayout from "@/_layout/support/edit/layout";
+import { API_URLS } from "@/_config/apiConfig";
 import { useState } from "react";
-import useFormData from "../../../../../_hooks/useFormData";
+import useFormData from "@/_hooks/useFormData";
 import { useParams, useRouter } from "next/navigation";
-import { useAPIData } from "../../../../../_hooks/useAPIData";
-import { UserInquiryPasswordContext } from "../../../../../_contexts/inquiryContext";
+import { useAPIData } from "@/_hooks/useAPIData";
+import { UserInquiryPasswordContext } from "@/_contexts/inquiryContext";
 
 // 수정 페이지
 // TODO: 관리자 외 접근 제한 처리

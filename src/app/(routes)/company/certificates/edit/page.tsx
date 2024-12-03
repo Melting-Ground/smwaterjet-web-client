@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./page.module.scss";
-import axiosInstance from "../../../../_config/axiosInstance";
-import { getToken } from "../../../../_utils/getAuth";
-import Input from "../../../../_components/Input/Input";
-import Button from "../../../../_components/Button/Button";
+import axiosInstance from "@/_config/axiosInstance";
+import { getToken } from "@/_utils/getAuth";
+import Input from "@/_components/Input/Input";
+import Button from "@/_components/Button/Button";
 
 export default function Edit() {
   const [certificate, setCertificate] = useState<File | null>(null); // 초기값을 null로 설정

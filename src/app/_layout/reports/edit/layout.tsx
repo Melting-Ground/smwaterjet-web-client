@@ -1,13 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./layout.module.scss";
 import { useRouter } from "next/navigation";
-import Input from "../../../_components/Input/Input";
-import Button from "../../../_components/Button/Button";
-import DateInput from "../../../_components/DateInput/DateInput";
-import Select from "../../../_components/Select/Select";
-import { ReportPostType } from "../../../_types/report";
-import { formatDate } from "../../../_utils/formatDate";
+import Input from "@/_components/Input/Input";
+import Button from "@/_components/Button/Button";
+import DateInput from "@/_components/DateInput/DateInput";
+import Select from "@/_components/Select/Select";
+import { ReportPostType } from "@/_types/report";
+import { formatDate } from "@/_utils/formatDate";
 
 interface EditProps<ReportPostType> {
   contents?: ReportPostType;

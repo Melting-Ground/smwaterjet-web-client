@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
-import useCertificate from "../../../_hooks/useCertificate";
+import useCertificate from "@/_hooks/useCertificate";
 import Image from "next/image";
 import styles from "./page.module.scss";
 import { motion } from "framer-motion";
 import { RiCloseLine, RiZoomInLine } from "@remixicon/react";
-import { CertificateType } from "../../../_types/certificate";
-import Button from "../../../_components/Button/Button";
+import { CertificateType } from "@/_types/certificate";
+import Button from "@/_components/Button/Button";
 
 export default function Certificates() {
   // TODO: photos 에 있는 스타일과 통일하기

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getToken } from "../_utils/getAuth";
+import { getToken } from "@/_utils/getAuth";
 
 interface AuthContextType {
   isLoggedIn: boolean;

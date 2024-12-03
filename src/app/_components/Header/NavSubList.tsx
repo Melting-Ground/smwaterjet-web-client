@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./NavSubList.module.scss";
-import { routeCategories } from "../../_config/routes";
+import { routeCategories } from "@/_config/routes";
 import Link from "next/link";
-import { RouteType, RouteCategoryType } from "../../_types/route";
+import { RouteType, RouteCategoryType } from "@/_types/route";
 
 export default function NavSubList({
   isOpen,

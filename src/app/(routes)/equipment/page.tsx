@@ -3,9 +3,9 @@ import React from "react";
 import styles from "./page.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import { EquipmentType } from "../../_types/equipment";
-import { useLocalData } from "../../_hooks/useLocalData";
-// import { equipments } from "../../../../public/data/equipments";
+import { EquipmentType } from "@/_types/equipment";
+import { useLocalData } from "@/_hooks/useLocalData";
+// import { equipments } from "@/../public/data/equipments";
 
 export default function Equipment() {
   // 영상

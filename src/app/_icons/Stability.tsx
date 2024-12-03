@@ -1,5 +1,5 @@
 import React from "react";
-import { IconProps } from "../_types/icon";
+import { IconProps } from "@/_types/icon";
 
 export default function Stability({ alt, ...props }: IconProps) {
   return (

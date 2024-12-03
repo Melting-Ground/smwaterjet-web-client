@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect } from "react";
 import styles from "./page.module.scss";
-import Input from "../../../../../_components/Input/Input";
-import Button from "../../../../../_components/Button/Button";
+import Input from "@/_components/Input/Input";
+import Button from "@/_components/Button/Button";
 import { usePathname, useRouter } from "next/navigation";
-import { UserInquiryPasswordContext } from "../../../../../_contexts/inquiryContext";
+import { UserInquiryPasswordContext } from "@/_contexts/inquiryContext";
 
 export default function Password() {
   const router = useRouter();

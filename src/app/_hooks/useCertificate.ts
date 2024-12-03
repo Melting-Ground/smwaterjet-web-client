@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import axiosInstance from "../_config/axiosInstance";
-import { CertificateType } from "../_types/certificate";
+import axiosInstance from "@/_config/axiosInstance";
+import { CertificateType } from "@/_types/certificate";
 
 const useCertificate = () => {
   const [certificates, setCertificates] = useState<CertificateType[]>([]);

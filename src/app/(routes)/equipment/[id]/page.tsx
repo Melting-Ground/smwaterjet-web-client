@@ -1,11 +1,11 @@
 "use client";
 import { useParams, useRouter } from "next/navigation";
 import React from "react";
-import { useLocalData } from "../../../_hooks/useLocalData";
-import { EquipmentType } from "../../../_types/equipment";
+import { useLocalData } from "@/_hooks/useLocalData";
+import { EquipmentType } from "@/_types/equipment";
 import Image from "next/image";
 import styles from "./page.module.scss";
-import Button from "../../../_components/Button/Button";
+import Button from "@/_components/Button/Button";
 
 export default function EquipmentDetailLayout() {
   const { id } = useParams();

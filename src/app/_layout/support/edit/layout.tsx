@@ -1,15 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import styles from "./layout.module.scss";
-import Input from "../../../_components/Input/Input";
-import TextArea from "../../../_components/TextArea/TextArea";
-import Button from "../../../_components/Button/Button";
+import Input from "@/_components/Input/Input";
+import TextArea from "@/_components/TextArea/TextArea";
+import Button from "@/_components/Button/Button";
 import { useRouter } from "next/navigation";
-import { NoticePostType } from "../../../_types/notice";
-import { InquiryPostType } from "../../../_types/inquiry";
+import { NoticePostType } from "@/_types/notice";
+import { InquiryPostType } from "@/_types/inquiry";
 import { RiCloseCircleLine } from "@remixicon/react";
-import { FileWithIdType } from "../../../_types/file";
-import { BoardType, EditMethodType } from "../../../_types/board";
+import { FileWithIdType } from "@/_types/file";
+import { BoardType, EditMethodType } from "@/_types/board";
 
 // TODO: 레이아웃 상위 폴더로 옮기기
 interface EditProps<T> {

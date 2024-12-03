@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "./page.module.scss";
 import Image from "next/image";
-import backgroundImage from "../../../../../public/images/background-image.jpg";
+import backgroundImage from "public/images/background-image.jpg";
 
 export default function Waterjet() {
   // TODO: 시멘틱 태그 수정하기

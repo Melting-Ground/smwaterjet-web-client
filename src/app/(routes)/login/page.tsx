@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./page.module.scss";
-import Button from "../../_components/Button/Button";
-import Input from "../../_components/Input/Input";
+import Button from "@/_components/Button/Button";
+import Input from "@/_components/Input/Input";
 import { RiEyeLine, RiEyeOffLine } from "@remixicon/react";
-import { useAuth } from "../../_hooks/useAuth";
+import { useAuth } from "@/_hooks/useAuth";
 
 export default function Login() {
   const {

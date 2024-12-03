@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import axiosInstance from "../_config/axiosInstance";
-import { getAuthHeaders } from "../_utils/getAuth";
-import { APIConfig } from "../_config/apiConfig";
+import axiosInstance from "@/_config/axiosInstance";
+import { getAuthHeaders } from "@/_utils/getAuth";
+import { APIConfig } from "@/_config/apiConfig";
 import { AxiosError } from "axios";
 
 export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {

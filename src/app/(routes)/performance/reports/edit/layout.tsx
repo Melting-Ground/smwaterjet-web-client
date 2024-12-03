@@ -1,5 +1,5 @@
 import React from "react";
-import AuthLayout from "../../../../authLayout";
+import AuthLayout from "@/authLayout";
 
 export default function ReportsEditLayout({
   children,

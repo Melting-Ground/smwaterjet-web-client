@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import { useAPIData } from "../../../_hooks/useAPIData";
-import { API_URLS } from "../../../_config/apiConfig";
+import { useAPIData } from "@/_hooks/useAPIData";
+import { API_URLS } from "@/_config/apiConfig";
 import { useRouter } from "next/navigation";
-import useFormData from "../../../_hooks/useFormData";
-import BoardListLayout from "../../../_layout/reports/list/layout";
+import useFormData from "@/_hooks/useFormData";
+import BoardListLayout from "@/_layout/reports/list/layout";
 
 export default function Reports() {
   // 게시판

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NewsType } from "../_types/news";
+import { NewsType } from "@/_types/news";
 import axios from "axios";
 
 // TODO: 로딩 상태 추가하기
