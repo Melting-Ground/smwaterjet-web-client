@@ -13,12 +13,13 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "../../../../_hooks/useAuth";
 import { API_URLS } from "../../../../_config/apiConfig";
 import useFormData from "../../../../_hooks/useFormData";
+import { BoardType } from "../../../../_types/board";
 
 interface DetailProps<T> {
   dataDetail: T;
   dataList: T[];
   currentId: number;
-  type: "notice" | "inquiry";
+  type: BoardType;
 }
 
 export default function BoardDetailLayout<T extends NoticeType | InquiryType>({

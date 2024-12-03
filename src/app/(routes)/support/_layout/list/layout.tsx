@@ -7,11 +7,12 @@ import { formatDate } from "../../../../_utils/formatDate";
 import { NoticeType } from "../../../../_types/notice";
 import { InquiryType } from "../../../../_types/inquiry";
 import { useAuth } from "../../../../_hooks/useAuth";
+import { BoardType } from "../../../../_types/board";
 
 interface ListProps<T> {
   list: T[];
   colWidthList: number[];
-  type: "notice" | "inquiry";
+  type: BoardType;
   tableHeadList: string[];
 }
 
@@ -27,7 +28,6 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
   const goToEditPage = () => {
     router.push(`/support/${type}/edit`);
   };
-
 
   const { isLoggedIn } = useAuth();
 

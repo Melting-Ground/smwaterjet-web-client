@@ -9,12 +9,12 @@ import { NoticePostType } from "../../../../_types/notice";
 import { InquiryPostType } from "../../../../_types/inquiry";
 import { RiCloseCircleLine } from "@remixicon/react";
 import { FileWithIdType } from "../../../../_types/file";
-import { EditMethodType } from "../../../../_types/editMethod";
+import { BoardType, EditMethodType } from "../../../../_types/board";
 
 // TODO: 레이아웃 상위 폴더로 옮기기
 interface EditProps<T> {
   contents: T;
-  type: "notice" | "inquiry";
+  type: BoardType;
   method: EditMethodType;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
