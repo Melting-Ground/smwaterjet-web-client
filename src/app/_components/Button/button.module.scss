@@ -30,9 +30,14 @@
   background-color: transparent;
   color: $primary;
   border: none;
-
   text-decoration: underline;
 }
+
+.icon {
+  background-color: transparent;
+  border: none;
+}
+
 .full-width {
   @include full-width;
 }
