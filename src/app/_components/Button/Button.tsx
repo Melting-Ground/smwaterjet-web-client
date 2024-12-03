@@ -3,10 +3,16 @@ import styles from "./Button.module.scss";
 
 interface ButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  children: ReactNode;
+  children?: ReactNode;
   id?: string;
   type?: "button" | "submit" | "reset";
-  color?: "primary" | "primary-border" | "transparent-link" | "blue" | "red";
+  color?:
+    | "primary"
+    | "primary-border"
+    | "transparent-link"
+    | "blue"
+    | "red"
+    | "icon";
   disabled?: boolean;
   className?: string;
   value?: string;
