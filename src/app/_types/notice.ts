@@ -4,7 +4,7 @@ export interface NoticePostType {
   title: string;
   content: string;
   author: string;
-  files: File[] | FileWithIdType[]; // 새로 등록 | 이미 있는
+  files: (FileWithIdType | File | null)[]; // 새로 등록 | 이미 있는
 }
 
 export interface NoticeType {
