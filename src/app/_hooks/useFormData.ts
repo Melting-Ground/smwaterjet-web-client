@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { APIConfig } from "../_config/apiConfig";
+import { EditMethod } from "../_types/editMethod";
 import { useAPIData } from "./useAPIData";
 
 const useFormData = <T, P>(
@@ -9,48 +9,12 @@ const useFormData = <T, P>(
 ) => {
   const { postData, putData, deleteData, deleteFile } =
     useAPIData<T>(apiConfig);
-  const [isFormDirty, setIsFormDirty] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   const trackFormChanges = () => {
-  //     setIsFormDirty(true);
-  //   };
-
-  //   // Add event listeners to all inputs and textareas
-  //   const inputs = document.querySelectorAll("input, textarea");
-  //   inputs.forEach((input) => {
-  //     input.addEventListener("change", trackFormChanges);
-  //   });
-
-  //   return () => {
-  //     inputs.forEach((input) => {
-  //       input.removeEventListener("change", trackFormChanges);
-  //     });
-  //   };
-  // }, []);
-
-  // // Prevent navigation when form is dirty
-  // useEffect(() => {
-  //   const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-  //     if (isFormDirty) {
-  //       e.preventDefault();
-  //       e.returnValue = "변경 사항이 저장되지 않을 수 있습니다.";
-  //       return "변경 사항이 저장되지 않을 수 있습니다.";
-  //     }
-  //   };
-
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, [isFormDirty]);
 
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
-    method: "update" | "upload" = "upload"
+    method: EditMethod = "upload"
   ) => {
     const { value, id, type } = e.target as HTMLInputElement;
     if (!setContents) return;
@@ -116,7 +80,6 @@ const useFormData = <T, P>(
     } catch (error) {
       alert("등록 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");
     }
-    setIsFormDirty(false);
   };
 
   const handleUpdate = async (
@@ -142,7 +105,6 @@ const useFormData = <T, P>(
     } catch (error) {
       alert("수정 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");
     }
-    setIsFormDirty(false);
   };
 
   const handleDelete = async (id: string): Promise<boolean> => {
@@ -183,7 +145,6 @@ const useFormData = <T, P>(
     handleUpdate,
     handleDelete,
     handleFileDelete,
-    isFormDirty,
   };
 };
 
