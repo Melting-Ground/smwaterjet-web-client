@@ -9,21 +9,21 @@ import { NoticePostType } from "../../../../_types/notice";
 import { InquiryPostType } from "../../../../_types/inquiry";
 import { RiCloseCircleLine } from "@remixicon/react";
 import { FileWithIdType } from "../../../../_types/file";
+import { EditMethodType } from "../../../../_types/editMethod";
 
 // TODO: 레이아웃 상위 폴더로 옮기기
 interface EditProps<T> {
   contents: T;
   type: "notice" | "inquiry";
-  method: "update" | "upload";
+  method: EditMethodType;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    method?: "update" | "upload"
+    method?: EditMethodType
   ) => void;
   handleSubmit: (
     e: React.FormEvent<HTMLFormElement>,
     setDeletedFileIdArray?: number[]
   ) => Promise<void>;
-  handleDeleteFile: (id: string) => void;
   isFormDirty: boolean;
 }
 
@@ -36,7 +36,6 @@ export default function BoardEditLayout<
   method,
   handleChange,
   handleSubmit,
-  handleDeleteFile,
   isFormDirty,
 }: EditProps<T>) {
   const router = useRouter();
@@ -61,18 +60,6 @@ export default function BoardEditLayout<
     setFiles(updatedFiles);
   }, [contents.files]);
 
-  // contents.files.map((file) => {
-  //   if (!file || file instanceof File) {
-  //     return;
-  //   }
-  //   combinedFileArray[file.id - 1] = file.file_path;
-  // });
-
-  useEffect(() => {
-    console.log(files);
-    console.log(contents.files);
-  }, [files]);
-
   const goBackToList = () => {
     if (isFormDirty) {
       const confirmation = window.confirm(
@@ -86,7 +73,6 @@ export default function BoardEditLayout<
     }
   };
   const deleteFile = (id: string) => {
-    // handleDeleteFile(id); // 수정 완료했을때 지우기.
     setFiles((prevFiles) =>
       prevFiles.map((file) => (file?.id.toString() === id ? null : file))
     );

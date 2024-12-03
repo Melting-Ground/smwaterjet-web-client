@@ -1,5 +1,5 @@
 import { APIConfig } from "../_config/apiConfig";
-import { EditMethod } from "../_types/editMethod";
+import { EditMethodType } from "../_types/editMethod";
 import { useAPIData } from "./useAPIData";
 
 const useFormData = <T, P>(
@@ -14,7 +14,7 @@ const useFormData = <T, P>(
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
-    method: EditMethod = "upload"
+    method: EditMethodType = "upload"
   ) => {
     const { value, id, type } = e.target as HTMLInputElement;
     if (!setContents) return;
