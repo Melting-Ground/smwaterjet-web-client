@@ -3,17 +3,17 @@ import styles from "./layout.module.scss";
 import React from "react";
 import { RiArrowUpSFill, RiArrowDownSFill } from "@remixicon/react";
 import Link from "next/link";
-import { formatDate } from "../../../../_utils/formatDate";
-import { downloadFile } from "../../../../_utils/downloadFile";
-import Button from "../../../../_components/Button/Button";
+import { downloadFile } from "../../../_utils/downloadFile";
+import Button from "../../../_components/Button/Button";
 import { RiFile2Line } from "@remixicon/react";
-import { NoticeType } from "../../../../_types/notice";
-import { InquiryType } from "../../../../_types/inquiry";
+import { NoticeType } from "../../../_types/notice";
+import { InquiryType } from "../../../_types/inquiry";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../../../../_hooks/useAuth";
-import { API_URLS } from "../../../../_config/apiConfig";
-import useFormData from "../../../../_hooks/useFormData";
-import { BoardType } from "../../../../_types/board";
+import { useAuth } from "../../../_hooks/useAuth";
+import { API_URLS } from "../../../_config/apiConfig";
+import useFormData from "../../../_hooks/useFormData";
+import { BoardType } from "../../../_types/board";
+import { formatDate } from "../../../_utils/formatDate";
 
 interface DetailProps<T> {
   dataDetail: T;

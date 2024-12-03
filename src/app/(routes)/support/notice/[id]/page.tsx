@@ -3,7 +3,7 @@ import { useParams } from "next/navigation"; // useParams를 import합니다.
 import React, { useEffect } from "react";
 import { API_URLS } from "../../../../_config/apiConfig";
 import { useAPIData } from "../../../../_hooks/useAPIData";
-import BoardDetailLayout from "../../_layout/[id]/layout";
+import BoardDetailLayout from "../../../../_layout/support/[id]/layout";
 
 export default function NoticeDetail() {
   // TODO: 조회수 추가하기

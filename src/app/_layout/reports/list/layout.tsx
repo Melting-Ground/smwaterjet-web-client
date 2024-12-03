@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import Button from "../../../../../_components/Button/Button";
+import React from "react";
 import styles from "./layout.module.scss";
 import { useRouter } from "next/navigation";
-import { ReportType } from "../../../../../_types/report";
-import { formatDate } from "../../../../../_utils/formatDate";
-import { useAuth } from "../../../../../_hooks/useAuth";
+import { ReportType } from "../../../_types/report";
+import { formatDate } from "../../../_utils/formatDate";
+import { useAuth } from "../../../_hooks/useAuth";
+import Button from "../../../_components/Button/Button";
 
 interface ListProps<T> {
   list: T[];

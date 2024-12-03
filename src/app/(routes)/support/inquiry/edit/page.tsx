@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import useFormData from "../../../../_hooks/useFormData";
 import { API_URLS } from "../../../../_config/apiConfig";
-import BoardEditLayout from "../../_layout/edit/layout";
+import BoardEditLayout from "../../../../_layout/support/edit/layout";
 
 // TODO: 시멘틱 태그로 바꾸기
 // id, username, phone_number, password, email, title, content

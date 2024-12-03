@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import useFormData from "../../../../_hooks/useFormData";
 import { API_URLS } from "../../../../_config/apiConfig";
-import BoardEditLayout from "../../_layout/edit/layout";
+import BoardEditLayout from "../../../../_layout/support/edit/layout";
 
 export default function Edit() {
   const NOTICE_API = API_URLS.notices;

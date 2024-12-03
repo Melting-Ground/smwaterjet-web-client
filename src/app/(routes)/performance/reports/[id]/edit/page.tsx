@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from "react";
 import useFormData from "../../../../../_hooks/useFormData";
 import { API_URLS } from "../../../../../_config/apiConfig";
-import BoardEditLayout from "../../_layout/edit/layout";
 import { useParams, useRouter } from "next/navigation";
 import { useAPIData } from "../../../../../_hooks/useAPIData";
+import BoardEditLayout from "../../../../../_layout/reports/edit/layout";
 
 export default function Edit() {
   const REPORTS_API = API_URLS.reports;

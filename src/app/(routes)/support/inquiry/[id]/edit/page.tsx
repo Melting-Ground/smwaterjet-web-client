@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import BoardEditLayout from "../../../_layout/edit/layout";
+import BoardEditLayout from "../../../../../_layout/support/edit/layout";
 import { API_URLS } from "../../../../../_config/apiConfig";
 import { useState } from "react";
 import useFormData from "../../../../../_hooks/useFormData";

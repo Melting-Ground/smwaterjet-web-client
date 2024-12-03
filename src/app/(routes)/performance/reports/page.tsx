@@ -2,9 +2,9 @@
 import React from "react";
 import { useAPIData } from "../../../_hooks/useAPIData";
 import { API_URLS } from "../../../_config/apiConfig";
-import BoardListLayout from "./_layout/list/layout";
 import { useRouter } from "next/navigation";
 import useFormData from "../../../_hooks/useFormData";
+import BoardListLayout from "../../../_layout/reports/list/layout";
 
 export default function Reports() {
   // 게시판
@@ -33,6 +33,7 @@ export default function Reports() {
   return (
     <BoardListLayout
       handleDelete={handleDelete}
+      // handleUpdate={goToEditPage}
       tableHeadList={reportsTableHeadList}
       list={reports}
       colWidthList={[50, 50, 250, 80, 80, 50]}
