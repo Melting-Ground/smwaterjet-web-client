@@ -14,10 +14,7 @@ export default function Inquiry() {
     typeof API_URLS.inquiries.method.get
   >(API_URLS.inquiries, 1);
 
-  const { goToEditPage } = useBoardAction();
-  const handleEditClick = () => {
-    goToEditPage("support", boardType);
-  };
+  const { goToEditPage } = useBoardAction("support", boardType);
 
   const inquiryTableHeadList = ["No", "제목", "글쓴이", "등록일"];
   const colWidthList = [80, 450, 100, 100];
@@ -28,7 +25,7 @@ export default function Inquiry() {
       list={inquiries}
       boardType={boardType}
       colWidthList={colWidthList}
-      handleEditClick={handleEditClick}
+      handleEditClick={goToEditPage}
     />
   );
 }

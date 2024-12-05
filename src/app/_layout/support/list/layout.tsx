@@ -30,7 +30,7 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
       <div className={styles["table-container"]}>
         {boardType !== "inquiry" && !isLoggedIn ? null : (
           <Button
-            onClick={handleEditClick}
+            onClick={() => handleEditClick()}
             color="primary"
             className={styles["write-button"]}
           >

@@ -5,10 +5,10 @@ import { API_URLS } from "@/_config/apiConfig";
 import { useParams, useRouter } from "next/navigation";
 import { useAPIData } from "@/_hooks/useAPIData";
 import BoardEditLayout from "@/_layout/reports/edit/layout";
+import useBoardAction from "@/_hooks/useBoardAction";
 
 export default function Edit() {
   const REPORTS_API = API_URLS.reports;
-  const router = useRouter();
   const { id } = useParams();
   let currentId;
   if (typeof id === "string") {
@@ -36,6 +36,7 @@ export default function Edit() {
 
   useEffect(() => {
     if (currentId) {
+      console.log("fetch");
       fetchReportDetail(currentId);
     }
   }, [currentId]);
@@ -53,26 +54,20 @@ export default function Edit() {
     }
   }, [reportDetail]);
 
-  const { handleChange, handleUpdate } = useFormData<
+  const { handleChange, updateForm } = useFormData<
     typeof REPORTS_API.method.get,
     typeof REPORTS_API.method.put
   >(REPORTS_API, reportContents, setReportContents);
 
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const { goToListPage } = useBoardAction("performance", "reports");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
-      await handleUpdate(e, currentId);
-      router.push("/performance/reports/");
+      await updateForm(e, currentId);
+      goToListPage();
     } catch (error) {
       alert(error);
     }
-  };
-
-  const goToEditPage = () => {
-    router.push(`/performance/reports/${currentId}/edit`);
-  };
-
-  const navigateToList = () => {
-    router.push("/performance/reports");
   };
 
   const isNotLoaded = isLoading.detail || !reportContents;
@@ -81,9 +76,8 @@ export default function Edit() {
     <BoardEditLayout
       contents={reportContents}
       handleChange={handleChange}
-      handleSubmit={handleFormSubmit}
-      handleUpdate={goToEditPage}
-      navigateToList={navigateToList}
+      handleSubmit={handleSubmit}
+      handleListClick={goToListPage}
     />
   ) : (
     <div>로딩중</div>

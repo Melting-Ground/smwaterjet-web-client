@@ -15,10 +15,7 @@ export default function Notice() {
     API_URLS.notices,
     1
   );
-  const { goToEditPage } = useBoardAction();
-  const handleEditClick = () => {
-    goToEditPage("support", boardType);
-  };
+  const { goToEditPage } = useBoardAction("support", boardType);
 
   const noticeTableHeadList = ["No", "제목", "글쓴이", "등록일", "조회"];
   const colWidthList = [100, 450, 100, 100, 100];
@@ -28,7 +25,7 @@ export default function Notice() {
       boardType={boardType}
       tableHeadList={noticeTableHeadList}
       list={notices}
-      handleEditClick={handleEditClick}
+      handleEditClick={goToEditPage}
       colWidthList={colWidthList}
     />
   );

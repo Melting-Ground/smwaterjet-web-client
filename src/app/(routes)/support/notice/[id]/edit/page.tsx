@@ -6,17 +6,21 @@ import { useState } from "react";
 import useFormData from "@/_hooks/useFormData";
 import { useParams, useRouter } from "next/navigation";
 import { useAPIData } from "@/_hooks/useAPIData";
+import useBoardAction from "@/_hooks/useBoardAction";
+import useBoardFiles from "@/_hooks/useBoardFiles";
 
 // 수정 페이지
 // TODO: 관리자 외 접근 제한 처리
 export default function Edit() {
   const NOTICE_API = API_URLS.notices;
-  const router = useRouter();
   const { id } = useParams();
 
   let currentId: string = "";
   if (typeof id === "string") {
     currentId = id;
+  }
+  if (!currentId) {
+    return <div>존재하지 않는 게시물입니다.</div>;
   }
 
   const {
@@ -25,7 +29,6 @@ export default function Edit() {
     isLoading,
   } = useAPIData<typeof API_URLS.notices.method.get>(API_URLS.notices);
 
-  // 로딩 상태 확인 후, 데이터가 로드되면 상태를 업데이트
   const [noticeContents, setNoticeContents] = useState<
     typeof NOTICE_API.method.put
   >({
@@ -53,27 +56,22 @@ export default function Edit() {
     }
   }, [noticeDetail]);
 
-  const { handleChange, handleUpdate, handleFileDelete } = useFormData<
+  const { handleChange, updateForm } = useFormData<
     typeof NOTICE_API.method.get,
     typeof NOTICE_API.method.put
   >(NOTICE_API, noticeContents, setNoticeContents);
 
-  //   TODO: 변수명 정리..
-  const handleFormSubmit = async (
-    e: React.FormEvent<HTMLFormElement>,
-    deletedFileIdArray?: number[]
-  ) => {
+  const { goToListPage, goToDetailPage } = useBoardAction("support", "notice");
+  const { deleteFile, files, deleteFileIds } = useBoardFiles(noticeContents);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
-      await handleUpdate(e, currentId, deletedFileIdArray);
-      router.push(`/support/notice/${currentId}`);
+      await updateForm(e, currentId, deleteFileIds);
+      goToDetailPage(currentId);
     } catch (error) {
       alert(error);
     }
   };
-
-  // if (!currentId) {
-  //   return <div>존재하지 않는 게시물입니다.</div>;
-  // }
 
   const isNotLoaded = isLoading.detail || !noticeDetail;
 
@@ -83,8 +81,11 @@ export default function Edit() {
       method="update"
       contents={noticeContents}
       handleChange={handleChange}
-      handleSubmit={handleFormSubmit}
-      handleDeleteFile={handleFileDelete}
+      handleSubmit={handleSubmit}
+      handleListClick={goToListPage}
+      handleFileDelete={deleteFile}
+      existFiles={files}
+      deleteFileIds={deleteFileIds}
     />
   ) : (
     <div>로딩중</div>

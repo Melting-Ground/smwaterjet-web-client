@@ -8,10 +8,6 @@ import Button from "@/_components/Button/Button";
 import { RiFile2Line } from "@remixicon/react";
 import { NoticeType } from "@/_types/notice";
 import { InquiryType } from "@/_types/inquiry";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/_hooks/useAuth";
-import { API_URLS } from "@/_config/apiConfig";
-import useFormData from "@/_hooks/useFormData";
 import { BoardType } from "@/_types/board";
 import { formatDate } from "@/_utils/formatDate";
 
@@ -19,39 +15,27 @@ interface DetailProps<T> {
   dataDetail: T;
   dataList: T[];
   currentId: number;
-  type: BoardType;
+  boardType: BoardType;
+  isLoggedIn: boolean;
+  handleDelete: (id: string) => void;
+  handleEditClick: () => void;
+  handleListClick: () => void;
 }
-
+// TODO: 이전글, 다음글 컴포넌트 분리하기
 export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
   dataDetail,
   dataList,
   currentId,
-  type,
+  boardType,
+  isLoggedIn,
+  handleDelete,
+  handleEditClick,
+  handleListClick,
 }: DetailProps<T>) {
   // 배열의 인덱스
   const currentIndex = dataList.findIndex((data) => data.id === currentId);
   const previousIndex = currentIndex - 1;
   const nextIndex = currentIndex + 1;
-  const router = useRouter();
-  const { isLoggedIn } = useAuth();
-
-  const apiConfig = type === "notice" ? API_URLS.notices : API_URLS.inquiries;
-  const { handleDelete } = useFormData(apiConfig);
-
-  const goToList = () => {
-    router.push(`/support/${type}`);
-  };
-
-  const goToEditPage = () => {
-    router.push(`/support/${type}/${currentId}/edit`);
-  };
-
-  const deleteItem = async (id: string) => {
-    const isDeleted = await handleDelete(id);
-    if (isDeleted) {
-      router.push(`/support/${type}`);
-    }
-  };
 
   return (
     <div className={styles.container}>
@@ -82,7 +66,7 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
               </span>
             </li>
             <li>
-              {type === "notice" && "count" in dataDetail ? (
+              {boardType === "notice" && "count" in dataDetail ? (
                 <>
                   <span className={styles.title}>조회수</span>
                   <span className={styles["info-item"]}>
@@ -111,9 +95,9 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
                 {previousIndex >= 0 ? (
                   <Link
                     href={
-                      type === "inquiry"
-                        ? `/support/${type}/${dataList[previousIndex].id}/password`
-                        : `/support/${type}/${dataList[previousIndex].id}`
+                      boardType === "inquiry"
+                        ? `/support/${boardType}/${dataList[previousIndex].id}/password`
+                        : `/support/${boardType}/${dataList[previousIndex].id}`
                     }
                   >
                     {dataList[previousIndex].title}
@@ -141,9 +125,9 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
                 {nextIndex < dataList.length ? (
                   <Link
                     href={
-                      type === "inquiry"
-                        ? `/support/${type}/${dataList[nextIndex].id}/password`
-                        : `/support/${type}/${dataList[nextIndex].id}`
+                      boardType === "inquiry"
+                        ? `/support/${boardType}/${dataList[nextIndex].id}/password`
+                        : `/support/${boardType}/${dataList[nextIndex].id}`
                     }
                   >
                     {dataList[nextIndex].title}
@@ -169,18 +153,18 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
         <Button
           color="primary"
           className={styles["to-list-button"]}
-          onClick={goToList}
+          onClick={handleListClick}
         >
           목록으로
         </Button>
         {isLoggedIn ? (
           <span className={styles["edit-del-button-container"]}>
-            <Button color="primary-border" onClick={goToEditPage}>
+            <Button color="primary-border" onClick={handleEditClick}>
               수정
             </Button>
             <Button
               color="red"
-              onClick={() => deleteItem(currentId.toString())}
+              onClick={() => handleDelete(currentId.toString())}
             >
               삭제
             </Button>

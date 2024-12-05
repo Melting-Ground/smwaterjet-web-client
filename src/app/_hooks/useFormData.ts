@@ -85,17 +85,15 @@ const useFormData = <T, P>(
   const updateForm = async (
     e: React.FormEvent<HTMLFormElement>,
     id: string,
-    deleteFileIdArray?: number[]
+    deleteFileIds?: number[]
   ) => {
     e.preventDefault();
     const formData = createFormData();
     formData.delete("files");
 
     // delete file
-    if (deleteFileIdArray) {
-      await Promise.all(
-        deleteFileIdArray.map((id) => deleteFile(id.toString()))
-      );
+    if (deleteFileIds) {
+      await Promise.all(deleteFileIds.map((id) => deleteFile(id.toString())));
       console.log("파일 전부 삭제 완료");
     }
 

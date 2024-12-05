@@ -16,7 +16,7 @@ export default function Reports() {
   );
   const { isLoggedIn } = useAuth();
   const { deleteItem } = useFormData(REPORTS_API);
-  const { goToEditPage } = useBoardAction();
+  const { goToEditPage } = useBoardAction("performance", "reports");
   const reportsTableHeadList = [
     "No",
     "공사년도",
@@ -27,15 +27,11 @@ export default function Reports() {
   ];
   const colWidthList = [50, 50, 250, 80, 80, 50];
 
-  const handleEditClick = (id?: string) => {
-    goToEditPage("performance", "reports", id);
-  };
-
   return (
     <BoardListLayout
       isLoggedIn={isLoggedIn}
       handleDelete={deleteItem}
-      handleEditClick={handleEditClick}
+      handleEditClick={goToEditPage}
       tableHeadList={reportsTableHeadList}
       list={reports}
       colWidthList={colWidthList}

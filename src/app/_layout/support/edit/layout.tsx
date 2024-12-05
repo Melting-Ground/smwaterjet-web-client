@@ -24,50 +24,35 @@ interface EditProps<T> {
     e: React.FormEvent<HTMLFormElement>,
     setDeletedFileIdArray?: number[]
   ) => Promise<void>;
+  handleListClick: () => void;
+  existFiles?: (FileWithIdType | File | null)[]; // 원래 있던 파일
+  handleFileDelete?: (id: string) => void; // update인 경우에만
+  deleteFileIds?: number[]; // update인 경우에만
 }
 
 // TODO: 자동 등록 방지
 export default function BoardEditLayout<
   T extends NoticePostType | InquiryPostType
->({ contents, type, method, handleChange, handleSubmit }: EditProps<T>) {
-  const router = useRouter();
-
-
-  const [files, setFiles] = useState<(FileWithIdType | File | null)[]>([]);
-  const [deleteFileIdArray, setDeleteFileIdArray] = useState<number[]>([]);
-
-  useEffect(() => {
-    const updatedFiles: (FileWithIdType | File | null)[] = [];
-    contents.files.forEach((file) => {
-      if (!file || file instanceof File) {
-        return;
-      }
-      updatedFiles.push({ id: file.id, file_path: file.file_path });
-    });
-
-    for (let i = 0; i < 5 - contents.files.length; i++) {
-      updatedFiles.push(null);
-    }
-    setFiles(updatedFiles);
-  }, [contents.files]);
-
-  const goBackToList = () => {
-    router.push(`/support/${type}`);
-  };
-
-  const deleteFile = (id: string) => {
-    setFiles((prevFiles) =>
-      prevFiles.map((file) => (file?.id.toString() === id ? null : file))
-    );
-    setDeleteFileIdArray((prev) => [...prev, Number(id)]);
-  };
-
+>({
+  contents,
+  type,
+  method,
+  handleChange,
+  handleSubmit,
+  handleListClick,
+  handleFileDelete,
+  existFiles,
+  deleteFileIds,
+}: EditProps<T>) {
   // TODO: * 표시 하기 (필수항목)
   //   문의사항의 경우 더 항목이 많음
+  console.log("existFiles", existFiles);
+  const files = existFiles ?? contents.files;
+
   return (
     <section className={styles.container}>
       <form
-        onSubmit={(e) => handleSubmit(e, deleteFileIdArray)}
+        onSubmit={(e) => handleSubmit(e, deleteFileIds)}
         className={styles.form}
       >
         <label htmlFor="title">
@@ -150,7 +135,8 @@ export default function BoardEditLayout<
                 {file.file_path}
                 <Button
                   onClick={() => {
-                    deleteFile(file.id.toString());
+                    if (!handleFileDelete) return;
+                    handleFileDelete(file.id.toString());
                   }}
                   color="icon"
                   className={styles["file-delete-button"]}
@@ -170,7 +156,11 @@ export default function BoardEditLayout<
         ))}
         {/* 자동방지등록 */}
         <div className={styles["button-container"]}>
-          <Button type="submit" color="primary-border" onClick={goBackToList}>
+          <Button
+            type="submit"
+            color="primary-border"
+            onClick={handleListClick}
+          >
             취소
           </Button>
           <Button type="submit" color="primary">

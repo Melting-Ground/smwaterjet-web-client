@@ -5,13 +5,13 @@ import Input from "@/_components/Input/Input";
 import Button from "@/_components/Button/Button";
 import { usePathname, useRouter } from "next/navigation";
 import { UserInquiryPasswordContext } from "@/_contexts/inquiryContext";
+import useBoardAction from "@/_hooks/useBoardAction";
 
 export default function Password() {
   const router = useRouter();
   const pathname = usePathname();
   const id = pathname?.split("/")[3];
   const { password, setPassword } = UserInquiryPasswordContext();
-  console.log(id);
 
   useEffect(() => {
     setPassword("");
@@ -22,9 +22,12 @@ export default function Password() {
     router.push(`/support/inquiry/${id}`);
   };
 
-  const goBackToList = () => {
-    router.push("/support/inquiry");
+  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setPassword(value);
   };
+
+  const { goToListPage } = useBoardAction("support", "inquiry");
 
   return (
     <section className={styles.container}>
@@ -45,7 +48,7 @@ export default function Password() {
               <Input
                 type="password"
                 id="password"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={onPasswordChange}
                 value={password}
                 fullWidth
                 className={styles.input}
@@ -58,7 +61,7 @@ export default function Password() {
         </form>
         <Button
           color="transparent-link"
-          onClick={goBackToList}
+          onClick={goToListPage}
           fullWidth
           className={styles["go-back-button"]}
         >

@@ -1,12 +1,17 @@
 "use client";
-import { useParams } from "next/navigation"; // useParams를 import합니다.
+import { useParams, useRouter } from "next/navigation"; // useParams를 import합니다.
 import React, { useEffect } from "react";
 import { API_URLS } from "@/_config/apiConfig";
 import { useAPIData } from "@/_hooks/useAPIData";
 import BoardDetailLayout from "@/_layout/support/[id]/layout";
+import { useAuth } from "@/_hooks/useAuth";
+import useFormData from "@/_hooks/useFormData";
+import useBoardAction from "@/_hooks/useBoardAction";
 
 export default function NoticeDetail() {
   // TODO: 조회수 추가하기
+  const router = useRouter();
+  const boardType = "notice";
   const {
     fetchData: fetchNoticeDetail,
     dataList: noticeList,
@@ -15,6 +20,7 @@ export default function NoticeDetail() {
   } = useAPIData<typeof API_URLS.notices.method.get>(API_URLS.notices);
 
   const { id } = useParams();
+  const { isLoggedIn } = useAuth();
 
   let currentId;
   if (typeof id === "string") {
@@ -28,6 +34,16 @@ export default function NoticeDetail() {
     fetchNoticeDetail(currentId);
   }, [currentId]);
 
+  const { deleteItem } = useFormData(API_URLS.notices);
+  const { goToEditPage, goToListPage } = useBoardAction(
+    "support",
+    "notice",
+    
+  );
+  const handleEditClick = () => {
+    goToEditPage(currentId);
+  }
+
   const isNotLoaded = isLoading.detail || !noticeDetail;
 
   return !isNotLoaded ? (
@@ -35,7 +51,11 @@ export default function NoticeDetail() {
       dataDetail={noticeDetail}
       dataList={noticeList}
       currentId={Number(currentId)}
-      type="notice"
+      boardType={boardType}
+      isLoggedIn={isLoggedIn}
+      handleDelete={deleteItem}
+      handleEditClick={handleEditClick}
+      handleListClick={goToListPage}
     />
   ) : (
     <div>로딩중</div>

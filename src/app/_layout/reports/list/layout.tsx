@@ -9,7 +9,7 @@ interface ListProps<T> {
   colWidthList: number[];
   tableHeadList: string[];
   handleDelete: (id: string) => void;
-  handleEditClick: (id: string) => void;
+  handleEditClick: (id?: string) => void;
   isLoggedIn: boolean;
 }
 
@@ -26,7 +26,7 @@ export default function BoardListLayout({
       <div className={styles["table-container"]}>
         {isLoggedIn ? (
           <Button
-            onClick={() => handleEditClick}
+            onClick={() => handleEditClick()}
             color="primary"
             className={styles["write-button"]}
           >
