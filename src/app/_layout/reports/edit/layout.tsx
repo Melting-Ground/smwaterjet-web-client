@@ -17,7 +17,7 @@ interface EditProps<ReportPostType> {
     >
   ) => void;
   handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
-  handleUpdate?: () => void;
+  navigateToList: () => void;
 }
 
 // TODO: 자동 등록 방지
@@ -25,19 +25,17 @@ export default function BoardEditLayout({
   contents,
   handleChange,
   handleSubmit,
-  handleUpdate,
+  navigateToList,
 }: EditProps<ReportPostType>) {
-  const router = useRouter();
-
   const currentYear = new Date().getFullYear();
   const yearList = Array.from(
     { length: currentYear + 1 - 2010 },
     (_, i) => 2010 + i
   );
 
-  const goBackToList = () => {
-    router.push("/performance/reports");
-  };
+  // const goBackToList = () => {
+  //   router.push("/performance/reports");
+  // };
 
   // TODO: * 표시 하기 (필수항목)
   //   문의사항의 경우 더 항목이 많음
@@ -94,7 +92,7 @@ export default function BoardEditLayout({
         />
 
         <div className={styles["button-container"]}>
-          <Button type="submit" color="primary-border" onClick={goBackToList}>
+          <Button type="submit" color="primary-border" onClick={navigateToList}>
             취소
           </Button>
           <Button type="submit" color="primary">

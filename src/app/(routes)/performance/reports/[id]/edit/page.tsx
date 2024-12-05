@@ -71,6 +71,10 @@ export default function Edit() {
     router.push(`/performance/reports/${currentId}/edit`);
   };
 
+  const navigateToList = () => {
+    router.push("/performance/reports");
+  };
+
   const isNotLoaded = isLoading.detail || !reportContents;
 
   return !isNotLoaded ? (
@@ -79,6 +83,7 @@ export default function Edit() {
       handleChange={handleChange}
       handleSubmit={handleFormSubmit}
       handleUpdate={goToEditPage}
+      navigateToList={navigateToList}
     />
   ) : (
     <div>로딩중</div>
