@@ -32,7 +32,6 @@ export default function BoardEditLayout<
 >({ contents, type, method, handleChange, handleSubmit }: EditProps<T>) {
   const router = useRouter();
 
-  console.log("contents", contents);
 
   const [files, setFiles] = useState<(FileWithIdType | File | null)[]>([]);
   const [deleteFileIdArray, setDeleteFileIdArray] = useState<number[]>([]);

@@ -1,43 +1,36 @@
 import React from "react";
 import Button from "@/_components/Button/Button";
 import styles from "./layout.module.scss";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { formatDate } from "@/_utils/formatDate";
 import { NoticeType } from "@/_types/notice";
 import { InquiryType } from "@/_types/inquiry";
-import { useAuth } from "@/_hooks/useAuth";
 import { BoardType } from "@/_types/board";
 
 interface ListProps<T> {
   list: T[];
   colWidthList: number[];
-  type: BoardType;
+  boardType: BoardType;
   tableHeadList: string[];
+  handleEditClick: () => void;
+  isLoggedIn: boolean;
 }
 
 export default function BoardListLayout<T extends NoticeType | InquiryType>({
   list,
   colWidthList,
-  type,
+  boardType,
   tableHeadList,
+  handleEditClick,
+  isLoggedIn,
 }: ListProps<T>) {
-  const router = useRouter();
-
-  // TODO: type === "notice", "inquiry" 일 경우와 "performance" 일 경우 대분류가 다름
-  const goToEditPage = () => {
-    router.push(`/support/${type}/edit`);
-  };
-
-  const { isLoggedIn } = useAuth();
-
   // TODO: 페이징 기능 추가하기
   return (
     <div className={styles.container}>
       <div className={styles["table-container"]}>
-        {type !== "inquiry" && !isLoggedIn ? null : (
+        {boardType !== "inquiry" && !isLoggedIn ? null : (
           <Button
-            onClick={goToEditPage}
+            onClick={handleEditClick}
             color="primary"
             className={styles["write-button"]}
           >
@@ -73,9 +66,9 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
                   <td className={styles.title}>
                     <Link
                       href={
-                        type === "inquiry"
-                          ? `/support/${type}/${item.id}/password`
-                          : `/support/${type}/${item.id}`
+                        boardType === "inquiry"
+                          ? `/support/${boardType}/${item.id}/password`
+                          : `/support/${boardType}/${item.id}`
                       }
                     >
                       {item.title}
@@ -87,7 +80,7 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
                       {formatDate(item.created_at)}
                     </time>
                   </td>
-                  {type === "notice" ? <td>{item.count}</td> : null}
+                  {boardType === "notice" ? <td>{item.count}</td> : null}
                 </tr>
               ))
             ) : (
