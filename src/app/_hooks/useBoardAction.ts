@@ -8,9 +8,14 @@ const useBoardAction = () => {
   // pageCategory: support, board: notice/
   const goToEditPage = (
     pageCategory: "support" | "performance",
-    boardCategory: BoardType | "reports"
+    boardCategory: BoardType | "reports",
+    id?: string
   ) => {
-    router.push(`/${pageCategory}/${boardCategory}/edit`);
+    let url = `/${pageCategory}/${boardCategory}/edit`;
+    if (id) {
+      url = `/${pageCategory}/${boardCategory}/${id}/edit`;
+    }
+    router.push(url);
   };
   return { goToEditPage };
 };

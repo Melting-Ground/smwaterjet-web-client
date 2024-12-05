@@ -1,9 +1,7 @@
 import React from "react";
 import styles from "./layout.module.scss";
-import { useRouter } from "next/navigation";
 import { ReportType } from "@/_types/report";
 import { formatDate } from "@/_utils/formatDate";
-import { useAuth } from "@/_hooks/useAuth";
 import Button from "@/_components/Button/Button";
 
 interface ListProps<T> {
@@ -11,7 +9,8 @@ interface ListProps<T> {
   colWidthList: number[];
   tableHeadList: string[];
   handleDelete: (id: string) => void;
-  // handleUpdate: () => void;
+  handleEditClick: (id: string) => void;
+  isLoggedIn: boolean;
 }
 
 export default function BoardListLayout({
@@ -19,25 +18,15 @@ export default function BoardListLayout({
   colWidthList,
   tableHeadList,
   handleDelete,
-}: // handleUpdate,
-ListProps<ReportType>) {
-  const router = useRouter();
-  const { isLoggedIn } = useAuth();
-
-  const goToEditPage = (id?: string) => {
-    if (id) {
-      router.push(`/performance/reports/${id}/edit`);
-    } else {
-      router.push("/performance/reports/edit");
-    }
-  };
-
+  handleEditClick,
+  isLoggedIn,
+}: ListProps<ReportType>) {
   return (
     <div className={styles.container}>
       <div className={styles["table-container"]}>
         {isLoggedIn ? (
           <Button
-            onClick={() => goToEditPage()}
+            onClick={() => handleEditClick}
             color="primary"
             className={styles["write-button"]}
           >
@@ -88,7 +77,7 @@ ListProps<ReportType>) {
                       <Button
                         color="primary-border"
                         className={styles["edit-button"]}
-                        onClick={() => goToEditPage(item.id.toString())}
+                        onClick={() => handleEditClick(item.id.toString())}
                       >
                         수정
                       </Button>

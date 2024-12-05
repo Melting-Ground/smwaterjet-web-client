@@ -71,7 +71,7 @@ const useFormData = <T, P>(
 
   // post or put
   // TODO: alert 처리 하기, navigate 처리하기
-  const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
+  const uploadForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = createFormData();
     try {
@@ -82,7 +82,7 @@ const useFormData = <T, P>(
     }
   };
 
-  const handleUpdate = async (
+  const updateForm = async (
     e: React.FormEvent<HTMLFormElement>,
     id: string,
     deleteFileIdArray?: number[]
@@ -107,7 +107,7 @@ const useFormData = <T, P>(
     }
   };
 
-  const handleDelete = async (id: string): Promise<boolean> => {
+  const deleteItem = async (id: string): Promise<boolean> => {
     if (!confirm("정말 삭제하시겠습니까?")) {
       return false;
     }
@@ -123,7 +123,7 @@ const useFormData = <T, P>(
   };
 
   // 파일 하나 지우기
-  const handleFileDelete = async (id: string) => {
+  const deleteFileInItem = async (id: string) => {
     if (!confirm("정말 삭제하시겠습니까?")) {
       return false;
     }
@@ -141,10 +141,10 @@ const useFormData = <T, P>(
 
   return {
     handleChange,
-    handleUpload,
-    handleUpdate,
-    handleDelete,
-    handleFileDelete,
+    uploadForm,
+    updateForm,
+    deleteItem,
+    deleteFileInItem,
   };
 };
 

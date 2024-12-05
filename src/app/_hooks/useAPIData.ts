@@ -22,7 +22,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
 
     try {
       const { data } = await axiosInstance.get(`${apiConfig.url}?page=${page}`);
-      // console.log(response);
+      console.log(data);
       setDataList(data.items);
     } catch (error) {
       throw new Error(`fatchDataList 에러: ${error}`);
