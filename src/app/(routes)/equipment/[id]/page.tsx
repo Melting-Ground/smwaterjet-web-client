@@ -49,15 +49,18 @@ export default function EquipmentDetailLayout() {
             </p>
             <p aria-label={equipment.standard}>{equipment.standard}</p>
 
+            {/*TODO: 확인하기 */}
             <p className={styles["item-info-title"]} aria-label="가격">
               가격
             </p>
-            <p aria-label={equipment.price}>{equipment.price}</p>
+            <p aria-label={`${equipment.price.toString()}백만원`}>
+              {equipment.price}
+            </p>
 
             <p className={styles["item-info-title"]} aria-label="구입년도">
               구입년도
             </p>
-            <p aria-label={equipment.purchased_year}>
+            <p aria-label={`${equipment.purchased_year}년`}>
               {equipment.purchased_year}년
             </p>
 
