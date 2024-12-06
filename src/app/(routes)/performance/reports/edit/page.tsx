@@ -23,7 +23,7 @@ export default function Edit() {
     typeof REPORTS_API.method.post
   >(REPORTS_API, reportsContents, setReportsContents);
 
-  const { goToListPage, goToDetailPage } = useBoardAction(
+  const { goToListPage } = useBoardAction(
     "performance",
     "reports"
   );

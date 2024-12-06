@@ -51,7 +51,7 @@ TextAreaProps) {
           onChange={onChange}
           disabled={disabled}
           placeholder={placeholder}
-          required
+          required={required}
         />
       </div>
       {error && message && <p className={styles.errorMessage}>{message}</p>}{" "}

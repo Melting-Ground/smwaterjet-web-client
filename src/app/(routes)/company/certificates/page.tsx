@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import React, { useState } from "react";
 import useCertificate from "@/_hooks/useCertificate";
 import Image from "next/image";

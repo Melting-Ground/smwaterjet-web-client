@@ -80,7 +80,9 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
                       {formatDate(item.created_at)}
                     </time>
                   </td>
-                  {boardType === "notice" ? <td>{item.count}</td> : null}
+                  {boardType === "notice" && "count" in item ? (
+                    <td>{item.count}</td>
+                  ) : null}
                 </tr>
               ))
             ) : (

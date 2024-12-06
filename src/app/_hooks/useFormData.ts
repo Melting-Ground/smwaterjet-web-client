@@ -26,7 +26,8 @@ const useFormData = <T, P>(
       if (files) {
         const fieldName = method === "update" ? "newFiles" : "files";
         setContents((prev: P) => {
-          const fileList = prev.files;
+          const fileList = (prev as P & { files: File[] }).files;
+          // const fileList = prev.files;
           fileList[index] = files[0];
 
           return {

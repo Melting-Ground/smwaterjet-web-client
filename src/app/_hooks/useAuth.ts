@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axiosInstance from "@/_config/axiosInstance";
 import { useRouter } from "next/navigation";
-import { getToken } from "@/_utils/getAuth";
 import { useAuthContext } from "@/_contexts/authContext";
 
 export const useAuth = () => {
-  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const { login, logout, isLoggedIn } = useAuthContext();
 
   const [value, setValue] = useState<{
@@ -53,13 +51,13 @@ export const useAuth = () => {
     }
   };
 
-  const handleLogoutClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleLogoutClick = () => {
     logout();
     alert("로그아웃 되었습니다.");
     router.push("/");
   };
 
-  const handleLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleLoginClick = () => {
     router.push("/login");
   };
 
