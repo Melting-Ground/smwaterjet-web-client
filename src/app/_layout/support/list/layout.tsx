@@ -15,7 +15,10 @@ interface ListProps<T> {
   tableHeadList: string[];
   handleEditClick: () => void;
   isLoggedIn: boolean;
-  lastPageNumber: number;
+  handleArrowClick: (direction: "prev" | "next") => void;
+  handlePageClick: (page: number) => void;
+  pages: number[];
+  currentPage: number;
 }
 
 export default function BoardListLayout<T extends NoticeType | InquiryType>({
@@ -25,8 +28,21 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
   tableHeadList,
   handleEditClick,
   isLoggedIn,
-  lastPageNumber,
+  handleArrowClick,
+  handlePageClick,
+  pages,
+  currentPage,
 }: ListProps<T>) {
+  const handlePrevArrowClick = () => {
+    handleArrowClick("prev");
+  };
+  const handleNextArrowClick = () => {
+    handleArrowClick("next");
+  };
+  const handlePageButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const value = (e.target as HTMLButtonElement).value;
+    handlePageClick(Number(value));
+  };
   // TODO: 페이징 기능 추가하기
   return (
     <div className={styles.container}>
@@ -93,7 +109,13 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
             )}
           </tbody>
         </table>
-        <Pagination lastPageNumber={lastPageNumber} />
+        <Pagination
+          currentPage={currentPage}
+          pages={pages}
+          handlePageButtonClick={handlePageButtonClick}
+          handlePrevArrowClick={handlePrevArrowClick}
+          handleNextArrowClick={handleNextArrowClick}
+        />
       </div>
     </div>
   );
