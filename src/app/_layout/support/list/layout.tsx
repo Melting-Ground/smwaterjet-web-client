@@ -6,6 +6,7 @@ import { formatDate } from "@/_utils/formatDate";
 import { NoticeType } from "@/_types/notice";
 import { InquiryType } from "@/_types/inquiry";
 import { BoardType } from "@/_types/board";
+import Pagination from "@/_components/Pagination/Pagination";
 
 interface ListProps<T> {
   list: T[];
@@ -14,6 +15,7 @@ interface ListProps<T> {
   tableHeadList: string[];
   handleEditClick: () => void;
   isLoggedIn: boolean;
+  lastPageNumber: number;
 }
 
 export default function BoardListLayout<T extends NoticeType | InquiryType>({
@@ -23,6 +25,7 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
   tableHeadList,
   handleEditClick,
   isLoggedIn,
+  lastPageNumber,
 }: ListProps<T>) {
   // TODO: 페이징 기능 추가하기
   return (
@@ -90,6 +93,7 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
             )}
           </tbody>
         </table>
+        <Pagination lastPageNumber={lastPageNumber} />
       </div>
     </div>
   );

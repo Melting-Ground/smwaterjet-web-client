@@ -11,14 +11,14 @@ export default function Notice() {
   const boardType = "notice";
   const { isLoggedIn } = useAuth();
 
-  const { dataList: notices } = useAPIData<typeof API_URLS.notices.method.get>(
-    API_URLS.notices,
-    1
-  );
+  const { dataList: notices, paginationInfo } = useAPIData<
+    typeof API_URLS.notices.method.get
+  >(API_URLS.notices, 1);
   const { goToEditPage } = useBoardAction("support", boardType);
 
   const noticeTableHeadList = ["No", "제목", "글쓴이", "등록일", "조회"];
   const colWidthList = [100, 450, 100, 100, 100];
+  const lastPageNumber = paginationInfo?.lastPage || 0;
   return (
     <BoardListLayout
       isLoggedIn={isLoggedIn}
@@ -27,6 +27,7 @@ export default function Notice() {
       list={notices}
       handleEditClick={goToEditPage}
       colWidthList={colWidthList}
+      lastPageNumber={lastPageNumber}
     />
   );
 }

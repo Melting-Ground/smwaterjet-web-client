@@ -3,9 +3,11 @@ import axiosInstance from "@/_config/axiosInstance";
 import { getAuthHeaders } from "@/_utils/getAuth";
 import { APIConfig } from "@/_config/apiConfig";
 import { AxiosError } from "axios";
+import { PaginationInfoType } from "@/_types/pagination";
 
 export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
   const [dataList, setDataList] = useState<T[]>([]);
+  const [paginationInfo, setPaginationInfo] = useState<PaginationInfoType>();
   const [dataDetail, setDataDetail] = useState<T | undefined>(undefined);
 
   const [isLoading, setIsLoading] = useState({
@@ -22,7 +24,10 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
 
     try {
       const { data } = await axiosInstance.get(`${apiConfig.url}?page=${page}`);
+      console.log(data);
       setDataList(data.items);
+      setPaginationInfo(data.pagination);
+      // setTotalPageLength(data);
     } catch (error) {
       throw new Error(`fatchDataList 에러: ${error}`);
     } finally {
@@ -142,6 +147,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
 
   return {
     dataList,
+    paginationInfo,
     dataDetail,
     postData,
     putData,

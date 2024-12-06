@@ -26,10 +26,19 @@
   background-color: $red;
   color: $white;
 }
-.transparent-link {
+
+@mixin transparent {
   background-color: transparent;
   color: $primary;
   border: none;
+}
+
+.transparent {
+  @include transparent;
+}
+
+.transparent-link {
+  @include transparent;
   text-decoration: underline;
 }
 

@@ -149,6 +149,8 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
           </ul>
         </article>
       )}
+
+      {/* TODO: PrevNextLinks 등으로 컴포넌트 분리하기 */}
       <span className={styles["button-container"]}>
         <Button
           color="primary"

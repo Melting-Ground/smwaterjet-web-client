@@ -10,6 +10,7 @@ interface ButtonProps {
     | "primary"
     | "primary-border"
     | "transparent-link"
+    | "transparent"
     | "blue"
     | "red"
     | "icon";

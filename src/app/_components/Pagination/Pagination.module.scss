@@ -1,0 +1,12 @@
+@import "@/_styles/mixins";
+@import "@/_styles/variables";
+
+.pagination {
+  display: inline-flex;
+  margin: 0 auto;
+  margin-top: 40px;
+  gap: 8px;
+  button {
+    padding: 4px;
+  }
+}
