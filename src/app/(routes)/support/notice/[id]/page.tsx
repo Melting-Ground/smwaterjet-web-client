@@ -1,5 +1,5 @@
 "use client";
-import { useParams, useRouter } from "next/navigation"; // useParams를 import합니다.
+import { useParams } from "next/navigation"; // useParams를 import합니다.
 import React, { useEffect } from "react";
 import { API_URLS } from "@/_config/apiConfig";
 import { useAPIData } from "@/_hooks/useAPIData";
@@ -10,7 +10,6 @@ import useBoardAction from "@/_hooks/useBoardAction";
 
 export default function NoticeDetail() {
   // TODO: 조회수 추가하기
-  const router = useRouter();
   const boardType = "notice";
   const {
     fetchData: fetchNoticeDetail,
@@ -22,30 +21,24 @@ export default function NoticeDetail() {
   const { id } = useParams();
   const { isLoggedIn } = useAuth();
 
-  let currentId;
-  if (typeof id === "string") {
-    currentId = id;
-  }
-  if (!currentId) {
-    return <div>존재하지 않는 게시물입니다.</div>;
-  }
+  const currentId = typeof id === "string" ? id : undefined;
 
   useEffect(() => {
-    fetchNoticeDetail(currentId);
+    if (currentId) {
+      fetchNoticeDetail(currentId);
+    }
   }, [currentId]);
 
   const { deleteItem } = useFormData(API_URLS.notices);
-  const { goToEditPage, goToListPage } = useBoardAction(
-    "support",
-    "notice",
-    
-  );
+  const { goToEditPage, goToListPage } = useBoardAction("support", "notice");
   const handleEditClick = () => {
     goToEditPage(currentId);
-  }
+  };
 
   const isNotLoaded = isLoading.detail || !noticeDetail;
-
+  if (!currentId) {
+    return <div>존재하지 않는 게시물입니다.</div>;
+  }
   return !isNotLoaded ? (
     <BoardDetailLayout
       dataDetail={noticeDetail}

@@ -24,13 +24,7 @@ export default function InquiryDetail() {
   const { password } = UserInquiryPasswordContext();
   const { isLoggedIn } = useAuth();
 
-  let currentId;
-  if (typeof id === "string") {
-    currentId = id;
-  }
-  if (!currentId) {
-    return <div>존재하지 않는 게시물입니다.</div>;
-  }
+  const currentId = typeof id === "string" ? id : undefined;
 
   const { deleteItem } = useFormData(API_URLS.inquiries);
   const { goToEditPage, goToListPage } = useBoardAction("support", "inquiry");
@@ -49,7 +43,9 @@ export default function InquiryDetail() {
   };
 
   useEffect(() => {
-    getInquiryDetail(currentId);
+    if (currentId) {
+      getInquiryDetail(currentId);
+    }
   }, [currentId]);
 
   const handleDelete = async (id: string) => {
@@ -58,7 +54,9 @@ export default function InquiryDetail() {
       router.push("/support/inquiry");
     }
   };
-
+  if (!currentId) {
+    return <div>존재하지 않는 게시물입니다.</div>;
+  }
   const isNotLoaded = isLoading.detail || !inquiryDetail;
 
   return !isNotLoaded ? (

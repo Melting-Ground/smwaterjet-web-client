@@ -4,7 +4,7 @@ import BoardEditLayout from "@/_layout/support/edit/layout";
 import { API_URLS } from "@/_config/apiConfig";
 import { useState } from "react";
 import useFormData from "@/_hooks/useFormData";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useAPIData } from "@/_hooks/useAPIData";
 import useBoardAction from "@/_hooks/useBoardAction";
 import useBoardFiles from "@/_hooks/useBoardFiles";
@@ -15,13 +15,7 @@ export default function Edit() {
   const NOTICE_API = API_URLS.notices;
   const { id } = useParams();
 
-  let currentId: string = "";
-  if (typeof id === "string") {
-    currentId = id;
-  }
-  if (!currentId) {
-    return <div>존재하지 않는 게시물입니다.</div>;
-  }
+  const currentId = typeof id === "string" ? id : undefined;
 
   const {
     fetchData: fetchNoticeDetail,
@@ -39,7 +33,9 @@ export default function Edit() {
   });
 
   useEffect(() => {
-    fetchNoticeDetail(currentId);
+    if (currentId) {
+      fetchNoticeDetail(currentId);
+    }
   }, [currentId]);
 
   useEffect(() => {
@@ -65,6 +61,10 @@ export default function Edit() {
   const { deleteFile, files, deleteFileIds } = useBoardFiles(noticeContents);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    if (!currentId) {
+      alert("업로드 중 오류가 발생했습니다. 다시 시도해주세요.");
+      return;
+    }
     try {
       await updateForm(e, currentId, deleteFileIds);
       goToDetailPage(currentId);
@@ -72,6 +72,10 @@ export default function Edit() {
       alert(error);
     }
   };
+
+  if (!currentId) {
+    return <div>존재하지 않는 게시물입니다.</div>;
+  }
 
   const isNotLoaded = isLoading.detail || !noticeDetail;
 
