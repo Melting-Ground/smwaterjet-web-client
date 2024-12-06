@@ -17,7 +17,7 @@ export default function Notice() {
   const { goToEditPage } = useBoardAction("support", boardType);
 
   const noticeTableHeadList = ["No", "제목", "글쓴이", "등록일", "조회"];
-  const colWidthList = [100, 450, 100, 100, 100];
+  const colWidthList = [100, 400, 100, 100, 100];
   const lastPageNumber = paginationInfo?.lastPage || 0;
   return (
     <BoardListLayout

@@ -10,14 +10,16 @@ export default function Inquiry() {
   const boardType = "inquiry";
   const { isLoggedIn } = useAuth();
 
-  const { dataList: inquiries } = useAPIData<
+  const { dataList: inquiries, paginationInfo } = useAPIData<
     typeof API_URLS.inquiries.method.get
   >(API_URLS.inquiries, 1);
 
   const { goToEditPage } = useBoardAction("support", boardType);
 
   const inquiryTableHeadList = ["No", "제목", "글쓴이", "등록일"];
-  const colWidthList = [80, 450, 100, 100];
+  const colWidthList = [80, 400, 100, 100];
+  const lastPageNumber = paginationInfo?.lastPage || 0;
+  
   return (
     <BoardListLayout
       isLoggedIn={isLoggedIn}
@@ -26,6 +28,7 @@ export default function Inquiry() {
       boardType={boardType}
       colWidthList={colWidthList}
       handleEditClick={goToEditPage}
+      lastPageNumber={lastPageNumber}
     />
   );
 }

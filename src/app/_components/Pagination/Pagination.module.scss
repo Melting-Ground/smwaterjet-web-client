@@ -9,4 +9,13 @@
   button {
     padding: 4px;
   }
+  .pagination-button {
+    &.active {
+      color: $primary-lighter;
+    }
+
+    &.inActive {
+      color: $gray-02;
+    }
+  }
 }
