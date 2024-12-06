@@ -10,6 +10,7 @@ import { NoticeType } from "@/_types/notice";
 import { InquiryType } from "@/_types/inquiry";
 import { BoardType } from "@/_types/board";
 import { formatDate } from "@/_utils/formatDate";
+import { useRouter } from "next/navigation";
 
 interface DetailProps<T> {
   dataDetail: T;
@@ -33,9 +34,27 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
   handleListClick,
 }: DetailProps<T>) {
   // 배열의 인덱스
+  const router = useRouter();
   const currentIndex = dataList.findIndex((data) => data.id === currentId);
   const previousIndex = currentIndex - 1;
   const nextIndex = currentIndex + 1;
+
+  const previousLink =
+    boardType === "inquiry"
+      ? `/support/${boardType}/${dataList[previousIndex].id}/password`
+      : `/support/${boardType}/${dataList[previousIndex].id}`;
+  const nextLink =
+    boardType === "inquiry"
+      ? `/support/${boardType}/${dataList[nextIndex].id}/password`
+      : `/support/${boardType}/${dataList[nextIndex].id}`;
+
+  const handlePrevLinkClick = () => {
+    router.push(previousLink);
+  };
+
+  const handleNextLinkClick = () => {
+    router.push(nextLink);
+  };
 
   return (
     <div className={styles.container}>
@@ -89,17 +108,16 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
             <li className={styles["nav-item"]}>
               <span>
                 <p>이전글</p>
-                <RiArrowUpSFill size={18} />
+                <Button
+                  className={styles.arrow}
+                  icon={<RiArrowUpSFill size={18} />}
+                  color="transparent"
+                  onClick={handlePrevLinkClick}
+                />
               </span>
               <span>
                 {previousIndex >= 0 ? (
-                  <Link
-                    href={
-                      boardType === "inquiry"
-                        ? `/support/${boardType}/${dataList[previousIndex].id}/password`
-                        : `/support/${boardType}/${dataList[previousIndex].id}`
-                    }
-                  >
+                  <Link href={previousLink}>
                     {dataList[previousIndex].title}
                   </Link>
                 ) : (
@@ -119,19 +137,16 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
             <li className={styles["nav-item"]}>
               <span>
                 <p>다음글</p>
-                <RiArrowDownSFill size={18} />
+                <Button
+                  className={styles.arrow}
+                  icon={<RiArrowDownSFill size={18} />}
+                  color="transparent"
+                  onClick={handleNextLinkClick}
+                />
               </span>
               <span>
                 {nextIndex < dataList.length ? (
-                  <Link
-                    href={
-                      boardType === "inquiry"
-                        ? `/support/${boardType}/${dataList[nextIndex].id}/password`
-                        : `/support/${boardType}/${dataList[nextIndex].id}`
-                    }
-                  >
-                    {dataList[nextIndex].title}
-                  </Link>
+                  <Link href={nextLink}>{dataList[nextIndex].title}</Link>
                 ) : (
                   "다음 글이 없습니다."
                 )}
