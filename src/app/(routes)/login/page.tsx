@@ -7,12 +7,7 @@ import { RiEyeLine, RiEyeOffLine } from "@remixicon/react";
 import { useAuth } from "@/_hooks/useAuth";
 
 export default function Login() {
-  const {
-    handleLoginChange,
-    handleLoginSubmit,
-    handleLoginCheckboxChange,
-    rememberMe,
-  } = useAuth();
+  const { handleLoginChange, handleLoginSubmit } = useAuth();
 
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
 
@@ -60,7 +55,7 @@ export default function Login() {
             }
             iconPosition="inner-right"
           ></Input>
-          <span className={styles["remember-me-container"]}>
+          {/* <span className={styles["remember-me-container"]}>
             <Input
               type="checkbox"
               id="remember-me"
@@ -73,7 +68,7 @@ export default function Login() {
             >
               로그인 상태 유지
             </label>
-          </span>
+          </span> */}
           <Button
             type="submit"
             color="primary"

@@ -3,7 +3,7 @@ import { getToken } from "@/_utils/getAuth";
 
 interface AuthContextType {
   isLoggedIn: boolean;
-  login: (token: string, rememberMe: boolean) => void;
+  login: (token: string) => void;
   logout: () => void;
   isInitialized: boolean; // 초기화 상태
 }
@@ -23,12 +23,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setIsInitialized(true);
   }, []);
 
-  const login = (token: string, rememberMe: boolean) => {
-    if (rememberMe) {
-      localStorage.setItem("token", token);
-    } else {
-      sessionStorage.setItem("token", token);
-    }
+  const login = (token: string) => {
+    sessionStorage.setItem("token", token);
     setIsLoggedIn(true);
   };
 

@@ -14,13 +14,13 @@ export const useAuth = () => {
     password: "",
   });
   const router = useRouter();
-  const [rememberMe, setRememberMe] = useState<boolean>(false);
+  // const [rememberMe, setRememberMe] = useState<boolean>(false);
 
-  const handleLoginCheckboxChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRememberMe(e.target.checked);
-  };
+  // const handleLoginCheckboxChange = (
+  //   e: React.ChangeEvent<HTMLInputElement>
+  // ) => {
+  //   setRememberMe(e.target.checked);
+  // };
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.id === "id") {
@@ -42,7 +42,7 @@ export const useAuth = () => {
         password: value.password,
       });
 
-      login(data, rememberMe);
+      login(data);
       alert("로그인 되었습니다.");
       router.push("/");
     } catch (e) {
@@ -64,8 +64,8 @@ export const useAuth = () => {
   return {
     handleLoginChange,
     handleLoginSubmit,
-    handleLoginCheckboxChange,
-    rememberMe,
+    // handleLoginCheckboxChange,
+    // rememberMe,
     handleLogoutClick,
     handleLoginClick,
     isLoggedIn,
