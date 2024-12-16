@@ -27,6 +27,7 @@ interface EditProps<T> {
   existFiles?: (FileWithIdType | File | null)[]; // 원래 있던 파일
   handleFileDelete?: (id: string) => void; // update인 경우에만
   deleteFileIds?: number[]; // update인 경우에만
+  passwordRegex?: string;
 }
 
 // TODO: 자동 등록 방지
@@ -42,11 +43,15 @@ export default function BoardEditLayout<
   handleFileDelete,
   existFiles,
   deleteFileIds,
+  passwordRegex,
 }: EditProps<T>) {
   // TODO: * 표시 하기 (필수항목)
   //   문의사항의 경우 더 항목이 많음
   console.log("existFiles", existFiles);
   const files = existFiles ?? contents.files;
+  const RequiredMark = () => {
+    return <span className={styles["required-mark"]}>*</span>;
+  };
 
   return (
     <section className={styles.container}>
@@ -55,7 +60,15 @@ export default function BoardEditLayout<
         className={styles.form}
       >
         <label htmlFor="title">
-          {type === "inquiry" ? <>성함</> : <>작성자</>}
+          {type === "inquiry" ? (
+            <>
+              성함 <RequiredMark />
+            </>
+          ) : (
+            <>
+              작성자 <RequiredMark />
+            </>
+          )}
         </label>
         <Input
           type="text"
@@ -72,7 +85,9 @@ export default function BoardEditLayout<
         "phone_number" in contents &&
         "email" in contents ? (
           <>
-            <label htmlFor="password">비밀번호</label>
+            <label htmlFor="password">
+              비밀번호 <RequiredMark />
+            </label>
             <Input
               type="password"
               name="password"
@@ -82,8 +97,16 @@ export default function BoardEditLayout<
               required
               disabled={method === "update" ? true : false}
             />
+            {passwordRegex ? <span /> : null}
+            {passwordRegex ? (
+              <span className={styles["password-label"]}>
+                * {passwordRegex}합니다.
+              </span>
+            ) : null}
 
-            <label htmlFor="phone_number">연락처</label>
+            <label htmlFor="phone_number">
+              연락처 <RequiredMark />
+            </label>
             <Input
               type="text"
               name="phone_number"
@@ -94,7 +117,9 @@ export default function BoardEditLayout<
               disabled={method === "update" ? true : false}
             />
 
-            <label htmlFor="email">이메일</label>
+            <label htmlFor="email">
+              이메일 <RequiredMark />
+            </label>
             <Input
               type="text"
               name="email"
@@ -107,7 +132,9 @@ export default function BoardEditLayout<
           </>
         ) : null}
 
-        <label htmlFor="title">제목</label>
+        <label htmlFor="title">
+          제목 <RequiredMark />
+        </label>
         <Input
           type="text"
           name="title"
@@ -118,10 +145,13 @@ export default function BoardEditLayout<
           fullWidth
           disabled={method === "update" ? true : false}
         />
-        <label htmlFor="content">내용</label>
+        <label htmlFor="content">
+          내용 <RequiredMark />
+        </label>
         <TextArea
           id="content"
           name="content"
+          required
           value={contents.content}
           onChange={(e) => handleChange(e, method)}
         />

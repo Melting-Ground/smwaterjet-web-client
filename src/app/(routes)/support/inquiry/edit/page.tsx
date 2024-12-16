@@ -61,6 +61,7 @@ export default function Edit() {
       handleChange={handleChange}
       handleSubmit={handleSubmit}
       handleListClick={goToListPage}
+      passwordRegex={passwordRegex}
     />
   );
 }

@@ -4,6 +4,7 @@
 // TODO: inner padding 더 넓게 잡기
 .container {
   @include inner-container;
+
   .form {
     margin: 50px;
     width: 100%;
@@ -16,6 +17,11 @@
       font-size: 16px;
       color: $primary;
       font-weight: 500;
+    }
+    .password-label {
+      color: $gray-02;
+      font-size: 14px;
+      margin-bottom: 10px;
     }
 
     .file-input {
@@ -36,10 +42,10 @@
       gap: 10px;
       grid-column: span 2;
       margin-top: 50px;
-
-      // button {
-      //   width: 100px;
-      // }
+    }
+    .required-mark {
+      color: $secondary;
+      vertical-align: middle;
     }
   }
 }
