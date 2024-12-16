@@ -48,7 +48,6 @@ export default function Certificates() {
   const [selectedImage, setSelectedImage] = useState<CertificateType | null>(
     null
   );
-  const [deletedId, setDeletedId] = useState<number>();
   const handlePrevArrowClick = () => {
     clickArrowButton("prev");
   };
@@ -77,15 +76,13 @@ export default function Certificates() {
       return;
     }
 
+    await deleteItem(id.toString());
     const updatedCertificates = certificates?.filter(
       (certificate) => certificate.id !== id
     );
     setDataList(updatedCertificates || []);
     setIsModalOpen(false);
     setSelectedImage(null);
-
-    await deleteItem(id.toString());
-    setDeletedId(id);
   };
 
   return (
