@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAPIData } from "@/_hooks/useAPIData";
 import { API_URLS } from "@/_config/apiConfig";
 import BoardListLayout from "@/_layout/support/list/layout";
@@ -11,13 +11,18 @@ export default function Notice() {
   // TODO: 페이징 기능 추가하기
   const boardType = "notice";
   const { isLoggedIn } = useAuth();
-  
+
   const params = new URLSearchParams(window.location.search);
   const pageParam = params.get("page");
 
-  const { dataList: notices, paginationInfo } = useAPIData<
-    typeof API_URLS.notices.method.get
-  >(API_URLS.notices, pageParam ? Number(pageParam) : 1);
+  const {
+    dataList: notices,
+    paginationInfo,
+    fetchDataList,
+  } = useAPIData<typeof API_URLS.notices.method.get>(
+    API_URLS.notices,
+    pageParam ? Number(pageParam) : 1
+  );
 
   const { goToEditPage } = useBoardAction("support", boardType);
 
@@ -27,6 +32,10 @@ export default function Notice() {
 
   const { currentPage, pages, clickArrowButton, clickPageButton } =
     usePagination(lastPageNumber);
+
+  useEffect(() => {
+    fetchDataList(currentPage);
+  }, [currentPage]);
 
   return (
     <BoardListLayout

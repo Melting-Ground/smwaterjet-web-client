@@ -35,10 +35,6 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
     }
   };
 
-  useEffect(() => {
-    fetchDataList(page ?? 1);
-  }, [page]);
-
   // 에러 메시지 반환
   // TODO: 에러 메시지 따로 관리하기
   const fetchData = async (
@@ -53,7 +49,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
 
     try {
       const { data } = await axiosInstance.get(`${apiConfig.url}/${id}`, {
-        ...getAuthHeaders(password ? password : null),
+        ...getAuthHeaders(password ? password : undefined),
       });
 
       setDataDetail(data);
@@ -148,6 +144,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
 
   return {
     dataList,
+    fetchDataList,
     paginationInfo,
     dataDetail,
     postData,

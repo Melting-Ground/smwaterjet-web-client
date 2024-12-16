@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useAPIData } from "@/_hooks/useAPIData";
 import { API_URLS } from "@/_config/apiConfig";
 import BoardListLayout from "@/_layout/support/list/layout";
@@ -14,14 +14,23 @@ export default function Inquiry() {
   const params = new URLSearchParams(window.location.search);
   const pageParam = params.get("page");
 
-  const { dataList: inquiries, paginationInfo } = useAPIData<
-    typeof API_URLS.inquiries.method.get
-  >(API_URLS.inquiries, pageParam ? Number(pageParam) : 1);
+  const {
+    dataList: inquiries,
+    paginationInfo,
+    fetchDataList,
+  } = useAPIData<typeof API_URLS.inquiries.method.get>(
+    API_URLS.inquiries,
+    pageParam ? Number(pageParam) : 1
+  );
 
   const lastPageNumber = paginationInfo?.lastPage || 1;
 
   const { currentPage, pages, clickArrowButton, clickPageButton } =
     usePagination(lastPageNumber);
+
+  useEffect(() => {
+    fetchDataList(currentPage);
+  }, [currentPage]);
 
   const { goToEditPage } = useBoardAction("support", boardType);
 
