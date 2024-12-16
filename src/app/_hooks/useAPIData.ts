@@ -91,7 +91,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
     }
   };
 
-  const putData = async (formData: FormData, id: string) => {
+  const putData = async (formData: FormData, id: string, password?: string) => {
     setIsLoading((prev) => ({ ...prev, put: true }));
 
     try {
@@ -100,7 +100,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
       const response = await axiosInstance.put(
         `${apiConfig.url}/${id}`,
         formData,
-        getAuthHeaders()
+        getAuthHeaders(password)
       );
       console.log("put data", response);
     } catch (error) {

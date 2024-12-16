@@ -90,7 +90,8 @@ const useFormData = <T, P>(
   const updateForm = async (
     e: React.FormEvent<HTMLFormElement>,
     id: string,
-    deleteFileIds?: number[]
+    deleteFileIds?: number[],
+    password?: string
   ) => {
     e.preventDefault();
     const formData = createFormData();
@@ -103,7 +104,7 @@ const useFormData = <T, P>(
     }
 
     try {
-      await putData(formData, id);
+      await putData(formData, id, password);
       alert("수정이 완료되었습니다.");
     } catch (error) {
       alert("수정 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");

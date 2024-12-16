@@ -76,7 +76,7 @@ export default function Edit() {
       return;
     }
     try {
-      await updateForm(e, currentId, deleteFileIds);
+      await updateForm(e, currentId, deleteFileIds, password);
       goToDetailPage(currentId);
     } catch (error) {
       alert(error);
