@@ -25,12 +25,21 @@ export default function Inquiry() {
 
   const lastPageNumber = paginationInfo?.lastPage || 1;
 
-  const { currentPage, pages, clickArrowButton, clickPageButton } =
-    usePagination(lastPageNumber);
+  const {
+    currentPage,
+    pages,
+    clickArrowButton,
+    clickPageButton,
+    setCurrentPage,
+  } = usePagination(lastPageNumber);
 
   useEffect(() => {
     fetchDataList(currentPage);
   }, [currentPage]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, []);
 
   const { goToEditPage } = useBoardAction("support", boardType);
 

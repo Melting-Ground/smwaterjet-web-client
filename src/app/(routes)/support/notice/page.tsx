@@ -30,12 +30,21 @@ export default function Notice() {
   const colWidthList = [100, 400, 100, 100, 100];
   const lastPageNumber = paginationInfo?.lastPage || 1;
 
-  const { currentPage, pages, clickArrowButton, clickPageButton } =
-    usePagination(lastPageNumber);
+  const {
+    currentPage,
+    pages,
+    clickArrowButton,
+    clickPageButton,
+    setCurrentPage,
+  } = usePagination(lastPageNumber);
 
   useEffect(() => {
     fetchDataList(currentPage);
   }, [currentPage]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, []);
 
   return (
     <BoardListLayout

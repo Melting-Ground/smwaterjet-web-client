@@ -47,6 +47,12 @@ const usePagination = (lastPageNumber: number) => {
     }
   };
 
-  return { pages, currentPage, clickPageButton, clickArrowButton };
+  return {
+    pages,
+    currentPage,
+    clickPageButton,
+    clickArrowButton,
+    setCurrentPage,
+  };
 };
 export default usePagination;
