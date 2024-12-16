@@ -90,6 +90,7 @@ export default function Certificates() {
       <div className={styles["certificates-container"]}>
         {isLoggedIn ? (
           <Button
+            ariaLabel="글쓰기"
             onClick={() => handleEditClick()}
             color="primary"
             className={styles["write-button"]}

@@ -35,11 +35,19 @@ export default function Footer() {
             </li>
           </ul>
           {!isLoggedIn ? (
-            <Button className={styles.login} onClick={handleLoginClick}>
+            <Button
+              ariaLabel="로그인"
+              className={styles.login}
+              onClick={handleLoginClick}
+            >
               로그인
             </Button>
           ) : (
-            <Button className={styles.logout} onClick={handleLogoutClick}>
+            <Button
+              ariaLabel="로그아웃"
+              className={styles.logout}
+              onClick={handleLogoutClick}
+            >
               로그아웃
             </Button>
           )}

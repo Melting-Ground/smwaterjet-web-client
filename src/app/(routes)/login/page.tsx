@@ -43,6 +43,7 @@ export default function Login() {
             type={!isShowPassword ? "password" : "text"}
             icon={
               <Button
+                ariaLabel="비밀번호 표시/숨기기"
                 className={styles["show-password"]}
                 onClick={handleShowPasswordClick}
               >
@@ -74,6 +75,7 @@ export default function Login() {
             color="primary"
             fullWidth
             className={styles.login}
+            ariaLabel="로그인"
           >
             로그인
           </Button>

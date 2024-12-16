@@ -246,6 +246,7 @@ export default function Fields() {
               지금 문의하셔서 맞춤형 솔루션을 경험해보세요.
             </p>
             <Button
+              ariaLabel="문의하기"
               color="blue"
               className={styles["inquiry-button"]}
               onClick={() => {

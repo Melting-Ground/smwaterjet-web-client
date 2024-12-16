@@ -53,7 +53,12 @@ export default function Password() {
                 fullWidth
                 className={styles.input}
               />
-              <Button color="primary" type="submit" className={styles.button}>
+              <Button
+                ariaLabel="확인"
+                color="primary"
+                type="submit"
+                className={styles.button}
+              >
                 확인
               </Button>
             </div>
@@ -64,6 +69,7 @@ export default function Password() {
           onClick={goToListPage}
           fullWidth
           className={styles["go-back-button"]}
+          ariaLabel="목록으로 돌아가기"
         >
           목록으로 돌아가기
         </Button>

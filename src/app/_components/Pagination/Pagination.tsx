@@ -19,6 +19,7 @@ export default function Pagination({
   return (
     <section className={styles.pagination}>
       <Button
+        ariaLabel="이전으로"
         color="transparent"
         className={styles.arrow}
         icon={<RiArrowLeftSLine size={22} color="#8a8f97" />}
@@ -26,6 +27,7 @@ export default function Pagination({
       />
       {pages.map((page) => (
         <Button
+          ariaLabel={`${page}페이지`}
           key={page}
           color="transparent"
           className={`${styles["pagination-button"]} ${
@@ -38,6 +40,7 @@ export default function Pagination({
         </Button>
       ))}
       <Button
+        ariaLabel="다음으로"
         color="transparent"
         className={styles.arrow}
         icon={<RiArrowRightSLine size={22} color="#8a8f97" />}

@@ -49,6 +49,7 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
       <div className={styles["table-container"]}>
         {boardType !== "inquiry" && !isLoggedIn ? null : (
           <Button
+            ariaLabel="글쓰기"
             onClick={() => handleEditClick()}
             color="primary"
             className={styles["write-button"]}

@@ -163,6 +163,7 @@ export default function BoardEditLayout<
               <div className={styles["exist-file-container"]}>
                 {file.file_path}
                 <Button
+                  ariaLabel="삭제하기"
                   onClick={() => {
                     if (!handleFileDelete) return;
                     handleFileDelete(file.id.toString());
@@ -186,13 +187,14 @@ export default function BoardEditLayout<
         {/* 자동방지등록 */}
         <div className={styles["button-container"]}>
           <Button
+            ariaLabel="취소하기"
             type="button"
             color="primary-border"
             onClick={handleListClick}
           >
             취소
           </Button>
-          <Button type="submit" color="primary">
+          <Button ariaLabel="작성 완료" type="submit" color="primary">
             작성 완료
           </Button>
         </div>

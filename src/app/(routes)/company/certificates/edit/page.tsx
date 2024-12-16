@@ -67,10 +67,15 @@ export default function Edit() {
         <label htmlFor="file">제목</label>
         <Input name="title" id="title" onChange={handleTitleChange} fullWidth />
         <div className={styles["button-container"]}>
-          <Button type="button" color="primary-border" onClick={goToListPage}>
+          <Button
+            ariaLabel="취소하기"
+            type="button"
+            color="primary-border"
+            onClick={goToListPage}
+          >
             취소
           </Button>
-          <Button type="submit" color="primary">
+          <Button ariaLabel="작성 완료" type="submit" color="primary">
             작성 완료
           </Button>
         </div>

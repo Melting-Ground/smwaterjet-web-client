@@ -69,6 +69,7 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
                   ? dataDetail.files.map((file, index) => (
                       <span key={index} className={styles["file-download"]}>
                         <Button
+                          ariaLabel="파일 다운로드하기"
                           className={styles["file-download-button"]}
                           color="transparent-link"
                           onClick={() => {
@@ -109,6 +110,7 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
               <span>
                 <p>이전글</p>
                 <Button
+                  ariaLabel="이전글"
                   className={styles.arrow}
                   icon={<RiArrowUpSFill size={18} />}
                   color="transparent"
@@ -138,6 +140,7 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
               <span>
                 <p>다음글</p>
                 <Button
+                  ariaLabel="다음글"
                   className={styles.arrow}
                   icon={<RiArrowDownSFill size={18} />}
                   color="transparent"
@@ -168,6 +171,7 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
       {/* TODO: PrevNextLinks 등으로 컴포넌트 분리하기 */}
       <span className={styles["button-container"]}>
         <Button
+          ariaLabel="목록으로"
           color="primary"
           className={styles["to-list-button"]}
           onClick={handleListClick}
@@ -176,10 +180,15 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
         </Button>
         {hasPermission ? (
           <span className={styles["edit-del-button-container"]}>
-            <Button color="primary-border" onClick={handleEditClick}>
+            <Button
+              ariaLabel="수정하기"
+              color="primary-border"
+              onClick={handleEditClick}
+            >
               수정
             </Button>
             <Button
+              ariaLabel="삭제하기"
               color="red"
               onClick={() => handleDelete(currentId.toString())}
             >

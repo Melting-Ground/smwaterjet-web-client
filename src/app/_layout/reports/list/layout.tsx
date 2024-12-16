@@ -26,6 +26,7 @@ export default function BoardListLayout({
       <div className={styles["table-container"]}>
         {isLoggedIn ? (
           <Button
+            ariaLabel="글쓰기"
             onClick={() => handleEditClick()}
             color="primary"
             className={styles["write-button"]}
@@ -58,6 +59,7 @@ export default function BoardListLayout({
                       item.id
                     ) : (
                       <Button
+                        ariaLabel="삭제하기"
                         color="red"
                         className={styles["delete-button"]}
                         onClick={() => handleDelete(item.id.toString())}
@@ -75,6 +77,7 @@ export default function BoardListLayout({
                       item.note ?? "-"
                     ) : (
                       <Button
+                        ariaLabel="수정하기"
                         color="primary-border"
                         className={styles["edit-button"]}
                         onClick={() => handleEditClick(item.id.toString())}

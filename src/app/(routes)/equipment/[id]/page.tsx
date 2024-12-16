@@ -80,6 +80,7 @@ export default function EquipmentDetailLayout() {
         <>로딩중</>
       )}
       <Button
+        ariaLabel="목록으로"
         color="primary"
         className={styles["go-list-button"]}
         onClick={goToList}
