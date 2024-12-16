@@ -5,7 +5,7 @@ import { APIConfig } from "@/_config/apiConfig";
 import { AxiosError } from "axios";
 import { PaginationInfoType } from "@/_types/pagination";
 
-export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
+export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
   const [dataList, setDataList] = useState<T[]>([]);
   const [paginationInfo, setPaginationInfo] = useState<PaginationInfoType>();
   const [dataDetail, setDataDetail] = useState<T | undefined>(undefined);
@@ -98,7 +98,6 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
     }
 
     try {
-      console.log(`${apiConfig.url}/${id}`);
       const response = await axiosInstance.put(
         `${apiConfig.url}/${id}`,
         formData,

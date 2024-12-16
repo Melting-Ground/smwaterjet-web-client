@@ -11,17 +11,11 @@ export default function Inquiry() {
   const boardType = "inquiry";
   const { isLoggedIn } = useAuth();
 
-  const params = new URLSearchParams(window.location.search);
-  const pageParam = params.get("page");
-
   const {
     dataList: inquiries,
     paginationInfo,
     fetchDataList,
-  } = useAPIData<typeof API_URLS.inquiries.method.get>(
-    API_URLS.inquiries,
-    pageParam ? Number(pageParam) : 1
-  );
+  } = useAPIData<typeof API_URLS.inquiries.method.get>(API_URLS.inquiries);
 
   const lastPageNumber = paginationInfo?.lastPage || 1;
 

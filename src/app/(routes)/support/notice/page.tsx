@@ -12,17 +12,11 @@ export default function Notice() {
   const boardType = "notice";
   const { isLoggedIn } = useAuth();
 
-  const params = new URLSearchParams(window.location.search);
-  const pageParam = params.get("page");
-
   const {
     dataList: notices,
     paginationInfo,
     fetchDataList,
-  } = useAPIData<typeof API_URLS.notices.method.get>(
-    API_URLS.notices,
-    pageParam ? Number(pageParam) : 1
-  );
+  } = useAPIData<typeof API_URLS.notices.method.get>(API_URLS.notices);
 
   const { goToEditPage } = useBoardAction("support", boardType);
 
