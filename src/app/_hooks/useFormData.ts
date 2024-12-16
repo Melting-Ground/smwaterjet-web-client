@@ -72,14 +72,18 @@ const useFormData = <T, P>(
 
   // post or put
   // TODO: alert 처리 하기, navigate 처리하기
-  const uploadForm = async (e: React.FormEvent<HTMLFormElement>) => {
+  const uploadForm = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<string | null> => {
     e.preventDefault();
     const formData = createFormData();
     try {
-      await postData(formData);
+      const { id } = await postData(formData);
       alert("등록이 완료되었습니다.");
+      return id;
     } catch (error) {
       alert("등록 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+      return null;
     }
   };
 

@@ -4,6 +4,7 @@ import useFormData from "@/_hooks/useFormData";
 import { API_URLS } from "@/_config/apiConfig";
 import BoardEditLayout from "@/_layout/support/edit/layout";
 import useBoardAction from "@/_hooks/useBoardAction";
+import { UserInquiryPasswordContext } from "@/_contexts/inquiryContext";
 
 // TODO: 시멘틱 태그로 바꾸기
 // id, username, phone_number, password, email, title, content
@@ -27,26 +28,34 @@ export default function Edit() {
     typeof INQUIRY_API.method.post
   >(INQUIRY_API, inquiryContents, setInquiryContents);
 
-  const { goToListPage } = useBoardAction("support", "inquiry");
+  const { goToListPage, goToDetailPage } = useBoardAction("support", "inquiry");
+  const { setPassword } = UserInquiryPasswordContext();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
-      await uploadForm(e);
+      const id = await uploadForm(e);
+      if (!id) {
+        return;
+      }
+      setPassword(inquiryContents.password);
       // TODO: 게시물 등록 후 생성된 id에 해당하는 페이지로 이동
-      // goToDetailPage(id);
+      goToDetailPage(id);
     } catch (error) {
       alert(error);
     }
   };
 
   return (
-    <BoardEditLayout
-      type="inquiry"
-      method="upload"
-      contents={inquiryContents}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      handleListClick={goToListPage}
-    />
+    <>
+      {inquiryContents.password}
+      <BoardEditLayout
+        type="inquiry"
+        method="upload"
+        contents={inquiryContents}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        handleListClick={goToListPage}
+      />
+    </>
   );
 }

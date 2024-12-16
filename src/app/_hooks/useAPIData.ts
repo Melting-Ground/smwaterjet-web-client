@@ -75,7 +75,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
     }
   };
 
-  const postData = async (formData: FormData) => {
+  const postData = async (formData: FormData): Promise<{ id: string }> => {
     setIsLoading((prev) => ({ ...prev, post: true }));
 
     try {
@@ -87,6 +87,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
         getAuthHeaders()
       );
       console.log("response", response);
+      return response.data;
     } catch (error) {
       throw new Error(`postData 에러: ${error}`);
     } finally {

@@ -38,15 +38,16 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
   const currentIndex = dataList.findIndex((data) => data.id === currentId);
   const previousIndex = currentIndex - 1;
   const nextIndex = currentIndex + 1;
+  console.log(dataList);
 
   const previousLink =
     boardType === "inquiry"
-      ? `/support/${boardType}/${dataList[previousIndex].id}/password`
-      : `/support/${boardType}/${dataList[previousIndex].id}`;
+      ? `/support/${boardType}/${dataList[previousIndex]?.id}/password`
+      : `/support/${boardType}/${dataList[previousIndex]?.id}`;
   const nextLink =
     boardType === "inquiry"
-      ? `/support/${boardType}/${dataList[nextIndex].id}/password`
-      : `/support/${boardType}/${dataList[nextIndex].id}`;
+      ? `/support/${boardType}/${dataList[nextIndex]?.id}/password`
+      : `/support/${boardType}/${dataList[nextIndex]?.id}`;
 
   const handlePrevLinkClick = () => {
     router.push(previousLink);

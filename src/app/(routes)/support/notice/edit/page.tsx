@@ -22,13 +22,16 @@ export default function Edit() {
     typeof NOTICE_API.method.post
   >(NOTICE_API, noticeContents, setNoticeContents);
 
-  const { goToListPage } = useBoardAction("support", "notice");
+  const { goToListPage, goToDetailPage } = useBoardAction("support", "notice");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
-      await uploadForm(e);
+      const id = await uploadForm(e);
       // TODO: 게시물 등록 후 생성된 id에 해당하는 페이지로 이동
-      // goToDetailPage(id);
+      if (!id) {
+        return;
+      }
+      goToDetailPage(id);
     } catch (error) {
       alert(error);
     }
