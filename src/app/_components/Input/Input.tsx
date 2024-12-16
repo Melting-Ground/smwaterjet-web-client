@@ -5,7 +5,7 @@ interface InputProps {
   value?: string;
   checked?: boolean;
   label?: string;
-  error?: boolean;
+  // error?: boolean;
   placeholder?: string;
   id?: string;
   className?: string;
@@ -29,7 +29,7 @@ export default function Input({
   placeholder,
   id,
   className: customClassName,
-  error = false,
+  // error = false,
   message,
   disabled = false,
   onChange = () => {},
@@ -41,9 +41,9 @@ export default function Input({
   multiple = false,
   required = false,
 }: InputProps) {
-  const className = `${styles.input} ${
-    error ? styles.error : ""
-  } ${customClassName} ${fullWidth ? styles["full-width"] : ""}`;
+  const className = `${styles.input} ${customClassName} ${
+    fullWidth ? styles["full-width"] : ""
+  }`;
 
   return (
     <div
@@ -71,7 +71,7 @@ export default function Input({
       {icon && iconPosition === "inner-right" && (
         <span className={styles["inner-right-icon"]}>{icon}</span>
       )}
-      {error && message && <p className={styles.errorMessage}>{message}</p>}
+      {message && <p className={styles.message}>{message}</p>}
       {/* 에러 메시지 처리 */}
     </div>
   );

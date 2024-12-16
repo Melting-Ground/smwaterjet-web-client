@@ -5,6 +5,7 @@ import { API_URLS } from "@/_config/apiConfig";
 import BoardEditLayout from "@/_layout/support/edit/layout";
 import useBoardAction from "@/_hooks/useBoardAction";
 import { UserInquiryPasswordContext } from "@/_contexts/inquiryContext";
+import { validatePassword } from "@/_utils/passwordRegex";
 
 // TODO: 시멘틱 태그로 바꾸기
 // id, username, phone_number, password, email, title, content
@@ -30,8 +31,15 @@ export default function Edit() {
 
   const { goToListPage, goToDetailPage } = useBoardAction("support", "inquiry");
   const { setPassword } = UserInquiryPasswordContext();
+  const passwordRegex =
+    "영문, 숫자, 특수문자 (! @ # $ % ^ & * - + _ ( ) { } [ ] : ; ' \" / \\ < > =)만 사용 가능";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!validatePassword(inquiryContents.password)) {
+      alert(`비밀번호는 ${passwordRegex}합니다.`);
+      return;
+    }
     try {
       const id = await uploadForm(e);
       if (!id) {
@@ -46,16 +54,13 @@ export default function Edit() {
   };
 
   return (
-    <>
-      {inquiryContents.password}
-      <BoardEditLayout
-        type="inquiry"
-        method="upload"
-        contents={inquiryContents}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        handleListClick={goToListPage}
-      />
-    </>
+    <BoardEditLayout
+      type="inquiry"
+      method="upload"
+      contents={inquiryContents}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      handleListClick={goToListPage}
+    />
   );
 }

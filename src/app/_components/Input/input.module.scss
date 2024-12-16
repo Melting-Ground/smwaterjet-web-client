@@ -4,6 +4,7 @@
 .container {
   display: flex;
   position: relative;
+  align-items: center;
 
   .input {
     @include input-base;
@@ -13,7 +14,11 @@
       opacity: 0.6;
     }
   }
-
+  .message {
+    margin-left: 12px;
+    @include table-content-small;
+    color: $policy-font;
+  }
   .inner-right {
     &-icon {
       display: flex;
