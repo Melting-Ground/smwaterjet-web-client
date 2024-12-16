@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 // import styles from "./page.module.scss";
-import styles from "@/_layout/support/edit/layout.module.scss";
+import styles from "@/_layout/reports/edit/layout.module.scss";
 
 import Input from "@/_components/Input/Input";
 import Button from "@/_components/Button/Button";

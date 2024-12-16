@@ -10,6 +10,10 @@
     // display: none;
   }
 
+  .full-width {
+    @include full-width;
+  }
+
   //   .select-selected {
   //     background-color: yellow;
   //   }

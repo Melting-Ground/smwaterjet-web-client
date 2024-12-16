@@ -45,6 +45,7 @@ export default function BoardEditLayout({
           required
           value={contents?.title}
           onChange={handleChange}
+          fullWidth
         />
 
         <label htmlFor="title">공사년도</label>
@@ -60,6 +61,7 @@ export default function BoardEditLayout({
 
         <label htmlFor="title">시작일</label>
         <DateInput
+          fullWidth
           id="start_date"
           year={Number(contents?.year)}
           value={formatDate(contents?.start_date.toString() ?? "")}
@@ -68,6 +70,7 @@ export default function BoardEditLayout({
 
         <label htmlFor="title">종료일</label>
         <DateInput
+          fullWidth
           id="end_date"
           year={Number(contents?.year)}
           value={formatDate(contents?.end_date.toString() ?? "")}
@@ -84,6 +87,7 @@ export default function BoardEditLayout({
           placeholder="-"
           required={false}
           value={contents?.note ?? ""} // null
+          fullWidth
         />
 
         <div className={styles["button-container"]}>

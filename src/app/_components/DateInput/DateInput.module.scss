@@ -5,4 +5,7 @@
   .input {
     @include input-base;
   }
+  .full-width {
+    @include full-width;
+  }
 }

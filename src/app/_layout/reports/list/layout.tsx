@@ -3,6 +3,7 @@ import styles from "./layout.module.scss";
 import { ReportType } from "@/_types/report";
 import { formatDate } from "@/_utils/formatDate";
 import Button from "@/_components/Button/Button";
+import Pagination from "@/_components/Pagination/Pagination";
 
 interface ListProps<T> {
   list: T[];
@@ -11,6 +12,10 @@ interface ListProps<T> {
   handleDelete: (id: string) => void;
   handleEditClick: (id?: string) => void;
   isLoggedIn: boolean;
+  handleArrowClick: (direction: "prev" | "next") => void;
+  handlePageClick: (page: number) => void;
+  pages: number[];
+  currentPage: number;
 }
 
 export default function BoardListLayout({
@@ -20,7 +25,21 @@ export default function BoardListLayout({
   handleDelete,
   handleEditClick,
   isLoggedIn,
+  handleArrowClick,
+  handlePageClick,
+  pages,
+  currentPage,
 }: ListProps<ReportType>) {
+  const handlePrevArrowClick = () => {
+    handleArrowClick("prev");
+  };
+  const handleNextArrowClick = () => {
+    handleArrowClick("next");
+  };
+  const handlePageButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const value = (e.target as HTMLButtonElement).value;
+    handlePageClick(Number(value));
+  };
   return (
     <div className={styles.container}>
       <div className={styles["table-container"]}>
@@ -93,6 +112,13 @@ export default function BoardListLayout({
             )}
           </tbody>
         </table>
+        <Pagination
+          currentPage={currentPage}
+          pages={pages}
+          handlePageButtonClick={handlePageButtonClick}
+          handlePrevArrowClick={handlePrevArrowClick}
+          handleNextArrowClick={handleNextArrowClick}
+        />
       </div>
     </div>
   );
