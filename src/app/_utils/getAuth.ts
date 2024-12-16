@@ -1,15 +1,20 @@
-export const getAuthHeaders = () => {
+export const getAuthHeaders = (password?: string | null) => {
   const token = getToken();
-  if (!token) {
-    throw new Error("사용자 토큰이 없습니다.");
+
+  const headers: { authorization?: string; password?: string } = {};
+
+  if (token) {
+    headers.authorization = `Bearer ${token}`;
+  }
+
+  if (password) {
+    headers.password = password;
   }
   return {
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
+    headers,
   };
 };
 
 export const getToken = () => {
-  return localStorage.getItem("token") || sessionStorage.getItem("token");
+  return sessionStorage.getItem("token");
 };
