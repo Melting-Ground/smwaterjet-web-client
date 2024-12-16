@@ -6,7 +6,6 @@ import { useAPIData } from "@/_hooks/useAPIData";
 import { UserInquiryPasswordContext } from "@/_contexts/inquiryContext";
 import { useRouter } from "next/navigation";
 import BoardDetailLayout from "@/_layout/support/[id]/layout";
-import { useAuth } from "@/_hooks/useAuth";
 import useFormData from "@/_hooks/useFormData";
 import useBoardAction from "@/_hooks/useBoardAction";
 
@@ -22,7 +21,6 @@ export default function InquiryDetail() {
 
   const { id } = useParams();
   const { password } = UserInquiryPasswordContext();
-  const { isLoggedIn } = useAuth();
 
   const currentId = typeof id === "string" ? id : undefined;
 
@@ -64,7 +62,7 @@ export default function InquiryDetail() {
       dataList={inquiryList}
       dataDetail={inquiryDetail}
       boardType={boardType}
-      isLoggedIn={isLoggedIn}
+      hasPermission
       currentId={Number(currentId)}
       handleDelete={handleDelete}
       handleEditClick={handleEditClick}

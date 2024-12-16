@@ -45,7 +45,7 @@ export default function NoticeDetail() {
       dataList={noticeList}
       currentId={Number(currentId)}
       boardType={boardType}
-      isLoggedIn={isLoggedIn}
+      hasPermission={isLoggedIn}
       handleDelete={deleteItem}
       handleEditClick={handleEditClick}
       handleListClick={goToListPage}

@@ -17,7 +17,7 @@ interface DetailProps<T> {
   dataList: T[];
   currentId: number;
   boardType: BoardType;
-  isLoggedIn: boolean;
+  hasPermission: boolean;
   handleDelete: (id: string) => void;
   handleEditClick: () => void;
   handleListClick: () => void;
@@ -28,7 +28,7 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
   dataList,
   currentId,
   boardType,
-  isLoggedIn,
+  hasPermission,
   handleDelete,
   handleEditClick,
   handleListClick,
@@ -38,7 +38,6 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
   const currentIndex = dataList.findIndex((data) => data.id === currentId);
   const previousIndex = currentIndex - 1;
   const nextIndex = currentIndex + 1;
-  console.log(dataList);
 
   const previousLink =
     boardType === "inquiry"
@@ -175,7 +174,7 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
         >
           목록으로
         </Button>
-        {isLoggedIn ? (
+        {hasPermission ? (
           <span className={styles["edit-del-button-container"]}>
             <Button color="primary-border" onClick={handleEditClick}>
               수정

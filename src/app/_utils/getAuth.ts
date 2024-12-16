@@ -1,4 +1,4 @@
-export const getAuthHeaders = (password?: string | null) => {
+export const getAuthHeaders = (password?: string | undefined) => {
   const token = getToken();
 
   const headers: { authorization?: string; password?: string } = {};
