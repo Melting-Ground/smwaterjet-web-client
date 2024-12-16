@@ -88,7 +88,7 @@ export default function BoardEditLayout({
 
         <div className={styles["button-container"]}>
           <Button
-            type="submit"
+            type="button"
             color="primary-border"
             onClick={handleListClick}
           >

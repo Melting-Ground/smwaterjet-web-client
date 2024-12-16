@@ -186,7 +186,7 @@ export default function BoardEditLayout<
         {/* 자동방지등록 */}
         <div className={styles["button-container"]}>
           <Button
-            type="submit"
+            type="button"
             color="primary-border"
             onClick={handleListClick}
           >
