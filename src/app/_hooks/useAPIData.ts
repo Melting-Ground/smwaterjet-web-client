@@ -93,9 +93,11 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>, page?: number) => {
 
   const putData = async (formData: FormData, id: string, password?: string) => {
     setIsLoading((prev) => ({ ...prev, put: true }));
+    if (password) {
+      formData.delete("password");
+    }
 
     try {
-      formData.forEach((item) => console.log(item, typeof item));
       console.log(`${apiConfig.url}/${id}`);
       const response = await axiosInstance.put(
         `${apiConfig.url}/${id}`,
