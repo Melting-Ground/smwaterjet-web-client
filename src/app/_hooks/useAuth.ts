@@ -44,7 +44,7 @@ export const useAuth = () => {
 
       login(data);
       alert("로그인 되었습니다.");
-      router.push("/");
+      router.back();
     } catch (e) {
       console.error("로그인 에러:", e);
       alert("아이디 및 비밀번호가 일치하지 않습니다.");
@@ -54,7 +54,7 @@ export const useAuth = () => {
   const handleLogoutClick = () => {
     logout();
     alert("로그아웃 되었습니다.");
-    router.push("/");
+    router.back();
   };
 
   const handleLoginClick = () => {
