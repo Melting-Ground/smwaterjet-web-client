@@ -50,16 +50,19 @@ const useFormData = <T, P>(
     Object.entries(contents as Record<string, unknown>).forEach(
       ([key, value]) => {
         if (value) {
-          if (
+          if (value instanceof File) {
+            // 파일이 하나인 경우
+            formData.append(key, value);
+          } else if (
             Array.isArray(value) &&
             value.some((item) => item instanceof File)
           ) {
-            // 파일이 있을 경우
-            for (let i = 0; i < value.length; i++) {
-              if (value[i]) {
-                formData.append(key, value[i]);
+            // 파일이 배열인 경우
+            value.forEach((item) => {
+              if (item) {
+                formData.append(key, item);
               }
-            }
+            });
           } else if (typeof value === "string") {
             formData.append(key, value);
           }
@@ -77,6 +80,8 @@ const useFormData = <T, P>(
   ): Promise<string | null> => {
     e.preventDefault();
     const formData = createFormData();
+    const formDataObject = Object.fromEntries(formData.entries());
+    console.log(formDataObject);
     try {
       const { id } = await postData(formData);
       alert("등록이 완료되었습니다.");

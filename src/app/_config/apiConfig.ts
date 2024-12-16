@@ -1,3 +1,4 @@
+import { CertificatePostType, CertificateType } from "@/_types/certificate";
 import { InquiryPostType, InquiryType } from "@/_types/inquiry";
 // import { NewsPostType, NewsType } from "../_types/news";
 import { NoticePostType, NoticeType } from "@/_types/notice";
@@ -7,7 +8,7 @@ export type HttpMethodType = "get" | "post" | "put";
 
 export interface APIConfig<T = unknown, P = unknown> {
   url: string;
-  method: Record<HttpMethodType, T | P>;
+  method: Partial<Record<HttpMethodType, T | P>>;
 }
 
 const API_URLS = {
@@ -35,14 +36,22 @@ const API_URLS = {
       put: {} as ReportPostType,
     },
   },
+  photos: {
+    url: "/performance/reports", // 임시
+    method: {
+      get: {} as ReportType,
+      post: {} as ReportPostType,
+      put: {} as ReportPostType,
+    },
+  },
 
-  // certificates: {
-  //   url: "/company/certificates",
-  //   method: {
-  //     get: {} as InquiryType,
-  //     post: {} as InquiryPostType,
-  //   },
-  // },
+  certificates: {
+    url: "/company/certificates",
+    method: {
+      get: {} as CertificateType,
+      post: {} as CertificatePostType,
+    },
+  },
   // inquiries: {
   //   url: {
   //     list: "/support/inquiries",

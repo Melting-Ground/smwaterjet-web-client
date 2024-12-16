@@ -43,8 +43,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
   ): Promise<string | null> => {
     // password O: 문의사항
     // password X: 공지사항
-    // console.log(password);
-    // const password = "1234";
+
     setIsLoading((prev) => ({ ...prev, detail: true }));
 
     try {
@@ -145,6 +144,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
 
   return {
     dataList,
+    setDataList,
     fetchDataList,
     paginationInfo,
     dataDetail,

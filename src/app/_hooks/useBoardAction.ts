@@ -2,8 +2,8 @@ import { BoardType } from "@/_types/board";
 import { useRouter } from "next/navigation";
 
 const useBoardAction = (
-  pageCategory: "support" | "performance",
-  boardCategory: BoardType | "reports"
+  pageCategory: "support" | "performance" | "company",
+  boardCategory: BoardType | "reports" | "certificates"
 ) => {
   const router = useRouter();
 

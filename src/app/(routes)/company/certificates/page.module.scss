@@ -4,34 +4,80 @@
 .container {
   @include inner-container;
 
-  .certificates {
+  .certificates-container {
     margin: 100px 0;
-    gap: 16px;
-    display: flex;
-    flex-wrap: wrap;
+    width: 100%;
 
-    .image-container {
-      position: relative;
-      display: inline-block;
-      cursor: pointer;
+    .write-button {
+      margin-left: auto;
+      margin-bottom: 20px;
+    }
 
-      .image {
-        width: 100%;
-        height: auto;
-      }
-      .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: $black;
-        opacity: 0;
-        z-index: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+    .certificates {
+      gap: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      justify-content: center;
+
+      .image-container {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 1 / 1.414;
+
+        &:hover .overlay {
+          background-color: rgba(0, 0, 0, 0.6);
+          opacity: 1;
+          // .item-title {
+          //   color: $blue;
+          // }
+        }
+
+        .image {
+          width: 100%;
+          height: auto;
+        }
+
+        .overlay {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 0;
+          opacity: 0;
+          width: 100%;
+          padding: 30px;
+          // height: 100px;
+          // background-color: rgba(0, 0, 0, 0.2);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          flex-direction: column;
+          gap: 20px;
+          overflow: hidden;
+          transition: opacity 0.3s ease;
+
+          .item-title {
+            color: $white;
+            font-size: 17px;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .icon-container {
+            width: 50px;
+            height: 50px;
+            background-color: $gray-02;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:hover {
+              background: $blue;
+            }
+          }
+        }
       }
     }
   }
@@ -51,17 +97,24 @@
   align-items: center;
   z-index: 999;
 }
+
 .modal-content {
   position: relative;
   width: 90%;
   height: 90%;
   margin: 0 auto;
-}
 
-.close {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  background-color: transparent;
-  border: none;
+  .modal-button-container {
+    position: fixed;
+    display: inline-flex;
+    gap: 4px;
+    top: 12px;
+    right: 12px;
+    z-index: 100;
+
+    .close,
+    .delete {
+      padding: 8px;
+    }
+  }
 }

@@ -2,8 +2,8 @@
 @import "@/_styles/variables";
 
 .pagination {
-  display: inline-flex;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
   margin-top: 40px;
   gap: 8px;
   button {

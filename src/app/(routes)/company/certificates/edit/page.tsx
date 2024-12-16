@@ -1,18 +1,27 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./page.module.scss";
-import axiosInstance from "@/_config/axiosInstance";
-import { getToken } from "@/_utils/getAuth";
 import Input from "@/_components/Input/Input";
 import Button from "@/_components/Button/Button";
+import useFormData from "@/_hooks/useFormData";
+import { API_URLS } from "@/_config/apiConfig";
 
 export default function Edit() {
-  const [certificate, setCertificate] = useState<File | null>(null); // 초기값을 null로 설정
-  const [title, setTitle] = useState<string>("");
+  const CERTIFICATE_API = API_URLS.certificates;
+  const [certificate, setCertificate] = useState<
+    typeof CERTIFICATE_API.method.post
+  >({
+    title: "",
+    file: null,
+  });
+
+  const { uploadForm } = useFormData<
+    typeof API_URLS.certificates.method.get,
+    typeof API_URLS.certificates.method.post
+  >(API_URLS.certificates, certificate, setCertificate);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const token = getToken();
 
     if (!certificate) {
       console.error("파일을 선택하세요.");
@@ -20,22 +29,7 @@ export default function Edit() {
     }
 
     try {
-      const formData = new FormData();
-      formData.append("file", certificate);
-      formData.append("title", title);
-
-      const response = await axiosInstance.post(
-        "/company/certificates",
-        formData,
-        // TODO: 제목을 함께 넘겨줘야 함
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data", // 파일 업로드 시 Content-Type 설정
-          },
-        }
-      );
-      console.log("response", response);
+      await uploadForm(e);
     } catch (error) {
       console.error("에러", error);
     }
@@ -45,16 +39,18 @@ export default function Edit() {
     e.preventDefault();
     const file = e.target.files?.[0];
     if (file) {
-      setCertificate(file);
+      setCertificate({ ...certificate, file });
     }
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
+    const { value: title } = e.target;
+    setCertificate({ ...certificate, title });
   };
 
   return (
     <div className={styles.container}>
+      <button onClick={() => console.log(certificate)}>확인</button>
       <form onSubmit={handleSubmit}>
         <label htmlFor="file">파일 선택</label>
         <input type="file" name="files" id="file" onChange={handleFileChange} />

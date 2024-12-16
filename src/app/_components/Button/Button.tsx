@@ -4,6 +4,7 @@ import styles from "./Button.module.scss";
 interface ButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   children?: ReactNode;
+  ariaLabel?: string;
   id?: string;
   type?: "button" | "submit" | "reset";
   color?:
@@ -24,6 +25,7 @@ interface ButtonProps {
 export default function Button({
   onClick,
   children,
+  ariaLabel,
   id,
   type = "button",
   color,
@@ -43,6 +45,7 @@ export default function Button({
       type={type}
       className={className}
       disabled={disabled}
+      aria-label={ariaLabel}
       onClick={onClick}
       value={value}
     >
