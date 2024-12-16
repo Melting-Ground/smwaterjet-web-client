@@ -25,6 +25,7 @@ export default function Edit() {
   const { goToListPage, goToDetailPage } = useBoardAction("support", "notice");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
       const id = await uploadForm(e);
       // TODO: 게시물 등록 후 생성된 id에 해당하는 페이지로 이동
