@@ -22,7 +22,9 @@
       .image-container {
         position: relative;
         overflow: hidden;
-        aspect-ratio: 1 / 1.414;
+        // aspect-ratio: 1 / 1.414;
+        width: 400px;
+        height: 565.6px;
 
         &:hover .overlay {
           background-color: rgba(0, 0, 0, 0.6);

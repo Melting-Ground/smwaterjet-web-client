@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import useCertificate from "@/_hooks/useCertificate";
 import Image from "next/image";
 import styles from "./page.module.scss";
 import { RiCloseLine, RiDeleteBinLine, RiZoomInLine } from "@remixicon/react";

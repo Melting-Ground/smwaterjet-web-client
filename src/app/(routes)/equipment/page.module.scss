@@ -5,15 +5,19 @@
   @include inner-container;
 
   .gallery {
-    margin: 100px 0;
+    width: 100%;
+    margin: 100px auto;
     gap: 16px;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    justify-content: center;
 
     .img-container {
       position: relative;
       width: 400px;
       height: 260px;
+
+      margin: auto;
       overflow: hidden;
       cursor: pointer;
 
