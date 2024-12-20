@@ -42,6 +42,12 @@
   border-radius: 4px;
   line-height: 1;
   font-weight: 500;
+
+  &:disabled {
+    background-color: $gray-border;
+    border-color: $gray-border;
+    cursor: not-allowed;
+  }
 }
 
 @mixin inner-container {

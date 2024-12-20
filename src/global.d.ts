@@ -7,8 +7,9 @@ declare global {
         options: { sitekey: string; callback: (token: string) => void }
       ) => void;
       execute: (container: HTMLDivElement | null) => void;
+	  reset: (widgetId: string) => void;
     };
   }
 }
 
-export {}; // 모듈로 간주되도록 빈 export 추가
+export {};

@@ -47,7 +47,7 @@ export default function BoardEditLayout<
   passwordRegex,
 }: EditProps<T>) {
   const turnstileRef = useRef<HTMLDivElement>(null);
-  useTurnstile(turnstileRef);
+  const { isValidate } = useTurnstile(turnstileRef);
   console.log("existFiles", existFiles);
   const files = existFiles ?? contents.files;
   const RequiredMark = () => {
@@ -194,6 +194,7 @@ export default function BoardEditLayout<
             type="button"
             color="primary-border"
             onClick={handleListClick}
+            disabled={!isValidate}
           >
             취소
           </Button>

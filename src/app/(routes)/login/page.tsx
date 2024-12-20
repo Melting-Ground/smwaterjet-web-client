@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./page.module.scss";
 import Button from "@/_components/Button/Button";
 import Input from "@/_components/Input/Input";
@@ -10,7 +10,7 @@ import { useTurnstile } from "@/_hooks/useTurnstile";
 export default function Login() {
   const { handleLoginChange, handleLoginSubmit } = useAuth();
   const turnstileRef = useRef<HTMLDivElement>(null);
-  useTurnstile(turnstileRef);
+  const { isValidate } = useTurnstile(turnstileRef);
 
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
 
@@ -80,6 +80,7 @@ export default function Login() {
             fullWidth
             className={styles.login}
             ariaLabel="로그인"
+            disabled={!isValidate}
           >
             로그인
           </Button>
