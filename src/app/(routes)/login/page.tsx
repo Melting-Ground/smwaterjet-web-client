@@ -1,13 +1,16 @@
 "use client";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./page.module.scss";
 import Button from "@/_components/Button/Button";
 import Input from "@/_components/Input/Input";
 import { RiEyeLine, RiEyeOffLine } from "@remixicon/react";
 import { useAuth } from "@/_hooks/useAuth";
+import { useTurnstile } from "@/_hooks/useTurnstile";
 
 export default function Login() {
   const { handleLoginChange, handleLoginSubmit } = useAuth();
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  useTurnstile(turnstileRef);
 
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
 
@@ -70,6 +73,7 @@ export default function Login() {
               로그인 상태 유지
             </label>
           </span> */}
+
           <Button
             type="submit"
             color="primary"
@@ -79,6 +83,7 @@ export default function Login() {
           >
             로그인
           </Button>
+          <div ref={turnstileRef} className={styles.turnstile} />
         </fieldset>
       </form>
     </section>

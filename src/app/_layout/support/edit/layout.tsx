@@ -8,7 +8,8 @@ import { InquiryPostType } from "@/_types/inquiry";
 import { RiCloseCircleLine } from "@remixicon/react";
 import { FileWithIdType } from "@/_types/file";
 import { BoardType, EditMethodType } from "@/_types/board";
-import { Fragment } from "react";
+import { Fragment, useRef } from "react";
+import { useTurnstile } from "@/_hooks/useTurnstile";
 
 // TODO: 레이아웃 상위 폴더로 옮기기
 interface EditProps<T> {
@@ -45,8 +46,8 @@ export default function BoardEditLayout<
   deleteFileIds,
   passwordRegex,
 }: EditProps<T>) {
-  // TODO: * 표시 하기 (필수항목)
-  //   문의사항의 경우 더 항목이 많음
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  useTurnstile(turnstileRef);
   console.log("existFiles", existFiles);
   const files = existFiles ?? contents.files;
   const RequiredMark = () => {
@@ -131,7 +132,6 @@ export default function BoardEditLayout<
             />
           </>
         ) : null}
-
         <label htmlFor="title">
           제목 <RequiredMark />
         </label>
@@ -184,7 +184,10 @@ export default function BoardEditLayout<
             )}
           </Fragment>
         ))}
-        {/* 자동방지등록 */}
+        {/* 자동등록방지 */}
+        <label>자동등록방지</label>
+        <div className={styles.turnstile} ref={turnstileRef} />
+
         <div className={styles["button-container"]}>
           <Button
             ariaLabel="취소하기"
