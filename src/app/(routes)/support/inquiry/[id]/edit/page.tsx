@@ -9,6 +9,7 @@ import { useAPIData } from "@/_hooks/useAPIData";
 import { UserInquiryPasswordContext } from "@/_contexts/inquiryContext";
 import useBoardAction from "@/_hooks/useBoardAction";
 import useBoardFiles from "@/_hooks/useBoardFiles";
+import { useAuth } from "@/_hooks/useAuth";
 
 // 수정 페이지
 // TODO: 관리자 외 접근 제한 처리
@@ -36,9 +37,10 @@ export default function Edit() {
     password: "",
     files: [],
   });
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
-    if (currentId && password) {
+    if ((currentId && password) || (currentId && isLoggedIn)) {
       fetchInquiryDetail(currentId, password);
     }
   }, [currentId]);
