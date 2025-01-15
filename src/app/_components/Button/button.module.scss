@@ -4,10 +4,9 @@
 .button {
   @include button-base;
 }
+
 .primary {
-  background-color: $primary-lighter;
-  color: $white;
-  border: 1px solid $primary-lighter;
+  @include button-primary;
 }
 .primary-border {
   border: 1px solid $primary-lighter;

@@ -50,6 +50,12 @@
   }
 }
 
+@mixin button-primary {
+  background-color: $primary-lighter;
+  color: $white;
+  border: 1px solid $primary-lighter;
+}
+
 @mixin inner-container {
   max-width: $inner-max-width;
   height: 100%;

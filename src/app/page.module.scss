@@ -1,0 +1,92 @@
+@import "./_styles/variables";
+@import "./_styles/mixins";
+
+.container {
+  @include inner-container;
+
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin: 100px auto 250px auto;
+
+  .section {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    gap: 40px;
+
+    .photo {
+      width: 500px;
+      height: 300px;
+      background-color: aliceblue;
+    }
+  }
+
+  .list-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    height: 380px;
+
+    .section {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid black;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+      padding: 24px;
+      height: 100%;
+    }
+  }
+
+  .title {
+    @include title;
+  }
+  .sub-title {
+    @include sub-title;
+  }
+
+  .list {
+    @include label;
+  }
+  .label {
+    @include label;
+  }
+  .button {
+    @include button-base;
+    @include button-primary;
+    // margin-top: 100px;
+  }
+}
+.sr-only {
+  @include sr-only;
+}
+.photo {
+  width: 300px;
+  height: 200px;
+}
+
+.carousel {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.section-container {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  width: 100%;
+
+  section {
+    flex-grow: 1;
+  }
+}
+.notice,
+.inquiry {
+  height: 250px;
+  width: 100%;
+  margin-top: 24px;
+  background-color: antiquewhite;
+}

@@ -3,6 +3,8 @@
 
 .container {
   margin: 100px 0;
+  // TODO: container에 inner-container 줄건지
+  // inner-container에 줄건지 통일하기
   .inner-container {
     @include inner-container;
     flex-direction: column;
