@@ -22,41 +22,28 @@
     }
   }
 
-  .list-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    height: 380px;
+  .full-width {
+    @include full-width-without-padding;
+    background-color: $primary;
+    padding-top: 120px;
 
-    .section {
-      display: flex;
-      flex-direction: column;
-      border: 1px solid black;
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.2);
-      }
-      padding: 24px;
-      height: 100%;
+    .list-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background-color: $white;
+      max-width: calc($inner-max-width - 48px);
+      margin: 0 auto;
+
+      padding: 0;
     }
   }
 
-  .title {
-    @include title;
-  }
   .sub-title {
     @include sub-title;
   }
 
   .list {
     @include label;
-  }
-  .label {
-    @include label;
-  }
-  .button {
-    @include button-base;
-    @include button-primary;
-    // margin-top: 100px;
   }
 }
 .sr-only {
@@ -86,7 +73,64 @@
 .notice,
 .inquiry {
   height: 250px;
-  width: 100%;
+  //   width: 100%;
+  flex-grow: 1;
   margin-top: 24px;
-  background-color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inquiry {
+  background-color: rgba($primary, 0.8);
+
+  * {
+    color: $white;
+  }
+
+  li {
+    @include sub-title;
+  }
+}
+
+.title-button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// list item 스타일링
+.list-item {
+  padding: 42px;
+  height: 400px;
+  @include box-shadow;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .title {
+    color: $primary;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .content {
+    color: $policy-font;
+    font-size: 17px;
+    line-height: 1.6;
+    margin-top: 40px;
+
+    li {
+      color: $policy-font;
+    }
+  }
+
+  .more-button {
+    margin-left: auto;
+    bottom: 0;
+  }
 }

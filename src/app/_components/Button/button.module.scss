@@ -6,8 +6,11 @@
 }
 
 .primary {
-  @include button-primary;
+  background-color: $primary-lighter;
+  color: $white;
+  border: 1px solid $primary-lighter;
 }
+
 .primary-border {
   border: 1px solid $primary-lighter;
   background-color: $white;
@@ -28,7 +31,8 @@
 
 @mixin transparent {
   background-color: transparent;
-  color: $primary;
+  // color: $primary;
+  color: inherit;
   border: none;
 }
 

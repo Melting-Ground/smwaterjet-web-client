@@ -13,6 +13,12 @@
   width: 100%;
 }
 
+@mixin full-width-without-padding {
+  width: 100vw;
+  position: relative;
+  left: calc(-50vw + 50% - 8px); // 스크롤바 너비
+}
+
 @mixin input-base {
   display: flex;
   background-color: $gray-lightest;
@@ -48,12 +54,6 @@
     border-color: $gray-border;
     cursor: not-allowed;
   }
-}
-
-@mixin button-primary {
-  background-color: $primary-lighter;
-  color: $white;
-  border: 1px solid $primary-lighter;
 }
 
 @mixin inner-container {

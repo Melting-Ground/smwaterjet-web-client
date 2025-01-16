@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axiosInstance from "@/_config/axiosInstance";
 import { getAuthHeaders } from "@/_utils/getAuth";
 import { APIConfig } from "@/_config/apiConfig";
@@ -19,11 +19,14 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
     deleteFile: false,
   });
 
-  const fetchDataList = async (page: number) => {
+  const fetchDataList = async (page: number, limit: number = 10) => {
     setIsLoading((prev) => ({ ...prev, list: true }));
 
+    console.log(page, limit);
     try {
-      const { data } = await axiosInstance.get(`${apiConfig.url}?page=${page}`);
+      const { data } = await axiosInstance.get(
+        `${apiConfig.url}?page=${page}&limit=${limit}`
+      );
       console.log(data);
       setDataList(data.items);
       setPaginationInfo(data.pagination);

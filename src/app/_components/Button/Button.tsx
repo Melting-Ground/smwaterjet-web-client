@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import styles from "./Button.module.scss";
+import Link from "next/link";
 
 interface ButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -20,6 +21,7 @@ interface ButtonProps {
   value?: string;
   icon?: JSX.Element;
   fullWidth?: boolean;
+  href?: string;
 }
 
 export default function Button({
@@ -34,12 +36,13 @@ export default function Button({
   value,
   icon,
   fullWidth,
+  href,
 }: ButtonProps) {
   const className = `${styles.button} ${
     color ? styles[color] : ""
   } ${customClassName} ${fullWidth ? styles["full-width"] : ""}`;
 
-  return (
+  return !href ? (
     <button
       id={id}
       type={type}
@@ -52,5 +55,10 @@ export default function Button({
       {children}
       {icon}
     </button>
+  ) : (
+    // href가 있을 경우 Link Button으로 동작
+    <Link id={id} className={className} href={href}>
+      {children}
+    </Link>
   );
 }
