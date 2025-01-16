@@ -5,6 +5,8 @@ import { API_URLS } from "./_config/apiConfig";
 import { useEffect } from "react";
 import Button from "./_components/Button/Button";
 import { RiArrowRightUpLine } from "@remixicon/react";
+import Link from "next/link";
+import { formatDate } from "./_utils/formatDate";
 
 interface ListItemProps {
   title: string;
@@ -37,7 +39,7 @@ export default function Home() {
   >(API_URLS.notices);
 
   useEffect(() => {
-    fetchDataList(1, 5); // TODO: limit?
+    fetchDataList(1, 2); // TODO: limit?
   }, []);
 
   console.log(notices);
@@ -126,25 +128,36 @@ export default function Home() {
         </ul>
       </section>
 
-      <div className={styles["section-container"]}>
-        <section>
-          <h1>문의하기</h1>
-          <ul className={styles.inquiry}>
-            <p>customer service</p>
-            <li>033-261-4175</li>
-            <li>010-4277-6693</li>
-            <Button
-              color="blue"
-              href=""
-              icon={<RiArrowRightUpLine color="#ffffff" size={20} />}
-            >
-              게시판 바로가기
-            </Button>
-          </ul>
-        </section>
-        <section>
+      <div className={styles["article-container"]}>
+        <article className={styles.notice}>
           <div className={styles["title-button-container"]}>
-            <h1>공지사항</h1>
+            <h1 className={styles.title}>Notice</h1>
+            {/* <Button color="primary" href={"/support/notice"}>
+              바로가기
+            </Button> */}
+            <Link
+              href={"/support/notice"}
+              className={styles["notice-navigate-link"]}
+            >
+              <RiArrowRightUpLine color="#3272eb" size={20} />
+            </Link>
+          </div>
+          <ol>
+            {notices.map((notice) => (
+              <li key={notice.id} className={styles["link-item"]}>
+                <Link href={`/support/notice/${notice.id}`}>
+                  <p className={styles["notice-title"]}>{notice.title}</p>
+                  <p className={styles["notice-created-at"]}>
+                    {formatDate(notice.created_at)}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </article>
+        {/* <article className={styles.notice}>
+          <div className={styles["title-button-container"]}>
+            <h1></h1>
             <Button color="primary" href={"/support/notice"}>
               바로가기
             </Button>
@@ -161,7 +174,28 @@ export default function Home() {
               </li>
             ))}
           </ol>
-        </section>
+        </article> */}
+        <article className={styles.inquiry}>
+          <h1 className={styles["sr-only"]}>문의하기</h1>
+          <p className={styles.title}>Contact us</p>
+          <ul className={styles.numbers}>
+            <li>033-261-4175</li>
+            <li>010-4277-6693</li>
+          </ul>
+          <div className={styles.divider} />
+          <p className={styles.description}>
+            상담시간 오전 9시 ~ 오후 6시
+            <br />
+            토, 일요일, 공휴일은 휴무입니다.
+          </p>
+          <Link
+            href="/support/inquiry/edit"
+            className={styles["inquiry-button"]}
+          >
+            문의글 작성하기
+            <RiArrowRightUpLine color="#ffffff" size={24} />
+          </Link>
+        </article>
       </div>
       {/* 현장 사진 노출 */}
       {/* 문의하기  */}
