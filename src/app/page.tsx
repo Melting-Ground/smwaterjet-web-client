@@ -3,7 +3,6 @@ import styles from "./page.module.scss";
 import { useAPIData } from "./_hooks/useAPIData";
 import { API_URLS } from "./_config/apiConfig";
 import { useEffect } from "react";
-import Button from "./_components/Button/Button";
 import { RiArrowRightUpLine } from "@remixicon/react";
 import Link from "next/link";
 import { formatDate } from "./_utils/formatDate";
@@ -21,14 +20,9 @@ function ListItem({ title, content, link }: ListItemProps) {
         <h2 className={styles.title}>{title}</h2>
         {content}
       </div>
-      {/* <ul className={styles.list}>
-              <li>철근에 손상없이 콘크리트 해체</li>
-              <li>도로 보수공사, 교량의 상판 보수공사</li>
-              <li>도로, 다리, 높은 주차 건물의 콘크리트 파쇄</li>
-            </ul> */}
-      <Button className={styles["more-button"]} href={link} color="primary">
+      {/* <Button className={styles["more-button"]} href={link} color="primary">
         더보기
-      </Button>
+      </Button> */}
     </section>
   );
 }
@@ -42,18 +36,26 @@ export default function Home() {
     fetchDataList(1, 2); // TODO: limit?
   }, []);
 
-  console.log(notices);
   return (
     <div className={styles.container}>
-      <section className={styles.section}>
-        <div>
-          <h1 className={styles.title}>성문워터젯에서 함께합니다.</h1>
-          <p className={styles["sub-title"]}>
-            초고압 워터젯 공법으로 혁신적인 공사를 제공합니다.
-          </p>
-          <Button color="primary" href="/business/waterjet">
-            자세히 보기
-          </Button>
+      <section className={styles["top-section"]}>
+        {/* <h1 className={styles.greeting}>성문워터젯에서 함께합니다</h1> */}
+        <div className={styles["left-container"]}>
+          <h2 className={styles.greeting}>
+            초고압 워터젯 공법으로
+            <br />
+            <em>혁신적인 공사</em>를 제공합니다
+          </h2>
+          <Link href="/business/waterjet">
+            <div className={styles["waterjet-more-button"]}>
+              <span className={styles.icon}>
+                <RiArrowRightUpLine color="#ffffff" size={20} />
+              </span>
+              워터젯
+              <br />
+              알아보기
+            </div>
+          </Link>
         </div>
         <img src="" className={styles.photo} />
       </section>
@@ -109,32 +111,32 @@ export default function Home() {
       {/* TODO: carousel로 구현 */}
       <section>
         <h1>현장 사진</h1>
-        <ul className={styles.carousel}>
-          <li>
-            <img src="" alt="" className={styles.photo} />
-          </li>
-          <li>
-            <img src="" alt="" className={styles.photo} />
-          </li>
-          <li>
-            <img src="" alt="" className={styles.photo} />
-          </li>
-          <li>
-            <img src="" alt="" className={styles.photo} />
-          </li>
-          <li>
-            <img src="" alt="" className={styles.photo} />
-          </li>
-        </ul>
+        <article className={styles["carousel-container"]}>
+          <ul className={styles.carousel}>
+            <li>
+              <img src="" alt="" className={styles.photo} />
+            </li>
+            <li>
+              <img src="" alt="" className={styles.photo} />
+            </li>
+            <li>
+              <img src="" alt="" className={styles.photo} />
+            </li>
+            <li>
+              <img src="" alt="" className={styles.photo} />
+            </li>
+            <li>
+              <img src="" alt="" className={styles.photo} />
+            </li>
+          </ul>
+        </article>
       </section>
 
       <div className={styles["article-container"]}>
         <article className={styles.notice}>
           <div className={styles["title-button-container"]}>
             <h1 className={styles.title}>Notice</h1>
-            {/* <Button color="primary" href={"/support/notice"}>
-              바로가기
-            </Button> */}
+
             <Link
               href={"/support/notice"}
               className={styles["notice-navigate-link"]}

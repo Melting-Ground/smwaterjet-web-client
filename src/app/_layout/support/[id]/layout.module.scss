@@ -12,9 +12,8 @@
     @include table-content;
 
     .head-title {
-      background-color: $gray-lightest;
       padding: 22px 18px;
-      border-top: 1px solid $gray-border;
+      border-top: 1px solid $gray-02;
       border-bottom: 1px solid $gray-border;
       @include content;
       color: $primary;

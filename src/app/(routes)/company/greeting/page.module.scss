@@ -19,7 +19,7 @@
   .label,
   .label > em {
     @include label;
-    color: $primary-lighter;
+    color: $blue;
     font-weight: 600;
   }
   .content {

@@ -1,6 +1,10 @@
 @import "@/_styles/mixins";
 @import "@/_styles/variables";
 
+.sr-only {
+  @include sr-only;
+}
+
 .container {
   margin: 100px 0;
   .inner-container {
@@ -9,21 +13,49 @@
   }
 
   .title {
-    @include title;
-    font-weight: 700;
+    font-size: 17px;
     color: $primary-lighter;
-    margin-bottom: 50px;
+    text-align: center;
+    font-weight: 600;
+  }
+  .address {
+    font-weight: 500;
+    color: $policy-font;
+    font-size: 18px;
+    text-align: center;
+    margin: 20px 0 40px 0;
+  }
+  .line {
+    width: 70px;
+    height: 1px;
+    background-color: $gray-lighter;
+    margin: 0 auto;
+    margin-bottom: 40px;
   }
 
-  .address {
+  // .title {
+  //   @include title;
+  //   font-weight: 700;
+  //   color: $primary-lighter;
+  //   margin-bottom: 50px;
+  // }
+
+  .map-container {
+    width: 80%;
+    background-color: yellow;
+    margin: 0 auto;
+    border: 1px solid $gray-lighter;
+  }
+
+  .address-link {
     color: $primary-lighter;
-    padding: 8px;
+    padding: 10px;
     background-color: #fff;
     border-radius: 4px;
-    border: 1px solid $gray;
+    border: 1px solid $gray-02;
     font-size: 14px;
     position: relative;
-    font-weight: bold;
+    font-weight: 500;
 
     &::after {
       content: "";
@@ -39,7 +71,7 @@
     &::before {
       content: "";
       position: absolute;
-      background-color: $gray;
+      background-color: $gray-02;
       width: 12px;
       height: 12px;
       clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
