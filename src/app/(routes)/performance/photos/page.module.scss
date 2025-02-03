@@ -1,6 +1,20 @@
 @import "@/_styles/variables";
 @import "@/_styles/mixins";
 
+.container {
+  @include inner-container;
+
+  .photos-container {
+    margin: 100px 0;
+    width: 100%;
+
+    .write-button {
+      margin-left: auto;
+      margin-bottom: 20px;
+    }
+  }
+}
+
 // .container {
 //   @include inner-container;
 

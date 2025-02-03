@@ -81,54 +81,6 @@ export default function GalleryEditLayout({
             등록
           </Button>
         </div>
-        {/*
-        {/*
-        
-
-        <label htmlFor="title">시작일</label>
-        <DateInput
-          fullWidth
-          id="start_date"
-          year={Number(contents?.year)}
-          value={formatDate(contents?.start_date.toString() ?? "")}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="title">종료일</label>
-        <DateInput
-          fullWidth
-          id="end_date"
-          year={Number(contents?.year)}
-          value={formatDate(contents?.end_date.toString() ?? "")}
-          onChange={handleChange}
-        />
-
-        <label htmlFor="title">비고</label>
-        <Input
-          type="text"
-          name="note"
-          id="note"
-          disabled
-          onChange={handleChange}
-          placeholder="-"
-          required={false}
-          value={contents?.note ?? ""} // null
-          fullWidth
-        />
-
-        <div className={styles["button-container"]}>
-          <Button
-            ariaLabel="취소하기"
-            type="button"
-            color="primary-border"
-            onClick={handleListClick}
-          >
-            취소
-          </Button>
-          <Button ariaLabel="작성 완료" type="submit" color="primary">
-            작성 완료
-          </Button>
-        </div> */}
       </form>
     </section>
   );

@@ -12,7 +12,6 @@ export default function Edit() {
     typeof PHOTO_API.method.post
   >({
     title: "",
-    content: "",
     year: -1,
     path: "",
   });
@@ -22,10 +21,7 @@ export default function Edit() {
     typeof PHOTO_API.method.post
   >(PHOTO_API, photoContents, setPhotoContents);
 
-  const { goToListPage, goToDetailPage } = useBoardAction(
-    "performance",
-    "photos"
-  );
+  const { goToListPage } = useBoardAction("performance", "photos");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,8 +30,7 @@ export default function Edit() {
       if (!id) {
         return;
       }
-      goToDetailPage(id);
-      // 이동
+      goToListPage();
     } catch (error) {
       alert(error);
     }

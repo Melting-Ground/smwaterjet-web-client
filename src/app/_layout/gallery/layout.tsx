@@ -14,6 +14,7 @@ export interface GalleryItemType {
 interface GalleryProps<T extends PhotoType> {
   list: T[];
   isLinkItem?: boolean;
+  handleItemClick?: (item: PhotoType) => void;
   // 페이지네이션 (옵셔널?)
   handleArrowClick?: (direction: "prev" | "next") => void;
   handlePageClick?: (page: number) => void;
@@ -24,6 +25,7 @@ interface GalleryProps<T extends PhotoType> {
 export default function GalleryLayout<T extends PhotoType>({
   list,
   isLinkItem = false,
+  handleItemClick,
   handleArrowClick,
   handlePageClick,
   pages,
@@ -47,55 +49,54 @@ export default function GalleryLayout<T extends PhotoType>({
   };
   return (
     <div className={styles.container}>
-      <div className={styles["gallery-container"]}>
-        <ol className={styles.gallery}>
-          {list && list.length > 0
-            ? list.map((item) => (
-                // link 태그 등
-                <li key={item.id} className={styles["image-container"]}>
-                  {isLinkItem ? (
-                    <Link href={`/${item.id}`}>
-                      <Image
-                        src={`${imageBaseUrl}/${item.path}`}
-                        alt={item.title || ""}
-                        width={400}
-                        height={0}
-                        layout="intrinsic"
-                        className={styles.image}
-                      />
-                      <div className={styles.overlay}>
-                        <span className={styles.description}>{item.title}</span>
-                      </div>
-                    </Link>
-                  ) : (
-                    <>
-                      <Image
-                        src={`${imageBaseUrl}/${item.path}`}
-                        alt={item.title || ""}
-                        width={400}
-                        height={0}
-                        layout="intrinsic"
-                        className={styles.image}
-                      />
-                      <div className={styles.overlay}>
-                        <span className={styles.description}>{item.title}</span>
-                      </div>
-                    </>
-                  )}
-                </li>
-              ))
-            : null}
-        </ol>
-        {pages && currentPage ? (
-          <Pagination
-            currentPage={currentPage}
-            pages={pages}
-            handlePageButtonClick={handlePageButtonClick}
-            handlePrevArrowClick={handlePrevArrowClick}
-            handleNextArrowClick={handleNextArrowClick}
-          />
-        ) : null}
-      </div>
+      <ol className={styles.gallery}>
+        {list && list.length > 0
+          ? list.map((item) => (
+              // link 태그 등
+              <li key={item.id} className={styles["image-container"]}>
+                {isLinkItem ? (
+                  <Link href={`/${item.id}`}>
+                    <Image
+                      src={`${imageBaseUrl}/${item.path}`}
+                      alt={item.title || ""}
+                      width={400}
+                      height={0}
+                      layout="intrinsic"
+                      className={styles.image}
+                    />
+                    <div className={styles.overlay}>
+                      <span className={styles.description}>{item.title}</span>
+                    </div>
+                  </Link>
+                ) : (
+                  <>
+                    <Image
+                      src={`${imageBaseUrl}/${item.path}`}
+                      alt={item.title || ""}
+                      width={400}
+                      height={0}
+                      layout="intrinsic"
+                      className={styles.image}
+                      onClick={() => handleItemClick && handleItemClick(item)}
+                    />
+                    <div className={styles.overlay}>
+                      <span className={styles.description}>{item.title}</span>
+                    </div>
+                  </>
+                )}
+              </li>
+            ))
+          : null}
+      </ol>
+      {pages && currentPage ? (
+        <Pagination
+          currentPage={currentPage}
+          pages={pages}
+          handlePageButtonClick={handlePageButtonClick}
+          handlePrevArrowClick={handlePrevArrowClick}
+          handleNextArrowClick={handleNextArrowClick}
+        />
+      ) : null}
     </div>
   );
 }

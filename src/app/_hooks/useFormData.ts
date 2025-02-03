@@ -135,6 +135,7 @@ const useFormData = <T, P>(
       alert("삭제가 완료되었습니다.");
       return true;
     } catch (error) {
+      console.error(error);
       alert("삭제 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");
       return false;
     }
