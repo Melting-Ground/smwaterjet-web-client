@@ -23,15 +23,11 @@ export default function Edit() {
     typeof REPORTS_API.method.post
   >(REPORTS_API, reportsContents, setReportsContents);
 
-  const { goToListPage } = useBoardAction(
-    "performance",
-    "reports"
-  );
+  const { goToListPage } = useBoardAction("performance", "reports");
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       await uploadForm(e);
-      // TODO: 게시물 등록 후 생성된 id에 해당하는 페이지로 이동
-      // goToDetailPage(id);
+      goToListPage();
     } catch (error) {
       alert(error);
     }
