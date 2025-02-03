@@ -2,6 +2,7 @@ import { CertificatePostType, CertificateType } from "@/_types/certificate";
 import { InquiryPostType, InquiryType } from "@/_types/inquiry";
 // import { NewsPostType, NewsType } from "../_types/news";
 import { NoticePostType, NoticeType } from "@/_types/notice";
+import { PhotoPostType, PhotoType } from "@/_types/photo";
 import { ReportPostType, ReportType } from "@/_types/report";
 
 export type HttpMethodType = "get" | "post" | "put";
@@ -36,12 +37,13 @@ const API_URLS = {
       put: {} as ReportPostType,
     },
   },
+  // 작업사진
   photos: {
-    url: "/performance/reports", // 임시
+    url: "/performance/photos",
     method: {
-      get: {} as ReportType,
-      post: {} as ReportPostType,
-      put: {} as ReportPostType,
+      get: {} as PhotoType,
+      post: {} as PhotoPostType,
+      put: {} as PhotoPostType,
     },
   },
 

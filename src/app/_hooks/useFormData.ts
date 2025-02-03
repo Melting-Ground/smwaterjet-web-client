@@ -14,20 +14,23 @@ const useFormData = <T, P>(
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
-    method: EditMethodType = "upload"
+    method: EditMethodType = "upload",
+    multiplePhotos: boolean = true
   ) => {
     const { value, id, type } = e.target as HTMLInputElement;
     if (!setContents) return;
 
     if (type === "file") {
       const { files } = e.target as HTMLInputElement;
-      const num = Number(id.at(-1));
-      const index = num - 1;
-      if (files) {
+
+      if (multiplePhotos && files) {
+        // 파일이 여러개인 경우
+        const num = Number(id.at(-1));
+        const index = num - 1;
         const fieldName = method === "update" ? "newFiles" : "files";
+
         setContents((prev: P) => {
           const fileList = (prev as P & { files: File[] }).files;
-          // const fileList = prev.files;
           fileList[index] = files[0];
 
           return {
@@ -35,6 +38,12 @@ const useFormData = <T, P>(
             [fieldName]: fileList,
           };
         });
+      } else if (!multiplePhotos && files) {
+        // 파일이 하나인 경우
+        setContents((prev: P) => ({
+          ...prev,
+          file: files[0],
+        }));
       }
     } else {
       setContents((prev) => ({

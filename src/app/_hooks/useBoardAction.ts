@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 
 const useBoardAction = (
   pageCategory: "support" | "performance" | "company",
-  boardCategory: BoardType | "reports" | "certificates"
+  boardCategory: BoardType | "reports" | "certificates" | "photos"
 ) => {
   const router = useRouter();
 

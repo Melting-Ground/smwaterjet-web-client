@@ -1,0 +1,44 @@
+@import "@/_styles/variables";
+@import "@/_styles/mixins";
+
+// reports/edit 이랑 중복
+.container {
+  @include inner-container;
+
+  .form {
+    width: 550px;
+    margin: 0 auto;
+    border: 1px solid $gray-border;
+    // border-radius: 6px;
+    padding: 35px 40px;
+    margin: 150px auto 250px auto;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 10px;
+
+    label {
+      padding-top: 11px;
+      font-size: 16px;
+      color: $primary;
+      font-weight: 500;
+    }
+
+    .file-input {
+      background: none;
+      border: none;
+    }
+
+    .button-container {
+      display: flex;
+      margin: 0 auto;
+      flex-grow: 1;
+      gap: 10px;
+      grid-column: span 2;
+      margin-top: 50px;
+
+      // button {
+      //   width: 100px;
+      // }
+    }
+  }
+}

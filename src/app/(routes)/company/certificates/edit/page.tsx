@@ -54,7 +54,8 @@ export default function Edit() {
   };
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
+      <h2 className={styles["sr-only"]}>특허 등록</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor="file">파일 선택</label>
         <Input
@@ -75,11 +76,11 @@ export default function Edit() {
           >
             취소
           </Button>
-          <Button ariaLabel="작성 완료" type="submit" color="primary">
-            작성 완료
+          <Button ariaLabel="등록" type="submit" color="primary">
+            등록
           </Button>
         </div>
       </form>
-    </div>
+    </section>
   );
 }
