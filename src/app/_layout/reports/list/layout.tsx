@@ -9,7 +9,7 @@ interface ListProps<T> {
   list: T[];
   colWidthList: number[];
   tableHeadList: string[];
-  handleDelete: (id: string) => void;
+  handleDelete: (id: number | undefined) => void;
   handleEditClick: (id?: string) => void;
   isLoggedIn: boolean;
   handleArrowClick: (direction: "prev" | "next") => void;
@@ -81,7 +81,7 @@ export default function BoardListLayout({
                         ariaLabel="삭제하기"
                         color="red"
                         className={styles["delete-button"]}
-                        onClick={() => handleDelete(item.id.toString())}
+                        onClick={() => handleDelete(item.id)}
                       >
                         삭제
                       </Button>

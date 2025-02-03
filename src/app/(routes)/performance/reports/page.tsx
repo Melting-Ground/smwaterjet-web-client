@@ -15,6 +15,7 @@ export default function Reports() {
     dataList: reports,
     paginationInfo,
     fetchDataList,
+    setDataList,
   } = useAPIData<typeof REPORTS_API.method.get>(REPORTS_API);
   const { isLoggedIn } = useAuth();
 
@@ -22,6 +23,20 @@ export default function Reports() {
 
   console.log(reports);
   const { deleteItem } = useFormData(REPORTS_API);
+
+  const handleDeleteItem = async (id: number | undefined) => {
+    if (!id) {
+      return;
+    }
+    const deleted = await deleteItem(id.toString());
+    if (deleted) {
+      const updatedReports = reports
+        ? reports.filter((report) => report.id !== id)
+        : [];
+      setDataList(updatedReports);
+    }
+  };
+
   const { goToEditPage } = useBoardAction("performance", "reports");
   const reportsTableHeadList = [
     "No",
@@ -52,7 +67,7 @@ export default function Reports() {
   return (
     <BoardListLayout
       isLoggedIn={isLoggedIn}
-      handleDelete={deleteItem}
+      handleDelete={handleDeleteItem}
       handleEditClick={goToEditPage}
       tableHeadList={reportsTableHeadList}
       list={reports}
