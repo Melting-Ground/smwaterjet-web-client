@@ -2,18 +2,19 @@
 import React from "react";
 import { EquipmentType } from "@/_types/equipment";
 import { useLocalData } from "@/_hooks/useLocalData";
-import GalleryLayout, { GalleryItemType } from "@/_layout/gallery/layout";
+import GalleryLayout from "@/_layout/gallery/layout";
+import { PhotoType } from "@/_types/photo";
 
 export default function Equipment() {
   // 영상
   const { data: equipments } = useLocalData<EquipmentType[]>("equipments");
 
-  const galleryList: GalleryItemType[] = equipments
+  const galleryList: PhotoType[] = equipments
     ? equipments.map((equipment) => ({
         id: equipment.id,
-        image: equipment.image,
+        path: equipment.image,
         title: equipment.name,
-        link: `/equipment/${equipment.id}`,
+        // path: `/equipment/${equipment.id}`,
       }))
     : [];
   return <GalleryLayout list={galleryList} isLinkItem />;

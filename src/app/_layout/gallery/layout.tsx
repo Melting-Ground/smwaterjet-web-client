@@ -4,13 +4,6 @@ import styles from "./layout.module.scss";
 import Pagination from "@/_components/Pagination/Pagination";
 import { PhotoType } from "@/_types/photo";
 
-export interface GalleryItemType {
-  id: number;
-  image: string;
-  title: string;
-  link?: string;
-}
-
 interface GalleryProps<T extends PhotoType> {
   list: T[];
   isLinkItem?: boolean;
@@ -31,22 +24,22 @@ export default function GalleryLayout<T extends PhotoType>({
   pages,
   currentPage,
 }: GalleryProps<T>) {
-  const imageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
-
   const handlePrevArrowClick = () => {
     if (!handleArrowClick) return;
     handleArrowClick("prev");
   };
+
   const handleNextArrowClick = () => {
     if (!handleArrowClick) return;
-
     handleArrowClick("next");
   };
+
   const handlePageButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!handlePageClick) return;
     const value = (e.target as HTMLButtonElement).value;
     handlePageClick(Number(value));
   };
+
   return (
     <div className={styles.container}>
       <ol className={styles.gallery}>
@@ -55,9 +48,9 @@ export default function GalleryLayout<T extends PhotoType>({
               // link 태그 등
               <li key={item.id} className={styles["image-container"]}>
                 {isLinkItem ? (
-                  <Link href={`/${item.id}`}>
+                  <Link href={`/equipment/${item.id}`}>
                     <Image
-                      src={`${imageBaseUrl}/${item.path}`}
+                      src={item.path}
                       alt={item.title || ""}
                       width={400}
                       height={0}
@@ -71,7 +64,7 @@ export default function GalleryLayout<T extends PhotoType>({
                 ) : (
                   <>
                     <Image
-                      src={`${imageBaseUrl}/${item.path}`}
+                      src={item.path}
                       alt={item.title || ""}
                       width={400}
                       height={0}

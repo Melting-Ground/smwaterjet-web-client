@@ -14,6 +14,7 @@ import useFormData from "@/_hooks/useFormData";
 // 현장 사진
 export default function Photos() {
   const boardType = "photos";
+  const imageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
 
   const { goToEditPage } = useBoardAction("performance", boardType);
 
@@ -80,7 +81,10 @@ export default function Photos() {
         ) : null}
 
         <GalleryLayout
-          list={photos}
+          list={photos.map((photo) => ({
+            ...photo,
+            path: `${imageBaseUrl}/${photo.path}`,
+          }))}
           handleItemClick={onImageModalOpen}
           // 페이지네이션
           pages={pages}
