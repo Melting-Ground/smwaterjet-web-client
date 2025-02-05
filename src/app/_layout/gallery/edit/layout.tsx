@@ -58,7 +58,7 @@ export default function GalleryEditLayout({
           initialValue={currentYear}
           placeholder="공사년도"
           onChange={handleChange}
-          value={contents?.year.toString()}
+          value={contents?.year?.toString()}
         />
         <label htmlFor="title">첨부사진</label>
         <Input

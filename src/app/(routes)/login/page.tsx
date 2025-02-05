@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./page.module.scss";
 import Button from "@/_components/Button/Button";
 import Input from "@/_components/Input/Input";

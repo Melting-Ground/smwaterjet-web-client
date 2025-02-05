@@ -2,12 +2,25 @@
 @import "@/_styles/variables";
 
 .container {
-  //   position: relative;
-  //   width: 200px;
-  //   @include input-base;
+  select::-ms-expand {
+    display: none;
+  }
+  .select {
+    -o-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    width: 100px;
+    height: auto;
+    background: url("/images/arrow-down.svg");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 8px) center;
+    background-size: 18px;
+  }
+
   .select {
     @include input-base;
-    // display: none;
   }
 
   .full-width {

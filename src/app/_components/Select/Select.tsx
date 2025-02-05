@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./Select.module.scss";
 
 interface SelectProps {
-  selectList: number[];
-  initialValue: number;
+  selectList: (number | string)[];
+  initialValue?: number | string;
   placeholder: string;
   value?: string;
   id?: string;
@@ -21,7 +21,6 @@ export default function Select({
   id,
   className: customClassName,
   onChange,
-  //   label,
   fullWidth,
 }: SelectProps) {
   const className = `${styles.select} ${customClassName} ${

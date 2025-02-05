@@ -48,7 +48,6 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
     // password X: 공지사항
 
     setIsLoading((prev) => ({ ...prev, detail: true }));
-
     try {
       const { data } = await axiosInstance.get(`${apiConfig.url}/${id}`, {
         ...getAuthHeaders(password ? password : undefined),
@@ -63,13 +62,28 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
       ) {
         console.error(`비밀번호가 불일치 에러, ${error}`);
         return "비밀번호가 올바르지 않습니다.";
-        // 문의사항 비밀번호 불일치
       } else {
         console.error(`fetData 에러, ${error}`);
         return "알 수 없는 오류가 발생했습니다. 관리자에게 문의하세요.";
       }
     } finally {
       setIsLoading((prev) => ({ ...prev, detail: false }));
+    }
+  };
+
+  const yearSearchDataList = async (year: number | undefined) => {
+    setIsLoading((prev) => ({ ...prev, list: true }));
+    try {
+      const { data } = await axiosInstance.get(`${apiConfig.url}/year/${year}`);
+
+      console.log(data);
+      setDataList(data.items);
+      // setPaginationInfo(data.pagination);
+      // setTotalPageLength(data);
+    } catch (error) {
+      throw new Error(`searchDataList 에러: ${error}`);
+    } finally {
+      setIsLoading((prev) => ({ ...prev, list: false }));
     }
   };
 
@@ -149,6 +163,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
     dataList,
     setDataList,
     fetchDataList,
+    yearSearchDataList,
     paginationInfo,
     dataDetail,
     postData,

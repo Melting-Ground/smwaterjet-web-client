@@ -1,11 +1,25 @@
 @import "@/_styles/variables";
 @import "@/_styles/mixins";
 
+.sr-only {
+  @include sr-only;
+}
+
 .container {
   @include inner-container;
   text-align: center;
 
   .table-container {
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+
+      .select {
+        background-color: $white;
+        border-color: $gray-border;
+      }
+    }
     margin: 100px 50px;
     display: flex;
     width: 100%;
@@ -13,7 +27,6 @@
 
     .write-button {
       margin-left: auto;
-      margin-bottom: 20px;
     }
   }
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useAPIData } from "@/_hooks/useAPIData";
 import { API_URLS } from "@/_config/apiConfig";
 import useFormData from "@/_hooks/useFormData";
@@ -7,6 +7,7 @@ import BoardListLayout from "@/_layout/reports/list/layout";
 import useBoardAction from "@/_hooks/useBoardAction";
 import { useAuth } from "@/_hooks/useAuth";
 import usePagination from "@/_hooks/usePagination";
+import { generateYears } from "@/_utils/generateYears";
 // 게시판
 // TODO: 페이지네이션
 export default function Reports() {
@@ -15,6 +16,7 @@ export default function Reports() {
     dataList: reports,
     paginationInfo,
     fetchDataList,
+    yearSearchDataList,
     setDataList,
   } = useAPIData<typeof REPORTS_API.method.get>(REPORTS_API);
   const { isLoggedIn } = useAuth();
@@ -22,6 +24,24 @@ export default function Reports() {
   const lastPageNumber = paginationInfo?.lastPage || 1;
 
   console.log(reports);
+
+  const yearList = generateYears();
+  const [selectedYear, setSelectedYear] = useState<number | undefined>();
+
+  const handleSelectYear = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
+    setSelectedYear(Number(value));
+  };
+
+  useEffect(() => {
+    if (selectedYear) {
+      yearSearchDataList(selectedYear);
+    } else {
+      // 선택
+      fetchDataList(currentPage);
+    }
+  }, [selectedYear]);
+
   const { deleteItem } = useFormData(REPORTS_API);
 
   const handleDeleteItem = async (id: number | undefined) => {
@@ -69,6 +89,7 @@ export default function Reports() {
       isLoggedIn={isLoggedIn}
       handleDelete={handleDeleteItem}
       handleEditClick={goToEditPage}
+      handleYearSearch={yearSearchDataList}
       tableHeadList={reportsTableHeadList}
       list={reports}
       colWidthList={colWidthList}
@@ -76,6 +97,9 @@ export default function Reports() {
       handleArrowClick={clickArrowButton}
       handlePageClick={clickPageButton}
       currentPage={currentPage}
+      yearList={yearList}
+      handleSelectYear={handleSelectYear}
+      selectedYear={selectedYear}
     />
   );
 }
