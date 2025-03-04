@@ -8,6 +8,7 @@ import Link from "next/link";
 import { formatDate } from "./_utils/formatDate";
 import landingPageImage from "/public/images/background-image.jpg";
 import Image from "next/image";
+import Carousel from "./_components/Carousel/Carousel";
 interface ListItemProps {
   title: string;
   content: JSX.Element;
@@ -118,25 +119,7 @@ export default function Home() {
       {/* TODO: carousel로 구현 */}
       <section>
         <h1>현장 사진</h1>
-        <article className={styles["carousel-container"]}>
-          <ul className={styles.carousel}>
-            <li>
-              <img src="" alt="" className={styles.photo} />
-            </li>
-            <li>
-              <img src="" alt="" className={styles.photo} />
-            </li>
-            <li>
-              <img src="" alt="" className={styles.photo} />
-            </li>
-            <li>
-              <img src="" alt="" className={styles.photo} />
-            </li>
-            <li>
-              <img src="" alt="" className={styles.photo} />
-            </li>
-          </ul>
-        </article>
+        <Carousel />
       </section>
 
       <div className={styles["article-container"]}>

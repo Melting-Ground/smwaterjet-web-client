@@ -1,0 +1,50 @@
+@import "@/_styles/mixins";
+@import "@/_styles/variables";
+
+.carousel-container {
+  width: 100%;
+  height: 500px;
+  overflow-x: hidden;
+  margin-top: 10px;
+  display: flex;
+  height: fit-content;
+
+  .left-arrow,
+  .right-arrow {
+    height: fit-content;
+    margin: auto;
+    background-color: transparent;
+    border: none;
+	
+  }
+  .left-arrow {
+    margin-right: 10px;
+  }
+  .right-arrow {
+    margin-left: 10px;
+  }
+
+  .carousel {
+    display: flex;
+    overflow-x: hidden;
+    gap: 20px;
+    .image-container {
+      width: 300px;
+      height: 200px;
+      position: relative;
+      flex-shrink: 0;
+
+      .image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    }
+
+    .current {
+      background-color: yellow;
+    }
+  }
+}
