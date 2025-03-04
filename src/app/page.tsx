@@ -6,7 +6,8 @@ import { useEffect } from "react";
 import { RiArrowRightUpLine } from "@remixicon/react";
 import Link from "next/link";
 import { formatDate } from "./_utils/formatDate";
-
+import landingPageImage from "/public/images/background-image.jpg";
+import Image from "next/image";
 interface ListItemProps {
   title: string;
   content: JSX.Element;
@@ -57,7 +58,13 @@ export default function Home() {
             </div>
           </Link>
         </div>
-        <img src="" className={styles.photo} />
+        <Image
+          src={landingPageImage}
+          className={styles.photo}
+          alt={"성문워터젯 공사현장 사진"}
+          width={800}
+          height={400}
+        />
       </section>
 
       <div className={styles["full-width"]}>

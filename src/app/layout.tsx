@@ -12,8 +12,6 @@ const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
   display: "swap",
   weight: "45 920",
-  // weight: ["100", "900"], // 폰트 가중치 범위 설정
-  // variable: "--font-pretendard",
 });
 
 export const metadata: Metadata = {

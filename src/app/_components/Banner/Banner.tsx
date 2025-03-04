@@ -8,6 +8,10 @@ export default function Banner() {
   const pathname = usePathname();
   const label = findLabelByPathname(pathname);
   const segment = pathname.split("/")[1]; // path 대분류
+  const isLandingPage = pathname === "/";
+
+  if (isLandingPage) return null;
+
   return (
     <div key={pathname} className={styles.banner} id="banner">
       <div className={`${styles.background} ${styles[segment]}`}>
