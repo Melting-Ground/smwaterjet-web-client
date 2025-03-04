@@ -7,12 +7,10 @@
   display: flex;
   flex-direction: column;
   gap: 100px;
-  margin: 100px auto 250px auto;
+  margin: 230px auto 250px auto;
 
   .top-section {
     width: 100%;
-    @include full-width-without-padding;
-    padding: 100px 0 0 170px;
 
     .left-container {
       display: flex;
