@@ -83,7 +83,7 @@ export default function Photos() {
         <GalleryLayout
           list={photos.map((photo) => ({
             ...photo,
-            path: `${imageBaseUrl}/${photo.path}`,
+            path: `${imageBaseUrl}${photo.thumbnail_path}`,
           }))}
           handleItemClick={onImageModalOpen}
           // 페이지네이션

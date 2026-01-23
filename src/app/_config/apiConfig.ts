@@ -14,7 +14,7 @@ export interface APIConfig<T = unknown, P = unknown> {
 
 const API_URLS = {
   notices: {
-    url: "/support/notices",
+    url: "/notices",
     method: {
       get: {} as NoticeType,
       post: {} as NoticePostType,
@@ -22,7 +22,7 @@ const API_URLS = {
     },
   },
   inquiries: {
-    url: "/support/inquiries",
+    url: "/inquiries",
     method: {
       get: {} as InquiryType,
       post: {} as InquiryPostType,
@@ -39,7 +39,7 @@ const API_URLS = {
   },
   // 작업사진
   photos: {
-    url: "/performance/photos",
+    url: "/photos",
     method: {
       get: {} as PhotoType,
       post: {} as PhotoPostType,

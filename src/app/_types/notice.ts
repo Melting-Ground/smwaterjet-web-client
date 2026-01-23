@@ -8,17 +8,17 @@ export interface NoticePostType {
 }
 
 export interface NoticeType {
-  content: string;
-  created_at: string;
-  files: NoticeFileType[];
+  // list에서는 files/content가 없을 수 있음
+  row_num?: number;
   id: number;
   title: string;
   author: string;
-  count: number;
+  created_at: string;
+  content?: string;
+  files?: NoticeFileType[];
 }
 
 export interface NoticeFileType {
-  file_path: string;
   id: number;
-  notice_id: number;
+  file_path: string;
 }

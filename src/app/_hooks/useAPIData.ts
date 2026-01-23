@@ -146,11 +146,14 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
   const deleteFile = async (id: string) => {
     setIsLoading((prev) => ({ ...prev, deleteFile: true }));
 
+    // API 차이: inquiry는 /files/:id, notice/photo는 /file/:id
+    const isInquiry = apiConfig.url === "/inquiries";
+    const endpoint = isInquiry
+      ? `${apiConfig.url}/files/${id}`
+      : `${apiConfig.url}/file/${id}`;
+
     try {
-      const response = await axiosInstance.delete(
-        `${apiConfig.url}/file/${id}`,
-        getAuthHeaders()
-      );
+      const response = await axiosInstance.delete(endpoint, getAuthHeaders());
       console.log(response);
     } catch (error) {
       throw new Error(`deleteFile 에러: ${error}`);

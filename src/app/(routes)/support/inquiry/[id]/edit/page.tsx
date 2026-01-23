@@ -31,7 +31,6 @@ export default function Edit() {
   >({
     author: "",
     phone_number: "",
-    email: "",
     title: "",
     content: "",
     password: "",
@@ -52,7 +51,6 @@ export default function Edit() {
         author: inquiryDetail?.author || "",
         phone_number: inquiryDetail?.phone_number || "",
         password: password || "",
-        email: inquiryDetail?.email || "",
         title: inquiryDetail?.title || "",
         content: inquiryDetail?.content || "",
         files: inquiryDetail?.files.map((file) => ({

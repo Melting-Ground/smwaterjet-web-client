@@ -12,8 +12,7 @@ export default function Edit() {
     typeof PHOTO_API.method.post
   >({
     title: "",
-    year: -1,
-    path: "",
+    files: [null, null, null, null, null],
   });
 
   const { handleChange, uploadForm } = useFormData<

@@ -3,7 +3,6 @@ import { FileWithIdType } from "./file";
 export interface InquiryPostType {
   author: string;
   phone_number: string;
-  email: string;
   title: string;
   content: string;
   password: string;
@@ -11,19 +10,18 @@ export interface InquiryPostType {
 }
 
 export interface InquiryType {
+  // list에서는 files/content가 없을 수 있음
+  row_num?: number;
   id: number;
   author: string;
-  phone_number: string;
-  password: string;
-  email: string;
+  phone_number?: string;
   title: string;
-  content: string;
+  content?: string;
   created_at: string;
-  files: InquiryFileType[];
+  files?: InquiryFileType[];
 }
 
 export interface InquiryFileType {
   id: number;
   file_path: string;
-  inquiry_id: string;
 }

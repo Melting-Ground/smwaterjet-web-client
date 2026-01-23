@@ -20,6 +20,15 @@ export default function ImageModal({
   selectedImage,
 }: ImageModalProps) {
   const imageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
+  const src = !selectedImage
+    ? ""
+    : "path" in selectedImage && selectedImage.path
+      ? selectedImage.path
+      : "thumbnail_path" in selectedImage
+        ? `${imageBaseUrl}${selectedImage.thumbnail_path}`
+        : "path" in selectedImage
+          ? `${imageBaseUrl}/${selectedImage.path}`
+          : "";
 
   return (
     <article className={styles.modal} onClick={handleImageModalClose}>

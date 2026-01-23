@@ -17,7 +17,6 @@ export default function Edit() {
   >({
     author: "",
     phone_number: "",
-    email: "",
     title: "",
     content: "",
     password: "",

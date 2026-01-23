@@ -3,10 +3,6 @@ import React from "react";
 import styles from "./layout.module.scss";
 import Input from "@/_components/Input/Input";
 import Button from "@/_components/Button/Button";
-import DateInput from "@/_components/DateInput/DateInput";
-import Select from "@/_components/Select/Select";
-import { ReportPostType } from "@/_types/report";
-import { formatDate } from "@/_utils/formatDate";
 import { PhotoPostType } from "@/_types/photo";
 import { EditMethodType } from "@/_types/board";
 
@@ -32,12 +28,6 @@ export default function GalleryEditLayout({
   handleSubmit,
   handleListClick,
 }: EditProps<PhotoPostType>) {
-  const currentYear = new Date().getFullYear();
-  const yearList = Array.from(
-    { length: currentYear + 1 - 2010 },
-    (_, i) => 2010 + i
-  );
-
   return (
     <section className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
@@ -50,15 +40,6 @@ export default function GalleryEditLayout({
           value={contents?.title}
           onChange={handleChange}
           fullWidth
-        />
-        <label htmlFor="title">공사년도</label>
-        <Select
-          id="year"
-          selectList={yearList}
-          initialValue={currentYear}
-          placeholder="공사년도"
-          onChange={handleChange}
-          value={contents?.year?.toString()}
         />
         <label htmlFor="title">첨부사진</label>
         <Input

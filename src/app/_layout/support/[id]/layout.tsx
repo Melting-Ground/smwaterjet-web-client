@@ -65,8 +65,8 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
             <li className={styles["attachment-file"]}>
               <span className={styles.title}>첨부파일</span>
               <span className={styles["info-item"]}>
-                {dataDetail.files.length > 0
-                  ? dataDetail.files.map((file, index) => (
+                {(dataDetail.files?.length ?? 0) > 0
+                  ? (dataDetail.files ?? []).map((file, index) => (
                       <span key={index} className={styles["file-download"]}>
                         <Button
                           ariaLabel="파일 다운로드하기"
@@ -84,18 +84,7 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
                     ))
                   : null}
               </span>
-            </li>
-            <li>
-              {boardType === "notice" && "count" in dataDetail ? (
-                <>
-                  <span className={styles.title}>조회수</span>
-                  <span className={styles["info-item"]}>
-                    {dataDetail.count}
-                  </span>
-                </>
-              ) : null}
-            </li>
-            <li>
+            </li><li>
               <span className={styles.title}>작성일</span>
               <span className={styles["info-item"]}>
                 <time dateTime={dataDetail.created_at}>

@@ -15,20 +15,14 @@ export const businessRoutes: RouteCategoryType = {
   routes: [
     { path: "/business/waterjet", label: "워터젯이란?" },
     { path: "/business/fields", label: "시공분야" },
+    { path: "/business/photos", label: "현장사진" },
   ],
 };
 
 export const equipmentRoutes: RouteCategoryType = {
   title: "주요장비",
   routes: [{ path: "/equipment", label: "주요장비" }],
-};
-
-export const performanceRoutes: RouteCategoryType = {
-  title: "사업실적",
-  routes: [
-    { path: "/performance/reports", label: "실적현황" },
-    { path: "/performance/photos", label: "현장사진" },
-  ],
+  
 };
 
 export const supportRoutes: RouteCategoryType = {
@@ -44,6 +38,5 @@ export const routeCategories: RouteCategoryType[] = [
   companyRoutes,
   businessRoutes,
   equipmentRoutes,
-  performanceRoutes,
   supportRoutes,
 ];

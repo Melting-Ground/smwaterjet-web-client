@@ -84,7 +84,7 @@ export default function BoardEditLayout<
         contents &&
         "password" in contents &&
         "phone_number" in contents &&
-        "email" in contents ? (
+        true ? (
           <>
             <label htmlFor="password">
               비밀번호 <RequiredMark />
@@ -113,19 +113,6 @@ export default function BoardEditLayout<
               name="phone_number"
               id="phone_number"
               value={contents.phone_number}
-              onChange={(e) => handleChange(e, method)}
-              required
-              disabled={method === "update" ? true : false}
-            />
-
-            <label htmlFor="email">
-              이메일 <RequiredMark />
-            </label>
-            <Input
-              type="text"
-              name="email"
-              id="email"
-              value={contents.email}
               onChange={(e) => handleChange(e, method)}
               required
               disabled={method === "update" ? true : false}
