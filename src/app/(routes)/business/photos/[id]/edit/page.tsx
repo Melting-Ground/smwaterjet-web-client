@@ -1,0 +1,79 @@
+"use client";
+import React, { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { API_URLS } from "@/_config/apiConfig";
+import { useAPIData } from "@/_hooks/useAPIData";
+import useFormData from "@/_hooks/useFormData";
+import GalleryEditLayout from "@/_layout/gallery/edit/layout";
+
+export default function Edit() {
+  const PHOTO_API = API_URLS.photos;
+  const { id } = useParams();
+  const router = useRouter();
+  const currentId = typeof id === "string" ? id : undefined;
+
+  const { fetchData, dataDetail, isLoading } = useAPIData<
+    typeof API_URLS.photos.method.get
+  >(API_URLS.photos);
+
+  const [photoContents, setPhotoContents] = useState<
+    typeof PHOTO_API.method.put
+  >({
+    title: "",
+    files: [],
+    newFiles: [],
+  });
+
+  useEffect(() => {
+    if (currentId) {
+      fetchData(currentId);
+    }
+  }, [currentId]);
+
+  useEffect(() => {
+    if (dataDetail) {
+      setPhotoContents({
+        title: dataDetail.title || "",
+        files: [],
+        newFiles: [],
+      });
+    }
+  }, [dataDetail]);
+
+  const { handleChange, updateForm } = useFormData<
+    typeof PHOTO_API.method.get,
+    typeof PHOTO_API.method.put
+  >(PHOTO_API, photoContents, setPhotoContents);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!currentId) {
+      alert("사진 정보를 찾을 수 없습니다.");
+      return;
+    }
+    try {
+      await updateForm(e, currentId);
+      router.push(`/business/photos/${currentId}`);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  if (!currentId) {
+    return <div>해당 사진 정보를 찾을 수 없습니다.</div>;
+  }
+
+  const isNotLoaded = isLoading.detail || !dataDetail;
+
+  return !isNotLoaded ? (
+    <GalleryEditLayout
+      method="update"
+      contents={photoContents}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      handleListClick={() => router.push("/business/photos")}
+    />
+  ) : (
+    <div>로딩중...</div>
+  );
+}

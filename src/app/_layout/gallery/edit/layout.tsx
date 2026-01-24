@@ -45,9 +45,10 @@ export default function GalleryEditLayout({
         <Input
           className={styles["file-input"]}
           type="file"
-          name={`file${1}`}
-          id={`file${1}`}
-          onChange={(e) => handleChange(e, method, false)}
+          name="files"
+          id="files"
+          multiple
+          onChange={(e) => handleChange(e, method, true)}
         />
         <div className={styles["button-container"]}>
           <Button

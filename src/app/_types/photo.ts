@@ -4,6 +4,7 @@ import { FileWithIdType } from "./file";
 export interface PhotoPostType {
   title: string;
   files: (FileWithIdType | File | null)[];
+  newFiles?: (FileWithIdType | File | null)[];
 }
 
 export interface PhotoType {

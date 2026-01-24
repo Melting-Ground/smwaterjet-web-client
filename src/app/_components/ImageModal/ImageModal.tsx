@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./imageModal.module.scss";
 import { RiCloseLine, RiDeleteBinLine } from "@remixicon/react";
 import Button from "../Button/Button";
@@ -20,19 +20,49 @@ export default function ImageModal({
   selectedImage,
 }: ImageModalProps) {
   const imageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
-  const src = !selectedImage
-    ? ""
-    : "path" in selectedImage && selectedImage.path
-      ? selectedImage.path
-      : "thumbnail_path" in selectedImage
-        ? `${imageBaseUrl}${selectedImage.thumbnail_path}`
-        : "path" in selectedImage
-          ? `${imageBaseUrl}/${selectedImage.path}`
-          : "";
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [selectedImage?.id]);
+
+  const buildImageUrl = (path?: string) => {
+    if (!path) return "";
+    if (path.startsWith("http")) return path;
+    if (!imageBaseUrl) return path.startsWith("/") ? path : `/${path}`;
+    const base = imageBaseUrl.endsWith("/")
+      ? imageBaseUrl.slice(0, -1)
+      : imageBaseUrl;
+    const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+    return `${base}/${cleanPath}`;
+  };
+
+  const filePaths = useMemo(() => {
+    if (!selectedImage) return [];
+    if (!("files" in selectedImage)) return [];
+    return (selectedImage.files || []).map((file) => file.file_path);
+  }, [selectedImage]);
+
+  const src = useMemo(() => {
+    if (!selectedImage) return "";
+    if (filePaths.length > 0) {
+      return buildImageUrl(filePaths[activeIndex] || filePaths[0]);
+    }
+    if ("path" in selectedImage && selectedImage.path) {
+      return buildImageUrl(selectedImage.path);
+    }
+    if ("thumbnail_path" in selectedImage) {
+      return buildImageUrl(selectedImage.thumbnail_path);
+    }
+    return "";
+  }, [selectedImage, filePaths, activeIndex]);
 
   return (
     <article className={styles.modal} onClick={handleImageModalClose}>
-      <div className={styles["modal-content"]}>
+      <div
+        className={styles["modal-content"]}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className={styles["modal-button-container"]}>
           {isLoggedIn ? (
             <Button
@@ -52,12 +82,45 @@ export default function ImageModal({
             <RiCloseLine color="white" size={24} />
           </Button>
         </div>
-        <Image
-          src={`${imageBaseUrl}/${selectedImage?.path}`}
-          alt={`expanded-${selectedImage?.id}`}
-          layout="fill"
-          objectFit="contain"
-        />
+        <div className={styles["image-frame"]}>
+          {src ? (
+            <Image
+              src={src}
+              alt={`expanded-${selectedImage?.id}`}
+              fill
+              sizes="90vw"
+              className={styles.image}
+            />
+          ) : null}
+        </div>
+        {filePaths.length > 1 ? (
+          <ul className={styles.thumbnails}>
+            {filePaths.map((path, index) => {
+              const thumbSrc = buildImageUrl(path);
+              return (
+                <li key={`${selectedImage?.id}-${path}-${index}`}>
+                  <button
+                    type="button"
+                    className={`${styles.thumb} ${
+                      index === activeIndex ? styles.active : ""
+                    }`}
+                    onClick={() => setActiveIndex(index)}
+                  >
+                    {thumbSrc ? (
+                      <Image
+                        src={thumbSrc}
+                        alt={`thumbnail-${selectedImage?.id}-${index}`}
+                        fill
+                        sizes="80px"
+                        className={styles["thumb-image"]}
+                      />
+                    ) : null}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        ) : null}
       </div>
     </article>
   );

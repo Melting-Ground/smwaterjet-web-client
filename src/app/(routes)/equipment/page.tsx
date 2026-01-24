@@ -17,5 +17,7 @@ export default function Equipment() {
         // path: `/equipment/${equipment.id}`,
       }))
     : [];
-  return <GalleryLayout list={galleryList} isLinkItem />;
+  return (
+    <GalleryLayout list={galleryList} isLinkItem captionPosition="below" />
+  );
 }

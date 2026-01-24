@@ -9,15 +9,19 @@ export default function Pagination({
   handlePageButtonClick,
   handlePrevArrowClick,
   handleNextArrowClick,
+  className,
+  style,
 }: {
   pages: number[];
   currentPage: number;
   handlePrevArrowClick: () => void;
   handleNextArrowClick: () => void;
   handlePageButtonClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  className?: string;
+  style?: React.CSSProperties;
 }) {
   return (
-    <section className={styles.pagination}>
+    <section className={`${styles.pagination} ${className || ""}`} style={style}>
       <Button
         ariaLabel="이전으로"
         color="transparent"

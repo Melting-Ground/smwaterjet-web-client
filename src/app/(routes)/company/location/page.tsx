@@ -1,12 +1,11 @@
-"use client";
+﻿"use client";
 import React from "react";
+import { RiMapPinLine, RiPhoneLine, RiSmartphoneLine } from "@remixicon/react";
 import { MapMarker, Map, CustomOverlayMap } from "react-kakao-maps-sdk";
 import styles from "./page.module.scss";
 // import { useKakaoLoader } from "@/_hooks/useKakaoLoader";
 
 export default function Location() {
-  // 카카오
-  // const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&autoload=false`;
   // useKakaoLoader(KAKAO_SDK_URL);
   return (
     <div className={styles.container}>
@@ -14,9 +13,20 @@ export default function Location() {
         <h3 className={styles["sr-only"]}>오시는 길</h3>
         <div className={styles["inner-container"]}>
           <p className={styles.title}>Address</p>
-          <address className={styles.address}>
-            강원특별자치도 춘천시 동내면 신촌길 15
-          </address>
+          <ul className={styles["info-list"]}>
+            <li className={styles["info-item"]}>
+              <RiMapPinLine size={18} />
+              <span>강원특별자치도 춘천시 동내면 신촌길 15</span>
+            </li>
+            <li className={styles["info-item"]}>
+              <RiPhoneLine size={18} />
+              <span>033-261-4175</span>
+            </li>
+            <li className={styles["info-item"]}>
+              <RiSmartphoneLine size={18} />
+              <span>010-4277-6693</span>
+            </li>
+          </ul>
           <div className={styles.line} />
           <div className={styles["map-container"]}>
             <Map

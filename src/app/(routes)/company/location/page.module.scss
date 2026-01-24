@@ -1,4 +1,4 @@
-@import "@/_styles/mixins";
+﻿@import "@/_styles/mixins";
 @import "@/_styles/variables";
 
 .sr-only {
@@ -17,6 +17,7 @@
     color: $primary-lighter;
     text-align: center;
     font-weight: 600;
+    margin-bottom: 12px;
   }
   .address {
     font-weight: 500;
@@ -25,12 +26,30 @@
     text-align: center;
     margin: 20px 0 40px 0;
   }
+  .info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 24px auto;
+    display: grid;
+    gap: 10px;
+    width: 100%;
+    justify-items: center;
+  }
+  .info-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: $policy-font;
+    font-size: 17px;
+    text-align: center;
+  }
   .line {
     width: 70px;
     height: 1px;
     background-color: $gray-lighter;
     margin: 0 auto;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
   }
 
   // .title {

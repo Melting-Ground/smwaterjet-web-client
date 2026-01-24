@@ -1,4 +1,4 @@
-import { APIConfig } from "@/_config/apiConfig";
+﻿import { APIConfig } from "@/_config/apiConfig";
 import { EditMethodType } from "@/_types/board";
 import { useAPIData } from "./useAPIData";
 
@@ -24,18 +24,25 @@ const useFormData = <T, P>(
       const { files } = e.target as HTMLInputElement;
 
       if (multiplePhotos && files) {
-        // 파일이 여러개인 경우
-        const num = Number(id.at(-1));
-        const index = num - 1;
         const fieldName = method === "update" ? "newFiles" : "files";
+        const lastChar = id?.at(-1) ?? "";
+        const index = Number.isNaN(Number(lastChar)) ? -1 : Number(lastChar) - 1;
 
         setContents((prev: P) => {
-          const fileList = (prev as P & { files: File[] }).files;
-          fileList[index] = files[0];
+          const prevFiles = (prev as P & { files: File[] }).files || [];
+
+          if (index >= 0) {
+            const fileList = [...prevFiles];
+            fileList[index] = files[0];
+            return {
+              ...prev,
+              [fieldName]: fileList,
+            };
+          }
 
           return {
             ...prev,
-            [fieldName]: fileList,
+            [fieldName]: Array.from(files),
           };
         });
       } else if (!multiplePhotos && files) {

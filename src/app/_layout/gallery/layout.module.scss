@@ -5,56 +5,98 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+}
 
-  .gallery {
+.container-inner {
+  @include inner-container;
+}
+
+.gallery {
+  width: 100%;
+  margin: 80px auto;
+  gap: 24px 16px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-items: center;
+  border-top: 1px solid $gray-02;
+  border-bottom: 1px solid $gray-02;
+  padding: 16px 0;
+
+  .image-container {
+    position: relative;
     width: 100%;
-    margin: 100px auto;
-    gap: 16px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    max-width: 400px;
+    height: auto;
+    margin: auto;
+    overflow: hidden;
+    cursor: pointer;
 
-    .image-container {
+    .image-wrap {
       position: relative;
-      width: 400px;
+      width: 100%;
       height: 260px;
-      margin: auto;
       overflow: hidden;
-      cursor: pointer;
+    }
 
-      &:hover .overlay {
-        background: rgba(0, 0, 0, 0.6);
+    &:hover .overlay {
+      background: rgba(0, 0, 0, 0.6);
 
-        .description {
-          color: $blue;
-        }
-      }
-
-      .image {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-      }
-
-      .overlay {
-        transition: transform 0.5s ease;
-        position: absolute;
-        left: 0;
-        width: 100%;
-        bottom: 0;
-        height: 20%;
-        background: rgba(0, 0, 0, 0.3);
-        // opacity: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transition: opacity 0.3s ease;
-
-        .description {
-          color: $white;
-          font-size: 15px;
-          font-weight: 500;
-        }
+      .description {
+        color: $blue;
       }
     }
+
+    .image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    .overlay {
+      transition: transform 0.5s ease;
+      position: absolute;
+      left: 0;
+      width: 100%;
+      bottom: 0;
+      height: 20%;
+      background: rgba(0, 0, 0, 0.3);
+      // opacity: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.3s ease;
+
+      .description {
+        color: $white;
+        font-size: 15px;
+        font-weight: 500;
+      }
+    }
+
+    .caption {
+      margin-top: 12px;
+      display: block;
+      text-align: center;
+      font-size: 14px;
+      color: $black;
+      font-weight: 500;
+      line-height: 1.4;
+    }
   }
+
+  .row-divider {
+    grid-column: 1 / -1;
+    height: 1px;
+    background-color: $gray-lighter;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    justify-self: stretch;
+  }
+}
+
+.gallery-empty {
+  border-top: none;
+  border-bottom: none;
+  padding: 0;
 }
