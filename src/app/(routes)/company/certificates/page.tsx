@@ -40,10 +40,6 @@ export default function Certificates() {
     fetchDataList(currentPage);
   }, [currentPage]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, []);
-
   const {
     onImageModalOpen,
     onImageModalClose,

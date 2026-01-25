@@ -65,14 +65,17 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
   const previousIndex = currentIndex - 1;
   const nextIndex = currentIndex + 1;
 
-  const previousLink =
+  const query = typeof window !== "undefined" ? window.location.search : "";
+  const previousLinkBase =
     boardType === "inquiry"
       ? `/support/${boardType}/${dataList[previousIndex]?.id}/password`
       : `/support/${boardType}/${dataList[previousIndex]?.id}`;
-  const nextLink =
+  const nextLinkBase =
     boardType === "inquiry"
       ? `/support/${boardType}/${dataList[nextIndex]?.id}/password`
       : `/support/${boardType}/${dataList[nextIndex]?.id}`;
+  const previousLink = `${previousLinkBase}${query}`;
+  const nextLink = `${nextLinkBase}${query}`;
 
   const handlePrevLinkClick = () => {
     if (previousIndex < 0) return;

@@ -250,7 +250,7 @@ export default function Fields() {
               color="blue"
               className={styles["inquiry-button"]}
               onClick={() => {
-                router.push("/support/inquiry/edit");
+                router.push("/support/inquiry");
               }}
               icon={<RiArrowRightUpLine color="#ffffff" size={20} />}
             >

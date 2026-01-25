@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const usePagination = (lastPageNumber: number) => {
@@ -9,13 +9,15 @@ const usePagination = (lastPageNumber: number) => {
   const [isFirstRender, setIsFirstRender] = useState(true);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
   const pages = Array.from({ length: lastPageNumber }, (_, index) => index + 1);
 
   // 초기화. 처음 렌더링에만 실행
   useEffect(() => {
-    const savedPage = sessionStorage.getItem("page");
-    if (savedPage) {
-      setCurrentPage(Number(savedPage));
+    const pageParam = searchParams.get("page");
+    const parsedPage = pageParam ? Number(pageParam) : NaN;
+    if (Number.isFinite(parsedPage) && parsedPage > 0) {
+      setCurrentPage(parsedPage);
     }
     setIsFirstRender(false);
   }, []);
@@ -23,11 +25,20 @@ const usePagination = (lastPageNumber: number) => {
   useEffect(() => {
     if (isFirstRender) return;
 
-    sessionStorage.setItem("page", String(currentPage));
     const params = new URLSearchParams(window.location.search);
     params.set("page", String(currentPage));
     router.push(`?${params.toString()}`);
   }, [currentPage]);
+
+  useEffect(() => {
+    const pageParam = searchParams.get("page");
+    const parsedPage = pageParam ? Number(pageParam) : NaN;
+    if (Number.isFinite(parsedPage) && parsedPage > 0) {
+      if (parsedPage !== currentPage) {
+        setCurrentPage(parsedPage);
+      }
+    }
+  }, [searchParams]);
 
   const clickPageButton = (page: number) => {
     // ?page=1 쿼리 파라미터 전달

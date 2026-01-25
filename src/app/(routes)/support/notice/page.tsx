@@ -36,10 +36,6 @@ export default function Notice() {
     fetchDataList(currentPage);
   }, [currentPage]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, []);
-
   return (
     <BoardListLayout
       isLoggedIn={isLoggedIn}

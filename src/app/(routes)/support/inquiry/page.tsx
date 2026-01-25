@@ -31,10 +31,6 @@ export default function Inquiry() {
     fetchDataList(currentPage);
   }, [currentPage]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, []);
-
   const { goToEditPage } = useBoardAction("support", boardType);
 
   const inquiryTableHeadList = ["No", "제목", "글쓴이", "등록일"];

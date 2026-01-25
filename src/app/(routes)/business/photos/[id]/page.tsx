@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useMemo } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import styles from "./page.module.scss";
 import { API_URLS } from "@/_config/apiConfig";
@@ -13,6 +13,7 @@ export default function PhotoDetail() {
   const { id } = useParams();
   const router = useRouter();
   const currentId = typeof id === "string" ? id : undefined;
+  const searchParams = useSearchParams();
   const imageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
 
   const { fetchData, dataDetail, isLoading } = useAPIData<
@@ -30,6 +31,12 @@ export default function PhotoDetail() {
       : imageBaseUrl;
     const cleanPath = path.startsWith("/") ? path.slice(1) : path;
     return `${base}/${cleanPath}`;
+  };
+
+  const isVideoFile = (path?: string) => {
+    if (!path) return false;
+    const ext = path.split(".").pop()?.toLowerCase() || "";
+    return ["mp4", "webm", "ogg"].includes(ext);
   };
 
   const formatDateTime = (value?: string) => {
@@ -72,10 +79,15 @@ export default function PhotoDetail() {
     router.push(`/business/photos/${dataDetail.id}/edit`);
   };
 
+  const listQuery = searchParams.toString();
+  const listUrl = listQuery
+    ? `/business/photos?${listQuery}`
+    : "/business/photos";
+
   const handleDeleteClick = async () => {
     const deleted = await deleteItem(String(dataDetail.id));
     if (deleted) {
-      router.push("/business/photos");
+      router.push(listUrl);
     }
   };
 
@@ -89,17 +101,28 @@ export default function PhotoDetail() {
       <ul className={styles.images}>
         {filePaths.map((path, index) => {
           const src = buildImageUrl(path);
+          const isVideo = isVideoFile(path);
           return (
             <li key={`${dataDetail.id}-${index}`} className={styles.imageItem}>
               <div className={styles.imageFrame}>
                 {src ? (
-                  <Image
-                    src={src}
-                    alt={`${dataDetail.title}-${index + 1}`}
-                    fill
-                    sizes="90vw"
-                    className={styles.image}
-                  />
+                  isVideo ? (
+                    <video
+                      className={styles.video}
+                      controls
+                      preload="metadata"
+                    >
+                      <source src={src} />
+                    </video>
+                  ) : (
+                    <Image
+                      src={src}
+                      alt={`${dataDetail.title}-${index + 1}`}
+                      fill
+                      sizes="90vw"
+                      className={styles.image}
+                    />
+                  )
                 ) : null}
               </div>
             </li>
@@ -132,7 +155,7 @@ export default function PhotoDetail() {
           type="button"
           color="primary"
           className={styles["go-list-button"]}
-          onClick={() => router.push("/business/photos")}
+          onClick={() => router.push(listUrl)}
         >
           목록으로
         </Button>

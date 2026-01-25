@@ -23,9 +23,39 @@
       font-weight: 500;
     }
 
+    .section-label {
+      grid-column: span 2;
+      padding-top: 20px;
+    }
+
     .file-input {
       background: none;
       border: none;
+    }
+
+    .exist-file-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 8px;
+      border-bottom: 1px solid $gray-lighter;
+    }
+
+    .exist-file-label {
+      padding-top: 8px;
+      font-size: 14px;
+      color: $gray-02;
+    }
+
+    .file-name {
+      flex: 1;
+      font-size: 14px;
+      color: $gray-02;
+      word-break: break-all;
+    }
+
+    .file-delete-button {
+      margin-left: auto;
     }
 
     .button-container {

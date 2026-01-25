@@ -8,12 +8,13 @@ import useBoardAction from "@/_hooks/useBoardAction";
 import usePagination from "@/_hooks/usePagination";
 import { useAPIData } from "@/_hooks/useAPIData";
 import { API_URLS } from "@/_config/apiConfig";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Photos() {
   const boardType = "photos";
   const imageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
   const router = useRouter();
+  const searchParams = useSearchParams();
   const buildImageUrl = (path?: string) => {
     if (!path) return "";
     if (path.startsWith("http")) return path;
@@ -46,12 +47,13 @@ export default function Photos() {
     fetchDataList(currentPage, 8);
   }, [currentPage]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, []);
   const { isLoggedIn } = useAuth();
   const handleDetailOpen = (item: { id: number }) => {
-    router.push(`/business/photos/${item.id}`);
+    const query = searchParams.toString();
+    const detailUrl = query
+      ? `/business/photos/${item.id}?${query}`
+      : `/business/photos/${item.id}`;
+    router.push(detailUrl);
   };
 
   return (

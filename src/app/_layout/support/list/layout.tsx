@@ -35,6 +35,7 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
   currentPage,
   pageSize = 10,
 }: ListProps<T>) {
+  const pageQuery = { page: currentPage };
   const handlePrevArrowClick = () => {
     handleArrowClick("prev");
   };
@@ -89,11 +90,13 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
                     <div className={styles["title-cell"]}>
                     <Link
                       className={styles["title-link"]}
-                      href={
-                        boardType === "inquiry"
-                          ? `/support/${boardType}/${item.id}/password`
-                          : `/support/${boardType}/${item.id}`
-                      }
+                      href={{
+                        pathname:
+                          boardType === "inquiry"
+                            ? `/support/${boardType}/${item.id}/password`
+                            : `/support/${boardType}/${item.id}`,
+                        query: pageQuery,
+                      }}
                     >
                       {item.title}
                     </Link>

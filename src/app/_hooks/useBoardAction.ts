@@ -18,7 +18,9 @@ const useBoardAction = (
   };
 
   const goToListPage = () => {
-    router.push(`/${pageCategory}/${boardCategory}`);
+    const query =
+      typeof window !== "undefined" ? window.location.search : "";
+    router.push(`/${pageCategory}/${boardCategory}${query}`);
   };
 
   const goToDetailPage = (id: string) => {
