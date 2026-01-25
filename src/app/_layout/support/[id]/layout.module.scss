@@ -4,25 +4,52 @@
 .container {
   @include inner-container;
   display: block;
-  margin-top: 100px;
+  margin-top: 60px;
   margin-bottom: 100px;
 
   .article {
     width: 100%;
     @include table-content;
 
+    .head-title-block {
+      padding: 10px 0 12px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
     .head-title {
-      padding: 22px 18px;
-      border-top: 1px solid $gray-02;
-      border-bottom: 1px solid $gray-border;
-      @include content;
-      color: $primary;
-      font-weight: 500;
+      font-size: 24px;
+      font-weight: 700;
+      color: $black;
+    }
+
+    .head-date {
+      font-size: 13px;
+      color: $gray-02;
+    }
+
+    .head-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .head-meta-item {
+      font-size: 13px;
+      color: $gray-02;
+    }
+
+    .head-divider {
+      height: 1px;
+      background-color: $black;
+      margin: 0;
     }
     .head-sub {
-      padding: 22px 18px;
+      padding: 18px 0;
       display: grid;
-      grid-template-columns: 1fr auto auto;
+      grid-template-columns: 1fr;
       column-gap: 24px;
       border-bottom: 1px solid $gray-lighter;
       @include table-content-small;
@@ -36,6 +63,17 @@
       .title {
         padding-right: 8px;
         font-size: 16px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+
+        &::after {
+          content: "";
+          display: inline-block;
+          width: 2px;
+          height: 16px;
+          background-color: $gray-lighter;
+        }
       }
 
       .info-item {
@@ -61,9 +99,34 @@
     }
 
     .content {
-      padding: 50px 18px;
+      padding: 50px 0;
       line-height: 1.3;
       white-space: pre-line;
+    }
+
+    .image-list {
+      list-style: none;
+      padding: 0 0 20px 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .image-item {
+      width: 100%;
+    }
+
+    .image-frame {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      max-height: 700px;
+      background-color: $gray-lightest;
+    }
+
+    .image {
+      object-fit: contain;
     }
 
     .nav {

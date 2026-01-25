@@ -22,21 +22,29 @@
   border-bottom: 1px solid $gray-02;
   padding: 16px 0;
 
-  .image-container {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    margin: auto;
-    overflow: hidden;
-    cursor: pointer;
-
-    .image-wrap {
+    .image-container {
       position: relative;
       width: 100%;
-      height: 260px;
+      max-width: 400px;
+      height: auto;
+      margin: auto;
       overflow: hidden;
-    }
+      cursor: pointer;
+
+      .image-wrap {
+        position: relative;
+        width: 100%;
+        height: 260px;
+        overflow: hidden;
+      }
+
+      &:hover .image {
+        transform: scale(1.03);
+      }
+
+      &:hover .image-wrap {
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+      }
 
     &:hover .overlay {
       background: rgba(0, 0, 0, 0.6);
@@ -46,11 +54,12 @@
       }
     }
 
-    .image {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
+      .image {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.2s ease;
+      }
 
     .overlay {
       transition: transform 0.5s ease;

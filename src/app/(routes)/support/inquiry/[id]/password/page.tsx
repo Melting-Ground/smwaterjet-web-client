@@ -6,16 +6,24 @@ import Button from "@/_components/Button/Button";
 import { usePathname, useRouter } from "next/navigation";
 import { UserInquiryPasswordContext } from "@/_contexts/inquiryContext";
 import useBoardAction from "@/_hooks/useBoardAction";
+import { useAuth } from "@/_hooks/useAuth";
 
 export default function Password() {
   const router = useRouter();
   const pathname = usePathname();
   const id = pathname?.split("/")[3];
   const { password, setPassword } = UserInquiryPasswordContext();
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
     setPassword("");
   }, [id]);
+
+  useEffect(() => {
+    if (isLoggedIn && id) {
+      router.replace(`/support/inquiry/${id}`);
+    }
+  }, [isLoggedIn, id]);
 
   const onPasswordSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

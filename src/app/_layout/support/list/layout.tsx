@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import Button from "@/_components/Button/Button";
 import styles from "./layout.module.scss";
 import Link from "next/link";
@@ -19,6 +19,7 @@ interface ListProps<T> {
   handlePageClick: (page: number) => void;
   pages: number[];
   currentPage: number;
+  pageSize?: number;
 }
 
 export default function BoardListLayout<T extends NoticeType | InquiryType>({
@@ -32,6 +33,7 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
   handlePageClick,
   pages,
   currentPage,
+  pageSize = 10,
 }: ListProps<T>) {
   const handlePrevArrowClick = () => {
     handleArrowClick("prev");
@@ -80,11 +82,13 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
           </thead>
           <tbody>
             {list ? (
-              list.map((item) => (
+              list.map((item, index) => (
                 <tr key={item.id}>
-                  <td>{item.id}</td>
+                  <td>{(currentPage - 1) * pageSize + index + 1}</td>
                   <td className={styles.title}>
+                    <div className={styles["title-cell"]}>
                     <Link
+                      className={styles["title-link"]}
                       href={
                         boardType === "inquiry"
                           ? `/support/${boardType}/${item.id}/password`
@@ -93,6 +97,7 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
                     >
                       {item.title}
                     </Link>
+                    </div>
                   </td>
                   <td>{item.author}</td>
                   <td>

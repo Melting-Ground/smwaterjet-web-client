@@ -48,6 +48,7 @@ export default function Notice() {
       list={notices}
       handleEditClick={goToEditPage}
       colWidthList={colWidthList}
+      pageSize={paginationInfo?.limit || 10}
       pages={pages}
       handleArrowClick={clickArrowButton}
       handlePageClick={clickPageButton}

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import styles from "./layout.module.scss";
 import React from "react";
 import { RiArrowUpSFill, RiArrowDownSFill } from "@remixicon/react";
@@ -11,6 +11,7 @@ import { InquiryType } from "@/_types/inquiry";
 import { BoardType } from "@/_types/board";
 import { formatDate } from "@/_utils/formatDate";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface DetailProps<T> {
   dataDetail: T;
@@ -33,7 +34,32 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
   handleEditClick,
   handleListClick,
 }: DetailProps<T>) {
-  // 배열의 인덱스
+  const isImageFile = (path?: string) => {
+    if (!path) return false;
+    const ext = path.split(".").pop()?.toLowerCase() || "";
+    return ["jpg", "jpeg", "png", "gif", "webp", "bmp", "svg"].includes(ext);
+  };
+
+  const buildFileUrl = (path?: string) => {
+    if (!path) return "";
+    if (path.startsWith("http")) return path;
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "";
+    const base = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
+    const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+    return `${base}/${cleanPath}`;
+  };
+
+  const formatDateTime = (value?: string) => {
+    if (!value) return "";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return value;
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+  };
   const router = useRouter();
   const currentIndex = dataList.findIndex((data) => data.id === currentId);
   const previousIndex = currentIndex - 1;
@@ -49,10 +75,12 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
       : `/support/${boardType}/${dataList[nextIndex]?.id}`;
 
   const handlePrevLinkClick = () => {
+    if (previousIndex < 0) return;
     router.push(previousLink);
   };
 
   const handleNextLinkClick = () => {
+    if (nextIndex >= dataList.length) return;
     router.push(nextLink);
   };
 
@@ -60,40 +88,84 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
     <div className={styles.container}>
       {dataDetail && (
         <article className={styles.article}>
-          <h3 className={styles["head-title"]}>{dataDetail.title}</h3>
+          <div className={styles["head-title-block"]}>
+            <h3 className={styles["head-title"]}>{dataDetail.title}</h3>
+            <div className={styles["head-meta"]}>
+              <time
+                className={styles["head-date"]}
+                dateTime={dataDetail.created_at}
+              >
+                {formatDateTime(dataDetail.created_at)}
+              </time>
+              {"phone_number" in dataDetail ? (
+                <>
+                  <span className={styles["head-meta-item"]}>
+                    작성자: {dataDetail.author}
+                  </span>
+                  {dataDetail.phone_number ? (
+                    <span className={styles["head-meta-item"]}>
+                      연락처: {dataDetail.phone_number}
+                    </span>
+                  ) : null}
+                </>
+              ) : null}
+            </div>
+          </div>
+          <div className={styles["head-divider"]} />
           <ul className={styles["head-sub"]}>
             <li className={styles["attachment-file"]}>
               <span className={styles.title}>첨부파일</span>
               <span className={styles["info-item"]}>
                 {(dataDetail.files?.length ?? 0) > 0
-                  ? (dataDetail.files ?? []).map((file, index) => (
-                      <span key={index} className={styles["file-download"]}>
-                        <Button
-                          ariaLabel="파일 다운로드하기"
-                          className={styles["file-download-button"]}
-                          color="transparent-link"
-                          onClick={() => {
-                            downloadFile(file); // 각 파일에 대한 다운로드 함수 호출
-                          }}
-                        >
-                          <RiFile2Line size={16} color="#75767f" />
-                          {file.file_path.split("/")[2]}{" "}
-                          {/* 파일 경로에서 파일명 추출 */}
-                        </Button>
-                      </span>
-                    ))
-                  : null}
-              </span>
-            </li><li>
-              <span className={styles.title}>작성일</span>
-              <span className={styles["info-item"]}>
-                <time dateTime={dataDetail.created_at}>
-                  {formatDate(dataDetail.created_at)}
-                </time>
+                  ? (dataDetail.files ?? [])
+                      .filter((file) => !isImageFile(file.file_path))
+                      .map((file, index) => (
+                        <span key={index} className={styles["file-download"]}>
+                          <Button
+                            ariaLabel="파일 다운로드하기"
+                            className={styles["file-download-button"]}
+                            color="transparent-link"
+                            onClick={() => {
+                              downloadFile(file); // 각 파일에 대한 다운로드 함수 호출
+                            }}
+                          >
+                            <RiFile2Line size={16} color="#75767f" />
+                            {file.file_path.split("/").pop()}{" "}
+                            {/* 파일 경로에서 파일명 추출 */}
+                          </Button>
+                        </span>
+                      ))
+                  : "첨부파일 없음"}
               </span>
             </li>
           </ul>
           <p className={styles.content}>{dataDetail.content}</p>
+          {(dataDetail.files ?? []).some((file) =>
+            isImageFile(file.file_path)
+          ) ? (
+            <ul className={styles["image-list"]}>
+              {(dataDetail.files ?? [])
+                .filter((file) => isImageFile(file.file_path))
+                .map((file, index) => {
+                  const src = buildFileUrl(file.file_path);
+                  return (
+                    <li key={`${file.id}-${index}`} className={styles["image-item"]}>
+                      <div className={styles["image-frame"]}>
+                        {src ? (
+                          <Image
+                            src={src}
+                            alt={`attachment-${file.id}`}
+                            fill
+                            sizes="(min-width: 1200px) 900px, 90vw"
+                            className={styles.image}
+                          />
+                        ) : null}
+                      </div>
+                    </li>
+                  );
+                })}
+            </ul>
+          ) : null}
           <ul className={styles.nav}>
             <li className={styles["nav-item"]}>
               <span>

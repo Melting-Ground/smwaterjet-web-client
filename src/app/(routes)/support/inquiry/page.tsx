@@ -38,7 +38,7 @@ export default function Inquiry() {
   const { goToEditPage } = useBoardAction("support", boardType);
 
   const inquiryTableHeadList = ["No", "제목", "글쓴이", "등록일"];
-  const colWidthList = [80, 400, 100, 100];
+  const colWidthList = [80, 420, 120, 120];
 
   return (
     <BoardListLayout
@@ -48,6 +48,7 @@ export default function Inquiry() {
       boardType={boardType}
       colWidthList={colWidthList}
       handleEditClick={goToEditPage}
+      pageSize={paginationInfo?.limit || 10}
       pages={pages}
       handleArrowClick={clickArrowButton}
       handlePageClick={clickPageButton}

@@ -113,9 +113,14 @@ export default function BoardEditLayout<
               name="phone_number"
               id="phone_number"
               value={contents.phone_number}
-              onChange={(e) => handleChange(e, method)}
+              onChange={(e) => {
+                e.target.value = e.target.value.replace(/\D/g, "").slice(0, 11);
+                handleChange(e, method);
+              }}
               required
               disabled={method === "update" ? true : false}
+              inputMode="numeric"
+              pattern="[0-9]*"
             />
           </>
         ) : null}

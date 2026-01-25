@@ -1,15 +1,18 @@
-import axios from "axios";
+﻿import axios from "axios";
 import { InquiryFileType } from "@/_types/inquiry";
 import { NoticeFileType } from "@/_types/notice";
 
 export const downloadFile = (file: NoticeFileType | InquiryFileType) => {
   const filePath = file.file_path;
-  const fileName = filePath.split("/")[2]; // 파일 이름
-  const fullUrl = `${process.env.NEXT_PUBLIC_API_URL}/${filePath}`;
+  const fileName = filePath.split("/").pop() || "file"; // 파일 이름
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "";
+  const fullUrl = filePath.startsWith("http")
+    ? filePath
+    : `${baseUrl.replace(/\/$/, "")}/${filePath.replace(/^\//, "")}`;
 
   const download = (url: string, name: string) => {
     if (!url) {
-      throw new Error("URL을 제공해야 합니다.");
+      throw new Error("URL이 제공되어야 합니다.");
     }
 
     axios({

@@ -1,5 +1,5 @@
-"use client";
-import { useParams } from "next/navigation"; // useParams를 import합니다.
+﻿"use client";
+import { useParams } from "next/navigation"; // useParams瑜?import?⑸땲??
 import React, { useEffect } from "react";
 import { API_URLS } from "@/_config/apiConfig";
 import { useAPIData } from "@/_hooks/useAPIData";
@@ -8,12 +8,14 @@ import { useRouter } from "next/navigation";
 import BoardDetailLayout from "@/_layout/support/[id]/layout";
 import useFormData from "@/_hooks/useFormData";
 import useBoardAction from "@/_hooks/useBoardAction";
+import { useAuth } from "@/_hooks/useAuth";
 
 export default function InquiryDetail() {
   const router = useRouter();
   const boardType = "inquiry";
   const {
     fetchData: fetchInquiryDetail,
+    fetchDataList,
     dataList: inquiryList,
     dataDetail: inquiryDetail,
     isLoading,
@@ -21,6 +23,7 @@ export default function InquiryDetail() {
 
   const { id } = useParams();
   const { password } = UserInquiryPasswordContext();
+  const { isLoggedIn } = useAuth();
 
   const currentId = typeof id === "string" ? id : undefined;
 
@@ -32,11 +35,16 @@ export default function InquiryDetail() {
   };
 
   const getInquiryDetail = async (id: string) => {
-    const errorMessage = await fetchInquiryDetail(id, password);
+    const errorMessage = await fetchInquiryDetail(
+      id,
+      isLoggedIn ? undefined : password
+    );
     if (errorMessage) {
       alert(errorMessage);
-      // 비밀번호 입력 페이지로 라우팅 (return)
-      router.push(`/support/inquiry/${id}/password`);
+      // 鍮꾨?踰덊샇 ?낅젰 ?섏씠吏濡??쇱슦??(return)
+      if (!isLoggedIn) {
+        router.push(`/support/inquiry/${id}/password`);
+      }
     }
   };
 
@@ -46,6 +54,10 @@ export default function InquiryDetail() {
     }
   }, [currentId]);
 
+  useEffect(() => {
+    fetchDataList(1, 100);
+  }, []);
+
   const handleDelete = async (id: string) => {
     const isDeleted = await deleteItem(id);
     if (isDeleted) {
@@ -53,7 +65,7 @@ export default function InquiryDetail() {
     }
   };
   if (!currentId) {
-    return <div>존재하지 않는 게시물입니다.</div>;
+    return <div>議댁옱?섏? ?딅뒗 寃뚯떆臾쇱엯?덈떎.</div>;
   }
   const isNotLoaded = isLoading.detail || !inquiryDetail;
 
@@ -69,6 +81,6 @@ export default function InquiryDetail() {
       handleListClick={goToListPage}
     />
   ) : (
-    <div>로딩중</div>
+    <div>로딩중...</div>
   );
 }

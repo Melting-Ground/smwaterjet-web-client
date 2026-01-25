@@ -13,6 +13,7 @@ export default function NoticeDetail() {
   const boardType = "notice";
   const {
     fetchData: fetchNoticeDetail,
+    fetchDataList,
     dataList: noticeList,
     dataDetail: noticeDetail,
     isLoading,
@@ -28,6 +29,10 @@ export default function NoticeDetail() {
       fetchNoticeDetail(currentId);
     }
   }, [currentId]);
+
+  useEffect(() => {
+    fetchDataList(1, 100);
+  }, []);
 
   const { deleteItem } = useFormData(API_URLS.notices);
   const { goToEditPage, goToListPage } = useBoardAction("support", "notice");

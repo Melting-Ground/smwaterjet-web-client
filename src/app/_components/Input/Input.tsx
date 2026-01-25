@@ -20,6 +20,8 @@ interface InputProps {
   fullWidth?: boolean;
   multiple?: boolean;
   required?: boolean;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+  pattern?: string;
 }
 
 export default function Input({
@@ -40,6 +42,8 @@ export default function Input({
   fullWidth = false,
   multiple = false,
   required = false,
+  inputMode,
+  pattern,
 }: InputProps) {
   const className = `${styles.input} ${customClassName} ${
     fullWidth ? styles["full-width"] : ""
@@ -67,6 +71,8 @@ export default function Input({
         placeholder={placeholder}
         multiple={multiple}
         required={required}
+        inputMode={inputMode}
+        pattern={pattern}
       />
       {icon && iconPosition === "inner-right" && (
         <span className={styles["inner-right-icon"]}>{icon}</span>
