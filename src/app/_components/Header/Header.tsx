@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import NavSubList from "./NavSubList";
 import NavList from "./NavList";
@@ -27,7 +27,7 @@ export default function Header() {
           />
         </div>
       </header>
-      {/* display: none으로 바꾸기 */}
+      {/* display: none로 바꾸기?*/}
       <NavSubList
         isOpen={isOpen}
         onOpen={onOpen}

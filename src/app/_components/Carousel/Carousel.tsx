@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./carousel.module.scss";
 import { useCarousel } from "@/_hooks/useCarousel";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "@remixicon/react";
+import Link from "next/link";
 
 const images = [
   { src: "/images/banner/company.jpg", alt: "1" },
@@ -46,13 +47,15 @@ export default function Carousel() {
                 : "none",
             }}
           >
-            <Image
-              src={image.src}
-              alt={image.src}
-              className={`${styles.image}`}
-              layout="fill"
-              objectFit="cover"
-            />
+            <Link href="/business/photos" className={styles["image-link"]}>
+              <Image
+                src={image.src}
+                alt={image.alt || "현장사진"}
+                className={styles.image}
+                layout="fill"
+                objectFit="cover"
+              />
+            </Link>
           </li>
         ))}
       </ul>

@@ -34,12 +34,31 @@
       position: relative;
       flex-shrink: 0;
 
+      .image-link {
+        position: absolute;
+        inset: 0;
+        display: block;
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
       .image {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
+        transition: transform 0.3s ease, filter 0.3s ease;
+      }
+
+      &:hover .image-link {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 24px rgba(15, 23, 42, 0.18);
+      }
+
+      &:hover .image {
+        transform: scale(1.03);
+        filter: saturate(1.05);
       }
     }
 

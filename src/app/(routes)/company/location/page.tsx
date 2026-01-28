@@ -1,12 +1,10 @@
-﻿"use client";
-import React from "react";
-import { RiMapPinLine, RiPhoneLine, RiSmartphoneLine } from "@remixicon/react";
-import { MapMarker, Map, CustomOverlayMap } from "react-kakao-maps-sdk";
-import styles from "./page.module.scss";
-// import { useKakaoLoader } from "@/_hooks/useKakaoLoader";
+"use client";
 
-export default function Location() {
-  // useKakaoLoader(KAKAO_SDK_URL);
+import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
+import { RiMapPinLine, RiPhoneLine, RiSmartphoneLine } from "@remixicon/react";
+import styles from "./page.module.scss";
+
+export default function LocationPage() {
   return (
     <div className={styles.container}>
       <section>
