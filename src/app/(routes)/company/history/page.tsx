@@ -1,7 +1,6 @@
-"use client";
+﻿"use client";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./page.module.scss";
-import { motion } from "framer-motion";
 
 const historyData = [
   {
@@ -50,30 +49,23 @@ const historyData = [
 ];
 
 export default function History() {
-  const [boxHeight, setBoxHeight] = useState<number>(0);
+  const [lineHeight, setLineHeight] = useState<number>(0);
+  const [lineTop, setLineTop] = useState<number>(0);
   const [currentYear, setCurrentYear] = useState<string | null>(null);
   const yearRefs = useRef<{ [key: string]: HTMLLIElement | null }>({});
   const containerRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLOListElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
 
-      const containerRect = containerRef.current.getBoundingClientRect();
-      const containerTop = containerRect.top;
-      const containerHeight = containerRect.height;
+      const listEl = listRef.current;
+      if (!listEl) return;
+      const listHeight = listEl.offsetHeight;
       const windowHeight = window.innerHeight;
 
-      // 스크롤 퍼센트
-      const scrollProgress = Math.max(
-        0,
-        Math.min(1, -containerTop / (containerHeight - windowHeight))
-      );
-      const newHeight = scrollProgress * 100;
-      setBoxHeight(newHeight);
-
-      // 현재 스크롤 위치에 해당하는 li
-      const threshold = windowHeight / 3; // 화면 1/3 지점을 기준으로 설정
+      const threshold = windowHeight / 3;
       let closestYear: string | null = null;
       let closestDistance = Infinity;
 
@@ -89,6 +81,17 @@ export default function History() {
 
       if (closestYear !== currentYear) {
         setCurrentYear(closestYear);
+      }
+
+      if (closestYear && yearRefs.current[closestYear]) {
+        const markerCenterOffset = 60;
+        const activeEl = yearRefs.current[closestYear];
+        if (!activeEl) return;
+        const activeOffset = activeEl.offsetTop + markerCenterOffset;
+        const lastYear = historyData[historyData.length - 1]?.year;
+        const isLast = lastYear === closestYear;
+        setLineTop(0);
+        setLineHeight(isLast ? listHeight : Math.max(0, activeOffset));
       }
     };
 
@@ -120,14 +123,11 @@ export default function History() {
 
   return (
     <div className={styles.container} ref={containerRef}>
-      <ol className={styles.history}>
-        <motion.div
+      <ol className={styles.history} ref={listRef}>
+        <div
           id="box"
           className={styles["history-line"]}
-          style={{ height: `${boxHeight}%` }}
-          initial={{ height: 0 }}
-          animate={{ height: `${boxHeight}%` }}
-          transition={{ duration: 0.3 }}
+          style={{ height: `${lineHeight}px`, top: `${lineTop}px` }}
         />
         {historyData.map((item, index) => (
           <li

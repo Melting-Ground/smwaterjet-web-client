@@ -1,16 +1,18 @@
-"use client";
-
-import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
+﻿"use client";
+import React from "react";
 import { RiMapPinLine, RiPhoneLine, RiSmartphoneLine } from "@remixicon/react";
+import { MapMarker, Map, CustomOverlayMap } from "react-kakao-maps-sdk";
 import styles from "./page.module.scss";
+// import { useKakaoLoader } from "@/_hooks/useKakaoLoader";
 
-export default function LocationPage() {
+export default function Location() {
+  // useKakaoLoader(KAKAO_SDK_URL);
   return (
     <div className={styles.container}>
       <section>
         <h3 className={styles["sr-only"]}>오시는 길</h3>
         <div className={styles["inner-container"]}>
-          <p className={styles.title}>Address</p>
+          <p className={styles.title}>ADDRESS</p>
           <ul className={styles["info-list"]}>
             <li className={styles["info-item"]}>
               <RiMapPinLine size={18} />

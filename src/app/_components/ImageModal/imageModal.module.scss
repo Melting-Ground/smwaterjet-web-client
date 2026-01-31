@@ -23,7 +23,6 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
 
   .modal-button-container {
     position: fixed;
@@ -40,10 +39,27 @@
   }
 }
 
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+
 .image-frame {
   position: relative;
   flex: 1;
   min-height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-box {
+  position: relative;
+  width: min(90%, 900px);
+  height: 100%;
 }
 
 .image {

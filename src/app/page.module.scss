@@ -46,7 +46,7 @@
       font-size: 46px;
       line-height: 1.18;
       font-weight: 700;
-      color: $policy-font;
+      color: $primary;
       margin-bottom: 24px;
       letter-spacing: -0.02em;
     }
@@ -63,8 +63,12 @@
       white-space: nowrap;
     }
 
+    .greeting-text {
+      color: $primary;
+    }
+
     .description {
-      font-size: 17px;
+      font-size: 19px;
       line-height: 1.8;
       color: $gray-02;
       max-width: 520px;
@@ -107,6 +111,11 @@
         font-weight: 700;
         font-size: 16px;
         line-height: 1.2;
+        color: $white;
+      }
+
+      span {
+        color: $white;
       }
     }
 
@@ -200,8 +209,14 @@
     font-size: 30px;
     font-weight: 700;
     color: $primary;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     margin-bottom: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .photo-title {
+      font-size: 36px;
+    }
   }
 
   .photo-accent {
@@ -213,7 +228,7 @@
   }
 
   .photo-description {
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.6;
     color: $gray-02;
     margin-top: 12px;

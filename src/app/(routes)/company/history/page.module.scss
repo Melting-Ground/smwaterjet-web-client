@@ -22,6 +22,7 @@
       background-color: #ff9945;
       border-radius: 100px;
       position: absolute;
+      transition: height 0.2s ease-out;
     }
 
     li {
@@ -38,6 +39,11 @@
         @include content;
         font-weight: 700;
         color: #ff9945;
+      }
+
+      .description {
+        color: #947c72;
+        transition: color 0.2s ease;
       }
 
       div:nth-child(2) {
@@ -69,8 +75,13 @@
         border-color: var(--border, #ffb87e);
       }
     }
-    .selected-year {
-      font-weight: 600;
+
+    li.active {
+      --border: #e86a02;
+
+      .description {
+        color: #f5f5f5;
+      }
     }
   }
 }

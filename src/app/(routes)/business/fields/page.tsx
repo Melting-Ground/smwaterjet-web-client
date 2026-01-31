@@ -238,7 +238,7 @@ export default function Fields() {
           </p>
 
           <p className={styles["waterjet-solution"]}>
-            삼형 건설의 워터젯 기술은 열화된 부분만 선택적으로 제거하여 교량
+            성문워터젯의 워터젯 기술은 열화된 부분만 선택적으로 제거하여 교량
             보강 및 복구 작업을 효율적으로 지원합니다.
           </p>
           <article className={styles["inquiry-article"]}>

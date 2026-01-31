@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "title": "인증서",
+    "path": "/images/certificate/page_1.jpg"
+  },
+  {
+    "id": 2,
+    "title": "인증서2",
+    "path": "/images/certificate/page_2.jpg"
+  },
+  {
+    "id": 3,
+    "title": "인증서2",
+    "path": "/images/certificate/page_2.jpg"
+  },
+  {
+    "id": 4,
+    "title": "인증서2",
+    "path": "/images/certificate/page_2.jpg"
+  }
+]

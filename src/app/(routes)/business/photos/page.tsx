@@ -60,12 +60,6 @@ export default function Photos() {
     <section className={styles.container}>
       <h3 className={styles["sr-only"]}>?占쎌옣 ?占쎌뾽 ?占쎌쭊</h3>
       <div className={styles["photos-container"]}>
-        <header className={styles.header}>
-          <p className={styles["header-title"]}>현장사진</p>
-          <p className={styles["header-description"]}>
-            작업 현장의 실제 사진을 공유합니다.
-          </p>
-        </header>
         <GalleryLayout
           list={photos.map((photo) => ({
             ...photo,

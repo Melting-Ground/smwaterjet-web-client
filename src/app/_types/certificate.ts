@@ -1,8 +1,8 @@
 export interface CertificateType {
   id: number;
   path: string;
-  uploaded_at: string;
   title: string;
+  uploaded_at?: string;
 }
 
 export interface CertificatePostType {

@@ -52,15 +52,17 @@ export default function Home() {
             {/* Left Content (모바일에서 이미지 먼저, 텍스트는 아래로 이동하도록 order 조정) */}
             <div className={styles["left-container"]}>
               <h2 className={styles.greeting}>
-                초고압 워터젯 공법으로
+                <span className={styles["greeting-text"]}>초고압 워터젯 공법으로</span>
                 <br />
                 <span className={styles["nowrap"]}>
-                  <span className={styles.primary}>혁신적인 공사</span>를 제공합니다
+                  <span className={styles.primary}>혁신적인 공사</span>
+                  <span className={styles["greeting-text"]}>를 제공합니다</span>
                 </span>
               </h2>
               <p className={styles.description}>
                 최첨단 장비와 숙련된 기술력으로 도로, 교량, 터널 등 다양한 구조물의
-                보수보강 공사를 수행합니다.
+                <br />
+                보수, 보강 공사를 수행합니다.
               </p>
             </div>
 
@@ -96,7 +98,7 @@ export default function Home() {
           <h1 className={styles["photo-title"]}>현장사진</h1>
           <div className={styles["photo-accent"]} />
           <p className={styles["photo-description"]}>
-            작업 현장의 실제 사진을 공유합니다.
+            수많은 현장에서 축적된 성문워터젯의 시공 사례를 담았습니다.
           </p>
         </div>
         <Carousel />
