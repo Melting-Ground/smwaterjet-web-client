@@ -5,11 +5,11 @@ import { RiArrowLeftSLine, RiArrowRightSLine } from "@remixicon/react";
 import Link from "next/link";
 
 const images = [
-  { src: "/images/banner/company.jpg", alt: "1" },
-  { src: "/images/banner/equipment.jpg", alt: "2" },
-  { src: "/images/banner/performance.jpg", alt: "3" },
-  { src: "/images/banner/support.jpg", alt: "4" },
-  { src: "/images/banner/waterjet.jpg", alt: "" },
+  { src: "/images/work/work1.jpg", alt: "현장사진 1" },
+  { src: "/images/work/work2.jpg", alt: "현장사진 2" },
+  { src: "/images/work/work3.jpg", alt: "현장사진 3" },
+  { src: "/images/work/work4.jpg", alt: "현장사진 4" },
+  { src: "/images/work/work5.jpg", alt: "현장사진 5" },
 ];
 
 export default function Carousel() {

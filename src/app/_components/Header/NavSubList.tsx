@@ -15,15 +15,11 @@ export default function NavSubList({
 }) {
   return (
     <div
-      className={`${styles["sub-nav-container"]} ${
-        isOpen ? "" : styles.hidden
-      }`}
+      className={`${styles["sub-nav-container"]} ${isOpen ? "" : styles.hidden}`}
       onMouseEnter={() => onOpen(true)}
       onMouseLeave={() => onOpen(false)}
     >
-      <div className={styles["sub-nav-list-container"]}>
-        <span />
-
+      <div className={styles["sub-nav-inner"]}>
         <ul className={styles["sub-nav-list"]}>
           {routeCategories.map((category: RouteCategoryType) => (
             <li key={category.title} className={styles["category-container"]}>
@@ -32,9 +28,7 @@ export default function NavSubList({
                 {category.routes.map((route: RouteType) => (
                   <li key={route.path} className={styles["category-item"]}>
                     <Link
-                      onMouseEnter={() => {
-                        onNavItemHover(category.title);
-                      }}
+                      onMouseEnter={() => onNavItemHover(category.title)}
                       onMouseLeave={() => onNavItemHover("")}
                       href={route.path}
                       className={styles["category-item-link"]}
