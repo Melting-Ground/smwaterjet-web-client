@@ -1,5 +1,5 @@
 ﻿"use client";
-import React from "react";
+import React, { Fragment } from "react";
 import styles from "./layout.module.scss";
 import Input from "@/_components/Input/Input";
 import Button from "@/_components/Button/Button";
@@ -34,10 +34,8 @@ export default function GalleryEditLayout({
   handleSubmit,
   handleListClick,
 }: EditProps<PhotoPostType>) {
-  const fileList = existFiles?.filter(
-    (file): file is FileWithIdType => Boolean(file)
-  );
-  const displayFiles = fileList?.slice(1);
+  const files = existFiles ?? contents?.files ?? [];
+  const normalizedFiles = Array.from({ length: 5 }, (_, index) => files[index] ?? null);
 
   return (
     <section className={styles.container}>
@@ -52,19 +50,18 @@ export default function GalleryEditLayout({
           onChange={handleChange}
           fullWidth
         />
-        <label htmlFor="files" className={styles["section-label"]}>
-          첨부파일
-        </label>
-        {displayFiles && displayFiles.length > 0
-          ? displayFiles.map((file, index) => (
-              <React.Fragment key={file.id}>
-                <span className={styles["exist-file-label"]}>
-                  첨부 파일 {index + 1}
+        <label className={styles["section-label"]}>첨부파일</label>
+        {normalizedFiles.map((file, index) => (
+          <Fragment key={index}>
+            <span className={styles["exist-file-label"]}>
+              {index === 0 ? "대표 사진" : `첨부 파일 ${index}`}
+            </span>
+            {file && !(file instanceof File) ? (
+              <div className={styles["exist-file-container"]}>
+                <span className={styles["file-name"]}>
+                  {file.file_path.split("/").pop()}
                 </span>
-                <div className={styles["exist-file-container"]}>
-                  <span className={styles["file-name"]}>
-                    {file.file_path.split("/").pop()}
-                  </span>
+                {index === 0 ? null : (
                   <Button
                     ariaLabel="파일 삭제"
                     onClick={() =>
@@ -74,18 +71,21 @@ export default function GalleryEditLayout({
                     className={styles["file-delete-button"]}
                     icon={<RiCloseCircleLine color={"#2f437a"} />}
                   />
-                </div>
-              </React.Fragment>
-            ))
-          : null}
-        <Input
-          className={styles["file-input"]}
-          type="file"
-          name="files"
-          id="files"
-          multiple
-          onChange={(e) => handleChange(e, method, true)}
-        />
+                )}
+              </div>
+            ) : (
+              <Input
+                className={styles["file-input"]}
+                type="file"
+                name={`file${index + 1}`}
+                id={`file${index + 1}`}
+                accept={index === 0 ? "image/*" : "image/*,video/*"}
+                required={method === "upload" && index === 0}
+                onChange={(e) => handleChange(e, method)}
+              />
+            )}
+          </Fragment>
+        ))}
         <div className={styles["button-container"]}>
           <Button
             ariaLabel="취소"

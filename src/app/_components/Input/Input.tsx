@@ -20,6 +20,7 @@ interface InputProps {
   fullWidth?: boolean;
   multiple?: boolean;
   required?: boolean;
+  accept?: string;
   inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
   pattern?: string;
 }
@@ -42,6 +43,7 @@ export default function Input({
   fullWidth = false,
   multiple = false,
   required = false,
+  accept,
   inputMode,
   pattern,
 }: InputProps) {
@@ -71,6 +73,7 @@ export default function Input({
         placeholder={placeholder}
         multiple={multiple}
         required={required}
+        accept={accept}
         inputMode={inputMode}
         pattern={pattern}
       />

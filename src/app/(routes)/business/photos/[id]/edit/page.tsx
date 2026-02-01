@@ -57,7 +57,7 @@ export default function Edit() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!currentId) {
-      alert("?ъ쭊 ?뺣낫瑜?李얠쓣 ???놁뒿?덈떎.");
+      alert("사진 정보를 찾을 수 없습니다.");
       return;
     }
     try {
@@ -76,7 +76,7 @@ export default function Edit() {
   };
 
   if (!currentId) {
-    return <div>?대떦 ?ъ쭊 ?뺣낫瑜?李얠쓣 ???놁뒿?덈떎.</div>;
+    return <div>해당 사진 정보를 찾을 수 없습니다.</div>;
   }
 
   const isNotLoaded = isLoading.detail || !dataDetail;
@@ -92,6 +92,6 @@ export default function Edit() {
       handleListClick={() => router.push("/business/photos")}
     />
   ) : (
-    <div>濡쒕뵫以?..</div>
+    <div>로딩중...</div>
   );
 }

@@ -1,5 +1,5 @@
 ﻿"use client";
-import { useParams } from "next/navigation"; // useParams瑜?import?⑸땲??
+import { useParams } from "next/navigation"; // useParams를 import합니다
 import React, { useEffect } from "react";
 import { API_URLS } from "@/_config/apiConfig";
 import { useAPIData } from "@/_hooks/useAPIData";
@@ -41,7 +41,7 @@ export default function InquiryDetail() {
     );
     if (errorMessage) {
       alert(errorMessage);
-      // 鍮꾨?踰덊샇 ?낅젰 ?섏씠吏濡??쇱슦??(return)
+      // 비밀번호 입력 페이지로 이동 (return)
       if (!isLoggedIn) {
         router.push(`/support/inquiry/${id}/password`);
       }
@@ -65,7 +65,7 @@ export default function InquiryDetail() {
     }
   };
   if (!currentId) {
-    return <div>議댁옱?섏? ?딅뒗 寃뚯떆臾쇱엯?덈떎.</div>;
+    return <div>존재하지 않는 게시물입니다.</div>;
   }
   const isNotLoaded = isLoading.detail || !inquiryDetail;
 

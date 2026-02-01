@@ -95,11 +95,35 @@ export default function History() {
       }
     };
 
+    const handleResize = () => {
+      handleScroll();
+    };
+
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    const visualViewport = window.visualViewport;
+    if (visualViewport) {
+      visualViewport.addEventListener("resize", handleResize);
+    }
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (listRef.current && "ResizeObserver" in window) {
+      resizeObserver = new ResizeObserver(() => {
+        handleScroll();
+      });
+      resizeObserver.observe(listRef.current);
+    }
     handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+      if (visualViewport) {
+        visualViewport.removeEventListener("resize", handleResize);
+      }
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
     };
   }, [currentYear]);
 

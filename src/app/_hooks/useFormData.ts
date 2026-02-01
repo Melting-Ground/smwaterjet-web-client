@@ -22,6 +22,11 @@ const useFormData = <T, P>(
 
     if (type === "file") {
       const { files } = e.target as HTMLInputElement;
+      if (id === "file1" && files && files[0] && !files[0].type.startsWith("image/")) {
+        alert("대표 사진은 이미지 파일만 업로드할 수 있습니다.");
+        (e.target as HTMLInputElement).value = "";
+        return;
+      }
 
       if (multiplePhotos && files) {
         const fieldName = method === "update" ? "newFiles" : "files";
@@ -29,7 +34,9 @@ const useFormData = <T, P>(
         const index = Number.isNaN(Number(lastChar)) ? -1 : Number(lastChar) - 1;
 
         setContents((prev: P) => {
-          const prevFiles = (prev as P & { files: File[] }).files || [];
+          const prevTyped = prev as P & { files?: (File | null)[]; newFiles?: (File | null)[] };
+          const prevFiles =
+            fieldName === "newFiles" ? prevTyped.newFiles || [] : prevTyped.files || [];
 
           if (index >= 0) {
             const fileList = [...prevFiles];
@@ -46,10 +53,11 @@ const useFormData = <T, P>(
           };
         });
       } else if (!multiplePhotos && files) {
-        // 파일이 하나인 경우
+        // 파일이 하나인 경우 (thumbnail 등 단일 파일용)
+        const fieldName = id || "file";
         setContents((prev: P) => ({
           ...prev,
-          file: files[0],
+          [fieldName]: files[0],
         }));
       }
     } else {
@@ -117,6 +125,15 @@ const useFormData = <T, P>(
     e.preventDefault();
     const formData = createFormData();
     formData.delete("files");
+    if (formData.has("newFiles")) {
+      const newFiles = formData.getAll("newFiles");
+      formData.delete("newFiles");
+      newFiles.forEach((file) => {
+        if (file) {
+          formData.append("files", file);
+        }
+      });
+    }
 
     // delete file
     if (deleteFileIds) {

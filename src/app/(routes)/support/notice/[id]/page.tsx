@@ -1,5 +1,5 @@
-"use client";
-import { useParams } from "next/navigation"; // useParams를 import합니다.
+﻿"use client";
+import { useParams } from "next/navigation"; // useParams를 import합니다
 import React, { useEffect } from "react";
 import { API_URLS } from "@/_config/apiConfig";
 import { useAPIData } from "@/_hooks/useAPIData";
@@ -39,6 +39,12 @@ export default function NoticeDetail() {
   const handleEditClick = () => {
     goToEditPage(currentId);
   };
+  const handleDelete = async (id: string) => {
+    const isDeleted = await deleteItem(id);
+    if (isDeleted) {
+      goToListPage();
+    }
+  };
 
   const isNotLoaded = isLoading.detail || !noticeDetail;
   if (!currentId) {
@@ -51,11 +57,11 @@ export default function NoticeDetail() {
       currentId={Number(currentId)}
       boardType={boardType}
       hasPermission={isLoggedIn}
-      handleDelete={deleteItem}
+      handleDelete={handleDelete}
       handleEditClick={handleEditClick}
       handleListClick={goToListPage}
     />
   ) : (
-    <div>로딩중</div>
+    <div>로딩중...</div>
   );
 }
