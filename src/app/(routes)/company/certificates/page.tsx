@@ -30,26 +30,43 @@ export default function Certificates() {
         <ol className={styles.certificates}>
           {certificates && certificates.length > 0
             ? certificates.map((certificate) => (
-                <li className={styles["image-container"]} key={certificate.id}>
-                  <Image
-                    width={400}
-                    height={0}
-                    layout="intrinsic"
-                    src={certificate.path}
-                    alt={`certificate-${certificate.id}`}
-                    className={styles.image}
-                  />
-                  <div className={styles.overlay}>
-                    <p className={styles["item-title"]}>{certificate.title}</p>
-                    <span className={styles["icon-container"]}>
-                      <Button
-                        color="transparent"
-                        onClick={() => onImageModalOpen(certificate)}
-                        ariaLabel="자세히 보기"
-                      >
-                        <RiZoomInLine color="white" size={24} />
-                      </Button>
+                <li className={styles.card} key={certificate.id}>
+                  <div className={styles.header}>
+                    <span className={styles.label}>특허명</span>
+                    <span className={styles.title}>{certificate.title}</span>
+                  </div>
+                  <button
+                    type="button"
+                    className={styles.preview}
+                    onClick={() => onImageModalOpen(certificate)}
+                    aria-label="미리보기 확대"
+                  >
+                    <Image
+                      width={520}
+                      height={0}
+                      layout="intrinsic"
+                      src={certificate.path}
+                      alt={`certificate-${certificate.id}`}
+                      className={styles.image}
+                    />
+                    <span className={styles["preview-overlay"]}>
+                      <RiZoomInLine color="white" size={24} />
                     </span>
+                  </button>
+                  <div className={styles.meta}>
+                    <span className={styles["meta-label"]}>등록일</span>
+                    <span className={styles["meta-value"]}>
+                      {certificate.registeredAt || "미기재"}
+                    </span>
+                  </div>
+                  <div className={styles.actions}>
+                    <Button
+                      color="primary-border"
+                      onClick={() => onImageModalOpen(certificate)}
+                      ariaLabel="상세 보기"
+                    >
+                      상세 보기
+                    </Button>
                   </div>
                 </li>
               ))

@@ -16,78 +16,111 @@
     .certificates {
       gap: 24px;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      justify-content: center;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      align-items: stretch;
+    }
 
-      .image-container {
-        position: relative;
-        overflow: hidden;
-        // aspect-ratio: 1 / 1.414;
-        width: 400px;
-        height: 565.6px;
-        transition: box-shadow 0.3s ease, transform 0.3s ease;
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 20px;
+      border-radius: 16px;
+      background: $white;
+      border: 1px solid $gray-border;
+      box-shadow: 0 12px 24px rgba(17, 24, 39, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
 
-        &:hover .overlay {
-          opacity: 1;
-        }
-
-        &:hover {
-          box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
-          transform: translateY(-4px);
-        }
-
-        &:hover .image {
-          transform: scale(1.03);
-        }
-
-        .image {
-          width: 100%;
-          height: auto;
-          transition: transform 0.4s ease;
-        }
-
-        .overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          opacity: 0;
-          width: 100%;
-          height: 100%;
-          padding: 30px;
-          background: rgba(0, 0, 0, 0.45);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-align: center;
-          flex-direction: column;
-          gap: 20px;
-          overflow: hidden;
-          transition: opacity 0.3s ease;
-
-          .item-title {
-            color: $white;
-            font-size: 17px;
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-
-          .icon-container {
-            width: 50px;
-            height: 50px;
-            background-color: $gray-02;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            &:hover {
-              background: $blue;
-            }
-          }
-        }
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 30px rgba(17, 24, 39, 0.14);
       }
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .label {
+      font-size: 12px;
+      font-weight: 600;
+      color: $gray-02;
+      letter-spacing: 0.08em;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+      color: $black;
+      word-break: keep-all;
+    }
+
+    .preview {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: $gray-lightest;
+      padding: 0;
+      width: 100%;
+      border: 1px solid $gray-lighter;
+      text-align: left;
+      cursor: pointer;
+
+      &:hover .image {
+        transform: scale(1.02);
+      }
+
+      &:hover .preview-overlay {
+        opacity: 1;
+      }
+    }
+
+    .image {
+      width: 100%;
+      height: auto;
+      transition: transform 0.35s ease;
+    }
+
+    .preview-overlay {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(25, 45, 82, 0.8);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px solid $gray-lighter;
+      font-size: 14px;
+      color: $policy-font;
+      gap: 12px;
+    }
+
+    .meta-label {
+      font-weight: 600;
+      color: $primary;
+    }
+
+    .meta-value {
+      margin-left: auto;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
     }
 
     .divider {

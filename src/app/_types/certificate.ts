@@ -2,6 +2,7 @@ export interface CertificateType {
   id: number;
   path: string;
   title: string;
+  registeredAt?: string;
   uploaded_at?: string;
 }
 
