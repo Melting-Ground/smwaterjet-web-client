@@ -70,6 +70,7 @@ export default function Photos() {
           captionPosition="below"
           useInnerContainer={false}
           paginationMarginTop={0}
+          galleryMarginBottom={40}
           handleItemClick={handleDetailOpen}
           pages={pages}
           handleArrowClick={clickArrowButton}

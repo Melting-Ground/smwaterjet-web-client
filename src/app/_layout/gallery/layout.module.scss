@@ -19,7 +19,7 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   justify-items: center;
   border-top: 1px solid $gray-02;
-  border-bottom: 1px solid $gray-02;
+  border-bottom: none;
   padding: 16px 0;
 
     .image-container {
@@ -82,7 +82,7 @@
       }
     }
 
-    .caption {
+  .caption {
       margin-top: 12px;
       display: block;
       text-align: center;

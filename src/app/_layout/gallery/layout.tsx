@@ -3,27 +3,36 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./layout.module.scss";
 import Pagination from "@/_components/Pagination/Pagination";
-import { PhotoType } from "@/_types/photo";
 
-interface GalleryProps<T extends PhotoType> {
+interface GalleryItemBase {
+  id: number;
+  path?: string;
+  title?: string;
+}
+
+interface GalleryProps<T extends GalleryItemBase> {
   list: T[];
   isLinkItem?: boolean;
   captionPosition?: "overlay" | "below";
   useInnerContainer?: boolean;
   paginationMarginTop?: number;
-  handleItemClick?: (item: PhotoType) => void;
+  galleryMarginTop?: number;
+  galleryMarginBottom?: number;
+  handleItemClick?: (item: T) => void;
   handleArrowClick?: (direction: "prev" | "next") => void;
   handlePageClick?: (page: number) => void;
   pages?: number[];
   currentPage?: number;
 }
 
-export default function GalleryLayout<T extends PhotoType>({
+export default function GalleryLayout<T extends GalleryItemBase>({
   list,
   isLinkItem = false,
   captionPosition = "overlay",
   useInnerContainer = true,
   paginationMarginTop,
+  galleryMarginTop,
+  galleryMarginBottom,
   handleItemClick,
   handleArrowClick,
   handlePageClick,
@@ -55,7 +64,14 @@ export default function GalleryLayout<T extends PhotoType>({
 
   return (
     <div className={containerClassName}>
-      <ol className={galleryClassName}>
+      <ol
+        className={galleryClassName}
+        style={{
+          marginTop: typeof galleryMarginTop === "number" ? galleryMarginTop : undefined,
+          marginBottom:
+            typeof galleryMarginBottom === "number" ? galleryMarginBottom : undefined,
+        }}
+      >
         {hasItems
           ? list.map((item, index) => {
               if (!item.path) return null;

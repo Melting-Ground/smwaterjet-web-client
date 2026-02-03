@@ -6,7 +6,7 @@
 }
 
 .container {
-  margin: 100px 0;
+  margin: 80px 0;
   .inner-container {
     @include inner-container;
     flex-direction: column;

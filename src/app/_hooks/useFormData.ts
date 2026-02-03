@@ -1,6 +1,8 @@
-﻿import { APIConfig } from "@/_config/apiConfig";
+import { APIConfig } from "@/_config/apiConfig";
 import { EditMethodType } from "@/_types/board";
 import { useAPIData } from "./useAPIData";
+
+const MAX_FILE_SIZE_BYTES = 200 * 1024 * 1024;
 
 const useFormData = <T, P>(
   apiConfig: APIConfig<T>,
@@ -22,7 +24,18 @@ const useFormData = <T, P>(
 
     if (type === "file") {
       const { files } = e.target as HTMLInputElement;
-      if (id === "file1" && files && files[0] && !files[0].type.startsWith("image/")) {
+      if (files && Array.from(files).some((file) => file.size > MAX_FILE_SIZE_BYTES)) {
+        alert("파일 크기는 200MB를 초과할 수 없습니다.");
+        (e.target as HTMLInputElement).value = "";
+        return;
+      }
+
+      if (
+        id === "file1" &&
+        files &&
+        files[0] &&
+        !files[0].type.startsWith("image/")
+      ) {
         alert("대표 사진은 이미지 파일만 업로드할 수 있습니다.");
         (e.target as HTMLInputElement).value = "";
         return;
@@ -34,7 +47,10 @@ const useFormData = <T, P>(
         const index = Number.isNaN(Number(lastChar)) ? -1 : Number(lastChar) - 1;
 
         setContents((prev: P) => {
-          const prevTyped = prev as P & { files?: (File | null)[]; newFiles?: (File | null)[] };
+          const prevTyped = prev as P & {
+            files?: (File | null)[];
+            newFiles?: (File | null)[];
+          };
           const prevFiles =
             fieldName === "newFiles" ? prevTyped.newFiles || [] : prevTyped.files || [];
 
