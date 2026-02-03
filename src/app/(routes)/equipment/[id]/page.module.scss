@@ -64,3 +64,47 @@
     margin-top: 100px;
   }
 }
+
+@media (max-width: 1024px) {
+  .container {
+    margin-top: 110px;
+
+    .item-container {
+      flex-direction: column;
+      gap: 24px;
+
+      .image-container {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 2;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    margin-top: 90px;
+    margin-bottom: 80px;
+
+    .equipment-name {
+      font-size: 18px;
+    }
+
+    .item-container {
+      .item-info {
+        grid-template-columns: 110px 1fr;
+        font-size: 14px;
+
+        p {
+          padding: 12px 14px;
+        }
+      }
+    }
+
+    .go-list-button {
+      margin-top: 60px;
+      width: 100%;
+    }
+  }
+}

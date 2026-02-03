@@ -3,8 +3,9 @@ import styles from "./carousel.module.scss";
 import { useCarousel } from "@/_hooks/useCarousel";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "@remixicon/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const images = [
+const fallbackImages = [
   { src: "/images/work/work1.jpg", alt: "현장사진 1" },
   { src: "/images/work/work2.jpg", alt: "현장사진 2" },
   { src: "/images/work/work3.jpg", alt: "현장사진 3" },
@@ -13,6 +14,23 @@ const images = [
 ];
 
 export default function Carousel() {
+  const [images, setImages] = useState(fallbackImages);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await fetch("/api/work-images");
+        const data = await response.json();
+        if (Array.isArray(data.images) && data.images.length > 0) {
+          setImages(data.images);
+        }
+      } catch (error) {
+        // fallback to bundled list if API fails
+      }
+    };
+    fetchImages();
+  }, []);
+
   const carouselImages = [...images, ...images, ...images];
 
   const {

@@ -34,14 +34,5 @@
     "image": "/images/equipment/equipment4.jpg",
     "own": "(주)삼형건설",
     "note": "해당 사항 없음"
-  },
-  {
-    "id": 5,
-    "name": "NLB High-pressure Pump",
-    "standard": "600HP",
-    "use": "고압수 생성",
-    "image": "/images/equipment/equipment5.jpg",
-    "own": "(주)삼형건설",
-    "note": "해당 사항 없음"
   }
 ]

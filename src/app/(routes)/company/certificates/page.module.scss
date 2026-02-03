@@ -139,3 +139,60 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .container {
+    .certificates-container {
+      margin: 80px 0;
+
+      .certificates {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .title {
+        font-size: 17px;
+      }
+
+      .intro-text {
+        font-size: 24px;
+      }
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    .certificates-container {
+      margin: 60px 0;
+
+      .certificates {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .actions {
+        justify-content: stretch;
+
+        button {
+          width: 100%;
+        }
+      }
+
+      .preview-overlay {
+        opacity: 1;
+      }
+    }
+  }
+}
