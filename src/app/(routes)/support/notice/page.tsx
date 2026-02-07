@@ -29,12 +29,11 @@ export default function Notice() {
     pages,
     clickArrowButton,
     clickPageButton,
-    setCurrentPage,
   } = usePagination(lastPageNumber);
 
   useEffect(() => {
     fetchDataList(currentPage);
-  }, [currentPage]);
+  }, [currentPage, fetchDataList]);
 
   return (
     <BoardListLayout

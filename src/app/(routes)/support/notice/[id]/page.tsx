@@ -28,11 +28,11 @@ export default function NoticeDetail() {
     if (currentId) {
       fetchNoticeDetail(currentId);
     }
-  }, [currentId]);
+  }, [currentId, fetchNoticeDetail]);
 
   useEffect(() => {
     fetchDataList(1, 100);
-  }, []);
+  }, [fetchDataList]);
 
   const { deleteItem } = useFormData(API_URLS.notices);
   const { goToEditPage, goToListPage } = useBoardAction("support", "notice");

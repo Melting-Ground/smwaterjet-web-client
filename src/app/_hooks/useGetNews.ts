@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { NewsType } from "@/_types/news";
 import axios from "axios";
 
 // TODO: 로딩 상태 추가하기
 export const useGetNews = (searchQuery: string) => {
   const [newsList, setNewsList] = useState<NewsType[] | NewsType | null>();
-  const fetchNews = async (searchQuery: string) => {
+  const fetchNews = useCallback(async (query: string) => {
     try {
       const { data } = await axios.get(
-        `/api/naver/v1/search/news.json?query=${searchQuery}&display=10&start=1&sort=sim`,
+        `/api/naver/v1/search/news.json?query=${query}&display=10&start=1&sort=sim`,
         {
           headers: {
             "X-Naver-Client-Id": process.env.NEXT_PUBLIC_NAVER_CLIENT_ID!,
@@ -22,10 +22,10 @@ export const useGetNews = (searchQuery: string) => {
     } catch (error) {
       console.error("fetchNews 에러", error);
     }
-  };
+  }, []);
   useEffect(() => {
     fetchNews(searchQuery);
-  }, []);
+  }, [fetchNews, searchQuery]);
 
   return { newsList };
 };

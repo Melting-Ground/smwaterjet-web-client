@@ -28,7 +28,7 @@ export const useCarousel = ({ imagesLength }: { imagesLength: number }) => {
         setIsTransitioning(true);
       }, 50);
     }
-  }, [currentIndex, imagesLength]);
+  }, [currentIndex, startIndex, endIndex]);
 
   const onMoveLeftSlide = () => {
     setCurrentIndex((prev) => prev - 1);

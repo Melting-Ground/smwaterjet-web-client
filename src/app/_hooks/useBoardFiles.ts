@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 const useBoardFiles = (contents: NoticePostType | InquiryPostType) => {
   const FILE_LENGTH = 5;
   const [files, setFiles] = useState<(FileWithIdType | File | null)[]>([]);
+  const [deleteFileIds, setDeleteFileIds] = useState<number[]>([]);
 
   // 지울 파일 목록 아이디
   const [deleteFileIds, setDeleteFileIds] = useState<number[]>([]);

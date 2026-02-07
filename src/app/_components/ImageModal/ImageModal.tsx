@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./imageModal.module.scss";
 import { RiCloseLine, RiDeleteBinLine } from "@remixicon/react";
 import Button from "../Button/Button";
@@ -40,17 +40,20 @@ export default function ImageModal({
     setOffset({ x: 0, y: 0 });
   }, [selectedImage?.id]);
 
-  const buildImageUrl = (path?: string) => {
-    if (!path) return "";
-    if (path.startsWith("http")) return path;
-    if (path.startsWith("/images/")) return path;
-    if (!imageBaseUrl) return path.startsWith("/") ? path : `/${path}`;
-    const base = imageBaseUrl.endsWith("/")
-      ? imageBaseUrl.slice(0, -1)
-      : imageBaseUrl;
-    const cleanPath = path.startsWith("/") ? path.slice(1) : path;
-    return `${base}/${cleanPath}`;
-  };
+  const buildImageUrl = useCallback(
+    (path?: string) => {
+      if (!path) return "";
+      if (path.startsWith("http")) return path;
+      if (path.startsWith("/images/")) return path;
+      if (!imageBaseUrl) return path.startsWith("/") ? path : `/${path}`;
+      const base = imageBaseUrl.endsWith("/")
+        ? imageBaseUrl.slice(0, -1)
+        : imageBaseUrl;
+      const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+      return `${base}/${cleanPath}`;
+    },
+    [imageBaseUrl]
+  );
 
   const filePaths = useMemo(() => {
     if (!selectedImage) return [];
@@ -70,7 +73,7 @@ export default function ImageModal({
       return buildImageUrl(selectedImage.thumbnail_path);
     }
     return "";
-  }, [selectedImage, filePaths, activeIndex]);
+  }, [selectedImage, filePaths, activeIndex, buildImageUrl]);
 
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
