@@ -42,24 +42,23 @@ export default function Edit() {
     if ((currentId && password) || (currentId && isLoggedIn)) {
       fetchInquiryDetail(currentId, password);
     }
-  }, [currentId]);
+  }, [currentId, password, isLoggedIn, fetchInquiryDetail]);
 
   useEffect(() => {
     if (inquiryDetail) {
-      console.log(inquiryContents);
       setInquiryContents({
         author: inquiryDetail?.author || "",
         phone_number: inquiryDetail?.phone_number || "",
         password: password || "",
         title: inquiryDetail?.title || "",
         content: inquiryDetail?.content || "",
-        files: inquiryDetail?.files.map((file) => ({
+        files: (inquiryDetail?.files ?? []).map((file) => ({
           id: file.id,
           file_path: file.file_path,
         })),
       });
     }
-  }, [inquiryDetail]);
+  }, [inquiryDetail, password]);
 
   const { handleChange, updateForm } = useFormData<
     typeof INQUIRY_API.method.get,

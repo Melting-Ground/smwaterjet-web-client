@@ -17,13 +17,13 @@ export default function Password() {
 
   useEffect(() => {
     setPassword("");
-  }, [id]);
+  }, [id, setPassword]);
 
   useEffect(() => {
     if (isLoggedIn && id) {
       router.replace(`/support/inquiry/${id}`);
     }
-  }, [isLoggedIn, id]);
+  }, [isLoggedIn, id, router]);
 
   const onPasswordSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -1,25 +1,17 @@
 import axiosInstance from "@/_config/axiosInstance";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type TurnstileApi = {
-  render: (
-    container: HTMLElement,
-    options: { sitekey: string; callback: (token: string) => void }
-  ) => string | number | HTMLElement;
-  reset: (widget: string | number | HTMLElement) => void;
-};
+type TurnstileWidget = string | number | HTMLElement;
 
 export const useTurnstile = (
   turnstileRef: React.RefObject<HTMLDivElement>
 ) => {
-  const turnstileInstanceRef = useRef<string | number | HTMLElement | null>(
-    null
-  );
+  const turnstileInstanceRef = useRef<TurnstileWidget | null>(null);
   const [isValidate, setIsValidate] = useState<boolean>(false);
 
   const resetTurnstile = useCallback(() => {
     if (typeof window === "undefined") return;
-    const turnstile = (window as Window & { turnstile?: TurnstileApi }).turnstile;
+    const turnstile = window.turnstile;
     if (turnstile && turnstileInstanceRef.current) {
       turnstile.reset(turnstileInstanceRef.current);
       console.log("Turnstile reset");
@@ -57,7 +49,7 @@ export const useTurnstile = (
 
   useEffect(() => {
     if (typeof window === "undefined" || !turnstileRef.current) return;
-    const turnstile = (window as Window & { turnstile?: TurnstileApi }).turnstile;
+    const turnstile = window.turnstile;
     if (!turnstile) return;
 
     const widget = turnstile.render(turnstileRef.current, {

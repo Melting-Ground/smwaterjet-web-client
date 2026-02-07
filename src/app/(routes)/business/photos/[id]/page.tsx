@@ -55,7 +55,7 @@ export default function PhotoDetail() {
     if (currentId) {
       fetchData(currentId);
     }
-  }, [currentId]);
+  }, [currentId, fetchData]);
 
   const filePaths = useMemo(() => {
     if (!dataDetail) return [];

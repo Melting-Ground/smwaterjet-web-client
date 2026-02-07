@@ -24,12 +24,11 @@ export default function Inquiry() {
     pages,
     clickArrowButton,
     clickPageButton,
-    setCurrentPage,
   } = usePagination(lastPageNumber);
 
   useEffect(() => {
     fetchDataList(currentPage);
-  }, [currentPage]);
+  }, [currentPage, fetchDataList]);
 
   const { goToEditPage } = useBoardAction("support", boardType);
 

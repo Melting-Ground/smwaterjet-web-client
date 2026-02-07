@@ -1,13 +1,15 @@
 // global.d.ts
+type TurnstileWidget = string | number | HTMLElement;
+
 declare global {
   interface Window {
-    turnstile: {
+    turnstile?: {
       render: (
-        container: HTMLDivElement | null,
+        container: HTMLElement,
         options: { sitekey: string; callback: (token: string) => void }
-      ) => void;
-      execute: (container: HTMLDivElement | null) => void;
-	  reset: (widgetId: string) => void;
+      ) => TurnstileWidget;
+      execute?: (container: HTMLElement) => void;
+      reset: (widget: TurnstileWidget) => void;
     };
   }
 }

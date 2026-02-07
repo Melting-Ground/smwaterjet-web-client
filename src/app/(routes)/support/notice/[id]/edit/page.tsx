@@ -36,7 +36,7 @@ export default function Edit() {
     if (currentId) {
       fetchNoticeDetail(currentId);
     }
-  }, [currentId]);
+  }, [currentId, fetchNoticeDetail]);
 
   useEffect(() => {
     if (noticeDetail) {
@@ -44,7 +44,7 @@ export default function Edit() {
         title: noticeDetail?.title || "",
         content: noticeDetail?.content || "",
         author: noticeDetail?.author || "",
-        files: noticeDetail?.files.map((file) => ({
+        files: (noticeDetail?.files ?? []).map((file) => ({
           id: file.id,
           file_path: file.file_path,
         })),

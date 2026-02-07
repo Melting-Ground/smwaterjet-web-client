@@ -40,12 +40,11 @@ export default function Photos() {
     pages,
     clickArrowButton,
     clickPageButton,
-    setCurrentPage,
   } = usePagination(lastPageNumber);
 
   useEffect(() => {
     fetchDataList(currentPage, 8);
-  }, [currentPage]);
+  }, [currentPage, fetchDataList]);
 
   const { isLoggedIn } = useAuth();
   const handleDetailOpen = (item: { id: number }) => {

@@ -8,9 +8,6 @@ const useBoardFiles = (contents: NoticePostType | InquiryPostType) => {
   const [files, setFiles] = useState<(FileWithIdType | File | null)[]>([]);
   const [deleteFileIds, setDeleteFileIds] = useState<number[]>([]);
 
-  // 지울 파일 목록 아이디
-  const [deleteFileIds, setDeleteFileIds] = useState<number[]>([]);
-
   useEffect(() => {
     const fileArray: (FileWithIdType | File | null)[] = [];
 

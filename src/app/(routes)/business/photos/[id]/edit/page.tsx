@@ -31,7 +31,7 @@ export default function Edit() {
     if (currentId) {
       fetchData(currentId);
     }
-  }, [currentId]);
+  }, [currentId, fetchData]);
 
   useEffect(() => {
     if (dataDetail) {

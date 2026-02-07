@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import axiosInstance from "@/_config/axiosInstance";
 import { getAuthHeaders } from "@/_utils/getAuth";
 import { APIConfig } from "@/_config/apiConfig";
@@ -19,148 +19,166 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
     deleteFile: false,
   });
 
-  const fetchDataList = async (page: number, limit: number = 10) => {
-    setIsLoading((prev) => ({ ...prev, list: true }));
+  const fetchDataList = useCallback(
+    async (page: number, limit: number = 10) => {
+      setIsLoading((prev) => ({ ...prev, list: true }));
 
-    console.log(page, limit);
-    try {
-      const { data } = await axiosInstance.get(
-        `${apiConfig.url}?page=${page}&limit=${limit}`
-      );
-      console.log(data);
-      setDataList(data.items);
-      setPaginationInfo(data.pagination);
-      // setTotalPageLength(data);
-    } catch (error) {
-      throw new Error(`fatchDataList 에러: ${error}`);
-    } finally {
-      setIsLoading((prev) => ({ ...prev, list: false }));
-    }
-  };
-
-  // 에러 메시지 반환
-  // TODO: 에러 메시지 따로 관리하기
-  const fetchData = async (
-    id: string,
-    password?: string
-  ): Promise<string | null> => {
-    // password O: 문의사항
-    // password X: 공지사항
-
-    setIsLoading((prev) => ({ ...prev, detail: true }));
-    try {
-      const { data } = await axiosInstance.get(`${apiConfig.url}/${id}`, {
-        ...getAuthHeaders(password ? password : undefined),
-      });
-
-      setDataDetail(data);
-      return null;
-    } catch (error) {
-      if (
-        (error as AxiosError).response &&
-        (error as AxiosError).response!.status === 401
-      ) {
-        console.error(`비밀번호가 불일치 에러, ${error}`);
-        return "비밀번호가 올바르지 않습니다.";
-      } else {
-        console.error(`fetData 에러, ${error}`);
-        return "알 수 없는 오류가 발생했습니다. 관리자에게 문의하세요.";
+      console.log(page, limit);
+      try {
+        const { data } = await axiosInstance.get(
+          `${apiConfig.url}?page=${page}&limit=${limit}`
+        );
+        console.log(data);
+        setDataList(data.items);
+        setPaginationInfo(data.pagination);
+        // setTotalPageLength(data);
+      } catch (error) {
+        throw new Error(`fatchDataList ?먮윭: ${error}`);
+      } finally {
+        setIsLoading((prev) => ({ ...prev, list: false }));
       }
-    } finally {
-      setIsLoading((prev) => ({ ...prev, detail: false }));
-    }
-  };
+    },
+    [apiConfig.url]
+  );
 
-  const yearSearchDataList = async (year: number | undefined) => {
-    setIsLoading((prev) => ({ ...prev, list: true }));
-    try {
-      const { data } = await axiosInstance.get(`${apiConfig.url}/year/${year}`);
+  // ?먮윭 硫붿떆吏 諛섑솚
+  // TODO: ?먮윭 硫붿떆吏 ?곕줈 愿由ы븯湲?
+  const fetchData = useCallback(
+    async (id: string, password?: string): Promise<string | null> => {
+      // password O: 臾몄쓽?ы빆
+      // password X: 怨듭??ы빆
 
-      console.log(data);
-      setDataList(data.items);
-      // setPaginationInfo(data.pagination);
-      // setTotalPageLength(data);
-    } catch (error) {
-      throw new Error(`searchDataList 에러: ${error}`);
-    } finally {
-      setIsLoading((prev) => ({ ...prev, list: false }));
-    }
-  };
+      setIsLoading((prev) => ({ ...prev, detail: true }));
+      try {
+        const { data } = await axiosInstance.get(`${apiConfig.url}/${id}`, {
+          ...getAuthHeaders(password ? password : undefined),
+        });
 
-  const postData = async (formData: FormData): Promise<{ id: string }> => {
-    setIsLoading((prev) => ({ ...prev, post: true }));
+        setDataDetail(data);
+        return null;
+      } catch (error) {
+        if (
+          (error as AxiosError).response &&
+          (error as AxiosError).response!.status === 401
+        ) {
+          console.error(`鍮꾨?踰덊샇媛 遺덉씪移??먮윭, ${error}`);
+          return "鍮꾨?踰덊샇媛 ?щ컮瑜댁? ?딆뒿?덈떎.";
+        } else {
+          console.error(`fetData ?먮윭, ${error}`);
+          return "?????녿뒗 ?ㅻ쪟媛 諛쒖깮?덉뒿?덈떎. 愿由ъ옄?먭쾶 臾몄쓽?섏꽭??";
+        }
+      } finally {
+        setIsLoading((prev) => ({ ...prev, detail: false }));
+      }
+    },
+    [apiConfig.url]
+  );
 
-    try {
-      formData.forEach((item) => console.log(item, typeof item));
+  const yearSearchDataList = useCallback(
+    async (year: number | undefined) => {
+      setIsLoading((prev) => ({ ...prev, list: true }));
+      try {
+        const { data } = await axiosInstance.get(`${apiConfig.url}/year/${year}`);
 
-      const response = await axiosInstance.post(
-        apiConfig.url,
-        formData,
-        getAuthHeaders()
-      );
-      console.log("response", response);
-      return response.data;
-    } catch (error) {
-      throw new Error(`postData 에러: ${error}`);
-    } finally {
-      setIsLoading((prev) => ({ ...prev, post: false }));
-    }
-  };
+        console.log(data);
+        setDataList(data.items);
+        // setPaginationInfo(data.pagination);
+        // setTotalPageLength(data);
+      } catch (error) {
+        throw new Error(`searchDataList ?먮윭: ${error}`);
+      } finally {
+        setIsLoading((prev) => ({ ...prev, list: false }));
+      }
+    },
+    [apiConfig.url]
+  );
 
-  const putData = async (formData: FormData, id: string, password?: string) => {
-    setIsLoading((prev) => ({ ...prev, put: true }));
-    if (password) {
-      formData.delete("password");
-    }
+  const postData = useCallback(
+    async (formData: FormData): Promise<{ id: string }> => {
+      setIsLoading((prev) => ({ ...prev, post: true }));
 
-    try {
-      const response = await axiosInstance.put(
-        `${apiConfig.url}/${id}`,
-        formData,
-        getAuthHeaders(password)
-      );
-      console.log("put data", response);
-    } catch (error) {
-      throw new Error(`putData 에러: ${error}`);
-    } finally {
-      setIsLoading((prev) => ({ ...prev, put: false }));
-    }
-  };
+      try {
+        formData.forEach((item) => console.log(item, typeof item));
 
-  const deleteData = async (id: string) => {
-    setIsLoading((prev) => ({ ...prev, delete: true }));
+        const response = await axiosInstance.post(
+          apiConfig.url,
+          formData,
+          getAuthHeaders()
+        );
+        console.log("response", response);
+        return response.data;
+      } catch (error) {
+        throw new Error(`postData ?먮윭: ${error}`);
+      } finally {
+        setIsLoading((prev) => ({ ...prev, post: false }));
+      }
+    },
+    [apiConfig.url]
+  );
 
-    try {
-      const response = await axiosInstance.delete(
-        `${apiConfig.url}/${id}`,
-        getAuthHeaders()
-      );
-      console.log(response);
-    } catch (error) {
-      throw new Error(`deleteData 에러: ${error}`);
-    } finally {
-      setIsLoading((prev) => ({ ...prev, delete: false }));
-    }
-  };
+  const putData = useCallback(
+    async (formData: FormData, id: string, password?: string) => {
+      setIsLoading((prev) => ({ ...prev, put: true }));
+      if (password) {
+        formData.delete("password");
+      }
 
-  const deleteFile = async (id: string) => {
-    setIsLoading((prev) => ({ ...prev, deleteFile: true }));
+      try {
+        const response = await axiosInstance.put(
+          `${apiConfig.url}/${id}`,
+          formData,
+          getAuthHeaders(password)
+        );
+        console.log("put data", response);
+      } catch (error) {
+        throw new Error(`putData ?먮윭: ${error}`);
+      } finally {
+        setIsLoading((prev) => ({ ...prev, put: false }));
+      }
+    },
+    [apiConfig.url]
+  );
 
-    // API 차이: inquiry는 /files/:id, notice/photo는 /file/:id
-    const isInquiry = apiConfig.url === "/inquiries";
-    const endpoint = isInquiry
-      ? `${apiConfig.url}/files/${id}`
-      : `${apiConfig.url}/file/${id}`;
+  const deleteData = useCallback(
+    async (id: string) => {
+      setIsLoading((prev) => ({ ...prev, delete: true }));
 
-    try {
-      const response = await axiosInstance.delete(endpoint, getAuthHeaders());
-      console.log(response);
-    } catch (error) {
-      throw new Error(`deleteFile 에러: ${error}`);
-    } finally {
-      setIsLoading((prev) => ({ ...prev, deleteFile: false }));
-    }
-  };
+      try {
+        const response = await axiosInstance.delete(
+          `${apiConfig.url}/${id}`,
+          getAuthHeaders()
+        );
+        console.log(response);
+      } catch (error) {
+        throw new Error(`deleteData ?먮윭: ${error}`);
+      } finally {
+        setIsLoading((prev) => ({ ...prev, delete: false }));
+      }
+    },
+    [apiConfig.url]
+  );
+
+  const deleteFile = useCallback(
+    async (id: string) => {
+      setIsLoading((prev) => ({ ...prev, deleteFile: true }));
+
+      // API 李⑥씠: inquiry??/files/:id, notice/photo??/file/:id
+      const isInquiry = apiConfig.url === "/inquiries";
+      const endpoint = isInquiry
+        ? `${apiConfig.url}/files/${id}`
+        : `${apiConfig.url}/file/${id}`;
+
+      try {
+        const response = await axiosInstance.delete(endpoint, getAuthHeaders());
+        console.log(response);
+      } catch (error) {
+        throw new Error(`deleteFile ?먮윭: ${error}`);
+      } finally {
+        setIsLoading((prev) => ({ ...prev, deleteFile: false }));
+      }
+    },
+    [apiConfig.url]
+  );
 
   return {
     dataList,

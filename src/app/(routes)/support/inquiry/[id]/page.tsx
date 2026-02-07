@@ -1,6 +1,6 @@
 ﻿"use client";
 import { useParams } from "next/navigation"; // useParams를 import합니다
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { API_URLS } from "@/_config/apiConfig";
 import { useAPIData } from "@/_hooks/useAPIData";
 import { UserInquiryPasswordContext } from "@/_contexts/inquiryContext";
@@ -34,29 +34,32 @@ export default function InquiryDetail() {
     goToEditPage(currentId);
   };
 
-  const getInquiryDetail = async (id: string) => {
-    const errorMessage = await fetchInquiryDetail(
-      id,
-      isLoggedIn ? undefined : password
-    );
-    if (errorMessage) {
-      alert(errorMessage);
-      // 비밀번호 입력 페이지로 이동 (return)
-      if (!isLoggedIn) {
-        router.push(`/support/inquiry/${id}/password`);
+  const getInquiryDetail = useCallback(
+    async (id: string) => {
+      const errorMessage = await fetchInquiryDetail(
+        id,
+        isLoggedIn ? undefined : password
+      );
+      if (errorMessage) {
+        alert(errorMessage);
+        // 비밀번호 입력 페이지로 이동 (return)
+        if (!isLoggedIn) {
+          router.push(`/support/inquiry/${id}/password`);
+        }
       }
-    }
-  };
+    },
+    [fetchInquiryDetail, isLoggedIn, password, router]
+  );
 
   useEffect(() => {
     if (currentId) {
       getInquiryDetail(currentId);
     }
-  }, [currentId]);
+  }, [currentId, getInquiryDetail]);
 
   useEffect(() => {
     fetchDataList(1, 100);
-  }, []);
+  }, [fetchDataList]);
 
   const handleDelete = async (id: string) => {
     const isDeleted = await deleteItem(id);
