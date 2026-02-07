@@ -6,7 +6,6 @@ import Header from "./_components/Header/Header";
 import Footer from "./_components/Footer/Footer";
 import Banner from "./_components/Banner/Banner";
 import ClientWrapper from "./clientWrapper";
-import Script from "next/script";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -24,8 +23,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_API_KEY}&autoload=false`;
-
   return (
     <html lang="ko">
       <head>
@@ -44,7 +41,6 @@ export default function RootLayout({
           </main>
           <Footer />
         </ClientWrapper>
-        <Script src={KAKAO_SDK_URL} strategy="beforeInteractive" />
       </body>
     </html>
   );

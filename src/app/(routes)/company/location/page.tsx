@@ -1,12 +1,16 @@
-﻿"use client";
+"use client";
 import React from "react";
 import { RiMapPinLine, RiPhoneLine, RiSmartphoneLine } from "@remixicon/react";
-import { MapMarker, Map, CustomOverlayMap } from "react-kakao-maps-sdk";
+import { CustomOverlayMap, Map, MapMarker, useKakaoLoader } from "react-kakao-maps-sdk";
 import styles from "./page.module.scss";
-// import { useKakaoLoader } from "@/_hooks/useKakaoLoader";
 
 export default function Location() {
-  // useKakaoLoader(KAKAO_SDK_URL);
+  const [loading, error] = useKakaoLoader({
+    appkey: process.env.NEXT_PUBLIC_KAKAO_API_KEY ?? "",
+  });
+
+  const isKakaoReady = !loading && !error;
+
   return (
     <div className={styles.container}>
       <section>
@@ -29,48 +33,52 @@ export default function Location() {
           </ul>
           <div className={styles.line} />
           <div className={styles["map-container"]}>
-            <Map
-              center={{
-                lat: 37.8516285,
-                lng: 127.7706658,
-              }}
-              style={{
-                width: "100%",
-                height: "450px",
-              }}
-              level={4}
-            >
-              <MapMarker
-                position={{ lat: 37.8516285, lng: 127.7706658 }}
-                image={{
-                  src: "/images/marker.png",
-                  size: {
-                    width: 42,
-                    height: 42,
-                  },
-                  options: {
-                    offset: {
-                      x: 21,
-                      y: -10,
-                    },
-                  },
+            {isKakaoReady ? (
+              <Map
+                center={{
+                  lat: 37.8516285,
+                  lng: 127.7706658,
                 }}
-              />
-              <CustomOverlayMap
-                position={{ lat: 37.8516285, lng: 127.7706658 }}
-                yAnchor={1}
+                style={{
+                  width: "100%",
+                  height: "450px",
+                }}
+                level={4}
               >
-                <div className={styles["address-link"]}>
-                  <a
-                    href="https://map.kakao.com/link/map/11394059"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <address>강원특별자치도 춘천시 동내면 신촌길 15</address>
-                  </a>
-                </div>
-              </CustomOverlayMap>
-            </Map>
+                <MapMarker
+                  position={{ lat: 37.8516285, lng: 127.7706658 }}
+                  image={{
+                    src: "/images/marker.png",
+                    size: {
+                      width: 42,
+                      height: 42,
+                    },
+                    options: {
+                      offset: {
+                        x: 21,
+                        y: -10,
+                      },
+                    },
+                  }}
+                />
+                <CustomOverlayMap
+                  position={{ lat: 37.8516285, lng: 127.7706658 }}
+                  yAnchor={1}
+                >
+                  <div className={styles["address-link"]}>
+                    <a
+                      href="https://map.kakao.com/link/map/11394059"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <address>강원특별자치도 춘천시 동내면 신촌길 15</address>
+                    </a>
+                  </div>
+                </CustomOverlayMap>
+              </Map>
+            ) : (
+              <div style={{ width: "100%", height: "450px" }} />
+            )}
           </div>
         </div>
       </section>
