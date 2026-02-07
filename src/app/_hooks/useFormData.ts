@@ -2,7 +2,7 @@ import { APIConfig } from "@/_config/apiConfig";
 import { EditMethodType } from "@/_types/board";
 import { useAPIData } from "./useAPIData";
 
-const MAX_FILE_SIZE_BYTES = 200 * 1024 * 1024;
+const MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024;
 
 const useFormData = <T, P>(
   apiConfig: APIConfig<T>,
@@ -25,7 +25,7 @@ const useFormData = <T, P>(
     if (type === "file") {
       const { files } = e.target as HTMLInputElement;
       if (files && Array.from(files).some((file) => file.size > MAX_FILE_SIZE_BYTES)) {
-        alert("파일 크기는 200MB를 초과할 수 없습니다.");
+        alert("파일 크기는 50MB를 초과할 수 없습니다.");
         (e.target as HTMLInputElement).value = "";
         return;
       }

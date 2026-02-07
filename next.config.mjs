@@ -5,7 +5,10 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const nextConfig = {
   images: {
-    domains: [new URL(process.env.NEXT_PUBLIC_IMAGE_BASE_URL).hostname],
+    domains: [
+      new URL(process.env.NEXT_PUBLIC_IMAGE_BASE_URL).hostname,
+      "cdn.smwaterjet.com",
+    ],
   },
   reactStrictMode: false,
   async rewrites() {
