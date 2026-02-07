@@ -18,7 +18,7 @@ export default function AuthLayout({
       alert("관리자만 접근 가능한 페이지입니다.");
       router.back();
     }
-  }, [isInitialized, isLoggedIn]);
+  }, [isInitialized, isLoggedIn, router]);
 
   return <>{children}</>;
 }

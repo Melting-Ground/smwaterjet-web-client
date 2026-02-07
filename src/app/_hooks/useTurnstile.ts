@@ -1,69 +1,75 @@
 import axiosInstance from "@/_config/axiosInstance";
-import { useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+
+type TurnstileApi = {
+  render: (
+    container: HTMLElement,
+    options: { sitekey: string; callback: (token: string) => void }
+  ) => string | number | HTMLElement;
+  reset: (widget: string | number | HTMLElement) => void;
+};
 
 export const useTurnstile = (
   turnstileRef: React.RefObject<HTMLDivElement>
-  //   handleSubmit: () => void
 ) => {
-  const turnstileInstanceRef = useRef<any>(null);
+  const turnstileInstanceRef = useRef<string | number | HTMLElement | null>(
+    null
+  );
   const [isValidate, setIsValidate] = useState<boolean>(false);
 
-  // Turnstile 검증 및 서버로 토큰 전송
-  const handleVerify = async (token: string) => {
-    try {
-      const response = await axiosInstance.post("/turnstile", {
-        "cf-turnstile-response": token,
-      });
+  const resetTurnstile = useCallback(() => {
+    if (typeof window === "undefined") return;
+    const turnstile = (window as Window & { turnstile?: TurnstileApi }).turnstile;
+    if (turnstile && turnstileInstanceRef.current) {
+      turnstile.reset(turnstileInstanceRef.current);
+      console.log("Turnstile reset");
+    }
+  }, []);
 
-      console.log("Turnstile response:", response);
+  const handleVerify = useCallback(
+    async (token: string) => {
+      try {
+        const response = await axiosInstance.post("/turnstile", {
+          "cf-turnstile-response": token,
+        });
 
-      if (response.data.validationResult === false) {
-        alert("자동 등록 방지 검증에 실패했습니다. 다시 시도해주세요.");
+        console.log("Turnstile response:", response);
+
+        if (response.data.validationResult === false) {
+          alert(
+            "자동 등록 방지 검증에 실패했습니다. 다시 시도해 주세요."
+          );
+          setIsValidate(false);
+          resetTurnstile();
+        } else {
+          setIsValidate(true);
+          console.log("Turnstile verification success");
+        }
+      } catch (error) {
+        console.error("Turnstile error:", error);
+        alert("검증 중 오류가 발생했습니다. 다시 시도해 주세요.");
         setIsValidate(false);
         resetTurnstile();
-      } else {
-        // validationResult === true
-        setIsValidate(true);
-        console.log("Turnstile verification 성공");
       }
-    } catch (error) {
-      console.error("Turnstile error:", error);
-      alert("검증 중 오류가 발생했습니다. 다시 시도해주세요.");
-      setIsValidate(false);
-      resetTurnstile();
-    }
-  };
-
-  const resetTurnstile = () => {
-    if (
-      typeof window !== "undefined" &&
-      window.turnstile &&
-      turnstileInstanceRef.current
-    ) {
-      window.turnstile.reset(turnstileInstanceRef.current);
-      console.log("Turnstile 리셋됨");
-    }
-  };
+    },
+    [resetTurnstile]
+  );
 
   useEffect(() => {
-    if (
-      typeof window !== "undefined" &&
-      window.turnstile &&
-      turnstileRef.current
-    ) {
-      // Turnstile 렌더링
-      window.turnstile.render(turnstileRef.current, {
-        sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "",
-        callback: (token) => {
-          console.log("Turnstile token:", token);
-          handleVerify(token); // 서버로 토큰 전송
-        },
-      });
+    if (typeof window === "undefined" || !turnstileRef.current) return;
+    const turnstile = (window as Window & { turnstile?: TurnstileApi }).turnstile;
+    if (!turnstile) return;
 
-      // 렌더링된 Turnstile 객체를 ref에 저장
-      turnstileInstanceRef.current = turnstileRef.current;
-    }
-  }, [turnstileRef]);
+    const widget = turnstile.render(turnstileRef.current, {
+      sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "",
+      callback: (token) => {
+        console.log("Turnstile token:", token);
+        handleVerify(token);
+      },
+    });
+
+    turnstileInstanceRef.current = widget;
+  }, [turnstileRef, handleVerify]);
 
   return { isValidate };
 };

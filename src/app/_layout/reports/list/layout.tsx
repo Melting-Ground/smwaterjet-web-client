@@ -12,7 +12,6 @@ interface ListProps<T> {
   tableHeadList: string[];
   handleDelete: (id: number | undefined) => void;
   handleEditClick: (id?: string) => void;
-  handleYearSearch: (year: number) => void;
   isLoggedIn: boolean;
   handleArrowClick: (direction: "prev" | "next") => void;
   handlePageClick: (page: number) => void;
@@ -31,7 +30,6 @@ export default function BoardListLayout({
   tableHeadList,
   handleDelete,
   handleEditClick,
-  handleYearSearch,
   isLoggedIn,
   handleArrowClick,
   handlePageClick,

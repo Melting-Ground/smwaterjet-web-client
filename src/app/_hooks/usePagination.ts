@@ -1,47 +1,41 @@
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const usePagination = (lastPageNumber: number) => {
-  // 최대 페이지 크기
-  const MAX_PAGE_LENGTH = 10;
   const [currentPage, setCurrentPage] = useState<number>(1);
-
-  const [isFirstRender, setIsFirstRender] = useState(true);
+  const hasMountedRef = useRef(false);
 
   const router = useRouter();
   const searchParams = useSearchParams();
   const pages = Array.from({ length: lastPageNumber }, (_, index) => index + 1);
 
-  // 초기화. 처음 렌더링에만 실행
   useEffect(() => {
     const pageParam = searchParams.get("page");
     const parsedPage = pageParam ? Number(pageParam) : NaN;
-    if (Number.isFinite(parsedPage) && parsedPage > 0) {
+    if (
+      Number.isFinite(parsedPage) &&
+      parsedPage > 0 &&
+      parsedPage !== currentPage
+    ) {
       setCurrentPage(parsedPage);
     }
-    setIsFirstRender(false);
-  }, []);
+    hasMountedRef.current = true;
+  }, [searchParams, currentPage]);
 
   useEffect(() => {
-    if (isFirstRender) return;
+    if (!hasMountedRef.current) return;
 
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(searchParams.toString());
+    const currentParam = params.get("page");
+    if (currentParam === String(currentPage)) {
+      return;
+    }
     params.set("page", String(currentPage));
     router.push(`?${params.toString()}`);
-  }, [currentPage]);
-
-  useEffect(() => {
-    const pageParam = searchParams.get("page");
-    const parsedPage = pageParam ? Number(pageParam) : NaN;
-    if (Number.isFinite(parsedPage) && parsedPage > 0) {
-      if (parsedPage !== currentPage) {
-        setCurrentPage(parsedPage);
-      }
-    }
-  }, [searchParams]);
+  }, [currentPage, router, searchParams]);
 
   const clickPageButton = (page: number) => {
-    // ?page=1 쿼리 파라미터 전달
+    // ?page=1 쿼리 파라미터 수정
     setCurrentPage(page);
   };
   const clickArrowButton = (direction: "prev" | "next") => {

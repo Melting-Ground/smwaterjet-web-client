@@ -15,6 +15,6 @@ export const useLocalData = <T>(dataName: string) => {
     };
 
     fetchData();
-  }, []);
+  }, [dataName]);
   return { data };
 };
