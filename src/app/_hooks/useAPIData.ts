@@ -18,7 +18,6 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
     delete: false,
     deleteFile: false,
   });
-
   const fetchDataList = useCallback(
     async (page: number, limit: number = 10) => {
       setIsLoading((prev) => ({ ...prev, list: true }));
@@ -33,7 +32,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
         setPaginationInfo(data.pagination);
         // setTotalPageLength(data);
       } catch (error) {
-        throw new Error(`fatchDataList ?먮윭: ${error}`);
+        throw new Error(`fetchDataList 에러: ${error}`);
       } finally {
         setIsLoading((prev) => ({ ...prev, list: false }));
       }
@@ -41,12 +40,12 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
     [apiConfig.url]
   );
 
-  // ?먮윭 硫붿떆吏 諛섑솚
-  // TODO: ?먮윭 硫붿떆吏 ?곕줈 愿由ы븯湲?
+  // 에러 메시지 반환
+  // TODO: 에러 메시지 공통 처리 함수로 관리하기
   const fetchData = useCallback(
     async (id: string, password?: string): Promise<string | null> => {
-      // password O: 臾몄쓽?ы빆
-      // password X: 怨듭??ы빆
+      // password O: 문의사항
+      // password X: 공지사항
 
       setIsLoading((prev) => ({ ...prev, detail: true }));
       try {
@@ -61,11 +60,11 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
           (error as AxiosError).response &&
           (error as AxiosError).response!.status === 401
         ) {
-          console.error(`鍮꾨?踰덊샇媛 遺덉씪移??먮윭, ${error}`);
-          return "鍮꾨?踰덊샇媛 ?щ컮瑜댁? ?딆뒿?덈떎.";
+          console.error(`비밀번호가 일치하지 않는 에러, ${error}`);
+          return "비밀번호가 올바르지 않습니다.";
         } else {
-          console.error(`fetData ?먮윭, ${error}`);
-          return "?????녿뒗 ?ㅻ쪟媛 諛쒖깮?덉뒿?덈떎. 愿由ъ옄?먭쾶 臾몄쓽?섏꽭??";
+          console.error(`fetchData 에러, ${error}`);
+          return "알 수 없는 오류가 발생했습니다. 관리자에게 문의해 주세요.";
         }
       } finally {
         setIsLoading((prev) => ({ ...prev, detail: false }));
@@ -85,7 +84,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
         // setPaginationInfo(data.pagination);
         // setTotalPageLength(data);
       } catch (error) {
-        throw new Error(`searchDataList ?먮윭: ${error}`);
+        throw new Error(`searchDataList 에러: ${error}`);
       } finally {
         setIsLoading((prev) => ({ ...prev, list: false }));
       }
@@ -108,7 +107,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
         console.log("response", response);
         return response.data;
       } catch (error) {
-        throw new Error(`postData ?먮윭: ${error}`);
+        throw new Error(`postData 에러: ${error}`);
       } finally {
         setIsLoading((prev) => ({ ...prev, post: false }));
       }
@@ -131,7 +130,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
         );
         console.log("put data", response);
       } catch (error) {
-        throw new Error(`putData ?먮윭: ${error}`);
+        throw new Error(`putData 에러: ${error}`);
       } finally {
         setIsLoading((prev) => ({ ...prev, put: false }));
       }
@@ -150,7 +149,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
         );
         console.log(response);
       } catch (error) {
-        throw new Error(`deleteData ?먮윭: ${error}`);
+        throw new Error(`deleteData 에러: ${error}`);
       } finally {
         setIsLoading((prev) => ({ ...prev, delete: false }));
       }
@@ -161,8 +160,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
   const deleteFile = useCallback(
     async (id: string) => {
       setIsLoading((prev) => ({ ...prev, deleteFile: true }));
-
-      // API 李⑥씠: inquiry??/files/:id, notice/photo??/file/:id
+      // API ??: inquiry? /files/:id, notice/photo? /file/:id
       const isInquiry = apiConfig.url === "/inquiries";
       const endpoint = isInquiry
         ? `${apiConfig.url}/files/${id}`
@@ -172,7 +170,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
         const response = await axiosInstance.delete(endpoint, getAuthHeaders());
         console.log(response);
       } catch (error) {
-        throw new Error(`deleteFile ?먮윭: ${error}`);
+        throw new Error(`deleteFile 에러: ${error}`);
       } finally {
         setIsLoading((prev) => ({ ...prev, deleteFile: false }));
       }

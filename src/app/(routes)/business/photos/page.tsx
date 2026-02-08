@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useEffect } from "react";
 import GalleryLayout from "@/_layout/gallery/layout";
 import styles from "./page.module.scss";
@@ -57,7 +57,7 @@ export default function Photos() {
 
   return (
     <section className={styles.container}>
-      <h3 className={styles["sr-only"]}>?占쎌옣 ?占쎌뾽 ?占쎌쭊</h3>
+      <h3 className={styles["sr-only"]}>현장 작업 사진</h3>
       <div className={styles["photos-container"]}>
         <GalleryLayout
           list={photos.map((photo) => ({
