@@ -17,7 +17,6 @@
         "name": "next"
       }
     ],
-    "types": ["kakao.maps.d.ts"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/app/*"]
