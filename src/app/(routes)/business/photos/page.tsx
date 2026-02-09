@@ -1,14 +1,16 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import GalleryLayout from "@/_layout/gallery/layout";
 import styles from "./page.module.scss";
 import { useAuth } from "@/_hooks/useAuth";
 import Button from "@/_components/Button/Button";
 import useBoardAction from "@/_hooks/useBoardAction";
 import usePagination from "@/_hooks/usePagination";
-import { useAPIData } from "@/_hooks/useAPIData";
 import { API_URLS } from "@/_config/apiConfig";
 import { useRouter, useSearchParams } from "next/navigation";
+import useSWR from "swr";
+import axiosInstance from "@/_config/axiosInstance";
+import { PaginationInfoType } from "@/_types/pagination";
 
 export default function Photos() {
   const boardType = "photos";
@@ -28,12 +30,7 @@ export default function Photos() {
 
   const { goToEditPage } = useBoardAction("performance", boardType);
 
-  const { dataList: photos, paginationInfo, fetchDataList } = useAPIData<
-    typeof API_URLS.photos.method.get
-  >(API_URLS.photos);
-
-  console.log(photos);
-  const lastPageNumber = paginationInfo?.lastPage || 1;
+  const [lastPageNumber, setLastPageNumber] = useState(1);
 
   const {
     currentPage,
@@ -42,9 +39,29 @@ export default function Photos() {
     clickPageButton,
   } = usePagination(lastPageNumber);
 
+  type PhotoItem = typeof API_URLS.photos.method.get;
+  const limit = 8;
+  const { data } = useSWR<{ items: PhotoItem[]; pagination: PaginationInfoType }>(
+    ["photos", currentPage, limit],
+    () =>
+      axiosInstance
+        .get(`${API_URLS.photos.url}?page=${currentPage}&limit=${limit}`)
+        .then((res) => res.data),
+    {
+      keepPreviousData: true,
+      revalidateOnFocus: false,
+      dedupingInterval: 60000,
+    }
+  );
+
+  const photos = data?.items ?? [];
+  const paginationInfo = data?.pagination;
+
   useEffect(() => {
-    fetchDataList(currentPage, 8);
-  }, [currentPage, fetchDataList]);
+    if (paginationInfo?.lastPage) {
+      setLastPageNumber(paginationInfo.lastPage);
+    }
+  }, [paginationInfo?.lastPage]);
 
   const { isLoggedIn } = useAuth();
   const handleDetailOpen = (item: { id: number }) => {

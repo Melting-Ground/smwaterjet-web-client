@@ -1,13 +1,14 @@
 "use client";
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import styles from "./page.module.scss";
 import { API_URLS } from "@/_config/apiConfig";
-import { useAPIData } from "@/_hooks/useAPIData";
 import Button from "@/_components/Button/Button";
 import { useAuth } from "@/_hooks/useAuth";
 import useFormData from "@/_hooks/useFormData";
+import useSWR from "swr";
+import axiosInstance from "@/_config/axiosInstance";
 
 export default function PhotoDetail() {
   const { id } = useParams();
@@ -16,9 +17,18 @@ export default function PhotoDetail() {
   const searchParams = useSearchParams();
   const imageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL;
 
-  const { fetchData, dataDetail, isLoading } = useAPIData<
-    typeof API_URLS.photos.method.get
-  >(API_URLS.photos);
+  type PhotoItem = typeof API_URLS.photos.method.get;
+  const { data: dataDetail, isValidating } = useSWR<PhotoItem>(
+    currentId ? ["photo-detail", currentId] : null,
+    () =>
+      axiosInstance
+        .get(`${API_URLS.photos.url}/${currentId}`)
+        .then((res) => res.data),
+    {
+      revalidateOnFocus: false,
+      dedupingInterval: 60000,
+    }
+  );
   const { isLoggedIn } = useAuth();
   const { deleteItem } = useFormData(API_URLS.photos);
 
@@ -51,12 +61,6 @@ export default function PhotoDetail() {
     return `${year}-${month}-${day} ${hours}:${minutes}`;
   };
 
-  useEffect(() => {
-    if (currentId) {
-      fetchData(currentId);
-    }
-  }, [currentId, fetchData]);
-
   const filePaths = useMemo(() => {
     if (!dataDetail) return [];
     if (dataDetail.files && dataDetail.files.length > 0) {
@@ -71,7 +75,7 @@ export default function PhotoDetail() {
     return <div>해당 사진 정보를 찾을 수 없습니다.</div>;
   }
 
-  if (isLoading.detail || !dataDetail) {
+  if (isValidating || !dataDetail) {
     return <div>로딩중...</div>;
   }
 
