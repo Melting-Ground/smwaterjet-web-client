@@ -31,7 +31,11 @@ const usePagination = (lastPageNumber: number) => {
       return;
     }
     params.set("page", String(currentPage));
-    router.push(`?${params.toString()}`);
+    if (!currentParam) {
+      router.replace(`?${params.toString()}`);
+    } else {
+      router.push(`?${params.toString()}`);
+    }
   }, [currentPage, router, searchParams]);
 
   const clickPageButton = (page: number) => {

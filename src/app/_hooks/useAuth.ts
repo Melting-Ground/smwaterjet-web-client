@@ -33,7 +33,7 @@ export const useAuth = () => {
   const handleLoginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!value.id || !value.password) {
-      alert("아이디 및 비밀번호를 입력해주세요.");
+      alert("아이디/비밀번호를 입력해 주세요.");
       return;
     }
     try {
@@ -43,21 +43,32 @@ export const useAuth = () => {
       });
 
       login(data);
-      alert("로그인 되었습니다.");
-      router.back();
+      alert("로그인되었습니다.");
+      const returnTo = sessionStorage.getItem("loginReturnTo");
+      const safeReturnTo =
+        returnTo && !returnTo.startsWith("/login") ? returnTo : null;
+      sessionStorage.removeItem("loginReturnTo");
+      if (safeReturnTo) {
+        router.push(safeReturnTo);
+      } else {
+        router.push("/");
+      }
     } catch (e) {
-      console.error("로그인 에러:", e);
-      alert("아이디 및 비밀번호가 일치하지 않습니다.");
+      console.error("로그인 오류:", e);
+      alert("아이디/비밀번호가 일치하지 않습니다.");
     }
   };
 
   const handleLogoutClick = () => {
     logout();
     alert("로그아웃 되었습니다.");
-    router.back();
+    router.refresh();
   };
 
-  const handleLoginClick = () => {
+  const handleLoginClick = (returnTo?: string) => {
+    if (returnTo && !returnTo.startsWith("/login")) {
+      sessionStorage.setItem("loginReturnTo", returnTo);
+    }
     router.push("/login");
   };
 

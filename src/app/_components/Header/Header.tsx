@@ -17,7 +17,7 @@ export default function Header() {
         <div className={styles["header-inner"]}>
           <Link href="/">
             <h1>
-              <Image width={150} src={logo} alt="성문워터젯" />
+              <Image width={190} src={logo} alt="성문워터젯" />
             </h1>
           </Link>
           <NavList

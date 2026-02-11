@@ -5,9 +5,13 @@ import Link from "next/link";
 import { RiArrowRightUpLine } from "@remixicon/react";
 import Button from "../Button/Button";
 import { useAuth } from "../../_hooks/useAuth";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export default function Footer() {
   const { handleLogoutClick, handleLoginClick, isLoggedIn } = useAuth();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const returnTo = `${pathname}${searchParams.toString() ? `?${searchParams}` : ""}`;
 
   return (
     <footer className={styles.footer}>
@@ -38,7 +42,7 @@ export default function Footer() {
             <Button
               ariaLabel="로그인"
               className={styles.login}
-              onClick={handleLoginClick}
+              onClick={() => handleLoginClick(returnTo)}
             >
               로그인
             </Button>
