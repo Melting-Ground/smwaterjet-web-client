@@ -41,6 +41,33 @@ export default function NavSubList({
             </li>
           ))}
         </ul>
+        <div className={styles["mobile-nav"]}>
+          <ul className={styles["mobile-nav-list"]}>
+            {routeCategories.map((category: RouteCategoryType) => (
+              <li key={category.title} className={styles["mobile-category"]}>
+                <details className={styles["mobile-details"]}>
+                  <summary className={styles["mobile-summary"]}>
+                    <span>{category.title}</span>
+                    <span className={styles["mobile-chevron"]} />
+                  </summary>
+                  <ul className={styles["mobile-sub-list"]}>
+                    {category.routes.map((route: RouteType) => (
+                      <li key={route.path}>
+                        <Link
+                          href={route.path}
+                          className={styles["mobile-sub-link"]}
+                          onClick={() => onOpen(false)}
+                        >
+                          {route.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
