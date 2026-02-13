@@ -286,6 +286,17 @@
       gap: 32px;
       align-items: stretch;
     }
+
+    @media (max-width: 640px) {
+      .list-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .service-header {
+        margin-bottom: 36px;
+      }
+    }
   }
 
   .article-container {
@@ -501,6 +512,13 @@
         font-size: 12px;
         color: #8e95a3;
       }
+    }
+  }
+
+  @media (max-width: 640px) {
+    .article-container {
+      grid-template-columns: 1fr;
+      gap: 24px;
     }
   }
 }
