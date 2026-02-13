@@ -84,4 +84,33 @@
       }
     }
   }
+
+  @media (max-width: 640px) {
+    padding: 72px 0 120px 0;
+
+    .history {
+      width: 100%;
+      padding: 0 20px;
+    }
+
+    .history-line {
+      display: none;
+    }
+
+    .history li {
+      position: relative;
+      padding: 28px 16px 28px 84px;
+      border-left: 0;
+    }
+
+    .history li::after {
+      display: none;
+    }
+
+    .history li::before {
+      left: 56px;
+      margin-left: 0;
+      margin-top: 12px;
+    }
+  }
 }

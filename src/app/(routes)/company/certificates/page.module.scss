@@ -170,11 +170,18 @@
       margin: 60px 0;
 
       .certificates {
-        grid-template-columns: 1fr;
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding: 4px 4px 16px;
       }
 
       .card {
         padding: 16px;
+        min-width: 85%;
+        scroll-snap-align: start;
       }
 
       .meta {

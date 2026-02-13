@@ -18,7 +18,7 @@ export default function Footer() {
       <div className={styles["footer-inner"]}>
         <div className={styles["policy-button-container"]}>
           <ul className={styles["policy"]}>
-            <cite>성문워터젯</cite>
+            <cite>(주)성문워터젯</cite>
             <li>
               <Link href={"/policy/tos"}>
                 이용약관
@@ -70,7 +70,7 @@ export default function Footer() {
           </p>
           <p>FAX: 033-261-4173</p>
         </address>
-        <small>© 성문워터젯, All right reserved.</small>
+        <small>© (주)성문워터젯, All right reserved.</small>
       </div>
     </footer>
   );

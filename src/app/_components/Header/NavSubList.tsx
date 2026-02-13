@@ -41,7 +41,7 @@ export default function NavSubList({
             </li>
           ))}
         </ul>
-        <div className={styles["mobile-nav"]}>
+        <div className={styles["mobile-nav"]} key={isOpen ? "open" : "closed"}>
           <ul className={styles["mobile-nav-list"]}>
             {routeCategories.map((category: RouteCategoryType) => (
               <li key={category.title} className={styles["mobile-category"]}>
