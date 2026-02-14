@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  verification: {
+    other: {
+      "naver-site-verification": "28d6847d7be98dd552ef10df1c0a2fdbd4decea",
+    },
+  },
   openGraph: {
     title: "워터젯 치핑·콘크리트 파쇄 전문 | 성문워터젯",
     description:
