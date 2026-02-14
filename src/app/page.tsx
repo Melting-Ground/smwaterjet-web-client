@@ -4,7 +4,6 @@ import styles from "./page.module.scss";
 import { useAPIData } from "./_hooks/useAPIData";
 import { API_URLS } from "./_config/apiConfig";
 import { useEffect } from "react";
-import { RiArrowRightUpLine } from "@remixicon/react";
 import { ArrowUpRight, MessageSquare, Phone, Clock, PhoneCall } from "lucide-react";
 import Link from "next/link";
 import { formatDate } from "./_utils/formatDate";
@@ -62,31 +61,23 @@ export default function Home() {
               <p className={styles.description}>
                 교량·도로·터널 현장에 맞는 정밀 워터젯 공법을 제공합니다.
               </p>
-              <Link href="/support/inquiry/edit" className={styles["hero-cta"]}>
+              <Link href="sms:01042776693" className={styles["hero-cta"]}>
                 시공 상담 요청
               </Link>
             </div>
 
             {/* Right Image */}
             <div className={styles["hero-media"]}>
-              {/* Floating CTA Button */}
-              <Link href="/business/waterjet" className={styles["waterjet-more-button"]}>
-                <RiArrowRightUpLine className={styles.icon} color="#ffffff" size={20} />
-                <span className={styles["cta-line"]}>워터젯</span>
-                <span className={styles["cta-line"]}>알아보기</span>
-              </Link>
-
               {/* Hero Image */}
-              <div className={styles["photo-wrap"]}>
-                <Image
-                  src={landingPageImage}
-                  alt="성문워터젯 공사현장 사진"
-                  className={styles.photo}
-                  fill
-                  priority
-                />
-                <div className={styles["image-overlay"]} aria-hidden="true" />
-              </div>
+              <Image
+                src={landingPageImage}
+                alt="성문워터젯 공사현장 사진"
+                fill
+                sizes="(max-width: 600px) 92vw, 520px"
+                className={styles.photo}
+                priority
+              />
+              <div className={styles["image-overlay"]} aria-hidden="true" />
             </div>
           </div>
         </div>

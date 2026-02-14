@@ -39,6 +39,12 @@
       order: 1;
       position: relative;
       animation: hero-fade-in 0.8s ease forwards;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 26px 60px rgba(15, 23, 42, 0.18);
+      border: 1px solid rgba(15, 23, 42, 0.06);
     }
 
     .greeting {
@@ -123,24 +129,8 @@
       }
     }
 
-    // Image wrapper: overflow-hidden + rounded-lg + shadow-2xl
-    .photo-wrap {
-      position: relative;
-      overflow: hidden;
-      border-radius: 20px;
-      box-shadow: 0 26px 60px rgba(15, 23, 42, 0.18);
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 3;
-      border: 1px solid rgba(15, 23, 42, 0.06);
-    }
-
     .photo {
       object-fit: contain;
-    }
-
-    .photo-mobile {
-      display: none;
     }
 
     .image-overlay {
@@ -179,6 +169,8 @@
 
       .top-grid {
         gap: 20px;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .left-container {
@@ -189,6 +181,9 @@
 
       .hero-media {
         width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        border-radius: 16px;
       }
 
 
@@ -231,22 +226,6 @@
         object-position: 65% center;
       }
 
-      .photo-desktop {
-        display: none;
-      }
-
-      .photo-mobile {
-        display: block;
-      }
-
-      .photo-wrap {
-        aspect-ratio: 16 / 9;
-        height: 240px;
-        border-radius: 16px;
-        width: 100%;
-        margin: 0;
-      }
-
       .image-overlay {
         background: linear-gradient(to top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
       }
@@ -258,7 +237,7 @@
       }
 
       .top-grid {
-        grid-template-columns: 1fr 1.15fr;
+        grid-template-columns: 1fr 1.25fr;
         gap: 64px;
       }
 
@@ -274,8 +253,7 @@
         font-size: 56px;
       }
 
-      .photo-wrap {
-        height: auto;
+      .hero-media {
         aspect-ratio: 4 / 3;
       }
     }
@@ -382,9 +360,11 @@
 
     @media (max-width: 640px) {
       padding: 56px 0 72px;
-      width: 100vw;
+      width: calc(100% + 32px);
+      margin-left: -16px;
+      margin-right: -16px;
       position: relative;
-      left: calc(50% - 50vw);
+      left: 0;
 
       .service-header {
         padding: 0 16px;
@@ -623,6 +603,14 @@
       grid-template-columns: 1fr;
       gap: 24px;
     }
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    margin: 84px auto 120px auto;
+    padding: 0 16px;
+    overflow-x: hidden;
   }
 }
 

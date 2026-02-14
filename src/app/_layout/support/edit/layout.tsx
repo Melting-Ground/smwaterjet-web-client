@@ -47,7 +47,7 @@ export default function BoardEditLayout<
   passwordRegex,
 }: EditProps<T>) {
   const turnstileRef = useRef<HTMLDivElement>(null);
-  const { isValidate } = useTurnstile(turnstileRef);
+  useTurnstile(turnstileRef);
   console.log("existFiles", existFiles);
   const files = existFiles ?? contents.files;
   const RequiredMark = () => {
