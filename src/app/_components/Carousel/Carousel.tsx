@@ -6,11 +6,26 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const fallbackImages = [
-  { src: "/images/work/work1.jpg", alt: "현장사진 1" },
-  { src: "/images/work/work2.jpg", alt: "현장사진 2" },
-  { src: "/images/work/work3.jpg", alt: "현장사진 3" },
-  { src: "/images/work/work4.jpg", alt: "현장사진 4" },
-  { src: "/images/work/work5.jpg", alt: "현장사진 5" },
+  {
+    src: "/images/work/work1.jpg",
+    alt: "초고압 워터젯을 이용한 콘크리트 치핑 작업 사진 1",
+  },
+  {
+    src: "/images/work/work2.jpg",
+    alt: "초고압 워터젯을 이용한 콘크리트 치핑 작업 사진 2",
+  },
+  {
+    src: "/images/work/work3.jpg",
+    alt: "초고압 워터젯을 이용한 콘크리트 치핑 작업 사진 3",
+  },
+  {
+    src: "/images/work/work4.jpg",
+    alt: "초고압 워터젯을 이용한 콘크리트 치핑 작업 사진 4",
+  },
+  {
+    src: "/images/work/work5.jpg",
+    alt: "초고압 워터젯을 이용한 콘크리트 치핑 작업 사진 5",
+  },
 ];
 
 export default function Carousel() {
@@ -68,7 +83,7 @@ export default function Carousel() {
             <Link href="/business/photos" className={styles["image-link"]}>
               <Image
                 src={image.src}
-                alt={image.alt || "현장사진"}
+                alt={image.alt || "초고압 워터젯을 이용한 콘크리트 치핑 작업 사진"}
                 className={styles.image}
                 layout="fill"
                 objectFit="cover"

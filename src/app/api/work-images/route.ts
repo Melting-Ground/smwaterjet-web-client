@@ -15,7 +15,10 @@ export async function GET() {
       .sort((a, b) => a.localeCompare(b))
       .map((name) => ({
         src: `/images/work/${name}`,
-        alt: `현장사진 ${path.basename(name, path.extname(name))}`,
+        alt: `초고압 워터젯을 이용한 콘크리트 치핑 작업 사진 ${path.basename(
+          name,
+          path.extname(name)
+        )}`,
       }));
 
     return NextResponse.json({ images });

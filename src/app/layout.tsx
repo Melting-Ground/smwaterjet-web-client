@@ -14,8 +14,27 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "성문워터젯-콘크리트 치핑, 파쇄, 커팅",
-  description: "콘크리트 워터젯 커팅 및 치핑 전문 업체 성문워터젯입니다. 다양한 현장에서 정밀하고 안전한 시공을 수행하고 있습니다.",
+  metadataBase: new URL("https://www.smwaterjet.com"),
+  title: "워터젯 치핑·콘크리트 파쇄 전문 | 성문워터젯",
+  description:
+    "워터젯 치핑 전문 시공업체 성문워터젯입니다. 초고압 워터젯 공법을 이용해 콘크리트 치핑, 교량 보수, 구조물 파쇄를 정밀하고 안전하게 수행합니다.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "워터젯 치핑·콘크리트 파쇄 전문 | 성문워터젯",
+    description:
+      "초고압 워터젯 공법 기반 콘크리트 치핑·교량 보수·구조물 파쇄 전문 시공업체",
+    url: "https://www.smwaterjet.com",
+    siteName: "성문워터젯",
+    type: "website",
+    images: [
+      {
+        url: "/images/logo/logo.png",
+        alt: "성문워터젯 로고",
+      },
+    ],
+  },
   icons: {
     icon: "/favicon.ico",
   },
