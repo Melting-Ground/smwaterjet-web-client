@@ -1,16 +1,11 @@
-﻿"use client";
-
 import styles from "./page.module.scss";
-import { useAPIData } from "./_hooks/useAPIData";
-import { API_URLS } from "./_config/apiConfig";
-import { useEffect } from "react";
 import { ArrowUpRight, MessageSquare, Phone, Clock, PhoneCall } from "lucide-react";
 import Link from "next/link";
-import { formatDate } from "./_utils/formatDate";
 import landingPageImage from "/public/images/background-image.jpg";
 import Image from "next/image";
 import Carousel from "./_components/Carousel/Carousel";
 import { Wrench, Hammer, Scissors } from "lucide-react";
+import HomeNoticeList from "./_components/HomeNoticeList/HomeNoticeList";
 
 interface ListItemProps {
   title: string;
@@ -34,15 +29,6 @@ function ListItem({ title, icon, content }: ListItemProps) {
 }
 
 export default function Home() {
-  const { dataList: notices, fetchDataList } = useAPIData<
-    typeof API_URLS.notices.method.get
-  >(API_URLS.notices);
-
-  useEffect(() => {
-    fetchDataList(1, 4); // TODO: limit?
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div className={styles.container}>
       <section className={styles["top-section"]}>
@@ -83,7 +69,6 @@ export default function Home() {
         </div>
       </section>
 
-
       <section className={styles["photo-section"]}>
         <div className={styles["photo-header"]}>
           <p className={styles["photo-eyebrow"]}>OUR WORKS</p>
@@ -109,8 +94,7 @@ export default function Home() {
               icon={<Wrench size={32} color="#3272eb" />}
               content={
                 <p className={styles.content}>
-                  구조물 안전을 지키며
-                  {" "}
+                  구조물 안전을 지키며{" "}
                   <span className={styles.keyword}>철근 손상 없는 해체</span>를
                   정확하게 진행합니다.
                 </p>
@@ -124,8 +108,7 @@ export default function Home() {
               icon={<Hammer size={32} color="#3272eb" />}
               content={
                 <p className={styles.content}>
-                  필요한 부위만 선택 제거해
-                  {" "}
+                  필요한 부위만 선택 제거해{" "}
                   <span className={styles.keyword}>손상 범위를 최소화</span>합니다.
                 </p>
               }
@@ -138,8 +121,7 @@ export default function Home() {
               icon={<Scissors size={32} color="#3272eb" />}
               content={
                 <p className={styles.content}>
-                  기준선에 맞춰
-                  {" "}
+                  기준선에 맞춰{" "}
                   <span className={styles.keyword}>깔끔한 절단면</span>을 제공합니다.
                 </p>
               }
@@ -166,20 +148,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <ol className={styles["notice-list"]}>
-            {notices.map((notice) => (
-              <li key={notice.id} className={styles["notice-item"]}>
-                <Link href={`/support/notice/${notice.id}`}>
-                  <div className={styles["notice-item-left"]}>
-                    <p className={styles["notice-item-title"]}>{notice.title}</p>
-                  </div>
-                  <p className={styles["notice-item-date"]}>
-                    {formatDate(notice.created_at)}
-                  </p>
-                </Link>
-              </li>
-            ))}
-          </ol>
+          <HomeNoticeList />
         </article>
 
         <article className={styles.inquiry}>
