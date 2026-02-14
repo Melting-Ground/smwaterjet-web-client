@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./carousel.module.scss";
 import { useCarousel } from "@/_hooks/useCarousel";
