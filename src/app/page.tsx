@@ -55,15 +55,16 @@ export default function Home() {
                 <span className={styles["greeting-text"]}>초고압 워터젯 공법으로</span>
                 <br />
                 <span className={styles["nowrap"]}>
-                  <span className={styles.primary}>혁신적인 공사</span>
-                  <span className={styles["greeting-text"]}>를 제공합니다</span>
+                  <span className={styles.primary}>교량·도로 보수</span>
+                  <span className={styles["greeting-text"]}>를 수행합니다</span>
                 </span>
               </h2>
               <p className={styles.description}>
-                최첨단 장비와 숙련된 기술력으로 도로, 교량, 터널 등 다양한 구조물의
-                <br />
-                보수, 보강 공사를 수행합니다.
+                교량·도로·터널 현장에 맞는 정밀 워터젯 공법을 제공합니다.
               </p>
+              <Link href="/support/inquiry/edit" className={styles["hero-cta"]}>
+                시공 상담 요청
+              </Link>
             </div>
 
             {/* Right Image */}
