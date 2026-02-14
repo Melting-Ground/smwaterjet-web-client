@@ -186,7 +186,6 @@ export default function BoardEditLayout<
             type="button"
             color="primary-border"
             onClick={handleListClick}
-            disabled={!isValidate}
           >
             취소
           </Button>

@@ -55,3 +55,48 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .container {
+    .form {
+      margin: 40px 24px;
+      grid-template-columns: 90px 1fr;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    .form {
+      margin: 32px 16px;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .form label {
+      padding-top: 0;
+      font-size: 15px;
+    }
+
+    .form input,
+    .form textarea,
+    .form .file-input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form .button-container {
+      grid-column: span 1;
+      width: 100%;
+      margin-top: 32px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    .form {
+      margin: 28px 12px;
+    }
+  }
+}
