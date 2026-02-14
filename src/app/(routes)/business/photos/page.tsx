@@ -28,7 +28,7 @@ export default function Photos() {
     return `${base}/${cleanPath}`;
   };
 
-  const { goToEditPage } = useBoardAction("performance", boardType);
+  const { goToEditPage } = useBoardAction("business", boardType);
 
   const [lastPageNumber, setLastPageNumber] = useState(1);
 

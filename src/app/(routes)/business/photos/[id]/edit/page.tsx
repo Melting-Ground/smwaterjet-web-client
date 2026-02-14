@@ -62,7 +62,7 @@ export default function Edit() {
     }
     try {
       await updateForm(e, currentId, deleteFileIds);
-      router.push(`/business/photos/${currentId}`);
+      router.push("/business/photos");
     } catch (error) {
       alert(error);
     }

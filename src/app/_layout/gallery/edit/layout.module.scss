@@ -72,3 +72,51 @@
     }
   }
 }
+
+@media (max-width: 1024px) {
+  .container {
+    .form {
+      width: min(640px, 100%);
+      margin: 120px auto 200px auto;
+      padding: 32px 28px;
+      grid-template-columns: 90px 1fr;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    .form {
+      width: 100%;
+      margin: 90px auto 160px auto;
+      padding: 28px 20px;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .form label {
+      padding-top: 0;
+      font-size: 15px;
+    }
+
+    .form .section-label {
+      grid-column: span 1;
+      padding-top: 12px;
+    }
+
+    .form .button-container {
+      grid-column: span 1;
+      width: 100%;
+      margin-top: 32px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    .form {
+      margin: 70px auto 120px auto;
+      padding: 22px 16px;
+    }
+  }
+}

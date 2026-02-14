@@ -20,7 +20,7 @@ export default function Edit() {
     typeof PHOTO_API.method.post
   >(PHOTO_API, photoContents, setPhotoContents);
 
-  const { goToListPage } = useBoardAction("performance", "photos");
+  const { goToListPage } = useBoardAction("business", "photos");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
