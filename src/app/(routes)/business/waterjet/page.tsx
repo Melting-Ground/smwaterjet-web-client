@@ -44,8 +44,8 @@ export default function Waterjet() {
                 </div>
                 <h5>초고압 워터젯</h5>
                 <p>
-                  초고압 물줄기로{" "}
-                  <span className={styles.keyword}>콘크리트·철근을 정밀하게 </span>
+                  초고압 물줄기로 철근의 손상없이{" "}
+                  <span className={styles.keyword}>콘크리트를 정밀하게 </span>
                   절단하고 제거합니다.
                 </p>
               </article>

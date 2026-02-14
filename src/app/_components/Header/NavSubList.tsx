@@ -13,11 +13,21 @@ export default function NavSubList({
   onOpen: (isOpen: boolean) => void;
   onNavItemHover: (currentItem: string) => void;
 }) {
+  const handleMouseEnter = () => {
+    if (typeof window !== "undefined" && window.innerWidth <= 640) return;
+    onOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (typeof window !== "undefined" && window.innerWidth <= 640) return;
+    onOpen(false);
+  };
+
   return (
     <div
       className={`${styles["sub-nav-container"]} ${isOpen ? "" : styles.hidden}`}
-      onMouseEnter={() => onOpen(true)}
-      onMouseLeave={() => onOpen(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <div className={styles["sub-nav-inner"]}>
         <ul className={styles["sub-nav-list"]}>

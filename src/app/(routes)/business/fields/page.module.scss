@@ -27,7 +27,7 @@
         line-height: 1.6;
         em {
           font-weight: 600;
-          color: $primary;
+          color: $blue;
           // color: $blue;
         }
       }
@@ -140,8 +140,26 @@
       }
     }
   }
+
+  .desc-full {
+    display: block;
+  }
+
+  .desc-mobile {
+    display: none;
+  }
   .solution {
     margin-top: 32px;
+  }
+
+  .waterjet-advantage {
+    .list-description {
+      em,
+      strong {
+        color: inherit;
+        font-weight: inherit;
+      }
+    }
   }
 
   .grid-list {
@@ -324,4 +342,257 @@
 
 .sr-only {
   @include sr-only;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    .waterjet-method {
+      margin: 110px 0;
+
+      .header {
+        margin-bottom: 90px;
+
+        &-title {
+          font-size: 32px;
+        }
+
+        &-description {
+          font-size: 18px;
+          margin-top: 28px;
+        }
+      }
+    }
+
+    .sub-title,
+    .sub-title > em {
+      margin-top: 70px;
+      margin-bottom: 36px;
+    }
+
+    .main {
+      gap: 100px;
+    }
+
+    .list {
+      padding: 40px 24px;
+      gap: 18px;
+    }
+
+    .list-item {
+      width: 200px;
+    }
+
+    .grid-list {
+      gap: 56px;
+    }
+
+    .inside-card {
+      width: 300px;
+      height: 300px;
+    }
+
+    .footer {
+      margin-top: 100px;
+
+      .inquiry-article {
+        width: 100%;
+      }
+    }
+  }
+}
+
+  @media (max-width: 640px) {
+    .container {
+    .waterjet-method {
+      margin: 80px 0;
+
+      .header {
+        margin-bottom: 60px;
+
+        &-title {
+          font-size: 24px;
+          line-height: 1.5;
+        }
+
+        &-description {
+          font-size: 16px;
+          margin-top: 18px;
+        }
+      }
+    }
+
+    .sub-title,
+    .sub-title > em {
+      margin-top: 50px;
+      margin-bottom: 24px;
+      font-size: 26px;
+    }
+
+    .content {
+      font-size: 16px;
+    }
+
+    .main {
+      gap: 70px;
+    }
+
+    .list {
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 18px;
+      gap: 28px;
+    }
+
+    .list-item {
+      width: 100%;
+    }
+
+    .list-item-card {
+      width: 150px;
+      height: 150px;
+    }
+
+    .list-item-card-inner {
+      width: 96px;
+      height: 96px;
+      border-width: 10px;
+    }
+
+    .list-title {
+      font-size: 24px;
+    }
+
+    .list-description {
+      display: none;
+    }
+
+    .grid-list {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-top: 60px;
+      width: 100%;
+    }
+
+    .waterjet-advantage {
+      display: none;
+    }
+
+    .grid-list > li {
+      text-align: left;
+    }
+
+    .grid-list-item {
+      flex-direction: row;
+      gap: 20px;
+      justify-content: flex-start;
+    }
+
+    .grid-list-item:nth-child(odd) {
+      flex-direction: row;
+    }
+
+    .grid-list-item-circle {
+      width: 120px;
+      height: 120px;
+      border-width: 10px;
+
+      ::before {
+        display: none;
+      }
+    }
+
+    .grid-list-item-title {
+      font-size: 18px;
+    }
+
+    .grid-list-item-description {
+      font-size: 16px;
+      padding: 0;
+    }
+
+    .inside-card {
+      position: static;
+      transform: none;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      padding: 24px 0;
+      margin-top: 16px;
+    }
+
+    .inside-card-title {
+      position: static;
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .footer {
+      margin-top: 80px;
+
+      .highlighted-text {
+        font-size: 22px;
+      }
+
+      .waterjet-solution {
+        font-size: 16px;
+      }
+
+      .inquiry-article {
+        flex-direction: column;
+        gap: 12px;
+        padding: 18px;
+        margin: 60px auto;
+      }
+
+      .inquiry-article .inquiry-text {
+        font-size: 14px;
+        line-height: 1.4;
+      }
+    }
+
+    .list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      padding: 22px 12px;
+    }
+
+    .list-item {
+      width: auto;
+    }
+
+    .list-item-card {
+      width: 96px;
+      height: 96px;
+    }
+
+    .list-item-card-inner {
+      width: 56px;
+      height: 56px;
+      border-width: 8px;
+    }
+
+    .list-item-title {
+      font-size: 16px;
+      margin-top: 16px;
+    }
+
+    .list-item-description {
+      font-size: 12px;
+      margin-top: 8px;
+      line-height: 1.5;
+      color: $policy-font;
+      max-width: 140px;
+      text-align: center;
+      word-break: keep-all;
+    }
+
+    .desc-full {
+      display: none;
+    }
+
+    .desc-mobile {
+      display: block;
+    }
+  }
 }

@@ -33,6 +33,7 @@
     color: $white;
   }
 
+
   .image-content-container {
     @include row-container;
     margin: 0 auto;
@@ -130,6 +131,15 @@
   }
 
   @media (max-width: 640px) {
+    .dark-section {
+      display: none;
+    }
+
+    .sub-title,
+    .sub-title > em {
+      font-size: 26px;
+    }
+
     .reason-grid {
       grid-template-columns: 1fr;
     }

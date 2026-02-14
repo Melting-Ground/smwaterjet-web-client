@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import styles from "./page.module.scss";
 import Vibration from "@/_icons/Vibration";
@@ -23,12 +23,21 @@ export default function Fields() {
       <section id="waterjet-method" className={styles["waterjet-method"]}>
         <header className={styles.header}>
           <p className={styles["header-title"]}>
-            혁신적인 워터젯 공법으로 교량의 수명을 연장합니다.
+            혁신적인 워터젯 공법으로 콘크리트
+            <br className={styles["mobile-break"]} />
+            구조물의 수명을 연장합니다.
           </p>
           <p className={styles["header-description"]}>
-            최신 고압 워터젯 기술을 통해 <br />
-            <em>교량 상부 및 하부 구조물의 열화</em>를 정밀하게 보수하며 <br />
-            <em>안전성과 내구성을 극대화</em>합니다.
+            <span className={styles["desc-full"]}>
+              최신 고압 워터젯 기술을 통해 <br />
+              <em>교량, 도로 등 콘크리트 구조물</em>의 열화를 정밀하게
+              보수하며 <br />
+              <em>안전성과 내구성을 극대화</em>합니다.
+            </span>
+            <span className={styles["desc-mobile"]}>
+              최신 고압 워터젯 기술로 <em>교량·도로 콘크리트 열화</em>를
+              정밀 보수하며 <em>안전성과 내구성</em>을 높입니다.
+            </span>
           </p>
         </header>
 
@@ -39,12 +48,12 @@ export default function Fields() {
           >
             {/* <h3 id="superstructure-heading">교량 상부의 주요 열화 요인</h3> */}
 
-            <h4 className={styles["list-title"]}>교량 상부 주요 열화 요인</h4>
+            <h4 className={styles["list-title"]}>교량·도로 상부 주요 열화 요인</h4>
             <p className={styles["list-description"]}>
-              교량 상부 구조물은 차량 하중, 날씨 변화, 염분 침투 등 외부
-              요인으로 인해 시간이 지남에 따라 열화가 진행됩니다.
+              교량·도로 상부 콘크리트 구조물은 차량 하중, 날씨 변화, 염분 침투 등
+              외부 요인으로 인해 시간이 지남에 따라 열화가 진행됩니다.
               <br />
-              이러한 열화는 교량의 안전성과 내구성에 큰 영향을 미칩니다.
+              이러한 열화는 구조물의 안전성과 내구성에 큰 영향을 미칩니다.
             </p>
             <ul className={styles.list}>
               <li className={styles["list-item"]}>
@@ -56,9 +65,14 @@ export default function Fields() {
                 </div>
                 <p className={styles["list-item-title"]}>차량 하중</p>
                 <p className={styles["list-item-description"]}>
-                  반복적인 차량 하중으로 인한
-                  <br />
-                  상판과 보 구조 손상
+                  <span className={styles["desc-full"]}>
+                    반복적인 차량 하중으로 인한
+                    <br />
+                    상판과 보 구조 손상
+                  </span>
+                  <span className={styles["desc-mobile"]}>
+                    차량 하중으로 인한 상판·보 손상
+                  </span>
                 </p>
               </li>
               <li className={styles["list-item"]}>
@@ -70,8 +84,13 @@ export default function Fields() {
                 </div>
                 <p className={styles["list-item-title"]}>환경적 요인</p>
                 <p className={styles["list-item-description"]}>
-                  자외선, 비, 눈 등<br />
-                  날씨 변화로 인한 열화
+                  <span className={styles["desc-full"]}>
+                    자외선, 비, 눈 등<br />
+                    날씨 변화로 인한 열화
+                  </span>
+                  <span className={styles["desc-mobile"]}>
+                    기후 변화로 인한 구조물 열화
+                  </span>
                 </p>
               </li>
               <li className={styles["list-item"]}>
@@ -82,9 +101,14 @@ export default function Fields() {
                 </div>
                 <p className={styles["list-item-title"]}>염분 침투</p>
                 <p className={styles["list-item-description"]}>
-                  도로 제설 작업 중 사용된
-                  <br />
-                  염분으로 인한 철근 부식
+                  <span className={styles["desc-full"]}>
+                    도로 제설 작업 중 사용된
+                    <br />
+                    염분으로 인한 철근 부식
+                  </span>
+                  <span className={styles["desc-mobile"]}>
+                    제설 염화물 침투로 인한 철근 부식
+                  </span>
                 </p>
               </li>
             </ul>
@@ -102,13 +126,13 @@ export default function Fields() {
             {/* <h3 id="substructure-heading">
             교량 하부의 안정성을 유지하는 핵심 기술
           </h3> */}
-            <h4 className={styles["list-title"]}>교량 하부 주요 열화 요인</h4>
+            <h4 className={styles["list-title"]}>교량·도로 하부 주요 열화 요인</h4>
             <p className={styles["list-description"]}>
-              교량 하부 구조물은 하천, 해안, 도로 환경에 노출되어 다양한 열화
-              요인에 의해 손상될 가능성이 높습니다.
+              교량·도로 하부 콘크리트 구조물은 하천, 해안, 도로 환경에 노출되어
+              다양한 열화 요인에 의해 손상될 가능성이 높습니다.
               <br />
-              교량 하부는 교각, 기초, 받침대 등 교량 전체를 지탱하는 핵심
-              구조물로, 정밀한 관리가 필수적입니다.
+              하부 구조물은 교각, 기초, 받침대 등 구조물 전체를 지탱하는 핵심
+              요소로, 정밀한 관리가 필수적입니다.
             </p>
             <ul className={styles.list}>
               <li className={styles["list-item"]}>
@@ -119,9 +143,14 @@ export default function Fields() {
                 </div>
                 <p className={styles["list-item-title"]}>환경적 요인</p>
                 <p className={styles["list-item-description"]}>
-                  하천 흐름에 의한 침식,
-                  <br />
-                  염분 노출, 습기로 인한 열화
+                  <span className={styles["desc-full"]}>
+                    하천 흐름에 의한 침식,
+                    <br />
+                    염분 노출, 습기로 인한 열화
+                  </span>
+                  <span className={styles["desc-mobile"]}>
+                    침식·염분·습기로 인한 열화
+                  </span>
                 </p>
               </li>
               <li className={styles["list-item"]}>
@@ -136,9 +165,14 @@ export default function Fields() {
                 </div>
                 <p className={styles["list-item-title"]}>구조적 요인</p>
                 <p className={styles["list-item-description"]}>
-                  진동, 하중, 토사의 이동으로
-                  <br />
-                  인한 구조물 약화
+                  <span className={styles["desc-full"]}>
+                    진동, 하중, 토사의 이동으로
+                    <br />
+                    인한 구조물 약화
+                  </span>
+                  <span className={styles["desc-mobile"]}>
+                    진동·하중·토사 이동으로 구조물 약화
+                  </span>
                 </p>
               </li>
               <li className={styles["list-item"]}>
@@ -149,9 +183,14 @@ export default function Fields() {
                 </div>
                 <p className={styles["list-item-title"]}>화학적 요인</p>
                 <p className={styles["list-item-description"]}>
-                  산성비, 염화물 침투로 인한
-                  <br />
-                  콘크리트 및 철근 부식
+                  <span className={styles["desc-full"]}>
+                    산성비, 염화물 침투로 인한
+                    <br />
+                    콘크리트 및 철근 부식
+                  </span>
+                  <span className={styles["desc-mobile"]}>
+                    산성비·염화물로 인한 부식
+                  </span>
                 </p>
               </li>
             </ul>
@@ -170,10 +209,8 @@ export default function Fields() {
           >
             <h3 className={styles["list-title"]}>해결 방안</h3>
             <p className={styles["list-description"]}>
-              <em>워터젯 공법</em>을 통해 구조물의{" "}
-              <strong>열화된 부분만 정밀하게 제거</strong>하고{" "}
-              <strong>보강 작업을 지원</strong>하여{" "}
-              <em>구조물의 안정성을 유지</em>합니다.
+              성문워터젯의 워터젯 기술은 열화된 부분만 선택적으로 제거하여 콘크리트
+              보강 및 복구 작업을 효율적으로 지원합니다.
             </p>
 
             {/* <h3 id="advantages-heading">워터젯 공법의 차별화된 기술력</h3> */}
@@ -234,13 +271,9 @@ export default function Fields() {
           <p className={styles["highlighted-text"]}>
             정기적인 점검과 적절한 보수 작업은
             <br />
-            교량의 안정성과 수명을 유지하는 데 필수적입니다.
+            교량, 교각의 안정성과 수명을 유지하는 데 필수적입니다.
           </p>
 
-          <p className={styles["waterjet-solution"]}>
-            성문워터젯의 워터젯 기술은 열화된 부분만 선택적으로 제거하여 교량
-            보강 및 복구 작업을 효율적으로 지원합니다.
-          </p>
           <article className={styles["inquiry-article"]}>
             <p className={styles["inquiry-text"]}>
               지금 문의하셔서 맞춤형 솔루션을 경험해보세요.
@@ -250,6 +283,10 @@ export default function Fields() {
               color="blue"
               className={styles["inquiry-button"]}
               onClick={() => {
+                if (typeof window !== "undefined" && window.innerWidth <= 640) {
+                  window.location.href = "sms:01042776693";
+                  return;
+                }
                 router.push("/support/inquiry");
               }}
               icon={<RiArrowRightUpLine color="#ffffff" size={20} />}
