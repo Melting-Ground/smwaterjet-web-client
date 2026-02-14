@@ -78,6 +78,9 @@
       text-decoration: underline;
     }
 
+    .mobile-meta {
+      display: none;
+    }
   }
 }
 
@@ -124,6 +127,84 @@
     .table td {
       padding: 10px;
       font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    .table-container {
+      overflow-x: visible;
+    }
+
+    .table {
+      min-width: 0;
+      table-layout: auto;
+      border-top: 1px solid $gray-lighter;
+    }
+
+    .table colgroup {
+      display: none;
+    }
+
+    .table thead {
+      display: none;
+    }
+
+    .table tbody,
+    .table tr {
+      display: block;
+      width: 100%;
+    }
+
+    .table tr {
+      border-bottom: 1px solid $gray-lighter;
+    }
+
+    .table tr:hover {
+      background-color: transparent;
+    }
+
+    .table td {
+      display: none;
+      padding: 0;
+      border-bottom: none;
+      text-align: left;
+    }
+
+    .table td.title {
+      display: block;
+      padding: 14px 0;
+      width: 100%;
+    }
+
+    .table .title-cell {
+      display: block;
+      height: auto;
+    }
+
+    .table .title-link {
+      display: block;
+      padding-bottom: 6px;
+      font-weight: 600;
+      word-break: keep-all;
+      white-space: normal;
+      line-height: 1.4;
+    }
+
+    .table .mobile-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: $gray-02;
+      white-space: nowrap;
+    }
+
+    .table .meta-date::before {
+      content: "|";
+      margin-right: 8px;
+      color: $gray-lighter;
     }
   }
 }

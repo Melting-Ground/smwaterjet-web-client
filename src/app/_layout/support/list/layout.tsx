@@ -100,6 +100,16 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
                     >
                       {item.title}
                     </Link>
+                    <div className={styles["mobile-meta"]}>
+                      <span className={styles["meta-author"]}>
+                        {item.author}
+                      </span>
+                      <span className={styles["meta-date"]}>
+                        <time dateTime={item.created_at}>
+                          {formatDate(item.created_at)}
+                        </time>
+                      </span>
+                    </div>
                     </div>
                   </td>
                   <td>{item.author}</td>
