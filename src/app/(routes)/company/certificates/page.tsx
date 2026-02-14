@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from "react";
 import Image from "next/image";
 import styles from "./page.module.scss";
@@ -24,7 +24,9 @@ export default function Certificates() {
       <h3 className={styles["sr-only"]}>인증 및 특허</h3>
       <div className={styles["certificates-container"]}>
         <p className={styles["intro-text"]}>
-          다양한 인증서와 특허를 통해 성문워터젯의 기술력을 증명합니다.
+          다양한 인증서와 특허를 통해
+          <br className={styles["intro-break"]} />
+          성문워터젯의 기술력을 증명합니다.
         </p>
         <div className={styles.divider} aria-hidden="true" />
         <ol className={styles.certificates}>
@@ -39,7 +41,7 @@ export default function Certificates() {
                     type="button"
                     className={styles.preview}
                     onClick={() => onImageModalOpen(certificate)}
-                    aria-label="미리보기 확대"
+                    aria-label="미리보기 열기"
                   >
                     <Image
                       width={520}
@@ -56,7 +58,7 @@ export default function Certificates() {
                   <div className={styles.meta}>
                     <span className={styles["meta-label"]}>등록일</span>
                     <span className={styles["meta-value"]}>
-                      {certificate.registeredAt || "미기재"}
+                      {certificate.registeredAt || "미등록"}
                     </span>
                   </div>
                   <div className={styles.actions}>

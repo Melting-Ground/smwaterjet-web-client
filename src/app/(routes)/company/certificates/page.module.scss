@@ -137,6 +137,10 @@
       text-align: center;
       margin: -10px 0 28px;
     }
+
+    .intro-break {
+      display: none;
+    }
   }
 }
 
@@ -199,6 +203,10 @@
 
       .preview-overlay {
         opacity: 1;
+      }
+
+      .intro-break {
+        display: block;
       }
     }
   }

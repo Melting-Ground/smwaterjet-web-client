@@ -2,7 +2,7 @@
 @import "@/_styles/variables";
 
 .container {
-  margin: 100px 0;
+  margin: 60px 0;
   // TODO: container에 inner-container 줄건지
   // inner-container에 줄건지 통일하기
   .inner-container {
@@ -50,6 +50,8 @@
   }
 
   @media (max-width: 640px) {
+    margin: 60px 0;
+
     .content {
       padding: 24px 20px;
     }

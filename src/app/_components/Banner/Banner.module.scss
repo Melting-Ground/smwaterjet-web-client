@@ -58,6 +58,19 @@
   }
 }
 
+@media (max-width: 640px) {
+  .banner {
+    .background {
+      height: 16rem;
+      padding-top: 72px;
+
+      h2 {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
+
 @keyframes zoomBackground {
   0% {
     background-size: 100%;
