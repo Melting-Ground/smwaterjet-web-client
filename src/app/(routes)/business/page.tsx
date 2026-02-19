@@ -1,5 +1,5 @@
-import React from "react";
+﻿import { redirect } from "next/navigation";
 
 export default function Business() {
-  return <div>비즈니스</div>;
+  redirect("/business/waterjet");
 }
