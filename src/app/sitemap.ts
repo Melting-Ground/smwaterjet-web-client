@@ -1,4 +1,4 @@
-﻿import type { MetadataRoute } from "next/sitemap";
+﻿import type { MetadataRoute } from "next";
 
 const SITE_URL = "https://www.smwaterjet.com";
 
