@@ -11,16 +11,6 @@ const nextConfig = {
     ],
   },
   reactStrictMode: false,
-  async redirects() {
-    return [
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "smwaterjet.com" }],
-        destination: "https://www.smwaterjet.com/:path*",
-        permanent: true,
-      },
-    ];
-  },
   async rewrites() {
     return [
       {

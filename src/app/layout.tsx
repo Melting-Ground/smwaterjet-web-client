@@ -15,9 +15,6 @@ const pretendard = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.smwaterjet.com"),
-  alternates: {
-    canonical: "./",
-  },
   title: "워터젯 치핑·콘크리트 파쇄 전문 | 성문워터젯",
   description:
     "워터젯 치핑 전문 시공업체 성문워터젯입니다. 초고압 워터젯 공법을 이용해 콘크리트 치핑, 교량 보수, 구조물 파쇄를 정밀하고 안전하게 수행합니다.",

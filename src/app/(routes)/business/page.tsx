@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import React from "react";
 
-export default function BusinessRedirectPage() {
-  redirect("/business/waterjet");
+export default function Business() {
+  return <div>비즈니스</div>;
 }
