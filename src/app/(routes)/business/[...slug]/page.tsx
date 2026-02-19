@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function BusinessRedirectPage() {
+export default function BusinessCatchAllPage() {
   redirect("/business/waterjet");
 }
