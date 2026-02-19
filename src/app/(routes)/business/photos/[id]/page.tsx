@@ -9,6 +9,7 @@ import { useAuth } from "@/_hooks/useAuth";
 import useFormData from "@/_hooks/useFormData";
 import useSWR from "swr";
 import axiosInstance from "@/_config/axiosInstance";
+import LoadingState from "@/_components/LoadingState/LoadingState";
 
 export default function PhotoDetail() {
   const { id } = useParams();
@@ -76,7 +77,7 @@ export default function PhotoDetail() {
   }
 
   if (isValidating || !dataDetail) {
-    return <div>로딩중...</div>;
+    return <LoadingState />;
   }
 
   const handleEditClick = () => {

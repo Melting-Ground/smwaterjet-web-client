@@ -6,6 +6,7 @@ import { useAPIData } from "@/_hooks/useAPIData";
 import useFormData from "@/_hooks/useFormData";
 import GalleryEditLayout from "@/_layout/gallery/edit/layout";
 import { FileWithIdType } from "@/_types/file";
+import LoadingState from "@/_components/LoadingState/LoadingState";
 
 export default function Edit() {
   const PHOTO_API = API_URLS.photos;
@@ -92,6 +93,6 @@ export default function Edit() {
       handleListClick={() => router.push("/business/photos")}
     />
   ) : (
-    <div>로딩중...</div>
+    <LoadingState />
   );
 }

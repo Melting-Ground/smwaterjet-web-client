@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import { useAPIData } from "@/_hooks/useAPIData";
 import useBoardAction from "@/_hooks/useBoardAction";
 import useBoardFiles from "@/_hooks/useBoardFiles";
+import LoadingState from "@/_components/LoadingState/LoadingState";
 
 // 수정 페이지
 // TODO: 관리자 외 접근 제한 처리
@@ -93,6 +94,6 @@ export default function Edit() {
       deleteFileIds={deleteFileIds}
     />
   ) : (
-    <div>로딩중</div>
+    <LoadingState />
   );
 }
