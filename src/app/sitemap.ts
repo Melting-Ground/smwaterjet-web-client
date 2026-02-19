@@ -1,4 +1,4 @@
-import type { MetadataRoute } from "next";
+﻿import type { MetadataRoute } from "next/sitemap";
 
 const SITE_URL = "https://www.smwaterjet.com";
 
@@ -8,7 +8,6 @@ const PUBLIC_ROUTES = [
   "/company/history",
   "/company/location",
   "/company/certificates",
-  "/business",
   "/business/waterjet",
   "/business/fields",
   "/business/photos",

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { headers } from "next/headers";
 import "./_styles/main.scss";
 import styles from "./layout.module.scss";
 import Header from "./_components/Header/Header";
@@ -51,9 +52,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = headers().get("x-pathname") ?? "/";
+  const canonicalHref = new URL(pathname, "https://www.smwaterjet.com").toString();
+
   return (
     <html lang="ko">
       <head>
+        <link rel="canonical" href={canonicalHref} />
         <script
           src="https://challenges.cloudflare.com/turnstile/v0/api.js"
           async
