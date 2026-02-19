@@ -13,7 +13,6 @@ import axiosInstance from "@/_config/axiosInstance";
 import { PaginationInfoType } from "@/_types/pagination";
 import { AxiosError } from "axios";
 import { getAuthHeaders } from "@/_utils/getAuth";
-import LoadingState from "@/_components/LoadingState/LoadingState";
 
 export default function InquiryDetail() {
   const router = useRouter();
@@ -110,6 +109,6 @@ export default function InquiryDetail() {
       handleListClick={goToListPage}
     />
   ) : (
-    <LoadingState />
+    <div>로딩중...</div>
   );
 }

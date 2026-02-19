@@ -10,7 +10,6 @@ import { UserInquiryPasswordContext } from "@/_contexts/inquiryContext";
 import useBoardAction from "@/_hooks/useBoardAction";
 import useBoardFiles from "@/_hooks/useBoardFiles";
 import { useAuth } from "@/_hooks/useAuth";
-import LoadingState from "@/_components/LoadingState/LoadingState";
 
 // 수정 페이지
 // TODO: 관리자 외 접근 제한 처리
@@ -102,6 +101,6 @@ export default function Edit() {
       deleteFileIds={deleteFileIds}
     />
   ) : (
-    <LoadingState />
+    <div>로딩중</div>
   );
 }

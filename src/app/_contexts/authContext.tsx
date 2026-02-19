@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getToken } from "@/_utils/getAuth";
-import LoadingState from "@/_components/LoadingState/LoadingState";
 
 interface AuthContextType {
   isLoggedIn: boolean;
@@ -35,7 +34,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setIsLoggedIn(false);
   };
   if (!isInitialized) {
-    return <LoadingState label="인증 상태를 확인하고 있습니다" />;
+    return <div>로딩 중...</div>;
   }
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout, isInitialized }}>

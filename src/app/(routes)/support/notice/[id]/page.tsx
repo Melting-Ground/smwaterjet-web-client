@@ -9,7 +9,6 @@ import useBoardAction from "@/_hooks/useBoardAction";
 import useSWR from "swr";
 import axiosInstance from "@/_config/axiosInstance";
 import { PaginationInfoType } from "@/_types/pagination";
-import LoadingState from "@/_components/LoadingState/LoadingState";
 
 export default function NoticeDetail() {
   // TODO: 조회수 추가하기
@@ -79,6 +78,6 @@ export default function NoticeDetail() {
       handleListClick={goToListPage}
     />
   ) : (
-    <LoadingState />
+    <div>로딩중...</div>
   );
 }

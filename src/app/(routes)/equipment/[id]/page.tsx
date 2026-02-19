@@ -6,7 +6,6 @@ import { EquipmentType } from "@/_types/equipment";
 import Image from "next/image";
 import styles from "./page.module.scss";
 import Button from "@/_components/Button/Button";
-import LoadingState from "@/_components/LoadingState/LoadingState";
 
 export default function EquipmentDetailLayout() {
   const { id } = useParams();
@@ -68,7 +67,7 @@ export default function EquipmentDetailLayout() {
           {/* </div> */}
         </div>
       ) : (
-        <LoadingState />
+        <>로딩중</>
       )}
       <Button
         ariaLabel="목록으로"
