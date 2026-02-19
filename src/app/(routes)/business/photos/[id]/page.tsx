@@ -1,5 +1,6 @@
 "use client";
 import React, { useMemo } from "react";
+import InlineLoader from "@/_components/InlineLoader/InlineLoader";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import styles from "./page.module.scss";
@@ -76,7 +77,7 @@ export default function PhotoDetail() {
   }
 
   if (isValidating || !dataDetail) {
-    return <div>로딩중...</div>;
+    return <InlineLoader message="잠시만 기다려주십시오." />;
   }
 
   const handleEditClick = () => {

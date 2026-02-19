@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import InlineLoader from "@/_components/InlineLoader/InlineLoader";
 import GalleryLayout from "@/_layout/gallery/layout";
 import styles from "./page.module.scss";
 import { useAuth } from "@/_hooks/useAuth";
@@ -64,6 +65,11 @@ export default function Photos() {
   }, [paginationInfo?.lastPage]);
 
   const { isLoggedIn } = useAuth();
+
+  if (!data) {
+    return <InlineLoader message="잠시만 기다려주십시오." />;
+  }
+
   const handleDetailOpen = (item: { id: number }) => {
     const query = searchParams.toString();
     const detailUrl = query

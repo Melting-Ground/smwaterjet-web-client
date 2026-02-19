@@ -1,6 +1,7 @@
 ﻿"use client";
 import { useParams } from "next/navigation"; // useParams를 import합니다
 import React, { useEffect } from "react";
+import InlineLoader from "@/_components/InlineLoader/InlineLoader";
 import { API_URLS } from "@/_config/apiConfig";
 import { UserInquiryPasswordContext } from "@/_contexts/inquiryContext";
 import { useRouter } from "next/navigation";
@@ -109,6 +110,8 @@ export default function InquiryDetail() {
       handleListClick={goToListPage}
     />
   ) : (
-    <div>로딩중...</div>
+    <InlineLoader message="잠시만 기다려주십시오." />
   );
 }
+
+

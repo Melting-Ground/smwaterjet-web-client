@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useEffect, useState } from "react";
 import { API_URLS } from "@/_config/apiConfig";
 import BoardListLayout from "@/_layout/support/list/layout";
@@ -67,3 +67,4 @@ export default function Notice() {
     />
   );
 }
+
