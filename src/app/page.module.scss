@@ -13,7 +13,7 @@
     position: relative;
     min-height: auto;
     padding-top: 16px;
-    overflow: hidden;
+    overflow: visible;
 
     .top-inner {
       max-width: $inner-max-width;
@@ -49,19 +49,20 @@
 
     .greeting {
       @include title;
-      font-size: 46px;
-      line-height: 1.18;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.24;
       font-weight: 700;
       color: $primary;
-      margin-bottom: 24px;
-      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      letter-spacing: -0.015em;
     }
 
     .primary {
       color: $blue;
       font-weight: 700;
       display: inline-block;
-      border-bottom: 3px solid rgba(50, 114, 235, 0.25);
+      border-bottom: 2px solid rgba(50, 114, 235, 0.3);
+      padding-bottom: 1px;
     }
 
     .nowrap {
@@ -74,10 +75,11 @@
     }
 
     .description {
-      font-size: 19px;
-      line-height: 1.8;
+      font-size: clamp(1rem, 1.35vw, 1.1875rem);
+      line-height: 1.7;
       color: $gray-02;
       max-width: 520px;
+      margin-top: 0;
     }
 
     .hero-cta {
@@ -189,7 +191,7 @@
 
       .greeting {
         font-size: 26px;
-        line-height: 1.3;
+        line-height: 1.34;
         margin-bottom: 14px;
       }
 
@@ -198,6 +200,10 @@
         line-height: 1.6;
         max-width: none;
         margin-bottom: 16px;
+      }
+
+      .nowrap {
+        white-space: normal;
       }
 
       .waterjet-more-button {
