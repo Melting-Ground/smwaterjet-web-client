@@ -1,23 +1,144 @@
-@import "@/_styles/mixins";
+﻿@import "@/_styles/mixins";
 @import "@/_styles/variables";
 
 .tos,
 .privacy,
 .email {
   margin-bottom: 40px;
+
   h2 {
     font-weight: 600;
     font-size: 36px;
     margin-bottom: 40px;
   }
+
   strong {
     margin-bottom: 10px;
     margin-top: 20px;
     display: block;
   }
+
   p,
   ol > li {
     color: $policy-font;
     line-height: 1.5;
+  }
+}
+
+.tos {
+  @include inner-container;
+
+  .policy-hero {
+    background: linear-gradient(145deg, rgba($primary, 0.08), rgba($white, 0.9));
+    border: 1px solid rgba($primary, 0.12);
+    border-radius: 16px;
+    padding: 28px 30px;
+    margin-bottom: 20px;
+
+    h2 {
+      margin: 6px 0 10px;
+      font-size: 2rem;
+      color: $black;
+    }
+  }
+
+  .hero-kicker {
+    color: $primary;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    margin: 0;
+  }
+
+  .hero-summary {
+    margin: 0;
+    color: $policy-font;
+  }
+
+  .policy-card {
+    border: 1px solid $gray-lighter;
+    border-radius: 16px;
+    background-color: $white;
+    padding: 26px 28px;
+  }
+
+  .quick-list {
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 8px;
+
+    li {
+      background-color: $gray-lightest;
+      border: 1px solid $gray-lighter;
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: $policy-font;
+      font-size: 0.95rem;
+    }
+  }
+
+  .terms-grid {
+    display: grid;
+    gap: 14px;
+  }
+
+  .term-block {
+    border: 1px solid $gray-lighter;
+    border-radius: 12px;
+    padding: 16px;
+    background: linear-gradient(180deg, $white 0%, $gray-lightest 100%);
+
+    h3 {
+      margin: 0 0 10px;
+      color: $primary;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      margin: 0;
+    }
+
+    li + li {
+      margin-top: 6px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .tos {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+
+    .policy-hero,
+    .policy-card {
+      padding: 18px 16px;
+      border-radius: 12px;
+    }
+
+    .policy-hero h2 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .quick-list,
+    .terms-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
   }
 }
