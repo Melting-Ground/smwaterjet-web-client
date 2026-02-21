@@ -1,4 +1,4 @@
-@import "@/_styles/variables";
+﻿@import "@/_styles/variables";
 @import "@/_styles/mixins";
 
 .container {
@@ -18,7 +18,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   justify-items: center;
-  border-top: 1px solid $gray-02;
+  border-top: none;
   border-bottom: none;
   padding: 16px 0;
 
@@ -131,3 +131,4 @@
     height: 220px;
   }
 }
+

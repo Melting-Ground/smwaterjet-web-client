@@ -1,4 +1,4 @@
-@import "@/_styles/variables";
+﻿@import "@/_styles/variables";
 @import "@/_styles/mixins";
 
 .container {
@@ -10,7 +10,7 @@
 
 .hero {
   background: $white;
-  padding: 64px 0 20px;
+  padding: 64px 0 8px;
 }
 
 .hero-inner {
@@ -252,3 +252,4 @@
     font-size: 12px;
   }
 }
+

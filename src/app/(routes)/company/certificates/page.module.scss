@@ -1,4 +1,4 @@
-@import "@/_styles/mixins";
+﻿@import "@/_styles/mixins";
 @import "@/_styles/variables";
 
 .container {
@@ -126,7 +126,7 @@
     .divider {
       width: 100%;
       height: 2px;
-      background: rgba(17, 24, 39, 0.25);
+      background: $gray-lighter;
       margin: 16px 0 32px;
     }
 
@@ -211,3 +211,4 @@
     }
   }
 }
+

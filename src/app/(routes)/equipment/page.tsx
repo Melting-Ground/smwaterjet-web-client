@@ -32,7 +32,7 @@ export default function Equipment() {
         list={galleryList}
         isLinkItem
         captionPosition="below"
-        galleryMarginTop={8}
+        galleryMarginTop={0}
         galleryMarginBottom={32}
       />
       <section className={styles["composition-section"]}>
