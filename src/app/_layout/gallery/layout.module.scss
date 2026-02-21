@@ -36,6 +36,10 @@
         width: 100%;
         height: 260px;
         overflow: hidden;
+        border-radius: 0;
+        border: 1px solid $gray-lighter;
+        background: $gray-lightest;
+        box-shadow: 0 8px 16px rgba(15, 23, 42, 0.08);
       }
 
       &:hover .image {
@@ -43,7 +47,7 @@
       }
 
       &:hover .image-wrap {
-        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+        box-shadow: 0 14px 26px rgba(15, 23, 42, 0.16);
       }
 
     &:hover .overlay {
@@ -131,4 +135,5 @@
     height: 220px;
   }
 }
+
 

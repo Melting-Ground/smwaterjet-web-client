@@ -59,7 +59,7 @@
 
     .preview {
       position: relative;
-      border-radius: 12px;
+      border-radius: 0;
       overflow: hidden;
       background: $gray-lightest;
       padding: 0;
@@ -67,9 +67,15 @@
       border: 1px solid $gray-lighter;
       text-align: left;
       cursor: pointer;
+      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
 
       &:hover .image {
         transform: scale(1.02);
+      }
+
+      &:hover {
+        box-shadow: 0 14px 26px rgba(15, 23, 42, 0.16);
       }
 
       &:hover .preview-overlay {
@@ -211,4 +217,5 @@
     }
   }
 }
+
 

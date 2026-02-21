@@ -1,4 +1,4 @@
-@import "@/_styles/mixins";
+﻿@import "@/_styles/mixins";
 @import "@/_styles/variables";
 
 .container {
@@ -51,6 +51,10 @@
   height: 70vh;
   max-height: 800px;
   background-color: $gray-lightest;
+  border-radius: 0;
+  border: 1px solid $gray-lighter;
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
 }
 
 .image {
@@ -77,3 +81,4 @@
 .go-list-button {
   margin: 0 auto;
 }
+
