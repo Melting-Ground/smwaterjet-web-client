@@ -67,7 +67,7 @@ export default function EquipmentDetailLayout() {
           {/* </div> */}
         </div>
       ) : (
-        <>로딩중</>
+        <>로딩 중...</>
       )}
       <Button
         ariaLabel="목록으로"

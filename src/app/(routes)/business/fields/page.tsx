@@ -30,8 +30,8 @@ export default function Fields() {
           <p className={styles["header-description"]}>
             <span className={styles["desc-full"]}>
               최신 고압 워터젯 기술을 통해 <br />
-              <em>교량, 도로 등 콘크리트 구조물</em>의 열화를 정밀하게
-              보수하며 <br />
+              <em>교량·도로 등 콘크리트 구조물</em>의 열화 부위를 정밀하게
+              보수하고 <br />
               <em>안전성과 내구성을 극대화</em>합니다.
             </span>
             <span className={styles["desc-mobile"]}>
@@ -271,12 +271,12 @@ export default function Fields() {
           <p className={styles["highlighted-text"]}>
             정기적인 점검과 적절한 보수 작업은
             <br />
-            교량, 교각의 안정성과 수명을 유지하는 데 필수적입니다.
+            교량과 교각의 안정성과 수명을 유지하는 데 필수적입니다.
           </p>
 
           <article className={styles["inquiry-article"]}>
             <p className={styles["inquiry-text"]}>
-              지금 문의하셔서 맞춤형 솔루션을 경험해보세요.
+              지금 문의하셔서 맞춤형 솔루션을 경험해 보세요.
             </p>
             <Button
               ariaLabel="문의하기"

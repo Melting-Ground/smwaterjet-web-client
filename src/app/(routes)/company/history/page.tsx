@@ -5,7 +5,7 @@ import styles from "./page.module.scss";
 const historyData = [
   {
     year: "2022",
-    events: [{ period: "2022.", description: "종합 건설 토목으로 변경" }],
+    events: [{ period: "2022.", description: "종합건설 토목업으로 변경" }],
   },
   {
     year: "2020",
@@ -42,7 +42,7 @@ const historyData = [
     events: [
       {
         period: "2005 ~ 현재",
-        description: "Water Jet 공법공사 및 VIEW ROCK 공법공사 다수",
+        description: "Water Jet 공법 및 VIEW ROCK 공법 공사 다수 수행",
       },
     ],
   },

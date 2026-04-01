@@ -101,6 +101,6 @@ export default function Edit() {
       deleteFileIds={deleteFileIds}
     />
   ) : (
-    <div>로딩중</div>
+    <div>로딩 중...</div>
   );
 }

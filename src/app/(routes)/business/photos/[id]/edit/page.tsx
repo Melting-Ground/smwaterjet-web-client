@@ -92,6 +92,6 @@ export default function Edit() {
       handleListClick={() => router.push("/business/photos")}
     />
   ) : (
-    <div>로딩중...</div>
+    <div>로딩 중...</div>
   );
 }

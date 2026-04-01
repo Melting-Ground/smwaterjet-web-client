@@ -13,14 +13,8 @@ export const useAuth = () => {
     id: "",
     password: "",
   });
-  const router = useRouter();
-  // const [rememberMe, setRememberMe] = useState<boolean>(false);
 
-  // const handleLoginCheckboxChange = (
-  //   e: React.ChangeEvent<HTMLInputElement>
-  // ) => {
-  //   setRememberMe(e.target.checked);
-  // };
+  const router = useRouter();
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.id === "id") {
@@ -36,6 +30,7 @@ export const useAuth = () => {
       alert("아이디/비밀번호를 입력해 주세요.");
       return;
     }
+
     try {
       const { data } = await axiosInstance.post("/admins/login", {
         phoneNumber: value.id,
@@ -44,24 +39,26 @@ export const useAuth = () => {
 
       login(data);
       alert("로그인되었습니다.");
+
       const returnTo = sessionStorage.getItem("loginReturnTo");
       const safeReturnTo =
         returnTo && !returnTo.startsWith("/login") ? returnTo : null;
       sessionStorage.removeItem("loginReturnTo");
+
       if (safeReturnTo) {
         router.push(safeReturnTo);
       } else {
         router.push("/");
       }
-    } catch (e) {
-      console.error("로그인 오류:", e);
+    } catch (error) {
+      console.error("로그인 오류:", error);
       alert("아이디/비밀번호가 일치하지 않습니다.");
     }
   };
 
   const handleLogoutClick = () => {
     logout();
-    alert("로그아웃 되었습니다.");
+    alert("로그아웃되었습니다.");
     router.refresh();
   };
 
@@ -75,8 +72,6 @@ export const useAuth = () => {
   return {
     handleLoginChange,
     handleLoginSubmit,
-    // handleLoginCheckboxChange,
-    // rememberMe,
     handleLogoutClick,
     handleLoginClick,
     isLoggedIn,

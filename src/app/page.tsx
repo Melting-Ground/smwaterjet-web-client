@@ -57,7 +57,7 @@ export default function Home() {
               {/* Hero Image */}
               <Image
                 src={landingPageImage}
-                alt="성문워터젯 공사현장 사진"
+                alt="성문워터젯 공사 현장 사진"
                 fill
                 sizes="(max-width: 600px) 92vw, 520px"
                 className={styles.photo}
@@ -72,7 +72,7 @@ export default function Home() {
       <section className={styles["photo-section"]}>
         <div className={styles["photo-header"]}>
           <p className={styles["photo-eyebrow"]}>OUR WORKS</p>
-          <h1 className={styles["photo-title"]}>현장사진</h1>
+          <h1 className={styles["photo-title"]}>현장 사진</h1>
           <div className={styles["photo-accent"]} />
           <p className={styles["photo-description"]}>
             수많은 현장에서 축적된 성문워터젯의 시공 사례를 담았습니다.
@@ -173,9 +173,9 @@ export default function Home() {
           <div className={styles["contact-hours"]}>
             <Clock size={16} />
             <p>
-              상담시간 오전 9시 ~ 오후 6시
+              상담 시간: 오전 9시 ~ 오후 6시
               <br />
-              토, 일요일, 공휴일은 휴무입니다.
+              토요일, 일요일 및 공휴일은 휴무입니다.
             </p>
           </div>
 

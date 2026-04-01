@@ -6,7 +6,7 @@ import GalleryLayout from "@/_layout/gallery/layout";
 import styles from "./page.module.scss";
 
 export default function Equipment() {
-  // 영상
+  // 장비
   const { data: equipments } = useLocalData<EquipmentType[]>("equipments");
 
   const galleryList = equipments
@@ -23,7 +23,7 @@ export default function Equipment() {
         <div className={styles["hero-inner"]}>
           <p className={styles["section-eyebrow"]}>EQUIPMENT OVERVIEW</p>
           <p className={styles["section-title"]}>
-            핵심장비 보유 현황
+            핵심 장비 보유 현황
           </p>
           <div className={styles["section-accent"]} aria-hidden="true" />
         </div>
@@ -39,7 +39,7 @@ export default function Equipment() {
         <div className={styles["composition-inner"]}>
           <div className={styles["section-header"]}>
             <p className={styles["section-eyebrow"]}>EQUIPMENT SYSTEM</p>
-            <h3 className={styles["section-title"]}>주요장비 구성</h3>
+            <h3 className={styles["section-title"]}>주요 장비 구성</h3>
             <div className={styles["section-accent"]} aria-hidden="true" />
             <p className={styles["section-summary"]}>
               고압수 생성부터 분사·제어·폐수 처리까지, 단일 시스템으로
@@ -48,19 +48,19 @@ export default function Equipment() {
           </div>
           <ol className={styles["pill-list"]}>
             <li>
-              고압펌프
+              고압 펌프
               <span>high pressure pump</span>
             </li>
             <li>
-              워터젯 분사장비
+              워터젯 분사 장비
               <span>water jet spray unit</span>
             </li>
             <li>
-              유/무선 원격 컨트롤러
+              유·무선 원격 컨트롤러
               <span>wire/wireless remote controller</span>
             </li>
             <li>
-              폐수 처리장비
+              폐수 처리 장비
               <span>effluent handling unit</span>
             </li>
           </ol>
@@ -68,7 +68,7 @@ export default function Equipment() {
             <article className={styles["detail-card"]}>
               <span className={styles.badge}>1</span>
               <div>
-                <h4 className={styles["detail-title"]}>고압펌프</h4>
+                <h4 className={styles["detail-title"]}>고압 펌프</h4>
                 <p className={styles["detail-desc"]}>
                 고압수를 안정적으로 생성해 절삭 성능을 확보합니다.<br />
                 현장 조건에 맞춘 압력 제어로 작업 효율과 안전성을
@@ -89,7 +89,7 @@ export default function Equipment() {
         <article className={styles["detail-card"]}>
           <span className={styles.badge}>3</span>
           <div>
-            <h4 className={styles["detail-title"]}>유/무선 원격 컨트롤러</h4>
+            <h4 className={styles["detail-title"]}>유·무선 원격 컨트롤러</h4>
             <p className={styles["detail-desc"]}>
               원거리에서 장비를 통합 제어해 작업 중 위험 노출을
               줄입니다.<br /> 작업자의 안전 확보와 작업 리듬 유지에

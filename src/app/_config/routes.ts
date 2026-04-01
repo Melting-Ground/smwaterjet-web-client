@@ -6,7 +6,7 @@ export const companyRoutes: RouteCategoryType = {
     { path: "/company/greeting", label: "인사말" },
     { path: "/company/history", label: "역사 및 연혁" },
     { path: "/company/certificates", label: "인증 및 특허" },
-    { path: "/company/location", label: "오시는길" },
+    { path: "/company/location", label: "오시는 길" },
   ],
 };
 
