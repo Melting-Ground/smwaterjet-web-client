@@ -1,4 +1,4 @@
-@import "@/_styles/mixins";
+﻿@import "@/_styles/mixins";
 @import "@/_styles/variables";
 
 .container {
@@ -31,23 +31,6 @@
     @include label;
     text-align: center;
     color: $white;
-  }
-
-
-  .image-content-container {
-    @include row-container;
-    margin: 0 auto;
-    width: fit-content;
-    justify-content: space-between;
-    gap: 60px;
-    align-items: center;
-    margin-top: 70px;
-
-    .image {
-      @include box-shadow;
-      width: 500px;
-      height: fit-content;
-    }
   }
 
   .reason-section {
@@ -235,7 +218,7 @@
             position: relative;
             font-weight: 600;
 
-            // 원
+            // ??
             // &::before {
             //   margin-left: 12px;
             //   position: absolute;

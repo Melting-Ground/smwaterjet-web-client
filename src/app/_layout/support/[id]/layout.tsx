@@ -151,10 +151,22 @@ export default function BoardDetailLayout<T extends NoticeType | InquiryType>({
                 .filter((file) => isImageFile(file.file_path))
                 .map((file, index) => {
                   const src = buildFileUrl(file.file_path);
+                  const isNoticeImage = boardType === "notice";
                   return (
                     <li key={`${file.id}-${index}`} className={styles["image-item"]}>
-                      <div className={styles["image-frame"]}>
-                        {src ? (
+                      <div
+                        className={`${styles["image-frame"]} ${
+                          isNoticeImage ? styles["notice-image-frame"] : ""
+                        }`}
+                      >
+                        {src && isNoticeImage ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={src}
+                            alt={`attachment-${file.id}`}
+                            className={styles["notice-image"]}
+                          />
+                        ) : src ? (
                           <Image
                             src={src}
                             alt={`attachment-${file.id}`}

@@ -56,7 +56,7 @@
 
       .attachment-file {
         display: inline-flex;
-        align-items: start;
+        align-items: flex-start;
         gap: 8px;
       }
 
@@ -127,6 +127,21 @@
 
     .image {
       object-fit: contain;
+    }
+
+    .notice-image-frame {
+      height: auto;
+      max-height: none;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      background-color: transparent;
+    }
+
+    .notice-image {
+      display: block;
+      width: min(100%, 980px);
+      height: auto;
     }
 
     .nav {

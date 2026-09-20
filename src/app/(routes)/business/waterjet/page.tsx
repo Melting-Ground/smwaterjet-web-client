@@ -1,5 +1,4 @@
-﻿import Image from "next/image";
-import React from "react";
+﻿import React from "react";
 import { BadgeCheck, Droplet, Shield, Zap } from "lucide-react";
 import styles from "./page.module.scss";
 
@@ -51,17 +50,6 @@ export default function Waterjet() {
           <br />
           <em>환경과 품질을 동시에</em> 잡는 <em>워터젯 공법</em>
         </h3>
-
-        <div className={styles["image-content-container"]}>
-          <Image
-            src="/images/banner/waterjet.webp"
-            width={500}
-            height={330}
-            alt="초고압 워터젯을 이용한 콘크리트 치핑 작업"
-            className={styles.image}
-            priority
-          />
-        </div>
       </section>
 
       <section className={styles["reason-section"]}>
