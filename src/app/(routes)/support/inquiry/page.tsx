@@ -8,6 +8,7 @@ import usePagination from "@/_hooks/usePagination";
 import useSWR from "swr";
 import axiosInstance from "@/_config/axiosInstance";
 import { PaginationInfoType } from "@/_types/pagination";
+import AsyncState from "@/_components/AsyncState/AsyncState";
 
 export default function Inquiry() {
   const boardType = "inquiry";
@@ -24,7 +25,7 @@ export default function Inquiry() {
 
   type InquiryItem = typeof API_URLS.inquiries.method.get;
   const limit = 10;
-  const { data } = useSWR<
+  const { data, error, isLoading, mutate } = useSWR<
     { items: InquiryItem[]; pagination: PaginationInfoType }
   >(
     ["inquiries", currentPage, limit],
@@ -53,6 +54,20 @@ export default function Inquiry() {
   const inquiryTableHeadList = ["No", "제목", "글쓴이", "등록일"];
   const colWidthList = [80, 420, 120, 120];
 
+  if (isLoading) {
+    return <AsyncState status="loading" message="문의사항을 불러오는 중입니다." />;
+  }
+
+  if (error) {
+    return (
+      <AsyncState
+        status="error"
+        message="문의사항을 불러오지 못했습니다."
+        onRetry={() => mutate()}
+      />
+    );
+  }
+
   return (
     <BoardListLayout
       isLoggedIn={isLoggedIn}
@@ -69,5 +84,4 @@ export default function Inquiry() {
     />
   );
 }
-
 

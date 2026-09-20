@@ -75,6 +75,11 @@ export function middleware(request: NextRequest) {
   const segments = pathname.split("/").filter(Boolean);
   const root = segments[0]?.toLowerCase();
 
+  if (root === "performance" && segments[1]?.toLowerCase() === "photos") {
+    url.pathname = pathname.replace(/^\/performance\/photos/i, "/business/photos");
+    return NextResponse.redirect(url, 308);
+  }
+
   if (!root) {
     return NextResponse.next({
       request: {

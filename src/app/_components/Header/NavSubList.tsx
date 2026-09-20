@@ -40,6 +40,7 @@ export default function NavSubList({
                     <Link
                       onMouseEnter={() => onNavItemHover(category.title)}
                       onMouseLeave={() => onNavItemHover("")}
+                      onFocus={() => onNavItemHover(category.title)}
                       href={route.path}
                       className={styles["category-item-link"]}
                     >

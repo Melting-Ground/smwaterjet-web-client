@@ -8,6 +8,7 @@ import usePagination from "@/_hooks/usePagination";
 import useSWR from "swr";
 import axiosInstance from "@/_config/axiosInstance";
 import { PaginationInfoType } from "@/_types/pagination";
+import AsyncState from "@/_components/AsyncState/AsyncState";
 
 export default function Notice() {
   // TODO: 페이징 기능 추가하기
@@ -29,7 +30,10 @@ export default function Notice() {
 
   type NoticeItem = typeof API_URLS.notices.method.get;
   const limit = 10;
-  const { data } = useSWR<{ items: NoticeItem[]; pagination: PaginationInfoType }>(
+  const { data, error, isLoading, mutate } = useSWR<{
+    items: NoticeItem[];
+    pagination: PaginationInfoType;
+  }>(
     ["notices", currentPage, limit],
     () =>
       axiosInstance
@@ -51,6 +55,20 @@ export default function Notice() {
     }
   }, [paginationInfo?.lastPage]);
 
+  if (isLoading) {
+    return <AsyncState status="loading" message="공지사항을 불러오는 중입니다." />;
+  }
+
+  if (error) {
+    return (
+      <AsyncState
+        status="error"
+        message="공지사항을 불러오지 못했습니다."
+        onRetry={() => mutate()}
+      />
+    );
+  }
+
   return (
     <BoardListLayout
       isLoggedIn={isLoggedIn}
@@ -67,4 +85,3 @@ export default function Notice() {
     />
   );
 }
-

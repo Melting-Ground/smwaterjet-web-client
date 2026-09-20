@@ -1,58 +1,30 @@
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
 
 const usePagination = (lastPageNumber: number) => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const hasMountedRef = useRef(false);
-
   const router = useRouter();
   const searchParams = useSearchParams();
   const pages = Array.from({ length: lastPageNumber }, (_, index) => index + 1);
+  const pageParam = Number(searchParams.get("page"));
+  const currentPage =
+    Number.isInteger(pageParam) && pageParam > 0 ? pageParam : 1;
 
-  useEffect(() => {
-    const pageParam = searchParams.get("page");
-    const parsedPage = pageParam ? Number(pageParam) : NaN;
-    if (
-      Number.isFinite(parsedPage) &&
-      parsedPage > 0 &&
-      parsedPage !== currentPage
-    ) {
-      setCurrentPage(parsedPage);
-    }
-    hasMountedRef.current = true;
-  }, [searchParams, currentPage]);
-
-  useEffect(() => {
-    if (!hasMountedRef.current) return;
-
+  const navigateToPage = (page: number) => {
+    const nextPage = Math.min(Math.max(page, 1), Math.max(lastPageNumber, 1));
     const params = new URLSearchParams(searchParams.toString());
-    const currentParam = params.get("page");
-    if (currentParam === String(currentPage)) {
-      return;
-    }
-    params.set("page", String(currentPage));
-    if (!currentParam) {
-      router.replace(`?${params.toString()}`);
-    } else {
-      router.push(`?${params.toString()}`);
-    }
-  }, [currentPage, router, searchParams]);
+    params.set("page", String(nextPage));
+    router.push(`?${params.toString()}`);
+  };
 
   const clickPageButton = (page: number) => {
-    // ?page=1 쿼리 파라미터 수정
-    setCurrentPage(page);
+    navigateToPage(page);
   };
   const clickArrowButton = (direction: "prev" | "next") => {
     if (direction === "prev") {
-      if (currentPage <= 1) {
-        return;
-      }
-      setCurrentPage((prev) => prev - 1);
+      if (currentPage <= 1) return;
+      navigateToPage(currentPage - 1);
     } else if (direction === "next") {
-      if (currentPage >= lastPageNumber) {
-        return;
-      }
-      setCurrentPage((prev) => prev + 1);
+      if (currentPage >= lastPageNumber) return;
+      navigateToPage(currentPage + 1);
     }
   };
 
@@ -61,7 +33,6 @@ const usePagination = (lastPageNumber: number) => {
     currentPage,
     clickPageButton,
     clickArrowButton,
-    setCurrentPage,
   };
 };
 export default usePagination;

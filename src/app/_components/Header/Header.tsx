@@ -13,7 +13,21 @@ export default function Header() {
   const { isOpen, onOpen, currentItem, onNavItemHover } = useNav();
 
   return (
-    <article className={styles["header-container"]}>
+    <article
+      className={styles["header-container"]}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          onOpen(false);
+          onNavItemHover("");
+        }
+      }}
+      onKeyDown={(event) => {
+        if (event.key === "Escape") {
+          onOpen(false);
+          onNavItemHover("");
+        }
+      }}
+    >
       <header className={styles.header}>
         <div className={styles["header-inner"]}>
           <a

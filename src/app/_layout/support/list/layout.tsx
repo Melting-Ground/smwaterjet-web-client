@@ -82,7 +82,7 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
             </tr>
           </thead>
           <tbody>
-            {list ? (
+            {list.length > 0 ? (
               list.map((item, index) => (
                 <tr key={item.id}>
                   <td>{(currentPage - 1) * pageSize + index + 1}</td>
@@ -121,17 +121,23 @@ export default function BoardListLayout<T extends NoticeType | InquiryType>({
                 </tr>
               ))
             ) : (
-              <>데이터가 존재하지 않습니다.</>
+              <tr>
+                <td className={styles.empty} colSpan={tableHeadList.length}>
+                  등록된 게시물이 없습니다.
+                </td>
+              </tr>
             )}
           </tbody>
         </table>
-        <Pagination
-          currentPage={currentPage}
-          pages={pages}
-          handlePageButtonClick={handlePageButtonClick}
-          handlePrevArrowClick={handlePrevArrowClick}
-          handleNextArrowClick={handleNextArrowClick}
-        />
+        {pages.length > 1 ? (
+          <Pagination
+            currentPage={currentPage}
+            pages={pages}
+            handlePageButtonClick={handlePageButtonClick}
+            handlePrevArrowClick={handlePrevArrowClick}
+            handleNextArrowClick={handleNextArrowClick}
+          />
+        ) : null}
       </div>
     </div>
   );

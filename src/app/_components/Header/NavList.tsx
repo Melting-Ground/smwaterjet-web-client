@@ -31,6 +31,12 @@ export default function NavList({
               href={category.routes[0].path}
               onMouseEnter={() => onNavItemHover(category.title)}
               onMouseLeave={() => onNavItemHover("")}
+              onFocus={() => {
+                onOpen(true);
+                onNavItemHover(category.title);
+              }}
+              aria-haspopup="true"
+              aria-expanded={currentItem === category.title}
             >
               {category.title}
             </Link>

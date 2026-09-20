@@ -18,7 +18,9 @@ export default function Footer() {
       <div className={styles["footer-inner"]}>
         <div className={styles["policy-button-container"]}>
           <ul className={styles.policy}>
-            <cite>(주)성문워터젯</cite>
+            <li>
+              <cite>(주)성문워터젯</cite>
+            </li>
             <li>
               <Link href="/policy/tos">
                 이용약관

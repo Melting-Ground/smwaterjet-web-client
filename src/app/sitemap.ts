@@ -12,7 +12,6 @@ const PUBLIC_ROUTES = [
   "/business/fields",
   "/business/photos",
   "/equipment",
-  "/performance/photos",
   "/support/notice",
   "/support/news",
   "/support/inquiry",

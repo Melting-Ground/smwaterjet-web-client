@@ -216,10 +216,10 @@ export default function Fields() {
             {/* <h3 id="advantages-heading">워터젯 공법의 차별화된 기술력</h3> */}
             <ul className={styles["grid-list"]}>
               <li className={styles["grid-list-item"]}>
-                <p className={styles["grid-list-item-circle"]}>
+                <div className={styles["grid-list-item-circle"]}>
                   <Target alt="정밀성" width={45} color="#3272eb" />
                   <p className={styles["grid-list-item-title"]}>정밀성</p>
-                </p>
+                </div>
 
                 <p className={styles["grid-list-item-description"]}>
                   열화된 콘크리트를
@@ -228,10 +228,10 @@ export default function Fields() {
                 </p>
               </li>
               <li className={styles["grid-list-item"]}>
-                <p className={styles["grid-list-item-circle"]}>
+                <div className={styles["grid-list-item-circle"]}>
                   <Stability alt="안정성" width={45} color="#3272eb" />
                   <p className={styles["grid-list-item-title"]}>안정성</p>
-                </p>
+                </div>
                 <p className={styles["grid-list-item-description"]}>
                   <em>구조물 손상을 최소화</em>하고
                   <br />
@@ -239,10 +239,10 @@ export default function Fields() {
                 </p>
               </li>
               <li className={styles["grid-list-item"]}>
-                <p className={styles["grid-list-item-circle"]}>
+                <div className={styles["grid-list-item-circle"]}>
                   <Eco alt="친환경성" width={45} color="#3272eb" />
                   <p className={styles["grid-list-item-title"]}>친환경성</p>
-                </p>
+                </div>
                 <p className={styles["grid-list-item-description"]}>
                   먼지 및 유독 물질
                   <br />
@@ -250,20 +250,20 @@ export default function Fields() {
                 </p>
               </li>
               <li className={styles["grid-list-item"]}>
-                <p className={styles["grid-list-item-circle"]}>
+                <div className={styles["grid-list-item-circle"]}>
                   <Energy alt="효율성" width={45} color="#3272eb" />
                   <p className={styles["grid-list-item-title"]}>효율성</p>
-                </p>
+                </div>
                 <p className={styles["grid-list-item-description"]}>
                   좁고 접근이 어려운
                   <br />
                   구조물에서도 <em>작업 가능</em>
                 </p>
               </li>
-              <div className={styles["inside-card"]}>
+              <li className={styles["inside-card"]}>
                 <p className={styles["inside-card-title"]}>WaterJet</p>
                 <Optimization alt="최적" width={150} color="#dce6f7" />
-              </div>
+              </li>
             </ul>
           </section>
         </main>

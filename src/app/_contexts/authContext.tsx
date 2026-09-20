@@ -33,10 +33,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     setIsLoggedIn(false);
   };
 
-  if (!isInitialized) {
-    return <div>로딩 중...</div>;
-  }
-
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout, isInitialized }}>
       {children}
