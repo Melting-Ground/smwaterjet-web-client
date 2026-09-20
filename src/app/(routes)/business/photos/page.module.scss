@@ -2,145 +2,262 @@
 @import "@/_styles/mixins";
 
 .container {
-  .photos-container {
-    @include inner-container;
-    margin: 0 auto 100px auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+}
 
-    .header {
-      margin: 60px 0 40px 0;
-      text-align: center;
-      &-title {
-        font-size: 38px;
-        font-weight: 700;
-        color: $primary-lighter;
-        line-height: 1.6;
-      }
-      &-description {
-        font-size: 20px;
-        margin-top: 24px;
-        line-height: 1.6;
-        color: $policy-font;
-      }
-    }
+.photos-container {
+  @include inner-container;
+  width: 100%;
+  margin: 0 auto 100px;
+  padding-top: 28px;
+}
 
-    .section-title {
-      font-size: 30px;
-      font-weight: 700;
-      color: $primary;
-      text-align: center;
-      margin-bottom: 20px;
-    }
+.photo-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
 
-    .write-button {
-      margin-left: auto;
-      margin-bottom: 20px;
-    }
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  align-items: start;
+}
 
-    .write-button-bottom {
-      margin-left: auto;
-      margin-top: 20px;
-    }
+.media-item {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background: #111827;
+  aspect-ratio: 1;
+}
+
+.media-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+
+  &:focus-visible {
+    outline: 3px solid #1683d8;
+    outline-offset: -3px;
+  }
+
+  &:hover .media,
+  &:focus-visible .media {
+    transform: scale(1.06);
+    filter: brightness(0.75);
+  }
+
+  &:hover .zoom-indicator,
+  &:focus-visible .zoom-indicator {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
+.media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 220ms ease, filter 220ms ease;
+}
+
+.zoom-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.85);
+  transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: none;
+
+  svg {
+    stroke: #fff;
+  }
+}
+
+.pagination-wrap {
+  display: block;
+  clear: both;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 40px 88px;
+  background: rgba(0, 0, 0, 0.9);
+  animation: viewer-fade-in 160ms ease-out;
+}
+
+.viewer-content {
+  display: flex;
+  max-width: 100%;
+  max-height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer-media {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 80px);
+  object-fit: contain;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+.viewer-close,
+.viewer-arrow {
+  position: fixed;
+  z-index: 1;
+  display: grid;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  svg {
+    stroke: #fff;
+  }
+}
+
+.viewer-close {
+  top: 20px;
+  right: 20px;
+}
+
+.viewer-arrow {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.viewer-prev {
+  left: 20px;
+}
+
+.viewer-next {
+  right: 20px;
+}
+
+.viewer-count {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  color: #fff;
+  font-size: 16px;
+  transform: translateX(-50%);
+}
+
+@keyframes viewer-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @media (max-width: 1024px) {
-  .container {
-    .photos-container {
-      .header {
-        margin: 50px 0 32px 0;
-
-        &-title {
-          font-size: 32px;
-        }
-
-        &-description {
-          font-size: 18px;
-        }
-      }
-    }
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
   }
 }
 
 @media (max-width: 640px) {
-  .container {
-    .photos-container {
-      margin-bottom: 80px;
+  .photos-container {
+    margin-bottom: 80px;
+    padding-top: 20px;
+  }
 
-      .header {
-        margin: 40px 0 24px 0;
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
 
-        &-title {
-          font-size: 26px;
-        }
+  .viewer {
+    padding: 64px 12px;
+  }
 
-        &-description {
-          font-size: 16px;
-          margin-top: 16px;
-        }
-      }
+  .viewer-media {
+    max-height: calc(100vh - 128px);
+  }
 
-      .write-button-bottom {
-        width: 100%;
-      }
-    }
+  .viewer-close,
+  .viewer-arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .viewer-close {
+    top: 12px;
+    right: 12px;
+  }
+
+  .viewer-prev {
+    left: 8px;
+  }
+
+  .viewer-next {
+    right: 8px;
   }
 }
 
-// .container {
-//   @include inner-container;
-
-//   .gallery {
-//     width: 100%;
-//     margin: 100px auto;
-//     gap: 16px;
-//     display: grid;
-//     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-
-//     .image-container {
-//       position: relative;
-//       width: 400px;
-//       height: 260px;
-//       margin: auto;
-//       overflow: hidden;
-//       cursor: pointer;
-
-//       &:hover .overlay {
-//         background: rgba(0, 0, 0, 0.6);
-
-//         .description {
-//           color: $blue;
-//         }
-//       }
-
-//       .image {
-//         object-fit: cover;
-//         width: 100%;
-//         height: 100%;
-//       }
-
-//       .overlay {
-//         transition: transform 0.5s ease;
-//         position: absolute;
-//         left: 0;
-//         width: 100%;
-//         bottom: 0;
-//         height: 20%;
-//         background: rgba(0, 0, 0, 0.3);
-//         // opacity: 0;
-//         display: flex;
-//         justify-content: center;
-//         align-items: center;
-//         transition: opacity 0.3s ease;
-
-//         .description {
-//           color: $white;
-//           font-size: 15px;
-//           font-weight: 500;
-//         }
-//       }
-//     }
-//   }
-// }
+@media (prefers-reduced-motion: reduce) {
+  .media,
+  .zoom-indicator,
+  .viewer {
+    animation: none;
+    transition: none;
+  }
+}
