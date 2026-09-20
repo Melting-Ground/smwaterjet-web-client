@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import BoardEditLayout from "@/_layout/support/edit/layout";
+import AsyncState from "@/_components/AsyncState/AsyncState";
 import { API_URLS } from "@/_config/apiConfig";
 import { useState } from "react";
 import useFormData from "@/_hooks/useFormData";
@@ -24,6 +25,7 @@ export default function Edit() {
     fetchData: fetchInquiryDetail,
     dataDetail: inquiryDetail,
     isLoading,
+    detailError,
   } = useAPIData<typeof API_URLS.inquiries.method.get>(API_URLS.inquiries);
 
   const [inquiryContents, setInquiryContents] = useState<
@@ -87,6 +89,10 @@ export default function Edit() {
   }
 
   const isNotLoaded = isLoading.detail || !inquiryDetail;
+  if (detailError) {
+    return <AsyncState status="error" message={detailError}
+      onRetry={() => { void fetchInquiryDetail(currentId, password); }} />;
+  }
 
   return !isNotLoaded ? (
     <BoardEditLayout

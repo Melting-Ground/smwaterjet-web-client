@@ -15,10 +15,11 @@ export default function AuthLayout({
 
   useEffect(() => {
     if (isInitialized && !isLoggedIn) {
-      alert("관리자만 접근 가능한 페이지입니다.");
-      router.back();
+      sessionStorage.setItem("loginReturnTo", window.location.pathname + window.location.search);
+      router.replace("/login");
     }
   }, [isInitialized, isLoggedIn, router]);
 
+  if (!isInitialized || !isLoggedIn) return null;
   return <>{children}</>;
 }

@@ -8,39 +8,43 @@ export const useTurnstile = (
 ) => {
   const turnstileInstanceRef = useRef<TurnstileWidget | null>(null);
   const [isValidate, setIsValidate] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const verificationVersion = useRef(0);
+
+  const invalidate = useCallback(() => {
+    verificationVersion.current += 1;
+    setIsValidate(false);
+  }, []);
 
   const resetTurnstile = useCallback(() => {
+    invalidate();
     if (typeof window === "undefined") return;
     const turnstile = window.turnstile;
-    if (turnstile && turnstileInstanceRef.current) {
+    if (turnstile && turnstileInstanceRef.current !== null) {
       turnstile.reset(turnstileInstanceRef.current);
-      console.log("Turnstile reset");
     }
-  }, []);
+  }, [invalidate]);
 
   const handleVerify = useCallback(
     async (token: string) => {
+      const version = ++verificationVersion.current;
+      setIsValidate(false);
+      setError(null);
       try {
         const response = await axiosInstance.post("/turnstile", {
           "cf-turnstile-response": token,
         });
 
-        console.log("Turnstile response:", response);
-
-        if (response.data.validationResult === false) {
-          alert(
-            "자동 등록 방지 검증에 실패했습니다. 다시 시도해 주세요."
-          );
-          setIsValidate(false);
+        if (version !== verificationVersion.current) return;
+        if (response.data.validationResult !== true) {
+          setError("자동등록방지 확인에 실패했습니다. 다시 시도해 주세요.");
           resetTurnstile();
         } else {
           setIsValidate(true);
-          console.log("Turnstile verification success");
         }
       } catch (error) {
-        console.error("Turnstile error:", error);
-        alert("검증 중 오류가 발생했습니다. 다시 시도해 주세요.");
-        setIsValidate(false);
+        if (version !== verificationVersion.current) return;
+        setError("자동등록방지를 확인하지 못했습니다. 다시 시도해 주세요.");
         resetTurnstile();
       }
     },
@@ -49,19 +53,40 @@ export const useTurnstile = (
 
   useEffect(() => {
     if (typeof window === "undefined" || !turnstileRef.current) return;
-    const turnstile = window.turnstile;
-    if (!turnstile) return;
+    const initialize = () => {
+      if (!window.turnstile || !turnstileRef.current || turnstileInstanceRef.current !== null) return;
+      try {
+        turnstileInstanceRef.current = window.turnstile.render(turnstileRef.current, {
+          sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "",
+          callback: handleVerify,
+          "expired-callback": invalidate,
+          "error-callback": () => {
+            invalidate();
+            setError("자동등록방지를 불러오지 못했습니다. 새로고침 후 다시 시도해 주세요.");
+          },
+        });
+      } catch {
+        setError("자동등록방지를 불러오지 못했습니다. 새로고침 후 다시 시도해 주세요.");
+      }
+    };
+    initialize();
+    const interval = window.setInterval(initialize, 300);
+    const timeout = window.setTimeout(() => {
+      window.clearInterval(interval);
+      if (turnstileInstanceRef.current === null) {
+        setError("자동등록방지를 불러오지 못했습니다. 새로고침 후 다시 시도해 주세요.");
+      }
+    }, 15000);
+    return () => {
+      verificationVersion.current += 1;
+      window.clearInterval(interval);
+      window.clearTimeout(timeout);
+      if (turnstileInstanceRef.current !== null) {
+        window.turnstile?.remove(turnstileInstanceRef.current);
+        turnstileInstanceRef.current = null;
+      }
+    };
+  }, [turnstileRef, handleVerify, invalidate]);
 
-    const widget = turnstile.render(turnstileRef.current, {
-      sitekey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "",
-      callback: (token) => {
-        console.log("Turnstile token:", token);
-        handleVerify(token);
-      },
-    });
-
-    turnstileInstanceRef.current = widget;
-  }, [turnstileRef, handleVerify]);
-
-  return { isValidate };
+  return { isValidate, error, resetTurnstile };
 };

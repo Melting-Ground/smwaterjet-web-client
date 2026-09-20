@@ -8,7 +8,7 @@ import { InquiryPostType } from "@/_types/inquiry";
 import { RiCloseCircleLine } from "@remixicon/react";
 import { FileWithIdType } from "@/_types/file";
 import { BoardType, EditMethodType } from "@/_types/board";
-import { Fragment, useRef } from "react";
+import { Fragment, useRef, useState } from "react";
 import { useTurnstile } from "@/_hooks/useTurnstile";
 
 // TODO: 레이아웃 상위 폴더로 옮기기
@@ -47,7 +47,9 @@ export default function BoardEditLayout<
   passwordRegex,
 }: EditProps<T>) {
   const turnstileRef = useRef<HTMLDivElement>(null);
-  useTurnstile(turnstileRef);
+  const { isValidate, error: verificationError, resetTurnstile } = useTurnstile(turnstileRef);
+  const submittingRef = useRef(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   console.log("existFiles", existFiles);
   const files = existFiles ?? contents.files;
   const RequiredMark = () => {
@@ -57,10 +59,22 @@ export default function BoardEditLayout<
   return (
     <section className={styles.container}>
       <form
-        onSubmit={(e) => handleSubmit(e, deleteFileIds)}
+        onSubmit={async (e) => {
+          e.preventDefault();
+          if (!isValidate || submittingRef.current) return;
+          submittingRef.current = true;
+          setIsSubmitting(true);
+          try {
+            await handleSubmit(e, deleteFileIds);
+          } finally {
+            submittingRef.current = false;
+            setIsSubmitting(false);
+            resetTurnstile();
+          }
+        }}
         className={styles.form}
       >
-        <label htmlFor="title">
+        <label htmlFor="author">
           {type === "inquiry" ? (
             <>
               성함 <RequiredMark />
@@ -178,7 +192,10 @@ export default function BoardEditLayout<
         ))}
         {/* 자동등록방지 */}
         <label>자동등록방지</label>
-        <div className={styles.turnstile} ref={turnstileRef} />
+        <div>
+          <div className={styles.turnstile} ref={turnstileRef} />
+          {verificationError ? <p role="alert">{verificationError}</p> : null}
+        </div>
 
         <div className={styles["button-container"]}>
           <Button
@@ -189,8 +206,8 @@ export default function BoardEditLayout<
           >
             취소
           </Button>
-          <Button ariaLabel="작성 완료" type="submit" color="primary">
-            작성 완료
+          <Button ariaLabel="작성 완료" type="submit" color="primary" disabled={!isValidate || isSubmitting}>
+            {isSubmitting ? "저장 중..." : "작성 완료"}
           </Button>
         </div>
       </form>

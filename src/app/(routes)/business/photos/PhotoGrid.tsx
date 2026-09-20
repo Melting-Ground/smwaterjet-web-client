@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import Pagination from "@/_components/Pagination/Pagination";
 import styles from "./page.module.scss";
@@ -22,6 +22,8 @@ export default function PhotoGrid({ media }: PhotoGridProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const selected = selectedIndex === null ? null : media[selectedIndex];
+  const viewerRef = useRef<HTMLDivElement>(null);
+  const viewerOpen = selected !== null && selected !== undefined;
   const totalPages = Math.ceil(media.length / ITEMS_PER_PAGE);
   const pageStart = (currentPage - 1) * ITEMS_PER_PAGE;
   const visibleMedia = media.slice(pageStart, pageStart + ITEMS_PER_PAGE);
@@ -58,14 +60,47 @@ export default function PhotoGrid({ media }: PhotoGridProps) {
       }
     };
 
-    document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.body.style.overflow = "";
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [media.length, selectedIndex]);
+
+  useEffect(() => {
+    if (!viewerOpen || !viewerRef.current) return;
+    const viewer = viewerRef.current;
+    const trigger = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    viewer.querySelector<HTMLButtonElement>("button")?.focus();
+    const keepFocus = (event: FocusEvent) => {
+      if (!viewer.contains(event.target as Node)) viewer.focus();
+    };
+    const trapTab = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+      const controls = Array.from(viewer.querySelectorAll<HTMLElement>(
+        'button:not([disabled]), a[href], video[controls], [tabindex="0"]'
+      ));
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === viewer)) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && (document.activeElement === last || document.activeElement === viewer)) {
+        event.preventDefault();
+        first?.focus();
+      }
+    };
+    document.addEventListener("focusin", keepFocus);
+    viewer.addEventListener("keydown", trapTab);
+    return () => {
+      document.removeEventListener("focusin", keepFocus);
+      viewer.removeEventListener("keydown", trapTab);
+      document.body.style.overflow = previousOverflow;
+      if (trigger?.isConnected) trigger.focus();
+    };
+  }, [viewerOpen]);
 
   return (
     <div className={styles["photo-grid"]}>
@@ -121,6 +156,8 @@ export default function PhotoGrid({ media }: PhotoGridProps) {
       {selected ? (
         <div
           className={styles.viewer}
+          ref={viewerRef}
+          tabIndex={-1}
           role="dialog"
           aria-modal="true"
           aria-label="현장 사진 확대 보기"
@@ -150,7 +187,7 @@ export default function PhotoGrid({ media }: PhotoGridProps) {
 
           <div className={styles["viewer-content"]}>
             {selected.type === "video" ? (
-              <video className={styles["viewer-media"]} controls autoPlay playsInline>
+              <video key={selected.src} className={styles["viewer-media"]} controls autoPlay playsInline>
                 <source src={selected.src} />
               </video>
             ) : (

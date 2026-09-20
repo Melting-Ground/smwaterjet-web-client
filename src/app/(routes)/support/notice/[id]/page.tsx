@@ -2,6 +2,8 @@
 import { useParams } from "next/navigation"; // useParams를 import합니다
 import React from "react";
 import InlineLoader from "@/_components/InlineLoader/InlineLoader";
+import AsyncState from "@/_components/AsyncState/AsyncState";
+import { isAxiosError } from "axios";
 import { API_URLS } from "@/_config/apiConfig";
 import BoardDetailLayout from "@/_layout/support/[id]/layout";
 import { useAuth } from "@/_hooks/useAuth";
@@ -21,7 +23,7 @@ export default function NoticeDetail() {
 
   const currentId = typeof id === "string" ? id : undefined;
 
-  const { data: noticeDetail, isValidating } = useSWR<NoticeItem>(
+  const { data: noticeDetail, error, mutate } = useSWR<NoticeItem>(
     currentId ? ["notice-detail", currentId] : null,
     () =>
       axiosInstance
@@ -63,7 +65,14 @@ export default function NoticeDetail() {
     }
   };
 
-  const isNotLoaded = isValidating || !noticeDetail;
+  const isNotLoaded = !noticeDetail;
+  if (error) {
+    return <AsyncState status="error"
+      message={isAxiosError(error) && error.response?.status === 404
+        ? "존재하지 않거나 삭제된 게시물입니다."
+        : "게시물을 불러오지 못했습니다."}
+      onRetry={() => { void mutate(); }} />;
+  }
   if (!currentId) {
     return <div>존재하지 않는 게시물입니다.</div>;
   }

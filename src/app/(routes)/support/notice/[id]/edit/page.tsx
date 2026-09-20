@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import BoardEditLayout from "@/_layout/support/edit/layout";
+import AsyncState from "@/_components/AsyncState/AsyncState";
 import { API_URLS } from "@/_config/apiConfig";
 import { useState } from "react";
 import useFormData from "@/_hooks/useFormData";
@@ -21,6 +22,7 @@ export default function Edit() {
     fetchData: fetchNoticeDetail,
     dataDetail: noticeDetail,
     isLoading,
+    detailError,
   } = useAPIData<typeof API_URLS.notices.method.get>(API_URLS.notices);
 
   const [noticeContents, setNoticeContents] = useState<
@@ -79,6 +81,10 @@ export default function Edit() {
   }
 
   const isNotLoaded = isLoading.detail || !noticeDetail;
+  if (detailError) {
+    return <AsyncState status="error" message={detailError}
+      onRetry={() => { void fetchNoticeDetail(currentId); }} />;
+  }
 
   return !isNotLoaded ? (
     <BoardEditLayout

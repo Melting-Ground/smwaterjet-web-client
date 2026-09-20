@@ -5,6 +5,7 @@ import { API_URLS } from "@/_config/apiConfig";
 import { useAPIData } from "@/_hooks/useAPIData";
 import useFormData from "@/_hooks/useFormData";
 import GalleryEditLayout from "@/_layout/gallery/edit/layout";
+import AsyncState from "@/_components/AsyncState/AsyncState";
 import { FileWithIdType } from "@/_types/file";
 
 export default function Edit() {
@@ -13,7 +14,7 @@ export default function Edit() {
   const router = useRouter();
   const currentId = typeof id === "string" ? id : undefined;
 
-  const { fetchData, dataDetail, isLoading } = useAPIData<
+  const { fetchData, dataDetail, isLoading, detailError } = useAPIData<
     typeof API_URLS.photos.method.get
   >(API_URLS.photos);
 
@@ -80,6 +81,10 @@ export default function Edit() {
   }
 
   const isNotLoaded = isLoading.detail || !dataDetail;
+  if (detailError) {
+    return <AsyncState status="error" message={detailError}
+      onRetry={() => { void fetchData(currentId); }} />;
+  }
 
   return !isNotLoaded ? (
     <GalleryEditLayout

@@ -31,6 +31,7 @@ const useFormData = <T, P>(
       }
 
       if (
+        apiConfig.url === "/photos" &&
         id === "file1" &&
         files &&
         files[0] &&
@@ -151,18 +152,18 @@ const useFormData = <T, P>(
       });
     }
 
-    // delete file
-    if (deleteFileIds) {
-      await Promise.all(deleteFileIds.map((id) => deleteFile(id.toString())));
-      console.log("파일 전부 삭제 완료");
-    }
-
     try {
       await putData(formData, id, password);
-      alert("수정이 완료되었습니다.");
     } catch (error) {
-      alert("수정 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+      throw new Error("저장하지 못했습니다. 입력 내용과 기존 첨부파일은 유지됩니다. 다시 시도해 주세요.");
     }
+
+    const deletions = await Promise.allSettled(
+      (deleteFileIds ?? []).map((fileId) => deleteFile(String(fileId), password))
+    );
+    alert(deletions.some((result) => result.status === "rejected")
+      ? "내용은 저장됐지만 일부 첨부파일을 삭제하지 못했습니다. 상세 화면에서 확인 후 다시 삭제해 주세요."
+      : "수정이 완료되었습니다.");
   };
 
   const deleteItem = async (id: string): Promise<boolean> => {

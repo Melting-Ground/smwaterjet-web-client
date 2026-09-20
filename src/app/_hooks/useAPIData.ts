@@ -9,6 +9,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
   const [dataList, setDataList] = useState<T[]>([]);
   const [paginationInfo, setPaginationInfo] = useState<PaginationInfoType>();
   const [dataDetail, setDataDetail] = useState<T | undefined>(undefined);
+  const [detailError, setDetailError] = useState<string | null>(null);
 
   const [isLoading, setIsLoading] = useState({
     list: false,
@@ -48,6 +49,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
       // password X: 공지사항
 
       setIsLoading((prev) => ({ ...prev, detail: true }));
+      setDetailError(null);
       try {
         const { data } = await axiosInstance.get(`${apiConfig.url}/${id}`, {
           ...getAuthHeaders(password ? password : undefined),
@@ -56,6 +58,12 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
         setDataDetail(data);
         return null;
       } catch (error) {
+        const status = (error as AxiosError).response?.status;
+        setDetailError(status === 404
+          ? "존재하지 않거나 삭제된 게시물입니다."
+          : status === 401 || status === 403
+            ? "접근 권한 또는 비밀번호를 확인해 주세요."
+            : "게시물을 불러오지 못했습니다. 다시 시도해 주세요.");
         if (
           (error as AxiosError).response &&
           (error as AxiosError).response!.status === 401
@@ -158,7 +166,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
   );
 
   const deleteFile = useCallback(
-    async (id: string) => {
+    async (id: string, password?: string) => {
       setIsLoading((prev) => ({ ...prev, deleteFile: true }));
       // API ??: inquiry? /files/:id, notice/photo? /file/:id
       const isInquiry = apiConfig.url === "/inquiries";
@@ -167,7 +175,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
         : `${apiConfig.url}/file/${id}`;
 
       try {
-        const response = await axiosInstance.delete(endpoint, getAuthHeaders());
+        const response = await axiosInstance.delete(endpoint, getAuthHeaders(password));
         console.log(response);
       } catch (error) {
         throw new Error(`deleteFile 에러: ${error}`);
@@ -185,6 +193,7 @@ export const useAPIData = <T>(apiConfig: APIConfig<T>) => {
     yearSearchDataList,
     paginationInfo,
     dataDetail,
+    detailError,
     postData,
     putData,
     deleteData,
