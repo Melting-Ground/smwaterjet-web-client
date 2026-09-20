@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ZoomIn, Play } from "lucide-react";
 import Pagination from "@/_components/Pagination/Pagination";
 import styles from "./page.module.scss";
 
@@ -48,6 +48,7 @@ export default function PhotoGrid({ media }: PhotoGridProps) {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") closeViewer();
+      if (event.target instanceof HTMLVideoElement) return;
       if (event.key === "ArrowLeft") {
         setSelectedIndex((current) =>
           current === null ? null : (current - 1 + media.length) % media.length
@@ -111,24 +112,22 @@ export default function PhotoGrid({ media }: PhotoGridProps) {
               type="button"
               className={styles["media-button"]}
               onClick={() => setSelectedIndex(pageStart + index)}
-              aria-label={`${pageStart + index + 1}번째 현장 사진 크게 보기`}
+              aria-label={`${pageStart + index + 1}번째 현장 ${item.type === "video" ? "영상 재생" : "사진 크게 보기"}`}
             >
-              {item.type === "video" ? (
-                <video className={styles.media} muted preload="metadata">
-                  <source src={item.src} />
-                </video>
+              {item.type === "video" && item.thumbnailSrc === item.src ? (
+                <video className={styles.media} muted preload="none" src={item.src} />
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   className={styles.media}
                   src={item.thumbnailSrc}
-                  alt="현장 작업 사진"
+                  alt={item.type === "video" ? "현장 작업 영상 썸네일" : "현장 작업 사진"}
                   loading={index < 3 ? "eager" : "lazy"}
                   decoding="async"
                 />
               )}
-              <span className={styles["zoom-indicator"]} aria-hidden="true">
-                <ZoomIn size={30} strokeWidth={2} />
+              <span className={`${styles["zoom-indicator"]} ${item.type === "video" ? styles["play-indicator"] : ""}`} aria-hidden="true">
+                {item.type === "video" ? <Play size={30} strokeWidth={2} /> : <ZoomIn size={30} strokeWidth={2} />}
               </span>
             </button>
           </li>
@@ -187,7 +186,9 @@ export default function PhotoGrid({ media }: PhotoGridProps) {
 
           <div className={styles["viewer-content"]}>
             {selected.type === "video" ? (
-              <video key={selected.src} className={styles["viewer-media"]} controls autoPlay playsInline>
+              <video key={selected.src} className={styles["viewer-media"]} controls autoPlay playsInline
+                poster={selected.thumbnailSrc !== selected.src ? selected.thumbnailSrc : undefined}
+                preload="metadata">
                 <source src={selected.src} />
               </video>
             ) : (

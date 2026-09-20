@@ -21,9 +21,11 @@ function getWorkMedia() {
       ({ extension }) =>
         IMAGE_EXTENSIONS.has(extension) || VIDEO_EXTENSIONS.has(extension)
     )
-    .sort((a, b) =>
-      a.name.localeCompare(b.name, undefined, { numeric: true })
-    );
+    .sort((a, b) => {
+      const videoOrder = Number(VIDEO_EXTENSIONS.has(b.extension)) -
+        Number(VIDEO_EXTENSIONS.has(a.extension));
+      return videoOrder || a.name.localeCompare(b.name, undefined, { numeric: true });
+    });
 }
 
 export default function Photos() {
